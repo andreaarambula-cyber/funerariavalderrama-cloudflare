@@ -1,4 +1,7 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { SiteHeader } from "@/components/site/SiteHeader";
+import { SiteFooter } from "@/components/site/SiteFooter";
+import { WhatsAppFab } from "@/components/site/WhatsAppFab";
 
 import appCss from "../styles.css?url";
 
@@ -29,16 +32,30 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Funeraria Serena — Acompañamos a tu familia 24/7 en Chile" },
+      {
+        name: "description",
+        content:
+          "Servicios funerarios y de cremación con dignidad en todo Chile. Atención 24/7, planes a futuro y obituarios online. +30 años acompañando familias.",
+      },
+      { name: "author", content: "Funeraria Serena" },
+      { name: "theme-color", content: "#1E3A52" },
+      { property: "og:title", content: "Funeraria Serena — Servicios funerarios 24/7" },
+      {
+        property: "og:description",
+        content:
+          "Acompañamos a tu familia en el momento más difícil. Servicio funerario, cremación y planes a futuro en todo Chile.",
+      },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap",
+      },
       {
         rel: "stylesheet",
         href: appCss,
@@ -65,5 +82,20 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  return <Outlet />;
+  return (
+    <div className="flex min-h-screen flex-col bg-background">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-primary focus:px-3 focus:py-2 focus:text-primary-foreground"
+      >
+        Saltar al contenido
+      </a>
+      <SiteHeader />
+      <main id="main" className="flex-1">
+        <Outlet />
+      </main>
+      <SiteFooter />
+      <WhatsAppFab />
+    </div>
+  );
 }
