@@ -9,38 +9,174 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ServiciosRouteImport } from './routes/servicios'
+import { Route as PlanesRouteImport } from './routes/planes'
+import { Route as ObituariosRouteImport } from './routes/obituarios'
+import { Route as NosotrosRouteImport } from './routes/nosotros'
+import { Route as CotizarRouteImport } from './routes/cotizar'
+import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ObituariosSlugRouteImport } from './routes/obituarios.$slug'
 
+const ServiciosRoute = ServiciosRouteImport.update({
+  id: '/servicios',
+  path: '/servicios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanesRoute = PlanesRouteImport.update({
+  id: '/planes',
+  path: '/planes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ObituariosRoute = ObituariosRouteImport.update({
+  id: '/obituarios',
+  path: '/obituarios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NosotrosRoute = NosotrosRouteImport.update({
+  id: '/nosotros',
+  path: '/nosotros',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CotizarRoute = CotizarRouteImport.update({
+  id: '/cotizar',
+  path: '/cotizar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ObituariosSlugRoute = ObituariosSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ObituariosRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contacto': typeof ContactoRoute
+  '/cotizar': typeof CotizarRoute
+  '/nosotros': typeof NosotrosRoute
+  '/obituarios': typeof ObituariosRouteWithChildren
+  '/planes': typeof PlanesRoute
+  '/servicios': typeof ServiciosRoute
+  '/obituarios/$slug': typeof ObituariosSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contacto': typeof ContactoRoute
+  '/cotizar': typeof CotizarRoute
+  '/nosotros': typeof NosotrosRoute
+  '/obituarios': typeof ObituariosRouteWithChildren
+  '/planes': typeof PlanesRoute
+  '/servicios': typeof ServiciosRoute
+  '/obituarios/$slug': typeof ObituariosSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contacto': typeof ContactoRoute
+  '/cotizar': typeof CotizarRoute
+  '/nosotros': typeof NosotrosRoute
+  '/obituarios': typeof ObituariosRouteWithChildren
+  '/planes': typeof PlanesRoute
+  '/servicios': typeof ServiciosRoute
+  '/obituarios/$slug': typeof ObituariosSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/contacto'
+    | '/cotizar'
+    | '/nosotros'
+    | '/obituarios'
+    | '/planes'
+    | '/servicios'
+    | '/obituarios/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/contacto'
+    | '/cotizar'
+    | '/nosotros'
+    | '/obituarios'
+    | '/planes'
+    | '/servicios'
+    | '/obituarios/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/contacto'
+    | '/cotizar'
+    | '/nosotros'
+    | '/obituarios'
+    | '/planes'
+    | '/servicios'
+    | '/obituarios/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactoRoute: typeof ContactoRoute
+  CotizarRoute: typeof CotizarRoute
+  NosotrosRoute: typeof NosotrosRoute
+  ObituariosRoute: typeof ObituariosRouteWithChildren
+  PlanesRoute: typeof PlanesRoute
+  ServiciosRoute: typeof ServiciosRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/servicios': {
+      id: '/servicios'
+      path: '/servicios'
+      fullPath: '/servicios'
+      preLoaderRoute: typeof ServiciosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/planes': {
+      id: '/planes'
+      path: '/planes'
+      fullPath: '/planes'
+      preLoaderRoute: typeof PlanesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/obituarios': {
+      id: '/obituarios'
+      path: '/obituarios'
+      fullPath: '/obituarios'
+      preLoaderRoute: typeof ObituariosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/nosotros': {
+      id: '/nosotros'
+      path: '/nosotros'
+      fullPath: '/nosotros'
+      preLoaderRoute: typeof NosotrosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cotizar': {
+      id: '/cotizar'
+      path: '/cotizar'
+      fullPath: '/cotizar'
+      preLoaderRoute: typeof CotizarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +184,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/obituarios/$slug': {
+      id: '/obituarios/$slug'
+      path: '/$slug'
+      fullPath: '/obituarios/$slug'
+      preLoaderRoute: typeof ObituariosSlugRouteImport
+      parentRoute: typeof ObituariosRoute
+    }
   }
 }
 
+interface ObituariosRouteChildren {
+  ObituariosSlugRoute: typeof ObituariosSlugRoute
+}
+
+const ObituariosRouteChildren: ObituariosRouteChildren = {
+  ObituariosSlugRoute: ObituariosSlugRoute,
+}
+
+const ObituariosRouteWithChildren = ObituariosRoute._addFileChildren(
+  ObituariosRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactoRoute: ContactoRoute,
+  CotizarRoute: CotizarRoute,
+  NosotrosRoute: NosotrosRoute,
+  ObituariosRoute: ObituariosRouteWithChildren,
+  PlanesRoute: PlanesRoute,
+  ServiciosRoute: ServiciosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
