@@ -1,7 +1,13 @@
-import { useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, MapPin, Calendar, Flame, Share2, Send } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, Share2 } from "lucide-react";
 import { getObituary, obituaries } from "@/data/obituaries";
+import { CandleWall } from "@/components/memorial/CandleWall";
+import { LifeTimeline } from "@/components/memorial/LifeTimeline";
+import { MemoryGallery } from "@/components/memorial/MemoryGallery";
+import { AnecdoteWall } from "@/components/memorial/AnecdoteWall";
+import { FarewellAgenda } from "@/components/memorial/FarewellAgenda";
+import { MemorialQR } from "@/components/memorial/MemorialQR";
+import { useState } from "react";
 
 export const Route = createFileRoute("/obituarios/$slug")({
   loader: ({ params }) => {
@@ -43,8 +49,11 @@ export const Route = createFileRoute("/obituarios/$slug")({
 
 function ObituarioPage() {
   const o = Route.useLoaderData();
-  const [candles, setCandles] = useState(o.candles);
-  const [lit, setLit] = useState(false);
+  const memorialUrl =
+    typeof window !== "undefined"
+      ? window.location.href
+      : `https://funerariaserena.cl/obituarios/${o.slug}`;
+
   const [messages, setMessages] = useState<{ name: string; text: string; date: string }[]>([
     {
       name: "Familia Rodríguez",
@@ -59,12 +68,6 @@ function ObituarioPage() {
   ]);
   const [name, setName] = useState("");
   const [text, setText] = useState("");
-
-  function light() {
-    if (lit) return;
-    setLit(true);
-    setCandles((c) => c + 1);
-  }
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -124,6 +127,12 @@ function ObituarioPage() {
         </div>
       </section>
 
+      <LifeTimeline items={o.timeline} personName={o.fullName} />
+      <MemoryGallery items={o.gallery} personName={o.fullName} />
+      <AnecdoteWall items={o.anecdotes} personName={o.fullName} />
+      <FarewellAgenda events={o.events} personName={o.fullName} />
+      <CandleWall initial={o.candles} personName={o.fullName} />
+
       <section className="container-prose grid gap-10 py-16 lg:grid-cols-[1fr,360px]">
         <div>
           <h2 className="font-serif text-3xl text-primary">Mensajes de condolencia</h2>
@@ -160,16 +169,13 @@ function ObituarioPage() {
               type="submit"
               className="mt-5 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition hover:brightness-110"
             >
-              <Send className="h-4 w-4" /> Enviar condolencia
+              Enviar condolencia
             </button>
           </form>
 
           <ul className="mt-8 space-y-4">
             {messages.map((m, i) => (
-              <li
-                key={i}
-                className="rounded-2xl border border-border bg-surface p-5 shadow-soft"
-              >
+              <li key={i} className="rounded-2xl border border-border bg-surface p-5 shadow-soft">
                 <div className="flex items-center justify-between gap-2">
                   <p className="font-medium text-primary">{m.name}</p>
                   <p className="text-xs text-muted-foreground">{m.date}</p>
@@ -180,49 +186,43 @@ function ObituarioPage() {
           </ul>
         </div>
 
-        <aside className="space-y-6">
-          <div className="rounded-2xl border border-border bg-surface p-6 text-center shadow-soft">
-            <Flame
-              className={`mx-auto h-12 w-12 transition ${lit ? "text-accent" : "text-muted-foreground/40"}`}
-              strokeWidth={1.4}
-            />
-            <p className="mt-3 font-serif text-xl text-primary">Encender una vela</p>
-            <p className="mt-1 text-3xl font-serif text-accent">{candles}</p>
-            <p className="text-xs text-muted-foreground">velas encendidas</p>
-            <button
-              onClick={light}
-              disabled={lit}
-              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition hover:brightness-110 disabled:opacity-60"
-            >
-              {lit ? "Vela encendida" : "Encender vela"}
-            </button>
-          </div>
-
-          {o.velatorio && (
-            <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-foreground/80">
-                Velatorio
-              </p>
-              <p className="mt-3 font-medium text-primary">{o.velatorio.address}</p>
-              <p className="mt-1 text-sm text-muted-foreground">{o.velatorio.time}</p>
-            </div>
-          )}
+        <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
+          <MemorialQR url={memorialUrl} personName={o.fullName} />
 
           <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-foreground/80">
               Compartir
             </p>
             <div className="mt-3 flex gap-2">
-              {["WhatsApp", "Facebook", "Email"].map((s) => (
-                <button
-                  key={s}
-                  className="flex-1 rounded-full border border-border px-3 py-2 text-xs font-medium text-foreground/80 transition hover:border-primary/40 hover:text-primary"
+              {[
+                {
+                  label: "WhatsApp",
+                  href: `https://wa.me/?text=${encodeURIComponent(`En memoria de ${o.fullName}: ${memorialUrl}`)}`,
+                },
+                {
+                  label: "Facebook",
+                  href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(memorialUrl)}`,
+                },
+                {
+                  label: "Email",
+                  href: `mailto:?subject=${encodeURIComponent(`En memoria de ${o.fullName}`)}&body=${encodeURIComponent(memorialUrl)}`,
+                },
+              ].map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 rounded-full border border-border px-3 py-2 text-center text-xs font-medium text-foreground/80 transition hover:border-primary/40 hover:text-primary"
                 >
-                  {s}
-                </button>
+                  {s.label}
+                </a>
               ))}
             </div>
-            <button className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full border border-border px-4 py-2 text-xs text-muted-foreground transition hover:border-primary/40">
+            <button
+              onClick={() => navigator.clipboard.writeText(memorialUrl)}
+              className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full border border-border px-4 py-2 text-xs text-muted-foreground transition hover:border-primary/40"
+            >
               <Share2 className="h-3.5 w-3.5" /> Copiar enlace
             </button>
           </div>
