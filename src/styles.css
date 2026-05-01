@@ -130,3 +130,22 @@
     background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
   }
 }
+
+@layer utilities {
+  @keyframes flicker {
+    0%, 100% { opacity: 0.92; transform: scaleY(1) translateZ(0); filter: drop-shadow(0 0 6px oklch(0.74 0.18 70 / 0.55)); }
+    25% { opacity: 1; transform: scaleY(1.06) translateZ(0); filter: drop-shadow(0 0 10px oklch(0.78 0.2 75 / 0.7)); }
+    50% { opacity: 0.85; transform: scaleY(0.97) translateZ(0); filter: drop-shadow(0 0 5px oklch(0.74 0.18 70 / 0.45)); }
+    75% { opacity: 0.98; transform: scaleY(1.03) translateZ(0); filter: drop-shadow(0 0 8px oklch(0.78 0.2 75 / 0.6)); }
+  }
+  .animate-flicker { animation: flicker 2.4s ease-in-out infinite; transform-origin: bottom center; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-flicker { animation: none; }
+  }
+
+  .polaroid-tilt-1 { transform: rotate(-2deg); }
+  .polaroid-tilt-2 { transform: rotate(1.5deg); }
+  .polaroid-tilt-3 { transform: rotate(-1deg); }
+  .polaroid-tilt-4 { transform: rotate(2deg); }
+}
