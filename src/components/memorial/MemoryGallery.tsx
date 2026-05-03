@@ -111,13 +111,13 @@ export function MemoryGallery({ items, personName }: { items: GalleryItem[]; per
           role="dialog"
           aria-modal="true"
           aria-label="Aportar un recuerdo"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-primary/60 p-4 backdrop-blur-sm animate-fade-in"
+          className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-primary/60 p-4 backdrop-blur-sm animate-fade-in"
           onClick={() => setOpen(false)}
         >
           <form
             onSubmit={submit}
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-md rounded-2xl bg-surface p-6 shadow-elevated animate-scale-in"
+            className="my-auto max-h-[90vh] w-full max-w-md overflow-y-auto rounded-2xl bg-surface p-5 shadow-elevated animate-scale-in sm:p-6"
           >
             <div className="flex items-start justify-between">
               <div>
@@ -137,7 +137,7 @@ export function MemoryGallery({ items, personName }: { items: GalleryItem[]; per
               </button>
             </div>
 
-            <div className="mt-5 flex aspect-video w-full cursor-pointer items-center justify-center rounded-xl border-2 border-dashed border-border bg-background text-center text-sm text-muted-foreground hover:border-primary/40">
+            <div className="mt-5 flex min-h-[140px] w-full cursor-pointer items-center justify-center rounded-xl border-2 border-dashed border-border bg-background p-4 text-center text-sm text-muted-foreground hover:border-primary/40 sm:aspect-video sm:min-h-0">
               <div>
                 <Upload className="mx-auto h-6 w-6" />
                 <p className="mt-2">Haz clic o arrastra una imagen</p>
