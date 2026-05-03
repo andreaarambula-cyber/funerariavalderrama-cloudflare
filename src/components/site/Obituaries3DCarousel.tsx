@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { motion, useReducedMotion, type PanInfo } from "framer-motion";
 import { ChevronLeft, ChevronRight, MapPin, ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
@@ -12,13 +12,11 @@ interface Props {
 const SPRING = { type: "spring" as const, stiffness: 500, damping: 90, mass: 1 };
 const DRAG_THRESHOLD = 40;
 const DEG = Math.PI / 180;
-const WHEEL_COOLDOWN = 280;
 
 export function Obituaries3DCarousel({ obituaries }: Props) {
   const [activeIndex, setActiveIndex] = useState(() => Math.floor(obituaries.length / 2));
   const prefersReduced = useReducedMotion();
   const isMobile = useIsMobile();
-  const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
   const cardW = isMobile ? 220 : 300;
@@ -62,7 +60,6 @@ export function Obituaries3DCarousel({ obituaries }: Props) {
 
   return (
     <div
-      ref={containerRef}
       className="relative select-none outline-none"
       tabIndex={0}
       onKeyDown={handleKeyDown}
