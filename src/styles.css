@@ -140,8 +140,34 @@
   }
   .animate-flicker { animation: flicker 2.4s ease-in-out infinite; transform-origin: bottom center; }
 
+  @keyframes candle-sway {
+    0%, 100% { transform: rotate(-1.2deg); }
+    50% { transform: rotate(1.2deg); }
+  }
+  .animate-candle-sway { animation: candle-sway 3.6s ease-in-out infinite; transform-origin: bottom center; }
+
+  @keyframes candle-flash {
+    0% { filter: drop-shadow(0 0 24px oklch(0.95 0.2 85 / 0.95)) brightness(1.6); }
+    100% { filter: drop-shadow(0 0 8px oklch(0.78 0.2 75 / 0.5)) brightness(1); }
+  }
+  .animate-candle-flash { animation: candle-flash 700ms ease-out 1; }
+
+  @keyframes dust-float {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    20% { opacity: 0.7; }
+    80% { opacity: 0.5; }
+    100% { transform: translateY(-120px) translateX(20px); opacity: 0; }
+  }
+  .animate-dust { animation: dust-float linear infinite; }
+
+  .candle-night {
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 100%, oklch(0.32 0.06 70 / 0.55), transparent 70%),
+      radial-gradient(ellipse 100% 70% at 50% 0%, oklch(0.08 0.01 260 / 0.95), oklch(0.12 0.015 250) 60%, oklch(0.06 0.01 260));
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .animate-flicker { animation: none; }
+    .animate-flicker, .animate-candle-sway, .animate-dust, .animate-candle-flash { animation: none; }
   }
 
   .polaroid-tilt-1 { transform: rotate(-2deg); }
