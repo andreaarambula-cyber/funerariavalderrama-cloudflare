@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Phone, ShieldCheck, Clock, MapPin, HeartHandshake, Flame, CalendarHeart, Newspaper, Quote, Star } from "lucide-react";
+import { ArrowRight, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star } from "lucide-react";
 import heroImg from "@/assets/hero-sunrise.jpg";
 import candleImg from "@/assets/candle.jpg";
 import flowersImg from "@/assets/flowers.jpg";
@@ -99,20 +99,18 @@ function TrustBar() {
 
 function Services() {
   const services = [
-    {
-      icon: HeartHandshake,
-      title: "Servicio funerario",
-      desc: "Acompañamiento integral con velatorio, traslado, ataúd y trámites.",
-    },
-    { icon: Flame, title: "Cremación", desc: "Servicio de cremación digna con urna a elección." },
-    { icon: CalendarHeart, title: "Plan a futuro", desc: "Planifica con calma y protege a tu familia." },
-    { icon: Newspaper, title: "Obituarios online", desc: "Memoriales digitales para honrar y compartir." },
+    { icon: PhoneCall, title: "Atención 24/7", desc: "Coordinamos el retiro y todo el proceso a cualquier hora." },
+    { icon: Box, title: "Elección de urna", desc: "Variedad de urnas y ataúdes para honrar a tu ser querido." },
+    { icon: Flame, title: "Equipo de velatorio", desc: "Cirios, luces y elementos para un ambiente solemne." },
+    { icon: Truck, title: "Traslados y carroza", desc: "Retiro desde clínica u hospital y carroza panorámica." },
+    { icon: FileText, title: "Trámites y cuota mortuoria", desc: "Inscripción en Registro Civil y gestión legal completa." },
+    { icon: Coffee, title: "Servicios incluidos", desc: "Cafetería y arreglo floral para acompañar a la familia." },
   ];
   return (
     <section className="py-20 md:py-28">
       <div className="container-prose">
         <SectionHeader eyebrow="Nuestros servicios" title="Cuidamos cada detalle con dignidad" />
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map(({ icon: Icon, title, desc }) => (
             <article
               key={title}
