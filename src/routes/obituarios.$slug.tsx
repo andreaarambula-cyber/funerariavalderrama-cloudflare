@@ -97,12 +97,12 @@ function ObituarioPage() {
           >
             <ArrowLeft className="h-4 w-4" /> Todos los obituarios
           </Link>
-          <div className="grid gap-10 md:grid-cols-[280px,1fr] md:items-end">
-            <div className="overflow-hidden rounded-2xl border-4 border-accent/40 shadow-elevated">
+          <div className="grid gap-10 md:grid-cols-[220px,1fr] md:items-end">
+            <div className="mx-auto w-40 overflow-hidden rounded-2xl border-4 border-accent/40 shadow-elevated sm:w-48 md:mx-0 md:w-full">
               <img
                 src={o.photo}
                 alt={`Retrato de ${o.fullName}`}
-                className="h-full w-full object-cover"
+                className="aspect-[4/5] h-full w-full object-cover"
                 width={560}
                 height={700}
               />
