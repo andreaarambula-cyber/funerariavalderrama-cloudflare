@@ -21,7 +21,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/85 backdrop-blur-md">
       <div className="container-prose flex h-16 items-center justify-between gap-4 md:h-20">
         <Link to="/" className="flex items-center gap-2" aria-label="Funeraria Valderrama - Inicio">
-          <img src={logo} alt="Funeraria Valderrama" className="h-12 w-auto md:h-14" />
+          <img src={logo} alt="Funeraria Valderrama" className="h-20 w-auto md:h-24" />
         </Link>
 
         <nav className="hidden lg:block" aria-label="Principal">
