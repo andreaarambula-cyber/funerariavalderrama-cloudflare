@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { ImagePlus, Upload, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ChevronLeft, ChevronRight, ImagePlus, Upload, X } from "lucide-react";
 import { toast } from "sonner";
 import type { GalleryItem } from "@/data/obituaries";
 
@@ -7,6 +7,26 @@ export function MemoryGallery({ items, personName }: { items: GalleryItem[]; per
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [caption, setCaption] = useState("");
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [paused, setPaused] = useState(false);
+
+  function scrollByCard(dir: 1 | -1) {
+    const el = trackRef.current;
+    if (!el) return;
+    const card = el.querySelector("figure") as HTMLElement | null;
+    const step = card ? card.offsetWidth + 16 : el.clientWidth * 0.8;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    let next = el.scrollLeft + dir * step;
+    if (dir === 1 && next > maxScroll - 4) next = 0;
+    if (dir === -1 && next < 0) next = maxScroll;
+    el.scrollTo({ left: next, behavior: "smooth" });
+  }
+
+  useEffect(() => {
+    if (paused || items.length <= 1) return;
+    const id = setInterval(() => scrollByCard(1), 6000);
+    return () => clearInterval(id);
+  }, [paused, items.length]);
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -40,8 +60,15 @@ export function MemoryGallery({ items, personName }: { items: GalleryItem[]; per
           </button>
         </div>
 
-        <div className="mt-8 -mx-4 overflow-x-auto px-4 pb-4 [scrollbar-width:thin] sm:-mx-6 sm:px-6">
-          <div className="flex gap-4 snap-x snap-mandatory">
+        <div
+          className="relative mt-8"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          <div
+            ref={trackRef}
+            className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-2 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:-mx-6 sm:px-6"
+          >
             {items.map((g, i) => (
               <figure
                 key={i}
@@ -60,6 +87,22 @@ export function MemoryGallery({ items, personName }: { items: GalleryItem[]; per
               </figure>
             ))}
           </div>
+          <button
+            type="button"
+            aria-label="Anterior"
+            onClick={() => scrollByCard(-1)}
+            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-primary/10 p-2 text-primary backdrop-blur-sm transition hover:bg-primary/30 hover:text-primary-foreground"
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </button>
+          <button
+            type="button"
+            aria-label="Siguiente"
+            onClick={() => scrollByCard(1)}
+            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-primary/10 p-2 text-primary backdrop-blur-sm transition hover:bg-primary/30 hover:text-primary-foreground"
+          >
+            <ChevronRight className="h-6 w-6" />
+          </button>
         </div>
       </div>
 
