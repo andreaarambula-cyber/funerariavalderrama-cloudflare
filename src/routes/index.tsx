@@ -44,10 +44,6 @@ function Hero() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-primary/55 via-primary/35 to-primary/70" />
       <div className="container-prose relative w-full py-16 text-primary-foreground md:py-20">
-        <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-white/90 backdrop-blur">
-          <Clock className="h-3.5 w-3.5 text-accent" />
-          Atención 24 horas, todos los días
-        </p>
         <h1 className="max-w-3xl text-balance font-serif text-4xl leading-[1.05] md:text-6xl lg:text-7xl">
           Acompañamos a tu familia en el momento más difícil
         </h1>

@@ -2,6 +2,7 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { WhatsAppFab } from "@/components/site/WhatsAppFab";
+import { AnnouncementBar } from "@/components/site/AnnouncementBar";
 import { Toaster } from "@/components/ui/sonner";
 
 import appCss from "../styles.css?url";
@@ -92,6 +93,7 @@ function RootComponent() {
         Saltar al contenido
       </a>
       <SiteHeader />
+      <AnnouncementBar />
       <main id="main" className="flex-1">
         <Outlet />
       </main>
