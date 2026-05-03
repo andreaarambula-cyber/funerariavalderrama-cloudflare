@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Phone, Mail, MapPin, Facebook, Instagram, Youtube } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook } from "lucide-react";
 import logo from "@/assets/logo-valderrama.png";
 
 export function SiteFooter() {
