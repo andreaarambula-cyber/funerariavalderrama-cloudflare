@@ -216,11 +216,11 @@ function ObituaryCard({
         <p className="mt-1 text-sm text-muted-foreground">
           {obituary.birth} — {obituary.death}
         </p>
-        <p className="mt-1.5 inline-flex items-center gap-1 text-[11px] uppercase tracking-wider text-accent-foreground/80">
+        <p className="mt-1.5 flex items-center gap-1 text-[11px] uppercase tracking-wider text-accent-foreground/80">
           <MapPin className="h-3 w-3" /> {obituary.comuna}
         </p>
         {isActive && (
-          <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
+          <span className="mt-4 flex items-center gap-1 text-sm font-medium text-primary">
             Ver memorial <ArrowRight className="h-3.5 w-3.5" />
           </span>
         )}
