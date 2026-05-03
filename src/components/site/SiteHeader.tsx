@@ -43,7 +43,7 @@ export function SiteHeader() {
 
         <div className="hidden items-center gap-3 md:flex">
           <a
-            href="tel:+56600123456"
+            href="tel:+56953900931"
             className="group flex items-center gap-2 text-sm"
             aria-label="Llamar a atención 24/7"
           >
@@ -54,11 +54,11 @@ export function SiteHeader() {
               <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
                 Atención 24/7
               </span>
-              <span className="font-medium text-foreground">600 123 456</span>
+              <span className="font-medium text-foreground">+56 9 5390 0931</span>
             </span>
           </a>
           <a
-            href="https://wa.me/56912345678?text=Hola%2C%20necesito%20ayuda"
+            href="https://wa.me/56953900931?text=Hola%2C%20necesito%20ayuda"
             className="inline-flex h-10 items-center gap-2 rounded-full bg-whatsapp px-4 text-sm font-medium text-whatsapp-foreground shadow-soft transition hover:brightness-95"
           >
             <MessageCircle className="h-4 w-4" />
@@ -101,13 +101,13 @@ export function SiteHeader() {
           </ul>
           <div className="mt-3 flex flex-col gap-2 border-t border-border/70 pt-3">
             <a
-              href="tel:+56600123456"
+              href="tel:+56953900931"
               className="inline-flex items-center justify-center gap-2 rounded-md border border-border px-3 py-2.5 text-sm"
             >
-              <Phone className="h-4 w-4" /> 600 123 456 · 24/7
+              <Phone className="h-4 w-4" /> +56 9 5390 0931 · 24/7
             </a>
             <a
-              href="https://wa.me/56912345678"
+              href="https://wa.me/56953900931"
               className="inline-flex items-center justify-center gap-2 rounded-md bg-whatsapp px-3 py-2.5 text-sm font-medium text-whatsapp-foreground"
             >
               <MessageCircle className="h-4 w-4" /> WhatsApp

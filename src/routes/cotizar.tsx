@@ -332,7 +332,7 @@ function Confirmation({ total, name }: { total: number; name: string }) {
           <p className="mt-1 font-serif text-3xl text-primary">{formatCLP(total)}</p>
         </div>
         <a
-          href="https://wa.me/56912345678"
+          href="https://wa.me/56953900931"
           className="mt-7 inline-flex items-center gap-2 rounded-full bg-whatsapp px-6 py-3 text-sm font-medium text-whatsapp-foreground"
         >
           <MessageCircle className="h-4 w-4" /> Conversar por WhatsApp

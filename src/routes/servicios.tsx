@@ -93,7 +93,7 @@ const faqs = [
   },
   {
     q: "¿Atienden las 24 horas?",
-    a: "Sí. Estamos disponibles las 24 horas, todos los días del año. Llámanos al 600 123 456 o escríbenos por WhatsApp en cualquier momento.",
+    a: "Sí. Estamos disponibles las 24 horas, todos los días del año. Llámanos al +56 9 5390 0931 o escríbenos por WhatsApp en cualquier momento.",
   },
   {
     q: "¿Tienen cobertura en regiones?",
@@ -162,7 +162,7 @@ function ServiciosPage() {
                 Cotizar este servicio <ArrowRight className="h-4 w-4" />
               </Link>
               <a
-                href="tel:+56600123456"
+                href="tel:+56953900931"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-primary transition hover:bg-secondary"
               >
                 Llamar ahora

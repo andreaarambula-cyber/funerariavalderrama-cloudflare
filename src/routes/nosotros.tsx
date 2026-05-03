@@ -71,9 +71,7 @@ function NosotrosPage() {
       <section className="container-prose py-20">
         <div className="grid gap-10 lg:grid-cols-3">
           {[
-            { city: "Santiago", addr: "Av. Providencia 1234, Providencia" },
-            { city: "Valparaíso", addr: "Brasil 2050, Valparaíso" },
-            { city: "Concepción", addr: "Caupolicán 530, Concepción" },
+            { city: "Concepción", addr: "O'Higgins 1601, esq. Galvarino, Concepción" },
           ].map((s) => (
             <div key={s.city} className="rounded-2xl border border-border bg-surface p-7 shadow-soft">
               <MapPin className="h-6 w-6 text-accent" />

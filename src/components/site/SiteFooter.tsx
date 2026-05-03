@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Phone, Mail, MapPin, Facebook, Instagram, Youtube } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook } from "lucide-react";
 import logo from "@/assets/logo-valderrama.png";
 
 export function SiteFooter() {
@@ -20,16 +20,15 @@ export function SiteFooter() {
             transparencia y cercanía. Más de 30 años de experiencia.
           </p>
           <div className="mt-6 flex gap-3">
-            {[Facebook, Instagram, Youtube].map((Icon, i) => (
-              <a
-                key={i}
-                href="#"
-                aria-label="Red social"
-                className="grid h-9 w-9 place-items-center rounded-full border border-primary-foreground/20 transition hover:bg-primary-foreground/10"
-              >
-                <Icon className="h-4 w-4" />
-              </a>
-            ))}
+            <a
+              href="https://www.facebook.com/people/Funeraria-Valderrama/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook Funeraria Valderrama"
+              className="grid h-9 w-9 place-items-center rounded-full border border-primary-foreground/20 transition hover:bg-primary-foreground/10"
+            >
+              <Facebook className="h-4 w-4" />
+            </a>
           </div>
         </div>
 
@@ -51,8 +50,8 @@ export function SiteFooter() {
         <FooterCol title="Contacto 24/7">
           <li className="flex items-start gap-2.5 text-sm text-primary-foreground/75">
             <Phone className="mt-0.5 h-4 w-4 text-accent" />
-            <a href="tel:+56600123456" className="hover:text-primary-foreground">
-              600 123 456
+            <a href="tel:+56953900931" className="hover:text-primary-foreground">
+              +56 9 5390 0931
             </a>
           </li>
           <li className="flex items-start gap-2.5 text-sm text-primary-foreground/75">
@@ -63,7 +62,7 @@ export function SiteFooter() {
           </li>
           <li className="flex items-start gap-2.5 text-sm text-primary-foreground/75">
             <MapPin className="mt-0.5 h-4 w-4 text-accent" />
-            <span>Av. Providencia 1234, Santiago</span>
+            <span>O'Higgins 1601, esq. Galvarino, Concepción</span>
           </li>
         </FooterCol>
       </div>
