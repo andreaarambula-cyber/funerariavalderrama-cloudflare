@@ -237,7 +237,7 @@ export function CandleWall({ initial, personName }: { initial: Candle[]; personN
         </div>
 
         {/* Altar scene */}
-        <div className="relative mt-12 overflow-hidden rounded-3xl border border-[oklch(0.2_0.02_70_/_0.6)] candle-night p-6 shadow-elevated md:p-10">
+        <div className="relative mt-12 overflow-hidden rounded-3xl border border-[oklch(0.2_0.02_70_/_0.6)] candle-night px-6 pb-10 pt-16 shadow-elevated md:px-10 md:pb-14 md:pt-20">
           <Dust />
 
           {/* Back row (smallest, furthest) */}
