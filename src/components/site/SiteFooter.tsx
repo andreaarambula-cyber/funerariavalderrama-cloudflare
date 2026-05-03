@@ -20,16 +20,15 @@ export function SiteFooter() {
             transparencia y cercanía. Más de 30 años de experiencia.
           </p>
           <div className="mt-6 flex gap-3">
-            {[Facebook, Instagram, Youtube].map((Icon, i) => (
-              <a
-                key={i}
-                href="#"
-                aria-label="Red social"
-                className="grid h-9 w-9 place-items-center rounded-full border border-primary-foreground/20 transition hover:bg-primary-foreground/10"
-              >
-                <Icon className="h-4 w-4" />
-              </a>
-            ))}
+            <a
+              href="https://www.facebook.com/people/Funeraria-Valderrama/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook Funeraria Valderrama"
+              className="grid h-9 w-9 place-items-center rounded-full border border-primary-foreground/20 transition hover:bg-primary-foreground/10"
+            >
+              <Facebook className="h-4 w-4" />
+            </a>
           </div>
         </div>
 
