@@ -57,7 +57,7 @@ export function AnecdoteWall({ items, personName }: { items: Anecdote[]; personN
         >
           <div
             ref={trackRef}
-            className="-mx-4 flex gap-8 overflow-x-auto px-4 pb-4 pt-2 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:-mx-6 sm:px-6"
+            className="-mx-4 flex gap-8 overflow-x-auto px-4 pb-4 pt-2 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:-mx-6 sm:px-14"
           >
             {list.map((a, i) => (
               <article
