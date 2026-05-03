@@ -107,7 +107,6 @@ function ObituarioPage() {
       <FarewellAgenda events={o.events} personName={o.fullName} />
       <CandleWall initial={o.candles} personName={o.fullName} />
 
-      <section className="container-prose grid gap-10 py-16 lg:grid-cols-[1fr,360px]">
       <section className="container-prose py-16">
         <aside className="mx-auto grid max-w-2xl gap-6">
           <MemorialQR url={memorialUrl} personName={o.fullName} />
