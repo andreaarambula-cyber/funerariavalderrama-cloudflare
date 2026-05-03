@@ -70,22 +70,44 @@ export function AnecdoteWall({ items, personName }: { items: Anecdote[]; personN
               </article>
             ))}
           </div>
-          <button
-            type="button"
-            aria-label="Anterior"
-            onClick={() => scrollByCard(-1)}
-            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-primary/10 p-2 text-primary backdrop-blur-sm transition hover:bg-primary/30 hover:text-primary-foreground"
-          >
-            <ChevronLeft className="h-6 w-6" />
-          </button>
-          <button
-            type="button"
-            aria-label="Siguiente"
-            onClick={() => scrollByCard(1)}
-            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-primary/10 p-2 text-primary backdrop-blur-sm transition hover:bg-primary/30 hover:text-primary-foreground"
-          >
-            <ChevronRight className="h-6 w-6" />
-          </button>
+          <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-12 items-center justify-start sm:flex">
+            <button
+              type="button"
+              aria-label="Anterior"
+              onClick={() => scrollByCard(-1)}
+              className="pointer-events-auto -ml-2 rounded-full bg-primary/10 p-2 text-primary backdrop-blur-sm transition hover:bg-primary/30 hover:text-primary-foreground"
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </button>
+          </div>
+          <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-12 items-center justify-end sm:flex">
+            <button
+              type="button"
+              aria-label="Siguiente"
+              onClick={() => scrollByCard(1)}
+              className="pointer-events-auto -mr-2 rounded-full bg-primary/10 p-2 text-primary backdrop-blur-sm transition hover:bg-primary/30 hover:text-primary-foreground"
+            >
+              <ChevronRight className="h-6 w-6" />
+            </button>
+          </div>
+          <div className="mt-4 flex justify-center gap-3 sm:hidden">
+            <button
+              type="button"
+              aria-label="Anterior"
+              onClick={() => scrollByCard(-1)}
+              className="rounded-full bg-primary/10 p-2 text-primary transition hover:bg-primary/30"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              aria-label="Siguiente"
+              onClick={() => scrollByCard(1)}
+              className="rounded-full bg-primary/10 p-2 text-primary transition hover:bg-primary/30"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
         </div>
 
         <form
