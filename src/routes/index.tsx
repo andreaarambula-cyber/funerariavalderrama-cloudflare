@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star } from "lucide-react";
+import { ArrowRight, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users } from "lucide-react";
 import heroImg from "@/assets/hero-sunrise.jpg";
 import candleImg from "@/assets/candle.jpg";
 import { obituaries } from "@/data/obituaries";
@@ -76,16 +76,26 @@ function TrustBar() {
     { icon: ShieldCheck, text: "Registrados en SEREMI" },
     { icon: Clock, text: "Atención 24/7" },
     { icon: MapPin, text: "Cobertura nacional" },
+    { icon: Users, text: "+10.000 familias acompañadas" },
+    { icon: BadgeCheck, text: "Transparencia en precios" },
+    { icon: FileText, text: "Trámites incluidos" },
+    { icon: Heart, text: "Atención cercana y humana" },
   ];
   return (
-    <section className="border-b border-border bg-surface">
-      <div className="container-prose grid grid-cols-2 gap-y-5 py-8 md:grid-cols-4">
-        {items.map(({ icon: Icon, text }) => (
-          <div key={text} className="flex items-center gap-3 text-sm text-foreground/80">
-            <Icon className="h-4 w-4 shrink-0 text-accent" />
-            <span>{text}</span>
-          </div>
-        ))}
+    <section className="group border-b border-border bg-surface py-6">
+      <div className="marquee-mask overflow-hidden">
+        <div className="flex w-max animate-marquee gap-12 group-hover:[animation-play-state:paused]">
+          {[...items, ...items].map(({ icon: Icon, text }, idx) => (
+            <div
+              key={`${text}-${idx}`}
+              className="flex shrink-0 items-center gap-3 text-sm text-foreground/80"
+              aria-hidden={idx >= items.length ? true : undefined}
+            >
+              <Icon className="h-4 w-4 shrink-0 text-accent" />
+              <span className="whitespace-nowrap">{text}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
