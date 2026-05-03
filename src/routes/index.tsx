@@ -114,18 +114,14 @@ function Services() {
           {services.map(({ icon: Icon, title, desc }) => (
             <article
               key={title}
-              className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-7 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
+              className="group rounded-2xl border border-border bg-surface p-7 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
             >
-              <span
-                aria-hidden
-                className="absolute right-5 top-5 h-16 w-16 rounded-full bg-accent/10 transition group-hover:scale-110"
-              />
-              <Icon className="relative h-8 w-8 text-accent" strokeWidth={1.5} />
-              <h3 className="relative mt-5 font-serif text-2xl text-primary">{title}</h3>
-              <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
+              <Icon className="h-8 w-8 text-accent" strokeWidth={1.5} />
+              <h3 className="mt-5 font-serif text-2xl text-primary">{title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
               <Link
                 to="/servicios"
-                className="relative mt-5 inline-flex items-center gap-1 text-sm font-medium text-primary"
+                className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-primary"
               >
                 Conocer más <ArrowRight className="h-3.5 w-3.5" />
               </Link>
