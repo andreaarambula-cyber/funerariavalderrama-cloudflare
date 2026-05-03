@@ -20,7 +20,7 @@ export function Obituaries3DCarousel({ obituaries }: Props) {
   const [isHovered, setIsHovered] = useState(false);
 
   const cardW = isMobile ? 220 : 300;
-  const cardH = isMobile ? 380 : 480;
+  const cardH = isMobile ? 420 : 520;
   const xStep = isMobile ? 250 : 360;
   const radius = isMobile ? 700 : 950;
   const angleStep = isMobile ? 11 : 13;
