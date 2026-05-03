@@ -57,7 +57,7 @@ export function AnecdoteWall({ items, personName }: { items: Anecdote[]; personN
         >
           <div
             ref={trackRef}
-            className="-mx-4 flex gap-8 overflow-x-auto px-4 pb-4 pt-2 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:-mx-6 sm:px-14"
+            className="flex gap-8 overflow-x-auto px-4 pb-4 pt-2 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:px-20"
           >
             {list.map((a, i) => (
               <article
@@ -70,22 +70,22 @@ export function AnecdoteWall({ items, personName }: { items: Anecdote[]; personN
               </article>
             ))}
           </div>
-          <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-12 items-center justify-start sm:flex">
+          <div className="pointer-events-none absolute inset-y-0 -left-2 hidden w-12 items-center justify-start sm:flex md:-left-6">
             <button
               type="button"
               aria-label="Anterior"
               onClick={() => scrollByCard(-1)}
-              className="pointer-events-auto -ml-2 rounded-full bg-primary/10 p-2 text-primary backdrop-blur-sm transition hover:bg-primary/30 hover:text-primary-foreground"
+              className="pointer-events-auto rounded-full bg-primary/10 p-2 text-primary backdrop-blur-sm transition hover:bg-primary/30 hover:text-primary-foreground"
             >
               <ChevronLeft className="h-6 w-6" />
             </button>
           </div>
-          <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-12 items-center justify-end sm:flex">
+          <div className="pointer-events-none absolute inset-y-0 -right-2 hidden w-12 items-center justify-end sm:flex md:-right-6">
             <button
               type="button"
               aria-label="Siguiente"
               onClick={() => scrollByCard(1)}
-              className="pointer-events-auto -mr-2 rounded-full bg-primary/10 p-2 text-primary backdrop-blur-sm transition hover:bg-primary/30 hover:text-primary-foreground"
+              className="pointer-events-auto rounded-full bg-primary/10 p-2 text-primary backdrop-blur-sm transition hover:bg-primary/30 hover:text-primary-foreground"
             >
               <ChevronRight className="h-6 w-6" />
             </button>
