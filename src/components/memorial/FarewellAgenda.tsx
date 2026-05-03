@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Calendar, MapPin, Navigation, CalendarPlus, UserCheck, X } from "lucide-react";
+import { Calendar, MapPin, Navigation, CalendarPlus } from "lucide-react";
 import { toast } from "sonner";
 import { downloadIcs } from "@/lib/ics";
 import type { FarewellEvent } from "@/data/obituaries";
@@ -19,21 +18,6 @@ export function FarewellAgenda({
   events: FarewellEvent[];
   personName: string;
 }) {
-  const [rsvpFor, setRsvpFor] = useState<FarewellEvent | null>(null);
-  const [name, setName] = useState("");
-  const [people, setPeople] = useState(1);
-
-  function rsvp(e: React.FormEvent) {
-    e.preventDefault();
-    if (!name.trim() || !rsvpFor) return;
-    toast.success("Asistencia confirmada", {
-      description: `${name} y ${people - 1 > 0 ? people - 1 + " acompañante" + (people - 1 > 1 ? "s" : "") : "sin acompañantes"} — ${rsvpFor.type}`,
-    });
-    setRsvpFor(null);
-    setName("");
-    setPeople(1);
-  }
-
   function addToCalendar(ev: FarewellEvent) {
     downloadIcs(`${personName}-${ev.type}`.toLowerCase().replace(/\s+/g, "-"), {
       title: `${ev.type} — ${personName}`,
@@ -100,12 +84,6 @@ export function FarewellAgenda({
                       >
                         <CalendarPlus className="h-3.5 w-3.5" /> Mi calendario
                       </button>
-                      <button
-                        onClick={() => setRsvpFor(ev)}
-                        className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition hover:brightness-110"
-                      >
-                        <UserCheck className="h-3.5 w-3.5" /> Confirmar asistencia
-                      </button>
                     </div>
                   </div>
                 </div>
@@ -128,69 +106,6 @@ export function FarewellAgenda({
           )}
         </div>
       </div>
-
-      {rsvpFor && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label="Confirmar asistencia"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-primary/60 p-4 backdrop-blur-sm animate-fade-in"
-          onClick={() => setRsvpFor(null)}
-        >
-          <form
-            onSubmit={rsvp}
-            onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-md rounded-2xl bg-surface p-6 shadow-elevated animate-scale-in"
-          >
-            <div className="flex items-start justify-between">
-              <div>
-                <UserCheck className="h-8 w-8 text-accent" strokeWidth={1.4} />
-                <h3 className="mt-2 font-serif text-2xl text-primary">Confirmar asistencia</h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {rsvpFor.type} — {rsvpFor.date}
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={() => setRsvpFor(null)}
-                aria-label="Cerrar"
-                className="rounded-full p-1 text-muted-foreground hover:bg-secondary"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-
-            <label className="mt-5 block text-sm">
-              <span className="font-medium">Tu nombre</span>
-              <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-                autoFocus
-                maxLength={50}
-                className="mt-1.5 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-              />
-            </label>
-            <label className="mt-4 block text-sm">
-              <span className="font-medium">Cantidad de personas</span>
-              <input
-                type="number"
-                min={1}
-                max={10}
-                value={people}
-                onChange={(e) => setPeople(Math.max(1, Math.min(10, Number(e.target.value) || 1)))}
-                className="mt-1.5 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-              />
-            </label>
-            <button
-              type="submit"
-              className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition hover:brightness-110"
-            >
-              Confirmar
-            </button>
-          </form>
-        </div>
-      )}
     </section>
   );
 }
