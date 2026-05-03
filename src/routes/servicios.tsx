@@ -1,6 +1,21 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Check, ChevronDown } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  ChevronDown,
+  PhoneCall,
+  Box,
+  Flame,
+  Truck,
+  FileText,
+  Coffee,
+  Music2,
+  Camera,
+  Newspaper,
+  Mic2,
+  Landmark,
+} from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { cn } from "@/lib/utils";
 
@@ -20,70 +35,92 @@ export const Route = createFileRoute("/servicios")({
 
 const services = [
   {
-    id: "funeral",
-    name: "Funeral tradicional",
-    price: 1290000,
-    desc: "Servicio completo de despedida con velatorio, traslado y ceremonia.",
+    id: "atencion",
+    name: "Atención 24/7",
+    icon: PhoneCall,
+    desc: "Disponibilidad permanente para coordinar el retiro y todo el proceso, sin importar la hora del día o la noche.",
     includes: [
-      "Ataúd a elección desde catálogo",
-      "Capilla ardiente y sala de velatorio",
-      "Traslado al cementerio",
-      "Coordinador familiar dedicado",
-      "Trámites y certificados",
+      "Coordinación inmediata por teléfono o WhatsApp",
+      "Retiro desde clínica, hospital o domicilio",
+      "Equipo de respuesta las 24 horas",
+      "Acompañamiento desde el primer minuto",
+      "Sin recargo por horario nocturno o festivo",
     ],
   },
   {
-    id: "cremacion",
-    name: "Cremación",
-    price: 890000,
-    desc: "Servicio de cremación digna con urna a elección y entrega protocolar.",
+    id: "urna",
+    name: "Elección de urna",
+    icon: Box,
+    desc: "Variedad de urnas y ataúdes para que elijas la opción que mejor represente a tu ser querido.",
     includes: [
-      "Cremación en horno certificado",
-      "Urna a elección desde catálogo",
-      "Velatorio opcional previo",
-      "Entrega de cenizas con protocolo",
-      "Certificado de cremación",
+      "Catálogo amplio de urnas y ataúdes",
+      "Modelos en distintas maderas y terminaciones",
+      "Asesoría personalizada según presupuesto",
+      "Entrega y preparación incluida",
+      "Opciones para cremación y sepultación",
     ],
   },
   {
     id: "velatorio",
-    name: "Velatorio",
-    price: 350000,
-    desc: "Salas privadas con todas las comodidades para recibir a familiares y amigos.",
+    name: "Equipo de velatorio",
+    icon: Flame,
+    desc: "Luces, cirios y todos los elementos necesarios para crear un ambiente solemne y respetuoso.",
     includes: [
-      "Sala privada hasta 80 personas",
-      "Servicio de café y agua",
-      "Música ambiente",
-      "Atención permanente",
-      "Hasta 24 horas de uso",
+      "Capilla ardiente con cirios",
+      "Iluminación y ornamentación",
+      "Atril, libro de condolencias y cruz",
+      "Instalación en domicilio o sala de velación",
+      "Atención permanente durante el velatorio",
     ],
   },
   {
     id: "traslados",
-    name: "Traslados",
-    price: 280000,
-    desc: "Traslados nacionales e internacionales con todos los permisos requeridos.",
+    name: "Traslados y carroza",
+    icon: Truck,
+    desc: "Retiro desde clínica, hospital o domicilio y traslado al lugar de velatorio y cementerio en carroza panorámica.",
     includes: [
-      "Traslado puerta a puerta",
-      "Vehículo especializado",
-      "Permisos sanitarios incluidos",
-      "Coordinación 24/7",
-      "Cobertura nacional",
+      "Carroza fúnebre panorámica",
+      "Retiro desde clínica, hospital o domicilio",
+      "Traslado al velatorio y al cementerio",
+      "Cobertura en Concepción y alrededores",
+      "Traslados a otras regiones coordinados",
     ],
   },
   {
     id: "tramites",
-    name: "Trámites",
-    price: 0,
-    desc: "Te acompañamos en cada gestión legal y administrativa, sin costo adicional.",
+    name: "Trámites y cuota mortuoria",
+    icon: FileText,
+    desc: "Inscripción en el Registro Civil y tramitación legal e integral de la cuota mortuoria.",
     includes: [
-      "Inscripción Registro Civil",
-      "Certificado de defunción",
-      "Coordinación con cementerio",
-      "Asesoría posesión efectiva",
-      "Gestiones AFP y seguros",
+      "Inscripción en el Registro Civil",
+      "Tramitación de la cuota mortuoria",
+      "Coordinación con cementerio o crematorio",
+      "Gestión de permisos sanitarios",
+      "Asesoría en posesión efectiva",
     ],
   },
+  {
+    id: "incluidos",
+    name: "Servicios incluidos",
+    icon: Coffee,
+    desc: "Detalles que cuidan a la familia durante el velatorio, sin costo adicional.",
+    includes: [
+      "Servicio de cafetería",
+      "Arreglo floral principal",
+      "Atención cordial al velatorio",
+      "Coordinador familiar dedicado",
+      "Acompañamiento durante todo el proceso",
+    ],
+  },
+];
+
+const extras = [
+  { icon: Truck, title: "Transporte adicional", desc: "Buses y vehículos para acompañantes." },
+  { icon: Landmark, title: "Lápidas", desc: "Diseño, grabado e instalación en cementerio." },
+  { icon: Mic2, title: "Cantantes líricos", desc: "Voces solistas para misa o despedida." },
+  { icon: Newspaper, title: "Publicación en diario oficial", desc: "Aviso fúnebre en medios oficiales." },
+  { icon: Music2, title: "Música de acompañamiento", desc: "Música ambiente para el velatorio." },
+  { icon: Camera, title: "Fotografías", desc: "Registro fotográfico de la ceremonia." },
 ];
 
 const faqs = [
@@ -96,12 +133,12 @@ const faqs = [
     a: "Sí. Estamos disponibles las 24 horas, todos los días del año. Llámanos al +56 9 5390 0931 o escríbenos por WhatsApp en cualquier momento.",
   },
   {
-    q: "¿Tienen cobertura en regiones?",
-    a: "Tenemos cobertura nacional. Trabajamos con sucursales y aliados en Arica, Antofagasta, La Valderrama, Valparaíso, Concepción, Temuco y Punta Arenas, entre otras ciudades.",
+    q: "¿En qué comunas tienen cobertura?",
+    a: "Atendemos principalmente Concepción, Chiguayante, San Pedro de la Paz, Hualpén y Talcahuano. Coordinamos también traslados a otras regiones según la necesidad de cada familia.",
   },
   {
-    q: "¿Aceptan seguros funerarios?",
-    a: "Sí, trabajamos con las principales aseguradoras del país. Verificamos tu cobertura y gestionamos el cobro directamente con la compañía.",
+    q: "¿Tramitan la cuota mortuoria?",
+    a: "Sí. Nos encargamos de toda la tramitación legal e integral de la cuota mortuoria, además de la inscripción en el Registro Civil y los permisos sanitarios necesarios.",
   },
 ];
 
@@ -137,29 +174,21 @@ function ServiciosPage() {
 
         <div className="grid gap-8 rounded-3xl border border-border bg-surface p-8 shadow-soft md:p-12 lg:grid-cols-[1.1fr,1fr]">
           <div>
-            <h2 className="font-serif text-3xl text-primary md:text-4xl">{current.name}</h2>
+            <div className="flex items-center gap-3">
+              <span className="grid h-12 w-12 place-items-center rounded-full bg-accent/15">
+                <current.icon className="h-6 w-6 text-accent" strokeWidth={1.5} />
+              </span>
+              <h2 className="font-serif text-3xl text-primary md:text-4xl">{current.name}</h2>
+            </div>
             <p className="mt-3 text-base leading-relaxed text-muted-foreground">
               {current.desc}
             </p>
-            <div className="mt-8 rounded-2xl bg-secondary/60 p-5">
-              <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                {current.price === 0 ? "Servicio incluido" : "Desde"}
-              </p>
-              <p className="mt-1 font-serif text-4xl text-primary">
-                {current.price === 0 ? "Sin costo" : formatCLP(current.price)}
-              </p>
-              {current.price > 0 && (
-                <p className="mt-1 text-xs text-muted-foreground">
-                  Cuotas sin interés disponibles
-                </p>
-              )}
-            </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
                 to="/cotizar"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition hover:brightness-110"
               >
-                Cotizar este servicio <ArrowRight className="h-4 w-4" />
+                Solicitar este servicio <ArrowRight className="h-4 w-4" />
               </Link>
               <a
                 href="tel:+56953900931"
@@ -184,6 +213,68 @@ function ServiciosPage() {
               ))}
             </ul>
           </div>
+        </div>
+      </section>
+
+      <section className="border-t border-border bg-secondary/30 py-16 md:py-20">
+        <div className="container-prose">
+          <div className="text-center">
+            <p className="text-xs uppercase tracking-[0.3em] text-accent">Servicios complementarios</p>
+            <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
+              Cuidamos cada detalle de la despedida
+            </h2>
+            <p className="mt-3 text-sm text-muted-foreground">
+              Servicios adicionales que puedes sumar al pack principal según las necesidades de tu familia.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {extras.map(({ icon: Icon, title, desc }) => (
+              <div
+                key={title}
+                className="rounded-2xl border border-border bg-surface p-6 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
+              >
+                <Icon className="h-7 w-7 text-accent" strokeWidth={1.5} />
+                <h3 className="mt-4 font-serif text-xl text-primary">{title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="container-prose py-16 md:py-20">
+        <div className="grid gap-8 rounded-3xl border border-border bg-surface p-8 shadow-soft md:p-12 lg:grid-cols-[1fr,1fr] lg:items-center">
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-accent">Zona de cobertura</p>
+            <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
+              Acompañamos a las familias del Gran Concepción
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              Nuestra funeraria se encuentra en <strong>O'Higgins 1601, esq. Galvarino, Concepción</strong>.
+              Atendemos a familias de la comuna y del Gran Concepción, coordinando traslados y servicios en
+              distintos cementerios y crematorios.
+            </p>
+            <p className="mt-3 text-sm text-muted-foreground">
+              Si necesitas confirmar disponibilidad en tu comuna, contáctanos y te orientaremos de inmediato.
+            </p>
+          </div>
+          <ul className="grid grid-cols-2 gap-3">
+            {[
+              "Concepción",
+              "Chiguayante",
+              "San Pedro de la Paz",
+              "Hualpén",
+              "Talcahuano",
+              "Otras regiones",
+            ].map((c) => (
+              <li
+                key={c}
+                className="flex items-center gap-2 rounded-xl border border-border bg-background px-4 py-3 text-sm"
+              >
+                <Check className="h-4 w-4 text-accent" /> {c}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -228,8 +319,4 @@ function FAQItem({ q, a }: { q: string; a: string }) {
       </div>
     </div>
   );
-}
-
-function formatCLP(n: number) {
-  return "$" + n.toLocaleString("es-CL") + " CLP";
 }
