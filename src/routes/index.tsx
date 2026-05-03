@@ -165,7 +165,6 @@ function HowWeHelp() {
               <span className="absolute left-0 top-0 font-serif text-5xl text-accent/70">
                 {s.n}
               </span>
-              <div className="absolute left-12 top-3 hidden h-px w-32 bg-border md:block" />
               <h3 className="font-serif text-2xl text-primary">{s.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
             </div>
