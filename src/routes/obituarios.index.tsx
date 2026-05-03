@@ -4,7 +4,7 @@ import { Search, MapPin, ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { obituaries } from "@/data/obituaries";
 
-export const Route = createFileRoute("/obituarios")({
+export const Route = createFileRoute("/obituarios/")({
   head: () => ({
     meta: [
       { title: "Obituarios online — Funeraria Valderrama" },
