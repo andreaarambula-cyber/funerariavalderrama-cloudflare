@@ -40,17 +40,17 @@ export function MemoryGallery({ items, personName }: { items: GalleryItem[]; per
           </button>
         </div>
 
-        <div className="mt-8 columns-2 gap-4 md:columns-3 [&>*]:mb-4 [&>*]:break-inside-avoid">
+        <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
           {items.map((g, i) => (
             <figure
               key={i}
-              className="group relative overflow-hidden rounded-2xl border border-border bg-surface shadow-soft transition hover:shadow-elevated"
+              className="group relative aspect-square overflow-hidden rounded-2xl border border-border bg-surface shadow-soft transition hover:shadow-elevated"
             >
               <img
                 src={g.src}
                 alt={g.caption}
                 loading="lazy"
-                className="w-full transition duration-500 group-hover:scale-105"
+                className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
               />
               <figcaption className="absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-primary/95 to-primary/0 p-4 text-primary-foreground transition group-hover:translate-y-0">
                 <p className="text-sm font-medium">{g.caption}</p>
