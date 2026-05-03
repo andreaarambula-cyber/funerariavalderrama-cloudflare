@@ -36,7 +36,7 @@ function HomePage() {
 
 function Hero() {
   return (
-    <section className="relative isolate overflow-hidden">
+    <section className="relative isolate flex min-h-[calc(100svh-4rem)] items-center overflow-hidden">
       <img
         src={heroImg}
         alt=""
@@ -45,7 +45,7 @@ function Hero() {
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-primary/55 via-primary/35 to-primary/70" />
-      <div className="container-prose relative py-24 text-primary-foreground md:py-36 lg:py-44">
+      <div className="container-prose relative w-full py-16 text-primary-foreground md:py-20">
         <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-white/90 backdrop-blur">
           <Clock className="h-3.5 w-3.5 text-accent" />
           Atención 24 horas, todos los días
