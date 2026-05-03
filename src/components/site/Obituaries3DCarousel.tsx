@@ -44,10 +44,17 @@ export function Obituaries3DCarousel({ obituaries }: Props) {
 
   const go = useCallback(
     (dir: 1 | -1) => {
-      setActiveIndex((prev) => Math.max(0, Math.min(obituaries.length - 1, prev + dir)));
+      setActiveIndex((prev) => (prev + dir + obituaries.length) % obituaries.length);
     },
     [obituaries.length],
   );
+
+  // Autoplay: avanza cada 6s, pausa al hover y respeta reduced-motion
+  useEffect(() => {
+    if (prefersReduced || isHovered || obituaries.length <= 1) return;
+    const id = window.setInterval(() => go(1), 6000);
+    return () => window.clearInterval(id);
+  }, [go, isHovered, prefersReduced, obituaries.length]);
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
@@ -116,7 +123,6 @@ export function Obituaries3DCarousel({ obituaries }: Props) {
     >
       <button
         onClick={() => go(-1)}
-        disabled={activeIndex === 0}
         className="absolute left-2 top-1/2 z-30 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/80 text-foreground backdrop-blur-sm transition-colors hover:bg-foreground/10 disabled:pointer-events-none disabled:opacity-30 md:left-6"
         aria-label="Anterior"
       >
@@ -124,7 +130,6 @@ export function Obituaries3DCarousel({ obituaries }: Props) {
       </button>
       <button
         onClick={() => go(1)}
-        disabled={activeIndex === obituaries.length - 1}
         className="absolute right-2 top-1/2 z-30 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/80 text-foreground backdrop-blur-sm transition-colors hover:bg-foreground/10 disabled:pointer-events-none disabled:opacity-30 md:right-6"
         aria-label="Siguiente"
       >
