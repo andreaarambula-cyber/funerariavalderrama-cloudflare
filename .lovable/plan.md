@@ -1,23 +1,45 @@
-## Problema
+## Objetivo
 
-En la página `/obituarios/$slug`, la foto del retrato del hero ocupa demasiado espacio vertical en mobile/tablet (la viewport actual es 768px). En el breakpoint `md:` la columna es de 220px pero usa `md:w-full`, lo que hace que en pantallas medianas la foto quede grande respecto a la información al lado.
+Mejorar la jerarquía y atractivo de las tarjetas en la sección "Recursos para el camino" (`BlogTeaser` en `src/routes/index.tsx`), sin agregar imágenes, newsletter ni nuevas funcionalidades.
 
-## Cambios en `src/routes/obituarios.$slug.tsx`
+## Cambios en `src/routes/index.tsx` — componente `BlogTeaser`
 
-Hero header (líneas ~99-108):
+### 1. Enriquecer los datos de cada post
+Agregar `author` y `date` al objeto de cada artículo:
+- "Duelo" → autora ej. *María González · 12 Mar 2025*
+- "Trámites" → *Equipo Valderrama · 28 Feb 2025*
+- "Tradiciones" → *Andrés Rivas · 5 Feb 2025*
 
-1. **Reducir el ancho de la columna de la foto** en el grid:
-   - De `md:grid-cols-[220px,1fr]` a `md:grid-cols-[160px,1fr]` (desktop más compacto).
+### 2. Hover más expresivo
+- Mantener el `-translate-y-0.5` y `shadow-elevated` actual.
+- Agregar transición de borde a `border-accent/40` en hover.
+- El título cambia sutilmente de color a `text-accent-foreground` en hover (transición suave).
 
-2. **Reducir el tamaño máximo del contenedor de la imagen**:
-   - De `w-40 sm:w-48 md:w-full` a `w-32 sm:w-36 md:w-40` (foto pequeña y consistente en todos los breakpoints).
-   - Mantener `aspect-[4/5]`, bordes y sombras.
+### 3. CTA "Leer artículo" como botón visible
+Reemplazar el `<span>` de texto plano por un botón ghost real:
+- Fondo `bg-secondary/60`, hover `bg-accent text-accent-foreground`.
+- Padding `px-4 py-2`, `rounded-full`, texto `text-sm font-medium`.
+- Mantiene el icono `ArrowRight` con micro-animación (`group-hover:translate-x-0.5`).
 
-3. **Alinear mejor con la información**:
-   - Cambiar `md:items-end` a `md:items-center` para que la foto pequeña quede centrada verticalmente respecto al bloque de texto.
+### 4. Mejor jerarquía interna de la tarjeta
+Reordenar el contenido para que respire mejor:
+```text
+[Categoría · tiempo lectura]   ← chip pequeño arriba
+[Título grande]                ← protagonista
+[Autor · fecha]                ← meta info sutil, text-xs muted
+─────────                      ← separador sutil (border-t)
+[Botón "Leer artículo →"]      ← CTA al fondo
+```
 
-4. **Ajustar el tamaño del título** si es necesario para mantener la jerarquía visual (el `h1` queda como `text-4xl md:text-6xl` — se mantiene, ahora la información dominará el header como se desea).
+- Convertir la tarjeta en `flex flex-col` para que el botón quede pegado abajo (`mt-auto`) y todas las tarjetas tengan misma altura.
+- La categoría pasa a ser un chip con fondo `bg-accent/10 text-accent-foreground` redondeado en lugar de texto suelto.
+- Separador horizontal (`border-t border-border`) entre el bloque de texto y el CTA.
+
+### 5. Pequeños detalles de pulido
+- `gap-7` entre tarjetas en desktop para dar más aire.
+- `p-7` se mantiene; añadir `pt-6` después del separador.
+- Cursor pointer en toda la tarjeta para indicar clickabilidad.
 
 ## Resultado esperado
 
-La foto del retrato pasa a ser un elemento compacto (~128–160px de ancho) en todos los tamaños, dejando que el nombre, fechas, ubicación y resumen sean los protagonistas del header del memorial.
+Las tarjetas pasan de bloques planos de texto a piezas con jerarquía clara: chip de categoría → título → meta → CTA visible. Misma altura entre tarjetas, hover más vivo, y el botón "Leer artículo" se vuelve la acción evidente sin necesidad de imágenes ni nuevos componentes.
