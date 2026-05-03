@@ -40,7 +40,7 @@ export const Route = createRootRoute({
           "Servicios funerarios y de cremación con dignidad en todo Chile. Atención 24/7, planes a futuro y obituarios online. +30 años acompañando familias.",
       },
       { name: "author", content: "Funeraria Valderrama" },
-      { name: "theme-color", content: "#1E3A52" },
+      { name: "theme-color", content: "#1A1A1A" },
       { property: "og:title", content: "Funeraria Valderrama — Servicios funerarios 24/7" },
       {
         property: "og:description",
