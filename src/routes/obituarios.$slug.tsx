@@ -19,7 +19,7 @@ export const Route = createFileRoute("/obituarios/$slug")({
     loaderData
       ? {
           meta: [
-            { title: `${loaderData.fullName} — Obituario | Funeraria Serena` },
+            { title: `${loaderData.fullName} — Obituario | Funeraria Valderrama` },
             {
               name: "description",
               content: `${loaderData.fullName} (${loaderData.birth} — ${loaderData.death}). ${loaderData.summary}`,
@@ -29,7 +29,7 @@ export const Route = createFileRoute("/obituarios/$slug")({
             { property: "og:image", content: loaderData.photo },
           ],
         }
-      : { meta: [{ title: "Obituario — Funeraria Serena" }] },
+      : { meta: [{ title: "Obituario — Funeraria Valderrama" }] },
   notFoundComponent: () => (
     <div className="container-prose py-24 text-center">
       <h1 className="font-serif text-4xl text-primary">Obituario no encontrado</h1>
@@ -52,7 +52,7 @@ function ObituarioPage() {
   const memorialUrl =
     typeof window !== "undefined"
       ? window.location.href
-      : `https://funerariaserena.cl/obituarios/${o.slug}`;
+      : `https://funerariavalderrama.cl/obituarios/${o.slug}`;
 
   const [messages, setMessages] = useState<{ name: string; text: string; date: string }[]>([
     {

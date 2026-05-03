@@ -37,7 +37,7 @@ export function FarewellAgenda({
   function addToCalendar(ev: FarewellEvent) {
     downloadIcs(`${personName}-${ev.type}`.toLowerCase().replace(/\s+/g, "-"), {
       title: `${ev.type} — ${personName}`,
-      description: `Despedida de ${personName}. Funeraria Serena.`,
+      description: `Despedida de ${personName}. Funeraria Valderrama.`,
       location: ev.address,
       startIso: ev.isoStart,
       endIso: ev.isoEnd,

@@ -144,7 +144,7 @@ export const obituaries: Obituary[] = [
       {
         type: "Velatorio",
         date: "Mañana, 11:00 a 18:00 hrs",
-        address: "Capilla Serena Ñuñoa, Av. Irarrázaval 2345",
+        address: "Capilla Valderrama Ñuñoa, Av. Irarrázaval 2345",
         mapsQuery: "Av. Irarrázaval 2345 Ñuñoa Santiago",
         isoStart: "2026-04-30T11:00:00-03:00",
         isoEnd: "2026-04-30T18:00:00-03:00",
@@ -297,7 +297,7 @@ export const obituaries: Obituary[] = [
     photo: obit6,
     birth: "08/06/1944",
     death: "21/04/2026",
-    comuna: "La Serena",
+    comuna: "La Valderrama",
     summary:
       "Pescador, narrador de historias y querido vecino. Amaba el mar al que volvía cada amanecer, dejando un legado de bondad y trabajo.",
     timeline: [
@@ -320,16 +320,16 @@ export const obituaries: Obituary[] = [
       {
         type: "Velatorio",
         date: "Hoy, 18:00 a 22:00 hrs",
-        address: "Parroquia San Francisco, La Serena",
-        mapsQuery: "Parroquia San Francisco La Serena",
+        address: "Parroquia San Francisco, La Valderrama",
+        mapsQuery: "Parroquia San Francisco La Valderrama",
         isoStart: "2026-04-29T18:00:00-03:00",
         isoEnd: "2026-04-29T22:00:00-03:00",
       },
       {
         type: "Sepultación",
         date: "Mañana, 11:00 hrs",
-        address: "Cementerio General de La Serena",
-        mapsQuery: "Cementerio General La Serena",
+        address: "Cementerio General de La Valderrama",
+        mapsQuery: "Cementerio General La Valderrama",
         isoStart: "2026-04-30T11:00:00-03:00",
         isoEnd: "2026-04-30T12:30:00-03:00",
       },

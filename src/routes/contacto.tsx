@@ -6,7 +6,7 @@ import { PageHero } from "@/components/site/PageHero";
 export const Route = createFileRoute("/contacto")({
   head: () => ({
     meta: [
-      { title: "Contacto — Funeraria Serena" },
+      { title: "Contacto — Funeraria Valderrama" },
       {
         name: "description",
         content:
@@ -42,7 +42,7 @@ function ContactoPage() {
           {[
             { icon: Phone, label: "Teléfono 24/7", val: "600 123 456", href: "tel:+56600123456" },
             { icon: MessageCircle, label: "WhatsApp", val: "+56 9 1234 5678", href: "https://wa.me/56912345678" },
-            { icon: Mail, label: "Email", val: "contacto@serena.cl", href: "mailto:contacto@serena.cl" },
+            { icon: Mail, label: "Email", val: "contacto@valderrama.cl", href: "mailto:contacto@valderrama.cl" },
             { icon: MapPin, label: "Casa matriz", val: "Av. Providencia 1234, Santiago", href: "#" },
           ].map(({ icon: Icon, label, val, href }) => (
             <a

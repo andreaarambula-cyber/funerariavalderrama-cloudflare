@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Phone, Menu, X, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import logo from "@/assets/logo-valderrama.png";
 
 const nav = [
   { to: "/", label: "Inicio" },
@@ -19,19 +20,8 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/85 backdrop-blur-md">
       <div className="container-prose flex h-16 items-center justify-between gap-4 md:h-20">
-        <Link to="/" className="flex items-center gap-2.5" aria-label="Funeraria Serena - Inicio">
-          <span
-            aria-hidden
-            className="grid h-9 w-9 place-items-center rounded-full bg-primary text-primary-foreground"
-          >
-            <span className="font-serif text-lg leading-none">S</span>
-          </span>
-          <span className="flex flex-col leading-tight">
-            <span className="font-serif text-xl text-primary">Serena</span>
-            <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-              Funeraria
-            </span>
-          </span>
+        <Link to="/" className="flex items-center gap-2" aria-label="Funeraria Valderrama - Inicio">
+          <img src={logo} alt="Funeraria Valderrama" className="h-12 w-auto md:h-14" />
         </Link>
 
         <nav className="hidden lg:block" aria-label="Principal">

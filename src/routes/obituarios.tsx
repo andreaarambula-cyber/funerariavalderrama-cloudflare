@@ -7,7 +7,7 @@ import { obituaries } from "@/data/obituaries";
 export const Route = createFileRoute("/obituarios")({
   head: () => ({
     meta: [
-      { title: "Obituarios online — Funeraria Serena" },
+      { title: "Obituarios online — Funeraria Valderrama" },
       {
         name: "description",
         content:

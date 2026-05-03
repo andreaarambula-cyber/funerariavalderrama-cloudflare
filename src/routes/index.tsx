@@ -8,7 +8,7 @@ import { obituaries } from "@/data/obituaries";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Funeraria Serena — Servicios funerarios y cremación 24/7 en Chile" },
+      { title: "Funeraria Valderrama — Servicios funerarios y cremación 24/7 en Chile" },
       {
         name: "description",
         content:

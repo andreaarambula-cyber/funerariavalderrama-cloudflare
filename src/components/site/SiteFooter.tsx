@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Phone, Mail, MapPin, Facebook, Instagram, Youtube } from "lucide-react";
+import logo from "@/assets/logo-valderrama.png";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -8,15 +9,11 @@ export function SiteFooter() {
       <div className="container-prose grid gap-10 py-16 md:grid-cols-2 lg:grid-cols-5">
         <div className="lg:col-span-2">
           <div className="flex items-center gap-2.5">
-            <span className="grid h-10 w-10 place-items-center rounded-full bg-accent text-accent-foreground">
-              <span className="font-serif text-lg">S</span>
-            </span>
-            <div className="leading-tight">
-              <p className="font-serif text-2xl text-primary-foreground">Serena</p>
-              <p className="text-[11px] uppercase tracking-[0.2em] text-primary-foreground/60">
-                Funeraria
-              </p>
-            </div>
+            <img
+              src={logo}
+              alt="Funeraria Valderrama"
+              className="h-16 w-auto rounded-md bg-background p-1.5"
+            />
           </div>
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-primary-foreground/70">
             Acompañamos a las familias chilenas en el momento más difícil con dignidad,
@@ -60,8 +57,8 @@ export function SiteFooter() {
           </li>
           <li className="flex items-start gap-2.5 text-sm text-primary-foreground/75">
             <Mail className="mt-0.5 h-4 w-4 text-accent" />
-            <a href="mailto:contacto@serena.cl" className="hover:text-primary-foreground">
-              contacto@serena.cl
+            <a href="mailto:contacto@valderrama.cl" className="hover:text-primary-foreground">
+              contacto@valderrama.cl
             </a>
           </li>
           <li className="flex items-start gap-2.5 text-sm text-primary-foreground/75">
@@ -73,7 +70,7 @@ export function SiteFooter() {
 
       <div className="border-t border-primary-foreground/10">
         <div className="container-prose flex flex-col gap-3 py-6 text-xs text-primary-foreground/60 md:flex-row md:items-center md:justify-between">
-          <p>© {year} Funeraria Serena. Todos los derechos reservados.</p>
+          <p>© {year} Funeraria Valderrama. Todos los derechos reservados.</p>
           <p>Empresa registrada SEREMI de Salud · Resolución N° 0123/2018</p>
           <div className="flex gap-4">
             <a href="#" className="hover:text-primary-foreground">Privacidad</a>

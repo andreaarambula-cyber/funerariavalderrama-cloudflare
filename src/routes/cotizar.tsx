@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/cotizar")({
   head: () => ({
     meta: [
-      { title: "Cotizador online — Funeraria Serena" },
+      { title: "Cotizador online — Funeraria Valderrama" },
       {
         name: "description",
         content:
