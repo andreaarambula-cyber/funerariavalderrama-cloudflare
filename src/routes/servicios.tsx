@@ -202,32 +202,6 @@ function ServiciosPage() {
         </div>
       </section>
 
-      <section className="border-t border-border bg-secondary/30 py-16 md:py-20">
-        <div className="container-prose">
-          <div className="text-center">
-            <p className="text-xs uppercase tracking-[0.3em] text-accent">Servicios complementarios</p>
-            <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
-              Cuidamos cada detalle de la despedida
-            </h2>
-            <p className="mt-3 text-sm text-muted-foreground">
-              Servicios adicionales que puedes sumar al pack principal según las necesidades de tu familia.
-            </p>
-          </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {extras.map(({ icon: Icon, title, desc }) => (
-              <div
-                key={title}
-                className="rounded-2xl border border-border bg-surface p-6 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
-              >
-                <Icon className="h-7 w-7 text-accent" strokeWidth={1.5} />
-                <h3 className="mt-4 font-serif text-xl text-primary">{title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="container-prose py-16 md:py-20">
         <div className="grid gap-8 rounded-3xl border border-border bg-surface p-8 shadow-soft md:p-12 lg:grid-cols-[1fr,1fr] lg:items-center">
           <div>
