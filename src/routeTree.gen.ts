@@ -11,11 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ServiciosRouteImport } from './routes/servicios'
 import { Route as PlanesRouteImport } from './routes/planes'
-import { Route as ObituariosRouteImport } from './routes/obituarios'
 import { Route as NosotrosRouteImport } from './routes/nosotros'
 import { Route as CotizarRouteImport } from './routes/cotizar'
 import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ObituariosIndexRouteImport } from './routes/obituarios.index'
 import { Route as ObituariosSlugRouteImport } from './routes/obituarios.$slug'
 
 const ServiciosRoute = ServiciosRouteImport.update({
@@ -26,11 +26,6 @@ const ServiciosRoute = ServiciosRouteImport.update({
 const PlanesRoute = PlanesRouteImport.update({
   id: '/planes',
   path: '/planes',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ObituariosRoute = ObituariosRouteImport.update({
-  id: '/obituarios',
-  path: '/obituarios',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NosotrosRoute = NosotrosRouteImport.update({
@@ -53,10 +48,15 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ObituariosIndexRoute = ObituariosIndexRouteImport.update({
+  id: '/obituarios/',
+  path: '/obituarios/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ObituariosSlugRoute = ObituariosSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => ObituariosRoute,
+  id: '/obituarios/$slug',
+  path: '/obituarios/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -64,20 +64,20 @@ export interface FileRoutesByFullPath {
   '/contacto': typeof ContactoRoute
   '/cotizar': typeof CotizarRoute
   '/nosotros': typeof NosotrosRoute
-  '/obituarios': typeof ObituariosRouteWithChildren
   '/planes': typeof PlanesRoute
   '/servicios': typeof ServiciosRoute
   '/obituarios/$slug': typeof ObituariosSlugRoute
+  '/obituarios/': typeof ObituariosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contacto': typeof ContactoRoute
   '/cotizar': typeof CotizarRoute
   '/nosotros': typeof NosotrosRoute
-  '/obituarios': typeof ObituariosRouteWithChildren
   '/planes': typeof PlanesRoute
   '/servicios': typeof ServiciosRoute
   '/obituarios/$slug': typeof ObituariosSlugRoute
+  '/obituarios': typeof ObituariosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -85,10 +85,10 @@ export interface FileRoutesById {
   '/contacto': typeof ContactoRoute
   '/cotizar': typeof CotizarRoute
   '/nosotros': typeof NosotrosRoute
-  '/obituarios': typeof ObituariosRouteWithChildren
   '/planes': typeof PlanesRoute
   '/servicios': typeof ServiciosRoute
   '/obituarios/$slug': typeof ObituariosSlugRoute
+  '/obituarios/': typeof ObituariosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -97,30 +97,30 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/cotizar'
     | '/nosotros'
-    | '/obituarios'
     | '/planes'
     | '/servicios'
     | '/obituarios/$slug'
+    | '/obituarios/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/contacto'
     | '/cotizar'
     | '/nosotros'
-    | '/obituarios'
     | '/planes'
     | '/servicios'
     | '/obituarios/$slug'
+    | '/obituarios'
   id:
     | '__root__'
     | '/'
     | '/contacto'
     | '/cotizar'
     | '/nosotros'
-    | '/obituarios'
     | '/planes'
     | '/servicios'
     | '/obituarios/$slug'
+    | '/obituarios/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -128,9 +128,10 @@ export interface RootRouteChildren {
   ContactoRoute: typeof ContactoRoute
   CotizarRoute: typeof CotizarRoute
   NosotrosRoute: typeof NosotrosRoute
-  ObituariosRoute: typeof ObituariosRouteWithChildren
   PlanesRoute: typeof PlanesRoute
   ServiciosRoute: typeof ServiciosRoute
+  ObituariosSlugRoute: typeof ObituariosSlugRoute
+  ObituariosIndexRoute: typeof ObituariosIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -147,13 +148,6 @@ declare module '@tanstack/react-router' {
       path: '/planes'
       fullPath: '/planes'
       preLoaderRoute: typeof PlanesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/obituarios': {
-      id: '/obituarios'
-      path: '/obituarios'
-      fullPath: '/obituarios'
-      preLoaderRoute: typeof ObituariosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/nosotros': {
@@ -184,36 +178,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/obituarios/': {
+      id: '/obituarios/'
+      path: '/obituarios'
+      fullPath: '/obituarios/'
+      preLoaderRoute: typeof ObituariosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/obituarios/$slug': {
       id: '/obituarios/$slug'
-      path: '/$slug'
+      path: '/obituarios/$slug'
       fullPath: '/obituarios/$slug'
       preLoaderRoute: typeof ObituariosSlugRouteImport
-      parentRoute: typeof ObituariosRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
-
-interface ObituariosRouteChildren {
-  ObituariosSlugRoute: typeof ObituariosSlugRoute
-}
-
-const ObituariosRouteChildren: ObituariosRouteChildren = {
-  ObituariosSlugRoute: ObituariosSlugRoute,
-}
-
-const ObituariosRouteWithChildren = ObituariosRoute._addFileChildren(
-  ObituariosRouteChildren,
-)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactoRoute: ContactoRoute,
   CotizarRoute: CotizarRoute,
   NosotrosRoute: NosotrosRoute,
-  ObituariosRoute: ObituariosRouteWithChildren,
   PlanesRoute: PlanesRoute,
   ServiciosRoute: ServiciosRoute,
+  ObituariosSlugRoute: ObituariosSlugRoute,
+  ObituariosIndexRoute: ObituariosIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
