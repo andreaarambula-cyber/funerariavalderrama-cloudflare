@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star } from "lucide-react";
 import heroImg from "@/assets/hero-sunrise.jpg";
 import candleImg from "@/assets/candle.jpg";
-import flowersImg from "@/assets/flowers.jpg";
 import { obituaries } from "@/data/obituaries";
 
 export const Route = createFileRoute("/")({
@@ -28,7 +27,6 @@ function HomePage() {
       <HowWeHelp />
       <FeaturedObituaries />
       <Testimonials />
-      <PlanFuturoCTA />
       <BlogTeaser />
     </>
   );
@@ -65,10 +63,10 @@ function Hero() {
             <Phone className="h-4 w-4" /> Necesito ayuda ahora
           </a>
           <Link
-            to="/planes"
+            to="/cotizar"
             className="inline-flex items-center justify-center gap-2 rounded-full border border-white/40 bg-white/5 px-7 py-3.5 text-sm font-medium text-white backdrop-blur transition hover:bg-white/10"
           >
-            Ver planes <ArrowRight className="h-4 w-4" />
+            Cotizar online <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </div>
@@ -280,66 +278,6 @@ function Testimonials() {
               </figcaption>
             </figure>
           ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function PlanFuturoCTA() {
-  return (
-    <section className="py-20 md:py-28">
-      <div className="container-prose">
-        <div className="overflow-hidden rounded-3xl border border-border bg-surface shadow-soft">
-          <div className="grid lg:grid-cols-2">
-            <div className="order-2 aspect-[4/3] overflow-hidden lg:order-1 lg:aspect-auto">
-              <img
-                src={flowersImg}
-                alt="Arreglo floral"
-                loading="lazy"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="order-1 p-8 md:p-14 lg:order-2">
-              <p className="text-xs uppercase tracking-[0.2em] text-accent-foreground/80">
-                Plan a futuro
-              </p>
-              <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
-                Tranquilidad para los que más amas
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-                Planifica con calma, congela el precio de hoy y libera a tu familia de
-                decisiones difíciles. Cuotas sin interés y cobertura inmediata.
-              </p>
-              <ul className="mt-6 space-y-2.5 text-sm">
-                {[
-                  "Precio congelado de por vida",
-                  "Hasta 48 cuotas sin interés",
-                  "Cobertura nacional inmediata",
-                  "Modificable y transferible",
-                ].map((b) => (
-                  <li key={b} className="flex items-start gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                    {b}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link
-                  to="/planes"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition hover:brightness-110"
-                >
-                  Ver planes <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  to="/cotizar"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-primary transition hover:bg-secondary"
-                >
-                  Cotizar online
-                </Link>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
