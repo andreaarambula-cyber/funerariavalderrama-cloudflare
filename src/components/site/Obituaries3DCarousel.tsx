@@ -18,21 +18,8 @@ export function Obituaries3DCarousel({ obituaries }: Props) {
   const [activeIndex, setActiveIndex] = useState(() => Math.floor(obituaries.length / 2));
   const prefersReduced = useReducedMotion();
   const isMobile = useIsMobile();
-  const wheelTimer = useRef(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
-  const [isFullyVisible, setIsFullyVisible] = useState(false);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsFullyVisible(entry.intersectionRatio > 0.85),
-      { threshold: [0, 0.85, 1] },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
 
   const cardW = isMobile ? 220 : 300;
   const cardH = isMobile ? 380 : 480;
@@ -73,49 +60,12 @@ export function Obituaries3DCarousel({ obituaries }: Props) {
     [go],
   );
 
-  const handleWheel = useCallback(
-    (e: React.WheelEvent) => {
-      const now = Date.now();
-      if (now - wheelTimer.current < WHEEL_COOLDOWN) return;
-      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-      if (Math.abs(delta) > 15) {
-        wheelTimer.current = now;
-        go(delta > 0 ? 1 : -1);
-      }
-    },
-    [go],
-  );
-
-  const atEdge = useCallback(
-    (delta: number) => {
-      if (delta > 0 && activeIndex >= obituaries.length - 1) return true;
-      if (delta < 0 && activeIndex <= 0) return true;
-      return false;
-    },
-    [activeIndex, obituaries.length],
-  );
-
-  const shouldCapture = isHovered && isFullyVisible;
-
-  useEffect(() => {
-    if (!shouldCapture) return;
-    const el = containerRef.current;
-    if (!el) return;
-    const prevent = (e: WheelEvent) => {
-      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-      if (!atEdge(delta)) e.preventDefault();
-    };
-    el.addEventListener("wheel", prevent, { passive: false });
-    return () => el.removeEventListener("wheel", prevent);
-  }, [shouldCapture, atEdge]);
-
   return (
     <div
       ref={containerRef}
       className="relative select-none outline-none"
       tabIndex={0}
       onKeyDown={handleKeyDown}
-      onWheel={handleWheel}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       role="region"
@@ -123,14 +73,14 @@ export function Obituaries3DCarousel({ obituaries }: Props) {
     >
       <button
         onClick={() => go(-1)}
-        className="absolute left-2 top-1/2 z-30 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/80 text-foreground backdrop-blur-sm transition-colors hover:bg-foreground/10 disabled:pointer-events-none disabled:opacity-30 md:left-6"
+        className="absolute left-2 top-1/2 z-30 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-border/40 bg-background/20 text-foreground/70 backdrop-blur-sm transition-all hover:bg-background/60 hover:text-foreground md:left-6"
         aria-label="Anterior"
       >
         <ChevronLeft className="h-5 w-5" />
       </button>
       <button
         onClick={() => go(1)}
-        className="absolute right-2 top-1/2 z-30 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/80 text-foreground backdrop-blur-sm transition-colors hover:bg-foreground/10 disabled:pointer-events-none disabled:opacity-30 md:right-6"
+        className="absolute right-2 top-1/2 z-30 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-border/40 bg-background/20 text-foreground/70 backdrop-blur-sm transition-all hover:bg-background/60 hover:text-foreground md:right-6"
         aria-label="Siguiente"
       >
         <ChevronRight className="h-5 w-5" />
