@@ -370,7 +370,7 @@ function Tier({
   return (
     <div
       className={`relative flex flex-wrap items-end justify-center ${gap}`}
-      style={{ marginTop: offset ? "-18px" : 0 }}
+      style={{ marginTop: offset ? "12px" : 0 }}
     >
       {candles.map(({ c, i }) => (
         <CandleNode
