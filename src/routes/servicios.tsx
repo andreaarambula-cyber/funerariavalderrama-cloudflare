@@ -10,11 +10,6 @@ import {
   Truck,
   FileText,
   Coffee,
-  Music2,
-  Camera,
-  Newspaper,
-  Mic2,
-  Landmark,
 } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { cn } from "@/lib/utils";
@@ -114,15 +109,6 @@ const services = [
   },
 ];
 
-const extras = [
-  { icon: Truck, title: "Transporte adicional", desc: "Buses y vehículos para acompañantes." },
-  { icon: Landmark, title: "Lápidas", desc: "Diseño, grabado e instalación en cementerio." },
-  { icon: Mic2, title: "Cantantes líricos", desc: "Voces solistas para misa o despedida." },
-  { icon: Newspaper, title: "Publicación en diario oficial", desc: "Aviso fúnebre en medios oficiales." },
-  { icon: Music2, title: "Música de acompañamiento", desc: "Música ambiente para el velatorio." },
-  { icon: Camera, title: "Fotografías", desc: "Registro fotográfico de la ceremonia." },
-];
-
 const faqs = [
   {
     q: "¿Cuánto demora organizar un servicio funerario?",
@@ -212,32 +198,6 @@ function ServiciosPage() {
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-border bg-secondary/30 py-16 md:py-20">
-        <div className="container-prose">
-          <div className="text-center">
-            <p className="text-xs uppercase tracking-[0.3em] text-accent">Servicios complementarios</p>
-            <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
-              Cuidamos cada detalle de la despedida
-            </h2>
-            <p className="mt-3 text-sm text-muted-foreground">
-              Servicios adicionales que puedes sumar al pack principal según las necesidades de tu familia.
-            </p>
-          </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {extras.map(({ icon: Icon, title, desc }) => (
-              <div
-                key={title}
-                className="rounded-2xl border border-border bg-surface p-6 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
-              >
-                <Icon className="h-7 w-7 text-accent" strokeWidth={1.5} />
-                <h3 className="mt-4 font-serif text-xl text-primary">{title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{desc}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
