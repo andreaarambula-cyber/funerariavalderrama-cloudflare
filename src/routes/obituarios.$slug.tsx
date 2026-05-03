@@ -2,7 +2,6 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, MapPin, Calendar, Share2 } from "lucide-react";
 import { getObituary, obituaries } from "@/data/obituaries";
 import { CandleWall } from "@/components/memorial/CandleWall";
-import { LifeTimeline } from "@/components/memorial/LifeTimeline";
 import { MemoryGallery } from "@/components/memorial/MemoryGallery";
 import { AnecdoteWall } from "@/components/memorial/AnecdoteWall";
 import { FarewellAgenda } from "@/components/memorial/FarewellAgenda";
@@ -127,7 +126,6 @@ function ObituarioPage() {
         </div>
       </section>
 
-      <LifeTimeline items={o.timeline} personName={o.fullName} />
       <MemoryGallery items={o.gallery} personName={o.fullName} />
       <AnecdoteWall items={o.anecdotes} personName={o.fullName} />
       <FarewellAgenda events={o.events} personName={o.fullName} />
