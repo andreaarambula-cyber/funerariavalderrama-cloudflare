@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/servicios")({
   head: () => ({
     meta: [
-      { title: "Servicios funerarios y cremación — Funeraria Serena" },
+      { title: "Servicios funerarios y cremación — Funeraria Valderrama" },
       {
         name: "description",
         content:
@@ -97,7 +97,7 @@ const faqs = [
   },
   {
     q: "¿Tienen cobertura en regiones?",
-    a: "Tenemos cobertura nacional. Trabajamos con sucursales y aliados en Arica, Antofagasta, La Serena, Valparaíso, Concepción, Temuco y Punta Arenas, entre otras ciudades.",
+    a: "Tenemos cobertura nacional. Trabajamos con sucursales y aliados en Arica, Antofagasta, La Valderrama, Valparaíso, Concepción, Temuco y Punta Arenas, entre otras ciudades.",
   },
   {
     q: "¿Aceptan seguros funerarios?",

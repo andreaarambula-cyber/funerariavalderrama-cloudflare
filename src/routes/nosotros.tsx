@@ -6,7 +6,7 @@ import forestImg from "@/assets/forest-path.jpg";
 export const Route = createFileRoute("/nosotros")({
   head: () => ({
     meta: [
-      { title: "Nosotros — Funeraria Serena" },
+      { title: "Nosotros — Funeraria Valderrama" },
       {
         name: "description",
         content:
@@ -38,7 +38,7 @@ function NosotrosPage() {
             Tres generaciones cuidando lo más importante
           </h2>
           <p className="mt-5 text-muted-foreground">
-            Funeraria Serena nació en Santiago en 1992 como una pequeña empresa familiar
+            Funeraria Valderrama nació en Santiago en 1992 como una pequeña empresa familiar
             con una convicción clara: cada despedida merece dignidad, cada familia
             merece ser escuchada, y cada detalle merece ser cuidado.
           </p>

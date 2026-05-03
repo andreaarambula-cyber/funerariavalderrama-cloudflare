@@ -12,7 +12,7 @@ export function SiteFooter() {
               <span className="font-serif text-lg">S</span>
             </span>
             <div className="leading-tight">
-              <p className="font-serif text-2xl text-primary-foreground">Serena</p>
+              <p className="font-serif text-2xl text-primary-foreground">Valderrama</p>
               <p className="text-[11px] uppercase tracking-[0.2em] text-primary-foreground/60">
                 Funeraria
               </p>
@@ -60,8 +60,8 @@ export function SiteFooter() {
           </li>
           <li className="flex items-start gap-2.5 text-sm text-primary-foreground/75">
             <Mail className="mt-0.5 h-4 w-4 text-accent" />
-            <a href="mailto:contacto@serena.cl" className="hover:text-primary-foreground">
-              contacto@serena.cl
+            <a href="mailto:contacto@valderrama.cl" className="hover:text-primary-foreground">
+              contacto@valderrama.cl
             </a>
           </li>
           <li className="flex items-start gap-2.5 text-sm text-primary-foreground/75">
@@ -73,7 +73,7 @@ export function SiteFooter() {
 
       <div className="border-t border-primary-foreground/10">
         <div className="container-prose flex flex-col gap-3 py-6 text-xs text-primary-foreground/60 md:flex-row md:items-center md:justify-between">
-          <p>© {year} Funeraria Serena. Todos los derechos reservados.</p>
+          <p>© {year} Funeraria Valderrama. Todos los derechos reservados.</p>
           <p>Empresa registrada SEREMI de Salud · Resolución N° 0123/2018</p>
           <div className="flex gap-4">
             <a href="#" className="hover:text-primary-foreground">Privacidad</a>

@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/planes")({
   head: () => ({
     meta: [
-      { title: "Planes y precios — Funeraria Serena" },
+      { title: "Planes y precios — Funeraria Valderrama" },
       {
         name: "description",
         content:

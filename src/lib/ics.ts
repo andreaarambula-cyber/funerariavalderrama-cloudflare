@@ -30,11 +30,11 @@ export type IcsEvent = {
 };
 
 export function buildIcs(event: IcsEvent): string {
-  const uid = `${Date.now()}-${Math.random().toString(36).slice(2)}@funerariaserena.cl`;
+  const uid = `${Date.now()}-${Math.random().toString(36).slice(2)}@funerariavalderrama.cl`;
   return [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Funeraria Serena//Memorial//ES",
+    "PRODID:-//Funeraria Valderrama//Memorial//ES",
     "CALSCALE:GREGORIAN",
     "BEGIN:VEVENT",
     `UID:${uid}`,

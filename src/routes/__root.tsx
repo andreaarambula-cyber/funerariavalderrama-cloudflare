@@ -33,15 +33,15 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Funeraria Serena — Acompañamos a tu familia 24/7 en Chile" },
+      { title: "Funeraria Valderrama — Acompañamos a tu familia 24/7 en Chile" },
       {
         name: "description",
         content:
           "Servicios funerarios y de cremación con dignidad en todo Chile. Atención 24/7, planes a futuro y obituarios online. +30 años acompañando familias.",
       },
-      { name: "author", content: "Funeraria Serena" },
+      { name: "author", content: "Funeraria Valderrama" },
       { name: "theme-color", content: "#1E3A52" },
-      { property: "og:title", content: "Funeraria Serena — Servicios funerarios 24/7" },
+      { property: "og:title", content: "Funeraria Valderrama — Servicios funerarios 24/7" },
       {
         property: "og:description",
         content:

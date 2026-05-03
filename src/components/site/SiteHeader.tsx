@@ -19,7 +19,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/85 backdrop-blur-md">
       <div className="container-prose flex h-16 items-center justify-between gap-4 md:h-20">
-        <Link to="/" className="flex items-center gap-2.5" aria-label="Funeraria Serena - Inicio">
+        <Link to="/" className="flex items-center gap-2.5" aria-label="Funeraria Valderrama - Inicio">
           <span
             aria-hidden
             className="grid h-9 w-9 place-items-center rounded-full bg-primary text-primary-foreground"
@@ -27,7 +27,7 @@ export function SiteHeader() {
             <span className="font-serif text-lg leading-none">S</span>
           </span>
           <span className="flex flex-col leading-tight">
-            <span className="font-serif text-xl text-primary">Serena</span>
+            <span className="font-serif text-xl text-primary">Valderrama</span>
             <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
               Funeraria
             </span>
