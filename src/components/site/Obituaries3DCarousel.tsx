@@ -220,7 +220,7 @@ function ObituaryCard({
           <MapPin className="h-3 w-3" /> {obituary.comuna}
         </p>
         {isActive && (
-          <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary">
+          <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
             Ver memorial <ArrowRight className="h-3.5 w-3.5" />
           </span>
         )}
