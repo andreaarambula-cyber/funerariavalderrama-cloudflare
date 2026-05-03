@@ -51,8 +51,8 @@ export function SiteFooter() {
         <FooterCol title="Contacto 24/7">
           <li className="flex items-start gap-2.5 text-sm text-primary-foreground/75">
             <Phone className="mt-0.5 h-4 w-4 text-accent" />
-            <a href="tel:+56600123456" className="hover:text-primary-foreground">
-              600 123 456
+            <a href="tel:+56953900931" className="hover:text-primary-foreground">
+              +56 9 5390 0931
             </a>
           </li>
           <li className="flex items-start gap-2.5 text-sm text-primary-foreground/75">
@@ -63,7 +63,7 @@ export function SiteFooter() {
           </li>
           <li className="flex items-start gap-2.5 text-sm text-primary-foreground/75">
             <MapPin className="mt-0.5 h-4 w-4 text-accent" />
-            <span>Av. Providencia 1234, Santiago</span>
+            <span>O'Higgins 1601, esq. Galvarino, Concepción</span>
           </li>
         </FooterCol>
       </div>

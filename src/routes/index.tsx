@@ -59,7 +59,7 @@ function Hero() {
         </p>
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
           <a
-            href="tel:+56600123456"
+            href="tel:+56953900931"
             className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-medium text-accent-foreground shadow-elevated transition hover:brightness-105"
           >
             <Phone className="h-4 w-4" /> Necesito ayuda ahora

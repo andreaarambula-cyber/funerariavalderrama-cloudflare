@@ -10,7 +10,7 @@ export const Route = createFileRoute("/contacto")({
       {
         name: "description",
         content:
-          "Atención 24 horas en todo Chile. Llámanos al 600 123 456, escríbenos por WhatsApp o envíanos un mensaje. Estamos aquí para ti.",
+          "Atención 24 horas en todo Chile. Llámanos al +56 9 5390 0931, escríbenos por WhatsApp o envíanos un mensaje. Estamos aquí para ti.",
       },
     ],
   }),
@@ -25,8 +25,8 @@ function ContactoPage() {
         <div className="container-prose flex flex-wrap items-center justify-center gap-3 py-3 text-center text-sm text-accent-foreground">
           <Clock className="h-4 w-4 text-accent-foreground" />
           <span className="font-medium">Emergencia 24/7:</span>
-          <a href="tel:+56600123456" className="font-semibold underline">
-            600 123 456
+          <a href="tel:+56953900931" className="font-semibold underline">
+            +56 9 5390 0931
           </a>
         </div>
       </section>
@@ -40,10 +40,10 @@ function ContactoPage() {
       <section className="container-prose grid gap-10 py-16 lg:grid-cols-[1fr,1.2fr]">
         <div className="space-y-4">
           {[
-            { icon: Phone, label: "Teléfono 24/7", val: "600 123 456", href: "tel:+56600123456" },
-            { icon: MessageCircle, label: "WhatsApp", val: "+56 9 1234 5678", href: "https://wa.me/56912345678" },
+            { icon: Phone, label: "Teléfono 24/7", val: "+56 9 5390 0931", href: "tel:+56953900931" },
+            { icon: MessageCircle, label: "WhatsApp", val: "+56 9 5390 0931", href: "https://wa.me/56953900931" },
             { icon: Mail, label: "Email", val: "contacto@valderrama.cl", href: "mailto:contacto@valderrama.cl" },
-            { icon: MapPin, label: "Casa matriz", val: "Av. Providencia 1234, Santiago", href: "#" },
+            { icon: MapPin, label: "Casa matriz", val: "O'Higgins 1601, esq. Galvarino, Concepción", href: "#" },
           ].map(({ icon: Icon, label, val, href }) => (
             <a
               key={label}
@@ -71,7 +71,7 @@ function ContactoPage() {
               </span>
               <h2 className="mt-5 font-serif text-3xl text-primary">Mensaje recibido</h2>
               <p className="mt-2 text-muted-foreground">
-                Te responderemos a la brevedad. Para urgencias, llámanos al 600 123 456.
+                Te responderemos a la brevedad. Para urgencias, llámanos al +56 9 5390 0931.
               </p>
             </div>
           ) : (
