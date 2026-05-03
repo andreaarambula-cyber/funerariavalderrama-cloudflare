@@ -3,6 +3,7 @@ import { ArrowRight, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, T
 import heroImg from "@/assets/hero-sunrise.jpg";
 import candleImg from "@/assets/candle.jpg";
 import { obituaries } from "@/data/obituaries";
+import { Obituaries3DCarousel } from "@/components/site/Obituaries3DCarousel";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -192,40 +193,9 @@ function FeaturedObituaries() {
             Ver todos <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {obituaries.slice(0, 6).map((o) => (
-            <Link
-              key={o.slug}
-              to="/obituarios/$slug"
-              params={{ slug: o.slug }}
-              className="group overflow-hidden rounded-2xl border border-border bg-surface shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
-            >
-              <div className="aspect-[4/5] overflow-hidden bg-muted">
-                <img
-                  src={o.photo}
-                  alt={`Retrato de ${o.fullName}`}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="font-serif text-2xl text-primary">{o.fullName}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {o.birth} — {o.death}
-                </p>
-                <p className="mt-1 text-xs uppercase tracking-wider text-accent-foreground/80">
-                  {o.comuna}
-                </p>
-                <p className="mt-4 line-clamp-2 text-sm leading-relaxed text-foreground/75">
-                  {o.summary}
-                </p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
-                  Dejar condolencias <ArrowRight className="h-3.5 w-3.5" />
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
+      </div>
+      <div className="mt-6">
+        <Obituaries3DCarousel obituaries={obituaries.slice(0, 8)} />
       </div>
     </section>
   );
