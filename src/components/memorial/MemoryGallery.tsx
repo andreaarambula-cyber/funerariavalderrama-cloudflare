@@ -40,24 +40,26 @@ export function MemoryGallery({ items, personName }: { items: GalleryItem[]; per
           </button>
         </div>
 
-        <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-          {items.map((g, i) => (
-            <figure
-              key={i}
-              className="group relative aspect-square overflow-hidden rounded-2xl border border-border bg-surface shadow-soft transition hover:shadow-elevated"
-            >
-              <img
-                src={g.src}
-                alt={g.caption}
-                loading="lazy"
-                className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-              />
-              <figcaption className="absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-primary/95 to-primary/0 p-4 text-primary-foreground transition group-hover:translate-y-0">
-                <p className="text-sm font-medium">{g.caption}</p>
-                <p className="mt-0.5 text-xs italic text-primary-foreground/70">— {g.author}</p>
-              </figcaption>
-            </figure>
-          ))}
+        <div className="mt-8 -mx-4 overflow-x-auto px-4 pb-4 [scrollbar-width:thin] sm:-mx-6 sm:px-6">
+          <div className="flex gap-4 snap-x snap-mandatory">
+            {items.map((g, i) => (
+              <figure
+                key={i}
+                className="group relative aspect-square w-56 shrink-0 snap-start overflow-hidden rounded-2xl border border-border bg-surface shadow-soft transition hover:shadow-elevated sm:w-64 md:w-72"
+              >
+                <img
+                  src={g.src}
+                  alt={g.caption}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                />
+                <figcaption className="absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-primary/95 to-primary/0 p-4 text-primary-foreground transition group-hover:translate-y-0">
+                  <p className="text-sm font-medium">{g.caption}</p>
+                  <p className="mt-0.5 text-xs italic text-primary-foreground/70">— {g.author}</p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </div>
 
