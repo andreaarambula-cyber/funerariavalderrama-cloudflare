@@ -12,7 +12,8 @@ export function SiteFooter() {
             <img
               src={logo}
               alt="Funeraria Valderrama"
-              className="h-16 w-auto rounded-md bg-background p-1.5"
+              className="h-24 w-auto"
+              style={{ filter: "invert(1) brightness(1.5)" }}
             />
           </div>
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-primary-foreground/70">
