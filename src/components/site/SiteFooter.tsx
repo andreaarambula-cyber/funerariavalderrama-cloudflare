@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Phone, Mail, MapPin, Facebook, Instagram, Youtube } from "lucide-react";
+import logo from "@/assets/logo-valderrama.png";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -8,15 +9,11 @@ export function SiteFooter() {
       <div className="container-prose grid gap-10 py-16 md:grid-cols-2 lg:grid-cols-5">
         <div className="lg:col-span-2">
           <div className="flex items-center gap-2.5">
-            <span className="grid h-10 w-10 place-items-center rounded-full bg-accent text-accent-foreground">
-              <span className="font-serif text-lg">S</span>
-            </span>
-            <div className="leading-tight">
-              <p className="font-serif text-2xl text-primary-foreground">Valderrama</p>
-              <p className="text-[11px] uppercase tracking-[0.2em] text-primary-foreground/60">
-                Funeraria
-              </p>
-            </div>
+            <img
+              src={logo}
+              alt="Funeraria Valderrama"
+              className="h-16 w-auto rounded-md bg-background p-1.5"
+            />
           </div>
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-primary-foreground/70">
             Acompañamos a las familias chilenas en el momento más difícil con dignidad,
