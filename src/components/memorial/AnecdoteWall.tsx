@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Quote } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { toast } from "sonner";
 import type { Anecdote } from "@/data/obituaries";
 
@@ -9,6 +9,26 @@ export function AnecdoteWall({ items, personName }: { items: Anecdote[]; personN
   const [list, setList] = useState<Anecdote[]>(items);
   const [author, setAuthor] = useState("");
   const [text, setText] = useState("");
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [paused, setPaused] = useState(false);
+
+  function scrollByCard(dir: 1 | -1) {
+    const el = trackRef.current;
+    if (!el) return;
+    const card = el.querySelector("article") as HTMLElement | null;
+    const step = card ? card.offsetWidth + 32 : el.clientWidth * 0.8;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    let next = el.scrollLeft + dir * step;
+    if (dir === 1 && next > maxScroll - 4) next = 0;
+    if (dir === -1 && next < 0) next = maxScroll;
+    el.scrollTo({ left: next, behavior: "smooth" });
+  }
+
+  useEffect(() => {
+    if (paused || list.length <= 1) return;
+    const id = setInterval(() => scrollByCard(1), 6000);
+    return () => clearInterval(id);
+  }, [paused, list.length]);
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -30,17 +50,42 @@ export function AnecdoteWall({ items, personName }: { items: Anecdote[]; personN
           <div className="gold-divider mx-auto mt-5 w-24" />
         </div>
 
-        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {list.map((a, i) => (
-            <article
-              key={i}
-              className={`relative rounded-sm bg-surface p-6 pb-10 shadow-elevated transition hover:rotate-0 hover:scale-[1.02] ${tilts[i % tilts.length]} animate-scale-in`}
-            >
-              <Quote className="h-6 w-6 text-accent/60" strokeWidth={1.5} />
-              <p className="mt-3 font-serif text-lg leading-snug text-primary">"{a.text}"</p>
-              <p className="mt-4 text-sm italic text-muted-foreground">— {a.author}</p>
-            </article>
-          ))}
+        <div
+          className="relative mt-12"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          <div
+            ref={trackRef}
+            className="-mx-4 flex gap-8 overflow-x-auto px-4 pb-4 pt-2 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:-mx-6 sm:px-6"
+          >
+            {list.map((a, i) => (
+              <article
+                key={i}
+                className={`relative w-72 shrink-0 snap-start rounded-sm bg-surface p-6 pb-10 shadow-elevated transition hover:rotate-0 hover:scale-[1.02] sm:w-80 md:w-96 ${tilts[i % tilts.length]} animate-scale-in`}
+              >
+                <Quote className="h-6 w-6 text-accent/60" strokeWidth={1.5} />
+                <p className="mt-3 font-serif text-lg leading-snug text-primary">"{a.text}"</p>
+                <p className="mt-4 text-sm italic text-muted-foreground">— {a.author}</p>
+              </article>
+            ))}
+          </div>
+          <button
+            type="button"
+            aria-label="Anterior"
+            onClick={() => scrollByCard(-1)}
+            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-primary/10 p-2 text-primary backdrop-blur-sm transition hover:bg-primary/30 hover:text-primary-foreground"
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </button>
+          <button
+            type="button"
+            aria-label="Siguiente"
+            onClick={() => scrollByCard(1)}
+            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-primary/10 p-2 text-primary backdrop-blur-sm transition hover:bg-primary/30 hover:text-primary-foreground"
+          >
+            <ChevronRight className="h-6 w-6" />
+          </button>
         </div>
 
         <form
