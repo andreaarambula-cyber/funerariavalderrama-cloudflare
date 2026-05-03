@@ -174,4 +174,17 @@
   .polaroid-tilt-2 { transform: rotate(1.5deg); }
   .polaroid-tilt-3 { transform: rotate(-1deg); }
   .polaroid-tilt-4 { transform: rotate(2deg); }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .animate-marquee { animation: marquee 38s linear infinite; }
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee { animation: none; }
+  }
 }
