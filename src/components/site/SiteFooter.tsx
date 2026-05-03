@@ -38,7 +38,6 @@ export function SiteFooter() {
           <FooterLink to="/servicios">Cremación</FooterLink>
           <FooterLink to="/servicios">Velatorios</FooterLink>
           <FooterLink to="/servicios">Traslados</FooterLink>
-          <FooterLink to="/planes">Plan a futuro</FooterLink>
         </FooterCol>
 
         <FooterCol title="Compañía">

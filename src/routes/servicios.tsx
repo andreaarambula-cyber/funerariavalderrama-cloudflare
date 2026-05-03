@@ -10,11 +10,6 @@ import {
   Truck,
   FileText,
   Coffee,
-  Music2,
-  Camera,
-  Newspaper,
-  Mic2,
-  Landmark,
 } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { cn } from "@/lib/utils";
@@ -112,15 +107,6 @@ const services = [
       "Acompañamiento durante todo el proceso",
     ],
   },
-];
-
-const extras = [
-  { icon: Truck, title: "Transporte adicional", desc: "Buses y vehículos para acompañantes." },
-  { icon: Landmark, title: "Lápidas", desc: "Diseño, grabado e instalación en cementerio." },
-  { icon: Mic2, title: "Cantantes líricos", desc: "Voces solistas para misa o despedida." },
-  { icon: Newspaper, title: "Publicación en diario oficial", desc: "Aviso fúnebre en medios oficiales." },
-  { icon: Music2, title: "Música de acompañamiento", desc: "Música ambiente para el velatorio." },
-  { icon: Camera, title: "Fotografías", desc: "Registro fotográfico de la ceremonia." },
 ];
 
 const faqs = [

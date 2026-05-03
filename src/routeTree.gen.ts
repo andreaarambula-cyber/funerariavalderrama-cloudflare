@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ServiciosRouteImport } from './routes/servicios'
-import { Route as PlanesRouteImport } from './routes/planes'
 import { Route as NosotrosRouteImport } from './routes/nosotros'
 import { Route as CotizarRouteImport } from './routes/cotizar'
 import { Route as ContactoRouteImport } from './routes/contacto'
@@ -21,11 +20,6 @@ import { Route as ObituariosSlugRouteImport } from './routes/obituarios.$slug'
 const ServiciosRoute = ServiciosRouteImport.update({
   id: '/servicios',
   path: '/servicios',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PlanesRoute = PlanesRouteImport.update({
-  id: '/planes',
-  path: '/planes',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NosotrosRoute = NosotrosRouteImport.update({
@@ -64,7 +58,6 @@ export interface FileRoutesByFullPath {
   '/contacto': typeof ContactoRoute
   '/cotizar': typeof CotizarRoute
   '/nosotros': typeof NosotrosRoute
-  '/planes': typeof PlanesRoute
   '/servicios': typeof ServiciosRoute
   '/obituarios/$slug': typeof ObituariosSlugRoute
   '/obituarios/': typeof ObituariosIndexRoute
@@ -74,7 +67,6 @@ export interface FileRoutesByTo {
   '/contacto': typeof ContactoRoute
   '/cotizar': typeof CotizarRoute
   '/nosotros': typeof NosotrosRoute
-  '/planes': typeof PlanesRoute
   '/servicios': typeof ServiciosRoute
   '/obituarios/$slug': typeof ObituariosSlugRoute
   '/obituarios': typeof ObituariosIndexRoute
@@ -85,7 +77,6 @@ export interface FileRoutesById {
   '/contacto': typeof ContactoRoute
   '/cotizar': typeof CotizarRoute
   '/nosotros': typeof NosotrosRoute
-  '/planes': typeof PlanesRoute
   '/servicios': typeof ServiciosRoute
   '/obituarios/$slug': typeof ObituariosSlugRoute
   '/obituarios/': typeof ObituariosIndexRoute
@@ -97,7 +88,6 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/cotizar'
     | '/nosotros'
-    | '/planes'
     | '/servicios'
     | '/obituarios/$slug'
     | '/obituarios/'
@@ -107,7 +97,6 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/cotizar'
     | '/nosotros'
-    | '/planes'
     | '/servicios'
     | '/obituarios/$slug'
     | '/obituarios'
@@ -117,7 +106,6 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/cotizar'
     | '/nosotros'
-    | '/planes'
     | '/servicios'
     | '/obituarios/$slug'
     | '/obituarios/'
@@ -128,7 +116,6 @@ export interface RootRouteChildren {
   ContactoRoute: typeof ContactoRoute
   CotizarRoute: typeof CotizarRoute
   NosotrosRoute: typeof NosotrosRoute
-  PlanesRoute: typeof PlanesRoute
   ServiciosRoute: typeof ServiciosRoute
   ObituariosSlugRoute: typeof ObituariosSlugRoute
   ObituariosIndexRoute: typeof ObituariosIndexRoute
@@ -141,13 +128,6 @@ declare module '@tanstack/react-router' {
       path: '/servicios'
       fullPath: '/servicios'
       preLoaderRoute: typeof ServiciosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/planes': {
-      id: '/planes'
-      path: '/planes'
-      fullPath: '/planes'
-      preLoaderRoute: typeof PlanesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/nosotros': {
@@ -200,7 +180,6 @@ const rootRouteChildren: RootRouteChildren = {
   ContactoRoute: ContactoRoute,
   CotizarRoute: CotizarRoute,
   NosotrosRoute: NosotrosRoute,
-  PlanesRoute: PlanesRoute,
   ServiciosRoute: ServiciosRoute,
   ObituariosSlugRoute: ObituariosSlugRoute,
   ObituariosIndexRoute: ObituariosIndexRoute,
