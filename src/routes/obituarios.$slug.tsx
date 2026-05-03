@@ -6,7 +6,6 @@ import { MemoryGallery } from "@/components/memorial/MemoryGallery";
 import { AnecdoteWall } from "@/components/memorial/AnecdoteWall";
 import { FarewellAgenda } from "@/components/memorial/FarewellAgenda";
 import { MemorialQR } from "@/components/memorial/MemorialQR";
-import { useState } from "react";
 
 export const Route = createFileRoute("/obituarios/$slug")({
   loader: ({ params }) => {
@@ -52,29 +51,6 @@ function ObituarioPage() {
     typeof window !== "undefined"
       ? window.location.href
       : `https://funerariavalderrama.cl/obituarios/${o.slug}`;
-
-  const [messages, setMessages] = useState<{ name: string; text: string; date: string }[]>([
-    {
-      name: "Familia Rodríguez",
-      text: "Un alma generosa que dejó huellas en todos quienes la conocimos. Un abrazo a toda la familia.",
-      date: "Hace 2 horas",
-    },
-    {
-      name: "Juan Pablo M.",
-      text: "Compañero de toda la vida. Tu sonrisa quedará para siempre en nuestra memoria.",
-      date: "Hace 5 horas",
-    },
-  ]);
-  const [name, setName] = useState("");
-  const [text, setText] = useState("");
-
-  function submit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!name.trim() || !text.trim()) return;
-    setMessages((m) => [{ name: name.trim(), text: text.trim(), date: "Hace un instante" }, ...m]);
-    setName("");
-    setText("");
-  }
 
   return (
     <>
@@ -132,59 +108,8 @@ function ObituarioPage() {
       <CandleWall initial={o.candles} personName={o.fullName} />
 
       <section className="container-prose grid gap-10 py-16 lg:grid-cols-[1fr,360px]">
-        <div>
-          <h2 className="font-serif text-3xl text-primary">Mensajes de condolencia</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Tus palabras son un consuelo para la familia.
-          </p>
-
-          <form
-            onSubmit={submit}
-            className="mt-6 rounded-2xl border border-border bg-surface p-6 shadow-soft"
-          >
-            <label className="block text-sm">
-              <span className="font-medium">Tu nombre</span>
-              <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-                maxLength={80}
-                className="mt-1.5 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-              />
-            </label>
-            <label className="mt-4 block text-sm">
-              <span className="font-medium">Tu mensaje</span>
-              <textarea
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                required
-                rows={4}
-                maxLength={500}
-                className="mt-1.5 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-              />
-            </label>
-            <button
-              type="submit"
-              className="mt-5 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition hover:brightness-110"
-            >
-              Enviar condolencia
-            </button>
-          </form>
-
-          <ul className="mt-8 space-y-4">
-            {messages.map((m, i) => (
-              <li key={i} className="rounded-2xl border border-border bg-surface p-5 shadow-soft">
-                <div className="flex items-center justify-between gap-2">
-                  <p className="font-medium text-primary">{m.name}</p>
-                  <p className="text-xs text-muted-foreground">{m.date}</p>
-                </div>
-                <p className="mt-2 text-sm leading-relaxed text-foreground/85">{m.text}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
+      <section className="container-prose py-16">
+        <aside className="mx-auto grid max-w-2xl gap-6">
           <MemorialQR url={memorialUrl} personName={o.fullName} />
 
           <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft">
