@@ -5,7 +5,7 @@ const messages = [
   { icon: Clock, text: "Atención 24 horas, todos los días" },
   { icon: Phone, text: "Llámanos ahora al +56 9 5390 0931" },
   { icon: MessageCircle, text: "Escríbenos por WhatsApp · Respuesta inmediata" },
-  { icon: MapPin, text: "Cobertura en todo el Gran Concepción" },
+  { icon: MapPin, text: "Cobertura en el Gran Concepción" },
 ] as const;
 
 export function AnnouncementBar() {
@@ -20,10 +20,10 @@ export function AnnouncementBar() {
 
   return (
     <div className="border-b border-primary-foreground/10 bg-primary text-primary-foreground">
-      <div className="container-prose flex h-9 items-center justify-center overflow-hidden text-[12px] font-medium uppercase tracking-[0.18em]">
+      <div className="container-prose flex h-9 items-center justify-center overflow-hidden text-[11px] font-medium uppercase tracking-[0.14em] sm:text-[12px] sm:tracking-[0.18em]">
         <div
           key={i}
-          className="flex animate-fade-in items-center gap-2.5"
+          className="flex animate-fade-in items-center gap-2.5 whitespace-nowrap"
           aria-live="polite"
         >
           <span className="relative grid h-2 w-2 place-items-center">
