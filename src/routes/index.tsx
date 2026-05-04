@@ -293,13 +293,13 @@ function BlogTeaser() {
     <section className="bg-secondary/40 py-20 md:py-28">
       <div className="container-prose">
         <SectionHeader eyebrow="Acompañamiento" title="Recursos para el camino" />
-        <div className="mt-12 grid gap-7 md:grid-cols-3">
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
           {posts.map((p) => (
             <article
               key={p.title}
               className="group flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-elevated"
             >
-              <div className="aspect-[16/10] overflow-hidden bg-muted">
+              <div className="aspect-[16/9] overflow-hidden bg-muted">
                 <img
                   src={p.image}
                   alt={p.title}
@@ -309,23 +309,21 @@ function BlogTeaser() {
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                 />
               </div>
-              <div className="flex flex-1 flex-col p-7">
+              <div className="flex flex-1 flex-col p-5">
               <div className="flex items-center gap-2">
                 <span className="rounded-full bg-accent/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-accent-foreground">
                   {p.cat}
                 </span>
                 <span className="text-xs text-muted-foreground">{p.read} de lectura</span>
               </div>
-              <h3 className="mt-4 font-serif text-xl leading-snug text-primary transition-colors group-hover:text-accent-foreground">
+              <h3 className="mt-3 font-serif text-lg leading-snug text-primary transition-colors group-hover:text-accent-foreground">
                 {p.title}
               </h3>
-              <p className="mt-3 text-xs text-muted-foreground">
-                {p.author} · {p.date}
-              </p>
-              <div className="mt-auto border-t border-border pt-6">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary/60 px-4 py-2 text-sm font-medium text-primary transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
+              <p className="mt-2 text-xs text-muted-foreground">{p.date}</p>
+              <div className="mt-auto border-t border-border pt-4">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary/60 px-3.5 py-1.5 text-xs font-medium text-primary transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
                   Leer artículo
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                  <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
                 </span>
               </div>
               </div>
