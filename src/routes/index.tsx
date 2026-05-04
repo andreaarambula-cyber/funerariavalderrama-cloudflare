@@ -2,6 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users } from "lucide-react";
 import heroImg from "@/assets/hero-sunrise.jpg";
 import candleImg from "@/assets/candle.jpg";
+import blogDuelo from "@/assets/blog-duelo.jpg";
+import blogTramites from "@/assets/blog-tramites.jpg";
+import blogTradiciones from "@/assets/blog-tradiciones.jpg";
 import { obituaries } from "@/data/obituaries";
 import { Obituaries3DCarousel } from "@/components/site/Obituaries3DCarousel";
 
@@ -267,6 +270,7 @@ function BlogTeaser() {
       read: "5 min",
       author: "María González",
       date: "12 Mar 2025",
+      image: blogDuelo,
     },
     {
       cat: "Trámites",
@@ -274,6 +278,7 @@ function BlogTeaser() {
       read: "7 min",
       author: "Equipo Valderrama",
       date: "28 Feb 2025",
+      image: blogTramites,
     },
     {
       cat: "Tradiciones",
@@ -281,6 +286,7 @@ function BlogTeaser() {
       read: "4 min",
       author: "Andrés Rivas",
       date: "5 Feb 2025",
+      image: blogTradiciones,
     },
   ];
   return (
@@ -291,8 +297,19 @@ function BlogTeaser() {
           {posts.map((p) => (
             <article
               key={p.title}
-              className="group flex cursor-pointer flex-col rounded-2xl border border-border bg-surface p-7 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-elevated"
+              className="group flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-elevated"
             >
+              <div className="aspect-[16/10] overflow-hidden bg-muted">
+                <img
+                  src={p.image}
+                  alt={p.title}
+                  loading="lazy"
+                  width={1024}
+                  height={704}
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                />
+              </div>
+              <div className="flex flex-1 flex-col p-7">
               <div className="flex items-center gap-2">
                 <span className="rounded-full bg-accent/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-accent-foreground">
                   {p.cat}
@@ -310,6 +327,7 @@ function BlogTeaser() {
                   Leer artículo
                   <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                 </span>
+              </div>
               </div>
             </article>
           ))}
