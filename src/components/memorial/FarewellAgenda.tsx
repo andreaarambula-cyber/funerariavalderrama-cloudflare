@@ -1,14 +1,14 @@
-import { Calendar, MapPin, Navigation, CalendarPlus } from "lucide-react";
+import { Calendar, MapPin, Navigation, CalendarPlus, Flame, Church, Car, TreePine, Candle, type LucideIcon } from "lucide-react";
 import { toast } from "sonner";
 import { downloadIcs } from "@/lib/ics";
 import type { FarewellEvent } from "@/data/obituaries";
 
-const ICONS: Record<FarewellEvent["type"], string> = {
-  Velatorio: "🕯️",
-  Misa: "⛪",
-  Cortejo: "🚗",
-  Sepultación: "🌳",
-  Cremación: "🔥",
+const ICONS: Record<FarewellEvent["type"], LucideIcon> = {
+  Velatorio: Candle,
+  Misa: Church,
+  Cortejo: Car,
+  Sepultación: TreePine,
+  Cremación: Flame,
 };
 
 export function FarewellAgenda({
@@ -55,8 +55,11 @@ export function FarewellAgenda({
                 className="rounded-2xl border border-border bg-surface p-5 shadow-soft"
               >
                 <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent/15 text-2xl">
-                    {ICONS[ev.type]}
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
+                    {(() => {
+                      const Icon = ICONS[ev.type];
+                      return <Icon className="h-5 w-5" strokeWidth={1.5} />;
+                    })()}
                   </div>
                   <div className="flex-1">
                     <p className="text-xs font-semibold uppercase tracking-wider text-accent-foreground/80">
