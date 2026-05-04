@@ -70,7 +70,6 @@ export function SiteFooter() {
       <div className="border-t border-primary-foreground/10">
         <div className="container-prose flex flex-col gap-3 py-6 text-xs text-primary-foreground/60 md:flex-row md:items-center md:justify-between">
           <p>© {year} Funeraria Valderrama. Todos los derechos reservados.</p>
-          <p>Empresa registrada SEREMI de Salud · Resolución N° 0123/2018</p>
           <div className="flex gap-4">
             <a href="#" className="hover:text-primary-foreground">Privacidad</a>
             <a href="#" className="hover:text-primary-foreground">Cookies</a>
