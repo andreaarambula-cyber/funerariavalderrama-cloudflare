@@ -65,11 +65,12 @@ export function FarewellAgenda({
                     <p className="text-xs font-semibold uppercase tracking-wider text-accent-foreground/80">
                       {ev.type}
                     </p>
-                    <p className="mt-1 inline-flex items-center gap-1.5 font-medium text-primary">
+                    <p className="mt-1 inline-flex items-center gap-2 font-medium text-primary">
                       <Calendar className="h-4 w-4 text-accent" /> {ev.date}
                     </p>
-                    <p className="mt-1 inline-flex items-start gap-1.5 text-sm text-muted-foreground">
-                      <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" /> {ev.address}
+                    <p className="mt-2 flex items-start gap-2 text-sm text-muted-foreground">
+                      <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                      <span>{ev.address}</span>
                     </p>
 
                     <div className="mt-4 flex flex-wrap gap-2">
