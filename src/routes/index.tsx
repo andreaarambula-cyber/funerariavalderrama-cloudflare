@@ -11,11 +11,11 @@ import { Obituaries3DCarousel } from "@/components/site/Obituaries3DCarousel";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Funeraria Valderrama — Servicios funerarios y cremación 24/7 en Chile" },
+      { title: "Funeraria Valderrama — Servicios funerarios y cremación 24/7 en el Gran Concepción" },
       {
         name: "description",
         content:
-          "Acompañamos a tu familia con dignidad. Servicio funerario, cremación, planes a futuro y obituarios online. Atención 24/7 en todo Chile.",
+          "Acompañamos a tu familia con dignidad. Servicio funerario, cremación, planes a futuro y obituarios online. Atención 24/7 en el Gran Concepción.",
       },
     ],
   }),
@@ -53,7 +53,7 @@ function Hero() {
         </h1>
         <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-white/85 md:text-lg">
           Servicios funerarios y de cremación con dignidad, transparencia y cercanía.
-          Más de 30 años cuidando a las familias chilenas.
+          Más de 30 años cuidando a las familias del Gran Concepción.
         </p>
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
           <a
@@ -79,7 +79,7 @@ function TrustBar() {
     { icon: Star, text: "+30 años de experiencia" },
     { icon: ShieldCheck, text: "Registrados en SEREMI" },
     { icon: Clock, text: "Atención 24/7" },
-    { icon: MapPin, text: "Cobertura nacional" },
+    { icon: MapPin, text: "Cobertura en todo el Gran Concepción" },
     { icon: Users, text: "+10.000 familias acompañadas" },
     { icon: BadgeCheck, text: "Transparencia en precios" },
     { icon: FileText, text: "Trámites incluidos" },
@@ -210,19 +210,19 @@ function Testimonials() {
       quote:
         "En el peor momento de nuestras vidas, sentimos que no estábamos solos. Cada detalle fue cuidado con cariño.",
       author: "Familia Pérez",
-      city: "Santiago",
+      city: "Concepción",
     },
     {
       quote:
         "Profesionalismo y humanidad. Nos guiaron paso a paso, con total transparencia en costos y tiempos.",
       author: "Camila Rojas",
-      city: "Valparaíso",
+      city: "San Pedro de la Paz",
     },
     {
       quote:
         "El obituario online permitió que familiares en el extranjero se despidieran. Un detalle que nunca olvidaremos.",
       author: "Andrés Muñoz",
-      city: "Concepción",
+      city: "Talcahuano",
     },
   ];
   return (
