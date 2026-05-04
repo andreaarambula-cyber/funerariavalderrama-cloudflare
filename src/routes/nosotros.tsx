@@ -10,7 +10,7 @@ export const Route = createFileRoute("/nosotros")({
       {
         name: "description",
         content:
-          "Más de 30 años acompañando a familias chilenas con servicios funerarios dignos, transparentes y humanos. Conoce nuestra historia y equipo.",
+          "Más de 30 años acompañando a familias del Gran Concepción con servicios funerarios dignos, transparentes y humanos. Conoce nuestra historia y equipo.",
       },
     ],
   }),
@@ -23,7 +23,7 @@ function NosotrosPage() {
       <PageHero
         eyebrow="Nosotros"
         title="Una historia de cuidado, durante tres generaciones"
-        subtitle="Desde 1992 hemos acompañado a más de 50.000 familias chilenas en momentos de despedida, manteniendo el mismo compromiso: dignidad, cercanía y transparencia."
+        subtitle="Desde 1992 hemos acompañado a miles de familias del Gran Concepción en momentos de despedida, manteniendo el mismo compromiso: dignidad, cercanía y transparencia."
       />
 
       <section className="container-prose grid gap-12 py-20 lg:grid-cols-2 lg:items-center">
@@ -38,13 +38,14 @@ function NosotrosPage() {
             Tres generaciones cuidando lo más importante
           </h2>
           <p className="mt-5 text-muted-foreground">
-            Funeraria Valderrama nació en Santiago en 1992 como una pequeña empresa familiar
+            Funeraria Valderrama nació en Concepción en 1992 como una pequeña empresa familiar
             con una convicción clara: cada despedida merece dignidad, cada familia
             merece ser escuchada, y cada detalle merece ser cuidado.
           </p>
           <p className="mt-3 text-muted-foreground">
-            Hoy contamos con sucursales en 12 ciudades de Chile, un equipo de 80
-            profesionales y la misma vocación de servicio que el primer día.
+            Hoy atendemos a familias en todo el Gran Concepción —Concepción, Chiguayante,
+            San Pedro de la Paz, Hualpén y Talcahuano—, con un equipo cercano y la misma
+            vocación de servicio que el primer día.
           </p>
         </div>
       </section>
