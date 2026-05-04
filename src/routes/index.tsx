@@ -185,7 +185,7 @@ function HowWeHelp() {
             className="absolute left-8 right-8 top-12 hidden h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent md:block"
           />
           <div className="grid gap-6 md:grid-cols-3 md:gap-8">
-            {steps.map(({ n, icon: Icon, title, desc }, i) => (
+            {steps.map(({ n, icon: Icon, title, desc }) => (
               <article
                 key={n}
                 className="group relative overflow-hidden rounded-2xl border border-border bg-surface/85 p-7 shadow-soft backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-elevated"
@@ -195,14 +195,6 @@ function HowWeHelp() {
                 </div>
                 <h3 className="font-serif text-2xl text-primary">{title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
-                {i < steps.length - 1 && (
-                  <div
-                    aria-hidden
-                    className="absolute -bottom-3 left-1/2 grid h-6 w-6 -translate-x-1/2 place-items-center rounded-full border border-border bg-surface text-accent md:hidden"
-                  >
-                    <ArrowRight className="h-3 w-3 rotate-90" />
-                  </div>
-                )}
               </article>
             ))}
           </div>
