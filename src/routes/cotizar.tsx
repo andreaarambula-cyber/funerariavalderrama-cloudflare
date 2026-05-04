@@ -1,227 +1,288 @@
-import { useMemo, useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, Check, MessageCircle } from "lucide-react";
+import { useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, Check, MessageCircle, Phone, ShieldCheck, Clock, Heart, Sparkles } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/cotizar")({
   head: () => ({
     meta: [
-      { title: "Cotizador online — Funeraria Valderrama" },
+      { title: "Solicita tu propuesta personalizada — Funeraria Valderrama" },
       {
         name: "description",
         content:
-          "Cotiza tu servicio funerario en línea en menos de 2 minutos. Precios transparentes en CLP y respuesta inmediata.",
+          "Cuéntanos qué necesita tu familia y te enviaremos una propuesta hecha a medida. Respuesta en menos de 30 minutos, 24/7 en el Gran Concepción.",
       },
     ],
   }),
   component: CotizarPage,
 });
 
-const TIPOS = [
-  { id: "sepultura", label: "Sepultura", price: 1290000 },
-  { id: "cremacion", label: "Cremación", price: 890000 },
-];
-const URNAS = [
-  { id: "estandar", label: "Estándar", price: 0 },
-  { id: "premium", label: "Premium", price: 220000 },
-  { id: "lujo", label: "Lujo", price: 480000 },
-];
-const ADICIONALES = [
-  { id: "capilla", label: "Capilla ardiente premium", price: 180000 },
-  { id: "coro", label: "Coro / música en vivo", price: 220000 },
-  { id: "obituario", label: "Publicación de obituario", price: 90000 },
-  { id: "flores", label: "Arreglo floral", price: 120000 },
+const SERVICIOS = [
+  "Sepultura tradicional",
+  "Cremación",
+  "Velatorio",
+  "Traslado",
+  "Plan a futuro",
+  "Aún no estoy seguro",
 ];
 
+const URGENCIA = [
+  { id: "urgente", title: "Es urgente", desc: "Necesito ayuda ahora" },
+  { id: "dias", title: "En los próximos días", desc: "Estoy organizando" },
+  { id: "futuro", title: "Planifico con tiempo", desc: "Quiero adelantarme" },
+];
+
+const CANALES = ["WhatsApp", "Llamada", "Email"];
+
+const WHATSAPP_NUMBER = "56953900931";
+
 function CotizarPage() {
-  const [step, setStep] = useState(0);
-  const [tipo, setTipo] = useState(TIPOS[0].id);
+  const [servicios, setServicios] = useState<string[]>([]);
+  const [urgencia, setUrgencia] = useState("dias");
   const [comuna, setComuna] = useState("");
-  const [traslado, setTraslado] = useState(false);
-  const [urna, setUrna] = useState(URNAS[0].id);
-  const [adic, setAdic] = useState<string[]>([]);
+  const [detalle, setDetalle] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [canal, setCanal] = useState("WhatsApp");
+  const [consent, setConsent] = useState(false);
+  const [errors, setErrors] = useState<string[]>([]);
   const [done, setDone] = useState(false);
 
-  const total = useMemo(() => {
-    const t = TIPOS.find((x) => x.id === tipo)!.price;
-    const u = URNAS.find((x) => x.id === urna)!.price;
-    const a = ADICIONALES.filter((x) => adic.includes(x.id)).reduce(
-      (s, x) => s + x.price,
-      0,
-    );
-    const tr = traslado ? 280000 : 0;
-    return t + u + a + tr;
-  }, [tipo, urna, adic, traslado]);
-
-  const steps = ["Tipo de servicio", "Comuna y traslados", "Urna o ataúd", "Adicionales", "Tus datos"];
-
-  function next() {
-    if (step < steps.length - 1) setStep((s) => s + 1);
-    else setDone(true);
-  }
-  function back() {
-    setStep((s) => Math.max(0, s - 1));
-  }
-  function toggleAdic(id: string) {
-    setAdic((a) => (a.includes(id) ? a.filter((x) => x !== id) : [...a, id]));
+  function toggleServicio(s: string) {
+    setServicios((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]));
   }
 
-  if (done) return <Confirmation total={total} name={name} />;
+  function buildMessage() {
+    const lines = [
+      "*Solicitud de propuesta — Funeraria Valderrama*",
+      "",
+      `*Nombre:* ${name}`,
+      `*Teléfono:* ${phone}`,
+      email && `*Email:* ${email}`,
+      `*Canal preferido:* ${canal}`,
+      "",
+      `*Servicios de interés:* ${servicios.join(", ")}`,
+      `*Urgencia:* ${URGENCIA.find((u) => u.id === urgencia)?.title}`,
+      comuna && `*Comuna:* ${comuna}`,
+      detalle && `\n*Detalles:* ${detalle}`,
+    ].filter(Boolean);
+    return lines.join("\n");
+  }
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const errs: string[] = [];
+    if (servicios.length === 0) errs.push("Selecciona al menos un tipo de servicio.");
+    if (!name.trim()) errs.push("Ingresa tu nombre.");
+    if (!phone.trim()) errs.push("Ingresa un teléfono de contacto.");
+    if (!consent) errs.push("Debes aceptar ser contactado.");
+    setErrors(errs);
+    if (errs.length > 0) return;
+
+    const text = encodeURIComponent(buildMessage());
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank", "noopener,noreferrer");
+    setDone(true);
+    if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  if (done) return <Confirmation name={name} canal={canal} />;
 
   return (
     <>
       <PageHero
-        eyebrow="Cotizador online"
-        title="Tu cotización en menos de 2 minutos"
-        subtitle="Diseña el servicio paso a paso. Verás el precio actualizándose en cada decisión, sin sorpresas."
+        eyebrow="Propuesta personalizada"
+        title="Cuéntanos qué necesitas"
+        subtitle="Cada despedida es única. Diseñamos una propuesta a medida según las necesidades de tu familia. Respondemos en menos de 30 minutos, las 24 horas."
       />
 
-      <section className="container-prose grid gap-10 py-16 lg:grid-cols-[1fr,340px]">
-        <div>
-          <ProgressBar step={step} total={steps.length} labels={steps} />
+      <section className="container-prose grid gap-10 py-16 lg:grid-cols-[1fr,360px]">
+        <form onSubmit={handleSubmit} className="rounded-3xl border border-border bg-surface p-6 shadow-soft md:p-10">
+          {/* Servicios */}
+          <Block
+            num="01"
+            title="¿Qué servicio necesitas?"
+            hint="Puedes elegir uno o varios."
+          >
+            <div className="flex flex-wrap gap-2">
+              {SERVICIOS.map((s) => {
+                const active = servicios.includes(s);
+                return (
+                  <button
+                    type="button"
+                    key={s}
+                    onClick={() => toggleServicio(s)}
+                    className={cn(
+                      "rounded-full border px-4 py-2 text-sm transition",
+                      active
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border bg-background text-foreground/80 hover:border-primary/40",
+                    )}
+                  >
+                    {active && <Check className="mr-1.5 inline h-3.5 w-3.5" />}
+                    {s}
+                  </button>
+                );
+              })}
+            </div>
+          </Block>
 
-          <div className="mt-8 rounded-3xl border border-border bg-surface p-8 shadow-soft md:p-10">
-            <p className="text-xs uppercase tracking-[0.2em] text-accent-foreground/80">
-              Paso {step + 1} de {steps.length}
-            </p>
-            <h2 className="mt-2 font-serif text-3xl text-primary">{steps[step]}</h2>
+          {/* Urgencia */}
+          <Block num="02" title="¿Cuándo lo necesitas?">
+            <div className="grid gap-3 sm:grid-cols-3">
+              {URGENCIA.map((u) => {
+                const active = urgencia === u.id;
+                return (
+                  <button
+                    type="button"
+                    key={u.id}
+                    onClick={() => setUrgencia(u.id)}
+                    className={cn(
+                      "rounded-xl border bg-background p-4 text-left transition",
+                      active
+                        ? "border-primary ring-2 ring-primary/20"
+                        : "border-border hover:border-primary/40",
+                    )}
+                  >
+                    <p className="font-serif text-base text-primary">{u.title}</p>
+                    <p className="mt-1 text-xs text-muted-foreground">{u.desc}</p>
+                  </button>
+                );
+              })}
+            </div>
+          </Block>
 
-            <div className="mt-6">
-              {step === 0 && (
-                <RadioGroup
-                  options={TIPOS.map((t) => ({ id: t.id, label: t.label, hint: formatCLP(t.price) }))}
-                  value={tipo}
-                  onChange={setTipo}
-                />
-              )}
-              {step === 1 && (
-                <div className="space-y-5">
-                  <label className="block">
-                    <span className="text-sm font-medium">Comuna</span>
-                    <input
-                      value={comuna}
-                      onChange={(e) => setComuna(e.target.value)}
-                      placeholder="Ej. Providencia"
-                      className="mt-1.5 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-                    />
-                  </label>
-                  <label className="flex items-start gap-3 rounded-xl border border-border bg-background p-4 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={traslado}
-                      onChange={(e) => setTraslado(e.target.checked)}
-                      className="mt-1 h-4 w-4 accent-primary"
-                    />
-                    <span>
-                      <span className="block text-sm font-medium">Requiero traslado interurbano</span>
-                      <span className="text-xs text-muted-foreground">Agrega {formatCLP(280000)}</span>
-                    </span>
-                  </label>
-                </div>
-              )}
-              {step === 2 && (
-                <RadioGroup
-                  options={URNAS.map((u) => ({
-                    id: u.id,
-                    label: u.label,
-                    hint: u.price === 0 ? "Incluido" : "+ " + formatCLP(u.price),
-                  }))}
-                  value={urna}
-                  onChange={setUrna}
-                />
-              )}
-              {step === 3 && (
-                <div className="grid gap-3">
-                  {ADICIONALES.map((a) => {
-                    const active = adic.includes(a.id);
-                    return (
-                      <label
-                        key={a.id}
-                        className={cn(
-                          "flex cursor-pointer items-center justify-between gap-4 rounded-xl border bg-background p-4 transition",
-                          active ? "border-primary ring-2 ring-primary/20" : "border-border hover:border-primary/40",
-                        )}
-                      >
-                        <div className="flex items-center gap-3">
-                          <input
-                            type="checkbox"
-                            checked={active}
-                            onChange={() => toggleAdic(a.id)}
-                            className="h-4 w-4 accent-primary"
-                          />
-                          <span className="text-sm font-medium">{a.label}</span>
-                        </div>
-                        <span className="text-sm text-muted-foreground">+ {formatCLP(a.price)}</span>
-                      </label>
-                    );
-                  })}
-                </div>
-              )}
-              {step === 4 && (
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <Field label="Nombre completo" value={name} onChange={setName} />
-                  <Field label="Teléfono" value={phone} onChange={setPhone} type="tel" />
-                  <div className="sm:col-span-2">
-                    <Field label="Email" value={email} onChange={setEmail} type="email" />
-                  </div>
-                </div>
-              )}
+          {/* Comuna */}
+          <Block num="03" title="Comuna" hint="Atendemos todo el Gran Concepción.">
+            <input
+              value={comuna}
+              onChange={(e) => setComuna(e.target.value)}
+              placeholder="Ej. Concepción, Talcahuano, San Pedro de la Paz…"
+              className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+            />
+          </Block>
+
+          {/* Detalle */}
+          <Block num="04" title="Cuéntanos más" hint="Opcional, pero nos ayuda a preparar mejor tu propuesta.">
+            <textarea
+              value={detalle}
+              onChange={(e) => setDetalle(e.target.value)}
+              rows={4}
+              placeholder="Ej. Velatorio en casa, ceremonia íntima, preferencias religiosas, presupuesto aproximado, etc."
+              className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+            />
+          </Block>
+
+          {/* Datos */}
+          <Block num="05" title="Tus datos de contacto">
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Field label="Nombre completo *" value={name} onChange={setName} />
+              <Field label="Teléfono / WhatsApp *" value={phone} onChange={setPhone} type="tel" />
+              <div className="sm:col-span-2">
+                <Field label="Email (opcional)" value={email} onChange={setEmail} type="email" />
+              </div>
             </div>
 
-            <div className="mt-10 flex items-center justify-between">
-              <button
-                onClick={back}
-                disabled={step === 0}
-                className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition hover:text-primary disabled:opacity-40"
-              >
-                <ArrowLeft className="h-4 w-4" /> Anterior
-              </button>
-              <button
-                onClick={next}
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3 text-sm font-medium text-primary-foreground transition hover:brightness-110"
-              >
-                {step === steps.length - 1 ? "Enviar cotización" : "Continuar"}{" "}
-                <ArrowRight className="h-4 w-4" />
-              </button>
+            <p className="mt-6 text-sm font-medium">Quiero recibir la propuesta por:</p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {CANALES.map((c) => {
+                const active = canal === c;
+                return (
+                  <button
+                    type="button"
+                    key={c}
+                    onClick={() => setCanal(c)}
+                    className={cn(
+                      "rounded-full border px-4 py-2 text-sm transition",
+                      active
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border bg-background hover:border-primary/40",
+                    )}
+                  >
+                    {c}
+                  </button>
+                );
+              })}
             </div>
-          </div>
-        </div>
 
-        <aside className="lg:sticky lg:top-24 lg:self-start">
-          <div className="rounded-2xl border border-border bg-primary p-7 text-primary-foreground shadow-soft">
-            <p className="text-xs uppercase tracking-[0.2em] text-primary-foreground/70">
-              Tu cotización
-            </p>
-            <p className="mt-2 font-serif text-4xl">{formatCLP(total)}</p>
-            <p className="text-xs text-primary-foreground/70">CLP, IVA incluido</p>
-            <ul className="mt-6 space-y-2 text-sm text-primary-foreground/85">
-              <li className="flex justify-between gap-2">
-                <span>{TIPOS.find((t) => t.id === tipo)?.label}</span>
-                <span>{formatCLP(TIPOS.find((t) => t.id === tipo)!.price)}</span>
-              </li>
-              {traslado && (
-                <li className="flex justify-between gap-2">
-                  <span>Traslado</span>
-                  <span>{formatCLP(280000)}</span>
-                </li>
-              )}
-              {URNAS.find((u) => u.id === urna)!.price > 0 && (
-                <li className="flex justify-between gap-2">
-                  <span>Urna {URNAS.find((u) => u.id === urna)?.label}</span>
-                  <span>{formatCLP(URNAS.find((u) => u.id === urna)!.price)}</span>
-                </li>
-              )}
-              {ADICIONALES.filter((a) => adic.includes(a.id)).map((a) => (
-                <li key={a.id} className="flex justify-between gap-2">
-                  <span>{a.label}</span>
-                  <span>{formatCLP(a.price)}</span>
-                </li>
+            <label className="mt-6 flex cursor-pointer items-start gap-3 rounded-xl border border-border bg-background p-4">
+              <input
+                type="checkbox"
+                checked={consent}
+                onChange={(e) => setConsent(e.target.checked)}
+                className="mt-0.5 h-4 w-4 accent-primary"
+              />
+              <span className="text-sm text-foreground/80">
+                Acepto ser contactado por Funeraria Valderrama para recibir mi propuesta personalizada.
+              </span>
+            </label>
+          </Block>
+
+          {errors.length > 0 && (
+            <ul className="mt-6 space-y-1 rounded-xl border border-destructive/30 bg-destructive/5 p-4 text-sm text-destructive">
+              {errors.map((e) => (
+                <li key={e}>• {e}</li>
               ))}
             </ul>
+          )}
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <a
+              href={`https://wa.me/${WHATSAPP_NUMBER}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 text-sm font-medium text-primary hover:underline"
+            >
+              <MessageCircle className="h-4 w-4" /> Prefiero hablar ahora
+            </a>
+            <button
+              type="submit"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground shadow-elevated transition hover:brightness-110 active:scale-[0.98]"
+            >
+              Solicitar propuesta <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
+        </form>
+
+        <aside className="lg:sticky lg:top-24 lg:self-start">
+          <div className="rounded-2xl border border-primary/20 bg-primary p-7 text-primary-foreground shadow-soft">
+            <p className="text-xs uppercase tracking-[0.2em] text-accent">
+              Cómo trabajamos tu propuesta
+            </p>
+            <ol className="mt-5 space-y-5">
+              {[
+                { t: "Recibimos tu solicitud", d: "La revisa un asesor real, no un bot." },
+                { t: "Diseñamos tu propuesta", d: "Adaptada a tus necesidades, presupuesto y deseos." },
+                { t: "Te contactamos", d: "En menos de 30 minutos por el canal que elijas." },
+              ].map((s, i) => (
+                <li key={s.t} className="flex gap-4">
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-accent/20 font-serif text-sm text-accent">
+                    {i + 1}
+                  </span>
+                  <div>
+                    <p className="font-serif text-base text-white">{s.t}</p>
+                    <p className="mt-0.5 text-sm text-primary-foreground/75">{s.d}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+
+            <div className="my-6 h-px bg-primary-foreground/15" />
+
+            <ul className="space-y-2.5 text-sm text-primary-foreground/85">
+              <Bullet icon={Clock}>Atención 24/7</Bullet>
+              <Bullet icon={Heart}>Sin compromiso</Bullet>
+              <Bullet icon={ShieldCheck}>Transparencia total</Bullet>
+              <Bullet icon={Sparkles}>+30 años de experiencia</Bullet>
+            </ul>
+
+            <a
+              href="tel:+56953900931"
+              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-medium text-accent-foreground transition hover:brightness-105"
+            >
+              <Phone className="h-4 w-4" /> Llámanos +56 9 5390 0931
+            </a>
           </div>
         </aside>
       </section>
@@ -229,60 +290,25 @@ function CotizarPage() {
   );
 }
 
-function ProgressBar({ step, total, labels }: { step: number; total: number; labels: string[] }) {
-  return (
-    <div>
-      <div className="h-1.5 w-full overflow-hidden rounded-full bg-border">
-        <div
-          className="h-full bg-accent transition-all duration-500"
-          style={{ width: `${((step + 1) / total) * 100}%` }}
-        />
-      </div>
-      <ol className="mt-3 hidden grid-cols-5 text-[11px] text-muted-foreground md:grid">
-        {labels.map((l, i) => (
-          <li
-            key={l}
-            className={cn(
-              "text-center uppercase tracking-wider",
-              i <= step && "text-primary",
-            )}
-          >
-            {l}
-          </li>
-        ))}
-      </ol>
-    </div>
-  );
-}
-
-function RadioGroup({
-  options,
-  value,
-  onChange,
+function Block({
+  num,
+  title,
+  hint,
+  children,
 }: {
-  options: { id: string; label: string; hint: string }[];
-  value: string;
-  onChange: (v: string) => void;
+  num: string;
+  title: string;
+  hint?: string;
+  children: React.ReactNode;
 }) {
   return (
-    <div className="grid gap-3 sm:grid-cols-2">
-      {options.map((o) => {
-        const active = value === o.id;
-        return (
-          <button
-            key={o.id}
-            type="button"
-            onClick={() => onChange(o.id)}
-            className={cn(
-              "flex flex-col items-start gap-1 rounded-xl border bg-background p-5 text-left transition",
-              active ? "border-primary ring-2 ring-primary/20" : "border-border hover:border-primary/40",
-            )}
-          >
-            <span className="font-serif text-xl text-primary">{o.label}</span>
-            <span className="text-sm text-muted-foreground">{o.hint}</span>
-          </button>
-        );
-      })}
+    <div className="border-t border-border py-7 first:border-t-0 first:pt-0">
+      <div className="flex items-baseline gap-3">
+        <span className="font-serif text-sm text-accent-foreground/70">{num}</span>
+        <h3 className="font-serif text-xl text-primary md:text-2xl">{title}</h3>
+      </div>
+      {hint && <p className="mt-1 pl-7 text-xs text-muted-foreground">{hint}</p>}
+      <div className="mt-4 pl-0 sm:pl-7">{children}</div>
     </div>
   );
 }
@@ -311,7 +337,16 @@ function Field({
   );
 }
 
-function Confirmation({ total, name }: { total: number; name: string }) {
+function Bullet({ icon: Icon, children }: { icon: typeof Clock; children: React.ReactNode }) {
+  return (
+    <li className="flex items-center gap-2.5">
+      <Icon className="h-4 w-4 shrink-0 text-accent" />
+      <span>{children}</span>
+    </li>
+  );
+}
+
+function Confirmation({ name, canal }: { name: string; canal: string }) {
   return (
     <section className="container-prose py-24">
       <div className="mx-auto max-w-xl rounded-3xl border border-border bg-surface p-10 text-center shadow-soft md:p-14">
@@ -319,29 +354,28 @@ function Confirmation({ total, name }: { total: number; name: string }) {
           <Check className="h-8 w-8" />
         </span>
         <h1 className="mt-6 font-serif text-3xl text-primary md:text-4xl">
-          Cotización enviada{name ? `, ${name.split(" ")[0]}` : ""}
+          Recibimos tu solicitud{name ? `, ${name.split(" ")[0]}` : ""}
         </h1>
         <p className="mt-3 text-muted-foreground">
-          Recibirás un correo con el detalle. Un asesor te contactará en menos de 30
-          minutos.
+          Un asesor está preparando tu propuesta personalizada y te contactará por <strong className="text-primary">{canal}</strong> en menos de 30 minutos.
         </p>
-        <div className="mt-6 rounded-2xl bg-secondary/60 p-5">
-          <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-            Total estimado
-          </p>
-          <p className="mt-1 font-serif text-3xl text-primary">{formatCLP(total)}</p>
+        <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
+          <a
+            href={`https://wa.me/${WHATSAPP_NUMBER}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-whatsapp px-6 py-3 text-sm font-medium text-whatsapp-foreground"
+          >
+            <MessageCircle className="h-4 w-4" /> Conversar por WhatsApp
+          </a>
+          <Link
+            to="/"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-primary hover:border-primary/40"
+          >
+            Volver al inicio
+          </Link>
         </div>
-        <a
-          href="https://wa.me/56953900931"
-          className="mt-7 inline-flex items-center gap-2 rounded-full bg-whatsapp px-6 py-3 text-sm font-medium text-whatsapp-foreground"
-        >
-          <MessageCircle className="h-4 w-4" /> Conversar por WhatsApp
-        </a>
       </div>
     </section>
   );
-}
-
-function formatCLP(n: number) {
-  return "$" + n.toLocaleString("es-CL");
 }
