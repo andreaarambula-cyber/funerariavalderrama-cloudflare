@@ -69,7 +69,7 @@ function ObituariosPage() {
           {results.length} {results.length === 1 ? "obituario" : "obituarios"}
         </p>
 
-        <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {results.map((o) => (
             <Link
               key={o.slug}
@@ -85,16 +85,16 @@ function ObituariosPage() {
                   className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                 />
               </div>
-              <div className="p-6">
-                <h3 className="font-serif text-2xl text-primary">{o.fullName}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">
+              <div className="p-4">
+                <h3 className="font-serif text-lg leading-tight text-primary">{o.fullName}</h3>
+                <p className="mt-1 text-xs text-muted-foreground">
                   {o.birth} — {o.death}
                 </p>
-                <p className="mt-2 inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-accent-foreground/80">
-                  <MapPin className="h-3 w-3" /> {o.comuna}
+                <p className="mt-2 flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-accent-foreground/80">
+                  <MapPin className="h-3 w-3 shrink-0" /> {o.comuna}
                 </p>
-                <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-primary">
-                  Ver memorial <ArrowRight className="h-3.5 w-3.5" />
+                <span className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-primary">
+                  Ver memorial <ArrowRight className="h-3 w-3" />
                 </span>
               </div>
             </Link>
