@@ -54,7 +54,7 @@ function ObituarioPage() {
 
   return (
     <>
-      <section className="relative isolate overflow-hidden border-b border-border bg-primary py-16 text-primary-foreground md:py-24">
+      <section className="relative isolate overflow-hidden border-b border-border bg-primary py-10 text-primary-foreground md:py-24">
         <div
           aria-hidden
           className="absolute inset-0 -z-10 opacity-30"
@@ -69,12 +69,12 @@ function ObituarioPage() {
         <div className="container-prose">
           <Link
             to="/obituarios"
-            className="mb-8 inline-flex items-center gap-1.5 text-sm text-primary-foreground/70 hover:text-primary-foreground"
+            className="mb-5 inline-flex items-center gap-1.5 text-sm text-primary-foreground/70 hover:text-primary-foreground md:mb-8"
           >
             <ArrowLeft className="h-4 w-4" /> Todos los obituarios
           </Link>
-          <div className="grid grid-cols-[110px_1fr] items-center gap-6 sm:grid-cols-[140px_1fr] sm:gap-8 md:grid-cols-[180px_1fr] md:gap-10">
-            <div className="w-full overflow-hidden rounded-2xl border-4 border-accent/40 shadow-elevated">
+          <div className="flex flex-col items-center gap-5 text-center sm:grid sm:grid-cols-[140px_1fr] sm:items-center sm:gap-8 sm:text-left md:grid-cols-[180px_1fr] md:gap-10">
+            <div className="w-32 overflow-hidden rounded-2xl border-4 border-accent/40 shadow-elevated sm:w-full">
               <img
                 src={o.photo}
                 alt={`Retrato de ${o.fullName}`}
@@ -84,9 +84,9 @@ function ObituarioPage() {
               />
             </div>
             <div>
-              <p className="text-xs uppercase tracking-[0.25em] text-accent">En memoria de</p>
-              <h1 className="mt-3 font-serif text-4xl leading-tight md:text-6xl">{o.fullName}</h1>
-              <p className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-1 text-primary-foreground/80">
+              <p className="text-[11px] uppercase tracking-[0.25em] text-accent">En memoria de</p>
+              <h1 className="mt-2 font-serif text-2xl leading-tight sm:text-4xl md:text-6xl">{o.fullName}</h1>
+              <p className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm text-primary-foreground/80 sm:justify-start sm:text-base">
                 <span className="inline-flex items-center gap-2">
                   <Calendar className="h-4 w-4 text-accent" /> {o.birth} — {o.death}
                 </span>
@@ -94,7 +94,7 @@ function ObituarioPage() {
                   <MapPin className="h-4 w-4 text-accent" /> {o.comuna}
                 </span>
               </p>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-primary-foreground/90">
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-primary-foreground/90 sm:text-lg">
                 {o.summary}
               </p>
             </div>
