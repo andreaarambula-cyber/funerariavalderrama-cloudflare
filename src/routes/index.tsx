@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users } from "lucide-react";
+import { useRef } from "react";
+import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users } from "lucide-react";
 import heroImg from "@/assets/hero-sunrise.jpg";
 import candleImg from "@/assets/candle.jpg";
 import blogDuelo from "@/assets/blog-duelo.jpg";
@@ -289,11 +290,18 @@ function BlogTeaser() {
       image: blogTradiciones,
     },
   ];
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const scrollBy = (dir: 1 | -1) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * el.clientWidth * 0.85, behavior: "smooth" });
+  };
   return (
     <section className="bg-secondary/40 py-20 md:py-28">
       <div className="container-prose">
         <SectionHeader eyebrow="Acompañamiento" title="Recursos para el camino" />
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        {/* Desktop grid */}
+        <div className="mt-12 hidden gap-6 md:grid md:grid-cols-3">
           {posts.map((p) => (
             <article
               key={p.title}
@@ -329,6 +337,61 @@ function BlogTeaser() {
               </div>
             </article>
           ))}
+        </div>
+
+        {/* Mobile carousel */}
+        <div className="relative mt-10 md:hidden">
+          <div
+            ref={scrollerRef}
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {posts.map((p) => (
+              <article
+                key={p.title}
+                className="group flex w-[85%] shrink-0 snap-center flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-soft"
+              >
+                <div className="aspect-[16/9] overflow-hidden bg-muted">
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <div className="flex items-center gap-2">
+                    <span className="rounded-full bg-accent/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-accent-foreground">
+                      {p.cat}
+                    </span>
+                    <span className="text-xs text-muted-foreground">{p.read} de lectura</span>
+                  </div>
+                  <h3 className="mt-3 font-serif text-lg leading-snug text-primary">{p.title}</h3>
+                  <p className="mt-2 text-xs text-muted-foreground">{p.date}</p>
+                  <div className="mt-4 border-t border-border pt-4">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary/60 px-3.5 py-1.5 text-xs font-medium text-primary">
+                      Leer artículo <ArrowRight className="h-3 w-3" />
+                    </span>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+          <button
+            type="button"
+            aria-label="Anterior"
+            onClick={() => scrollBy(-1)}
+            className="absolute left-1 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-primary/30 text-white backdrop-blur-sm transition active:scale-95"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </button>
+          <button
+            type="button"
+            aria-label="Siguiente"
+            onClick={() => scrollBy(1)}
+            className="absolute right-1 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-primary/30 text-white backdrop-blur-sm transition active:scale-95"
+          >
+            <ArrowRight className="h-5 w-5" />
+          </button>
         </div>
       </div>
     </section>
