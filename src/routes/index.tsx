@@ -146,34 +146,76 @@ function HowWeHelp() {
   const steps = [
     {
       n: "01",
+      icon: PhoneCall,
       title: "Llamada",
       desc: "Te atendemos al instante, las 24 horas. Te guiamos en los primeros pasos con calma.",
     },
     {
       n: "02",
+      icon: Heart,
       title: "Asesoría",
       desc: "Diseñamos contigo el servicio adecuado, transparente en precios y opciones.",
     },
     {
       n: "03",
+      icon: ShieldCheck,
       title: "Acompañamiento",
       desc: "Nos hacemos cargo de los trámites para que tu familia pueda despedirse en paz.",
     },
   ];
   return (
-    <section className="bg-secondary/40 py-20 md:py-28">
+    <section className="relative isolate overflow-hidden bg-secondary/40 py-20 md:py-28">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 opacity-60"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 15% 0%, color-mix(in oklab, var(--accent) 18%, transparent), transparent 55%), radial-gradient(circle at 90% 100%, color-mix(in oklab, var(--primary) 14%, transparent), transparent 50%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent"
+      />
       <div className="container-prose">
         <SectionHeader eyebrow="Cómo te ayudamos" title="Un proceso simple, humano y transparente" />
-        <div className="mt-12 grid gap-8 md:grid-cols-3">
-          {steps.map((s) => (
-            <div key={s.n} className="relative pl-16">
-              <span className="absolute left-0 top-0 font-serif text-5xl text-accent/70">
-                {s.n}
-              </span>
-              <h3 className="font-serif text-2xl text-primary">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
-            </div>
-          ))}
+        <div className="relative mt-14">
+          <div
+            aria-hidden
+            className="absolute left-8 right-8 top-12 hidden h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent md:block"
+          />
+          <div className="grid gap-6 md:grid-cols-3 md:gap-8">
+            {steps.map(({ n, icon: Icon, title, desc }, i) => (
+              <article
+                key={n}
+                className="group relative overflow-hidden rounded-2xl border border-border bg-surface/85 p-7 shadow-soft backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-elevated"
+              >
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute -right-3 -top-6 font-serif text-[7rem] leading-none text-accent/10 transition-colors group-hover:text-accent/20"
+                >
+                  {n}
+                </span>
+                <div className="relative mb-5 grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-accent/25 to-accent/5 ring-1 ring-accent/20">
+                  <Icon className="h-6 w-6 text-accent" strokeWidth={1.5} />
+                </div>
+                <div className="flex items-baseline gap-3">
+                  <span className="font-serif text-sm font-medium text-accent">{n}</span>
+                  <span className="h-px flex-1 bg-border" />
+                </div>
+                <h3 className="mt-3 font-serif text-2xl text-primary">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
+                {i < steps.length - 1 && (
+                  <div
+                    aria-hidden
+                    className="absolute -bottom-3 left-1/2 grid h-6 w-6 -translate-x-1/2 place-items-center rounded-full border border-border bg-surface text-accent md:hidden"
+                  >
+                    <ArrowRight className="h-3 w-3 rotate-90" />
+                  </div>
+                )}
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>
