@@ -77,13 +77,13 @@ export function FarewellAgenda({
                         href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(ev.mapsQuery)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium text-foreground/80 transition hover:border-primary/40 hover:text-primary"
+                        className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground/80 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary hover:shadow-md active:translate-y-0 active:scale-[0.96] active:bg-accent/15 active:border-accent active:text-accent active:shadow-inner focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
                       >
                         <Navigation className="h-3.5 w-3.5" /> Cómo llegar
                       </a>
                       <button
                         onClick={() => addToCalendar(ev)}
-                        className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium text-foreground/80 transition hover:border-primary/40 hover:text-primary"
+                        className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground/80 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary hover:shadow-md active:translate-y-0 active:scale-[0.96] active:bg-accent/15 active:border-accent active:text-accent active:shadow-inner focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
                       >
                         <CalendarPlus className="h-3.5 w-3.5" /> Mi calendario
                       </button>
