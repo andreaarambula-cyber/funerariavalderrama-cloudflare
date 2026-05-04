@@ -340,7 +340,7 @@ function BlogTeaser() {
         </div>
 
         {/* Mobile carousel */}
-        <div className="relative mt-10 md:hidden">
+        <div className="mt-10 md:hidden">
           <div
             ref={scrollerRef}
             className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
@@ -376,22 +376,24 @@ function BlogTeaser() {
               </article>
             ))}
           </div>
-          <button
-            type="button"
-            aria-label="Anterior"
-            onClick={() => scrollBy(-1)}
-            className="absolute left-1 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-primary/30 text-white backdrop-blur-sm transition active:scale-95"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </button>
-          <button
-            type="button"
-            aria-label="Siguiente"
-            onClick={() => scrollBy(1)}
-            className="absolute right-1 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-primary/30 text-white backdrop-blur-sm transition active:scale-95"
-          >
-            <ArrowRight className="h-5 w-5" />
-          </button>
+          <div className="mt-5 flex items-center justify-center gap-4">
+            <button
+              type="button"
+              aria-label="Anterior"
+              onClick={() => scrollBy(-1)}
+              className="grid h-11 w-11 place-items-center rounded-full border border-primary/20 bg-primary/10 text-primary backdrop-blur-sm transition active:scale-95"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              aria-label="Siguiente"
+              onClick={() => scrollBy(1)}
+              className="grid h-11 w-11 place-items-center rounded-full border border-primary/20 bg-primary/10 text-primary backdrop-blur-sm transition active:scale-95"
+            >
+              <ArrowRight className="h-5 w-5" />
+            </button>
+          </div>
         </div>
       </div>
     </section>
