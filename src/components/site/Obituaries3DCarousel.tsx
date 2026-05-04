@@ -60,7 +60,7 @@ export function Obituaries3DCarousel({ obituaries }: Props) {
 
   return (
     <div
-      className="relative select-none outline-none"
+      className="relative select-none outline-none overflow-hidden"
       tabIndex={0}
       onKeyDown={handleKeyDown}
       onMouseEnter={() => setIsHovered(true)}
