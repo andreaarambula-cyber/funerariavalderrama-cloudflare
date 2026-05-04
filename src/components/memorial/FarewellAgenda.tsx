@@ -1,10 +1,10 @@
-import { Calendar, MapPin, Navigation, CalendarPlus, Flame, Church, Car, TreePine, Candle, type LucideIcon } from "lucide-react";
+import { Calendar, MapPin, Navigation, CalendarPlus, Flame, Church, Car, TreePine, Flower2, type LucideIcon } from "lucide-react";
 import { toast } from "sonner";
 import { downloadIcs } from "@/lib/ics";
 import type { FarewellEvent } from "@/data/obituaries";
 
 const ICONS: Record<FarewellEvent["type"], LucideIcon> = {
-  Velatorio: Candle,
+  Velatorio: Flower2,
   Misa: Church,
   Cortejo: Car,
   Sepultación: TreePine,
