@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { Clock, Phone, MessageCircle, MapPin } from "lucide-react";
 
 const messages = [
-  { icon: Clock, text: "Atención 24 horas, todos los días" },
-  { icon: Phone, text: "Llámanos ahora al +56 9 5390 0931" },
-  { icon: MessageCircle, text: "Escríbenos por WhatsApp · Respuesta inmediata" },
-  { icon: MapPin, text: "Cobertura en el Gran Concepción" },
+  { icon: Clock, text: "Atención 24/7" },
+  { icon: Phone, text: "+56 9 5390 0931" },
+  { icon: MessageCircle, text: "WhatsApp inmediato" },
+  { icon: MapPin, text: "Gran Concepción" },
 ] as const;
 
 export function AnnouncementBar() {
