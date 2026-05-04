@@ -17,7 +17,7 @@ export function SiteFooter() {
             />
           </div>
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-primary-foreground/70">
-            Acompañamos a las familias chilenas en el momento más difícil con dignidad,
+            Acompañamos a las familias del Gran Concepción en el momento más difícil con dignidad,
             transparencia y cercanía. Más de 30 años de experiencia.
           </p>
           <div className="mt-6 flex gap-3">
