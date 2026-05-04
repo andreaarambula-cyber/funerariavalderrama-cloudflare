@@ -34,11 +34,11 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Funeraria Valderrama — Acompañamos a tu familia 24/7 en Chile" },
+      { title: "Funeraria Valderrama — Acompañamos a tu familia 24/7 en el Gran Concepción" },
       {
         name: "description",
         content:
-          "Servicios funerarios y de cremación con dignidad en todo Chile. Atención 24/7, planes a futuro y obituarios online. +30 años acompañando familias.",
+          "Servicios funerarios y de cremación con dignidad en el Gran Concepción. Atención 24/7, planes a futuro y obituarios online. +30 años acompañando familias.",
       },
       { name: "author", content: "Funeraria Valderrama" },
       { name: "theme-color", content: "#1A1A1A" },
@@ -46,7 +46,7 @@ export const Route = createRootRoute({
       {
         property: "og:description",
         content:
-          "Acompañamos a tu familia en el momento más difícil. Servicio funerario, cremación y planes a futuro en todo Chile.",
+          "Acompañamos a tu familia en el momento más difícil. Servicio funerario, cremación y planes a futuro en el Gran Concepción.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
