@@ -18,12 +18,12 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/85 backdrop-blur-md">
-      <div className="container-prose flex h-16 items-center justify-between gap-4 md:h-18">
-        <Link to="/" className="flex items-center gap-2" aria-label="Funeraria Valderrama - Inicio">
+      <div className="container-prose flex h-20 items-center justify-between gap-4 md:h-24 lg:h-28">
+        <Link to="/" className="flex items-center gap-2 py-1" aria-label="Funeraria Valderrama - Inicio">
           <img
             src={logo}
             alt="Funeraria Valderrama"
-            className="h-16 w-auto sm:h-20 md:h-24 lg:h-28 transition-all"
+            className="h-full max-h-16 w-auto object-contain sm:max-h-20 md:max-h-24 lg:max-h-28 transition-all"
           />
         </Link>
 
