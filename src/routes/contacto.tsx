@@ -10,7 +10,7 @@ export const Route = createFileRoute("/contacto")({
       {
         name: "description",
         content:
-          "Atención 24 horas en todo Chile. Llámanos al +56 9 5390 0931, escríbenos por WhatsApp o envíanos un mensaje. Estamos aquí para ti.",
+          "Atención 24 horas en el Gran Concepción. Llámanos al +56 9 5390 0931, escríbenos por WhatsApp o envíanos un mensaje. Estamos aquí para ti.",
       },
     ],
   }),
