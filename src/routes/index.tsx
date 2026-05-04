@@ -190,20 +190,10 @@ function HowWeHelp() {
                 key={n}
                 className="group relative overflow-hidden rounded-2xl border border-border bg-surface/85 p-7 shadow-soft backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-elevated"
               >
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute -right-3 -top-6 font-serif text-[7rem] leading-none text-accent/10 transition-colors group-hover:text-accent/20"
-                >
-                  {n}
-                </span>
                 <div className="relative mb-5 grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-accent/25 to-accent/5 ring-1 ring-accent/20">
                   <Icon className="h-6 w-6 text-accent" strokeWidth={1.5} />
                 </div>
-                <div className="flex items-baseline gap-3">
-                  <span className="font-serif text-sm font-medium text-accent">{n}</span>
-                  <span className="h-px flex-1 bg-border" />
-                </div>
-                <h3 className="mt-3 font-serif text-2xl text-primary">{title}</h3>
+                <h3 className="font-serif text-2xl text-primary">{title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
                 {i < steps.length - 1 && (
                   <div
