@@ -4,7 +4,7 @@ import { Clock, Phone, MessageCircle, MapPin } from "lucide-react";
 const messages = [
   { icon: Clock, text: "Atención 24/7" },
   { icon: Phone, text: "+56 9 5390 0931" },
-  { icon: MessageCircle, text: "WhatsApp inmediato" },
+  { icon: MessageCircle, text: "WhatsApp 24/7" },
   { icon: MapPin, text: "Gran Concepción" },
 ] as const;
 
