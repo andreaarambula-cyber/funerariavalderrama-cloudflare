@@ -42,7 +42,7 @@ export const Route = createRootRoute({
       },
       { name: "author", content: "Funeraria Valderrama" },
       { name: "theme-color", content: "#1A1A1A" },
-      { property: "og:title", content: "Funeraria Valderrama — Servicios funerarios 24/7" },
+      { property: "og:title", content: "Funeraria Valderrama — Acompañamos a tu familia 24/7 en el Gran Concepción" },
       {
         property: "og:description",
         content:
@@ -50,6 +50,12 @@ export const Route = createRootRoute({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Funeraria Valderrama — Acompañamos a tu familia 24/7 en el Gran Concepción" },
+      { name: "description", content: "A modern, dignified funeral home website for Chile, offering services, plans, and obituaries." },
+      { property: "og:description", content: "A modern, dignified funeral home website for Chile, offering services, plans, and obituaries." },
+      { name: "twitter:description", content: "A modern, dignified funeral home website for Chile, offering services, plans, and obituaries." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/781951dc-0398-4823-b0ec-aada83db29b2/id-preview-e01e4ee3--aa0c1194-590a-4958-b566-0ad45fb6e5a6.lovable.app-1777932698494.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/781951dc-0398-4823-b0ec-aada83db29b2/id-preview-e01e4ee3--aa0c1194-590a-4958-b566-0ad45fb6e5a6.lovable.app-1777932698494.png" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
