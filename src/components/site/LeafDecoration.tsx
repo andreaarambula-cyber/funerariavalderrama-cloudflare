@@ -44,6 +44,7 @@ export function LeafDecoration({ className }: { className?: string }) {
       viewBox="0 0 200 260"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="xMaxYMid slice"
       className={className}
       aria-hidden="true"
     >
