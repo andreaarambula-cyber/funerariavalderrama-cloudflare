@@ -7,6 +7,7 @@ import logo from "@/assets/logo-valderrama.png";
 const nav = [
   { to: "/", label: "Inicio" },
   { to: "/servicios", label: "Servicios" },
+  { to: "/planes", label: "Planes" },
   { to: "/obituarios", label: "Obituarios" },
   { to: "/cotizar", label: "Cotizar" },
   { to: "/nosotros", label: "Nosotros" },
@@ -23,7 +24,7 @@ export function SiteHeader() {
           <img
             src={logo}
             alt="Funeraria Valderrama"
-            className="h-full max-h-16 w-auto object-contain sm:max-h-20 md:max-h-24 lg:max-h-28 transition-all"
+            className="h-full max-h-20 w-auto object-contain sm:max-h-24 md:max-h-28 lg:max-h-32 transition-all"
           />
         </Link>
 
