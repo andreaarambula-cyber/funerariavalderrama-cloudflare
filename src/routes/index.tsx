@@ -339,10 +339,6 @@ function HowWeHelp() {
   );
 }
 
-function FeaturedObituaries() {
-  return null as never;
-}
-
 function OurWork() {
   const works = [
     { src: memorable1.url, title: "Velatorio Memorable", tag: "Servicio integral" },
