@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useRef } from "react";
-import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users } from "lucide-react";
+import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users, Handshake, Building2, Banknote, Check } from "lucide-react";
 import heroImg from "@/assets/hero-sunrise.jpg";
 import candleImg from "@/assets/candle.jpg";
 import blogDuelo from "@/assets/blog-duelo.jpg";
