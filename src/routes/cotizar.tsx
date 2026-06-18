@@ -274,7 +274,7 @@ function CotizarPage() {
               <Bullet icon={Clock}>Atención 24/7</Bullet>
               <Bullet icon={Heart}>Sin compromiso</Bullet>
               <Bullet icon={ShieldCheck}>Transparencia total</Bullet>
-              <Bullet icon={Sparkles}>+30 años de experiencia</Bullet>
+              <Bullet icon={Sparkles}>+28 años de experiencia</Bullet>
             </ul>
 
             <a
