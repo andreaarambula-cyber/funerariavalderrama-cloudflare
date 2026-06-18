@@ -11,6 +11,8 @@ import blogTramites from "@/assets/blog-tramites.jpg";
 import blogTradiciones from "@/assets/blog-tradiciones.jpg";
 import { obituaries } from "@/data/obituaries";
 import { Obituaries3DCarousel } from "@/components/site/Obituaries3DCarousel";
+import convenio1 from "@/assets/convenios/convenio-1.jpg.asset.json";
+import convenio2 from "@/assets/convenios/convenio-2.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
