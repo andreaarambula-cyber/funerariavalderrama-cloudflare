@@ -176,11 +176,22 @@ function ServiciosPage() {
             <p className="mt-3 text-base leading-relaxed text-muted-foreground">
               {current.desc}
             </p>
-            <div className="mt-6 flex aspect-[4/3] w-full items-center justify-center rounded-2xl border border-dashed border-border bg-background/60 text-center">
-              <span className="flex flex-col items-center gap-2 text-xs text-muted-foreground">
-                <ImageIcon className="h-7 w-7 opacity-60" strokeWidth={1.5} />
-                Fotos próximamente — sujeto a stock
-              </span>
+            <div className="mt-6 grid grid-cols-3 gap-3">
+              {current.gallery.map((src, i) => (
+                <button
+                  key={src}
+                  type="button"
+                  onClick={() => setLightbox(src)}
+                  className="group relative aspect-[3/4] overflow-hidden rounded-2xl border border-border bg-background/60"
+                >
+                  <img
+                    src={src}
+                    alt={`Urna ${current.name} ${i + 1}`}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                  />
+                </button>
+              ))}
             </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
