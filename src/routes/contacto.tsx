@@ -49,12 +49,13 @@ function ContactoPage() {
             <a
               key={label}
               href={href}
-              className="flex items-start gap-4 rounded-2xl border border-border bg-surface p-5 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
+              className="group relative flex items-start gap-4 overflow-hidden rounded-2xl border border-border bg-surface p-5 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
             >
-              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15 text-accent-foreground">
+              <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-60 transition-opacity duration-300 group-hover:opacity-80" />
+              <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15 text-accent-foreground">
                 <Icon className="h-5 w-5" />
               </span>
-              <div>
+              <div className="relative">
                 <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
                   {label}
                 </p>
