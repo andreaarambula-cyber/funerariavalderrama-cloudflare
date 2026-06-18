@@ -450,7 +450,7 @@ function OurWork() {
   );
 }
 
-function FeaturedObituariesReal() {
+function FeaturedObituaries() {
   return (
     <section className="py-20 md:py-28">
       <div className="container-prose">
