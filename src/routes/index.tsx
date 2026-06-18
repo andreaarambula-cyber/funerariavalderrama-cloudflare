@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
-import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users, Handshake, Building2, Banknote, Check } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users, Handshake, Building2, Banknote, Check, X } from "lucide-react";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
 import heroImg from "@/assets/hero-sunrise.jpg";
 import heroVideo from "@/assets/hero-video.mp4.asset.json";
@@ -9,6 +9,12 @@ import candleImg from "@/assets/candle.jpg";
 import blogDuelo from "@/assets/blog-duelo.jpg";
 import blogTramites from "@/assets/blog-tramites.jpg";
 import blogTradiciones from "@/assets/blog-tradiciones.jpg";
+import esencial1 from "@/assets/urnas/esencial-1.jpg.asset.json";
+import selecto1 from "@/assets/urnas/selecto-1.jpg.asset.json";
+import selecto2 from "@/assets/urnas/selecto-2.jpg.asset.json";
+import memorable1 from "@/assets/urnas/memorable-1.jpg.asset.json";
+import memorable2 from "@/assets/urnas/memorable-2.jpg.asset.json";
+import memorable3 from "@/assets/urnas/memorable-3.jpg.asset.json";
 import { obituaries } from "@/data/obituaries";
 import { Obituaries3DCarousel } from "@/components/site/Obituaries3DCarousel";
 
@@ -34,6 +40,7 @@ function HomePage() {
       <Services />
       <Convenios />
       <HowWeHelp />
+      <OurWork />
       <FeaturedObituaries />
       <Testimonials />
       <BlogTeaser />
@@ -328,6 +335,117 @@ function HowWeHelp() {
           </div>
         </div>
       </div>
+    </section>
+  );
+}
+
+function OurWork() {
+  const works = [
+    { src: memorable1.url, title: "Velatorio Memorable", tag: "Servicio integral" },
+    { src: selecto1.url, title: "Despedida Selecta", tag: "Capilla y flores" },
+    { src: esencial1.url, title: "Servicio Esencial", tag: "Urna y trámites" },
+    { src: memorable2.url, title: "Ambiente solemne", tag: "Cirios y arreglo floral" },
+    { src: selecto2.url, title: "Acompañamiento", tag: "Atención cercana" },
+    { src: memorable3.url, title: "Honrando su memoria", tag: "Detalle y dignidad" },
+  ];
+  const [active, setActive] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (active === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActive(null);
+      if (e.key === "ArrowRight") setActive((i) => (i === null ? i : (i + 1) % works.length));
+      if (e.key === "ArrowLeft") setActive((i) => (i === null ? i : (i - 1 + works.length) % works.length));
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [active, works.length]);
+
+  return (
+    <section className="py-20 md:py-28">
+      <div className="container-prose">
+        <SectionHeader eyebrow="Nuestro trabajo" title="Servicios que hemos realizado" />
+        <p className="mx-auto mt-4 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
+          Una muestra del cuidado y la dignidad con que acompañamos a cada familia.
+        </p>
+
+        <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 md:[grid-auto-rows:11rem]">
+          {works.map((w, i) => (
+            <button
+              key={w.title}
+              type="button"
+              onClick={() => setActive(i)}
+              className={`group relative overflow-hidden rounded-2xl border border-border bg-muted shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-elevated ${
+                i === 0 ? "md:col-span-2 md:row-span-2" : i === 3 ? "md:row-span-2" : ""
+              }`}
+            >
+              <img
+                src={w.src}
+                alt={w.title}
+                loading="lazy"
+                className="h-full min-h-44 w-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+              />
+              <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/10 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-95" />
+              <span className="pointer-events-none absolute inset-x-0 bottom-0 p-4 text-left">
+                <span className="block text-[10px] uppercase tracking-[0.18em] text-accent">{w.tag}</span>
+                <span className="mt-0.5 block font-serif text-base leading-tight text-white md:text-lg">{w.title}</span>
+              </span>
+            </button>
+          ))}
+        </div>
+
+        <div className="mt-10 text-center">
+          <Link
+            to="/servicios"
+            className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-7 py-3.5 text-sm font-medium text-primary shadow-soft transition hover:border-accent/40 hover:shadow-elevated"
+          >
+            Ver todos nuestros servicios <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </div>
+
+      {active !== null && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
+          onClick={() => setActive(null)}
+        >
+          <button
+            type="button"
+            aria-label="Cerrar"
+            onClick={() => setActive(null)}
+            className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          <button
+            type="button"
+            aria-label="Anterior"
+            onClick={(e) => { e.stopPropagation(); setActive((i) => (i === null ? i : (i - 1 + works.length) % works.length)); }}
+            className="absolute left-4 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </button>
+          <figure className="max-h-[85vh] max-w-3xl" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={works[active].src}
+              alt={works[active].title}
+              className="max-h-[78vh] w-full rounded-2xl object-contain"
+            />
+            <figcaption className="mt-4 text-center">
+              <span className="block text-[11px] uppercase tracking-[0.18em] text-accent">{works[active].tag}</span>
+              <span className="mt-1 block font-serif text-xl text-white">{works[active].title}</span>
+            </figcaption>
+          </figure>
+          <button
+            type="button"
+            aria-label="Siguiente"
+            onClick={(e) => { e.stopPropagation(); setActive((i) => (i === null ? i : (i + 1) % works.length)); }}
+            className="absolute right-4 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
+          >
+            <ArrowRight className="h-5 w-5" />
+          </button>
+        </div>
+      )}
     </section>
   );
 }
