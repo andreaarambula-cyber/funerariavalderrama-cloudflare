@@ -2,9 +2,11 @@ import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
+  ArrowLeftRight,
   Check,
   ChevronDown,
   Box,
+  Pickaxe,
   Image as ImageIcon,
   Handshake,
   Building2,
