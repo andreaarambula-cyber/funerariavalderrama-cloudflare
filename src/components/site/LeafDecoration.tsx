@@ -15,7 +15,7 @@ function Leaf({
 }) {
   return (
     <path
-      d="M0 0 C7 -3 16 -2 22 4 C16 6 7 6 0 0 Z"
+      d="M0 0 C9 -7 22 -7 34 0 C22 7 9 7 0 0 Z"
       fill="currentColor"
       opacity={opacity}
       transform={`translate(${x} ${y}) rotate(${rotate}) scale(${scale})`}
@@ -24,23 +24,24 @@ function Leaf({
 }
 
 export function LeafDecoration({ className }: { className?: string }) {
-  // Points sampled down a gentle S-curve from top to bottom.
+  // Nodes down a gentle curve near the right edge. The branch fans leaves
+  // up-and-left into the card, echoing the olive wreath in the logo.
+  // [x, y, tangentAngle]
   const stem: Array<[number, number, number]> = [
-    [150, 6, 96],
-    [146, 30, 100],
-    [140, 54, 106],
-    [132, 78, 112],
-    [124, 102, 118],
-    [118, 126, 122],
-    [114, 150, 126],
-    [114, 174, 130],
-    [118, 198, 134],
-    [126, 222, 138],
-    [136, 244, 142],
+    [168, 12, 100],
+    [160, 38, 104],
+    [152, 64, 110],
+    [144, 90, 116],
+    [138, 116, 122],
+    [134, 142, 128],
+    [134, 168, 134],
+    [138, 194, 140],
+    [146, 220, 146],
+    [158, 244, 152],
   ];
   return (
     <svg
-      viewBox="0 0 180 260"
+      viewBox="0 0 200 260"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
@@ -48,21 +49,21 @@ export function LeafDecoration({ className }: { className?: string }) {
     >
       {/* Curving stem */}
       <path
-        d="M150 6 C146 30 140 54 132 78 C124 102 116 126 114 150 C112 174 118 198 126 222 C132 238 136 244 136 244"
+        d="M168 12 C160 38 150 64 144 90 C138 116 132 142 134 168 C136 194 146 220 158 244"
         stroke="currentColor"
-        strokeWidth="1.4"
+        strokeWidth="2"
         fill="none"
-        opacity="0.9"
+        opacity="0.85"
       />
       {stem.map(([x, y, base], i) => (
         <g key={i}>
-          {/* Leaf pointing outward (to the right) */}
-          <Leaf x={x} y={y} rotate={base - 70} scale={1} opacity={0.95} />
-          {/* Leaf pointing inward (to the left) */}
-          <Leaf x={x} y={y} rotate={base + 110} scale={0.92} opacity={0.8} />
-          {/* Small berry near the node */}
+          {/* Outer leaf, fanning up-left into the card */}
+          <Leaf x={x} y={y} rotate={base + 150} scale={1.15} opacity={0.95} />
+          {/* Inner leaf */}
+          <Leaf x={x} y={y} rotate={base + 195} scale={0.95} opacity={0.7} />
+          {/* Berry near the node */}
           {i % 2 === 0 && (
-            <circle cx={x - 4} cy={y + 2} r="1.8" fill="currentColor" opacity="0.7" />
+            <circle cx={x + 3} cy={y - 2} r="2.4" fill="currentColor" opacity="0.8" />
           )}
         </g>
       ))}
