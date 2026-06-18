@@ -351,6 +351,78 @@ function ServiciosPage() {
   );
 }
 
+function PackageGallery({
+  gallery,
+  name,
+  onOpen,
+}: {
+  gallery: string[];
+  name: string;
+  onOpen: (src: string) => void;
+}) {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const indexRef = useRef(0);
+
+  useEffect(() => {
+    indexRef.current = 0;
+    const el = scrollerRef.current;
+    if (el) el.scrollTo({ left: 0 });
+    const id = setInterval(() => {
+      const node = scrollerRef.current;
+      if (!node) return;
+      const next = (indexRef.current + 1) % gallery.length;
+      indexRef.current = next;
+      node.scrollTo({ left: next * node.clientWidth, behavior: "smooth" });
+    }, 5000);
+    return () => clearInterval(id);
+  }, [gallery]);
+
+  return (
+    <>
+      {/* Mobile: auto-advancing horizontal carousel */}
+      <div
+        ref={scrollerRef}
+        className="mt-6 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth md:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {gallery.map((src, i) => (
+          <button
+            key={src}
+            type="button"
+            onClick={() => onOpen(src)}
+            className="relative aspect-[3/4] w-full shrink-0 snap-center overflow-hidden rounded-2xl border border-border bg-background/60"
+          >
+            <img
+              src={src}
+              alt={`Urna ${name} ${i + 1}`}
+              loading="lazy"
+              className="h-full w-full object-cover"
+            />
+          </button>
+        ))}
+      </div>
+
+      {/* Desktop: grid */}
+      <div className="mt-6 hidden grid-cols-3 gap-3 md:grid">
+        {gallery.map((src, i) => (
+          <button
+            key={src}
+            type="button"
+            onClick={() => onOpen(src)}
+            className="group relative aspect-[3/4] overflow-hidden rounded-2xl border border-border bg-background/60"
+          >
+            <img
+              src={src}
+              alt={`Urna ${name} ${i + 1}`}
+              loading="lazy"
+              className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+            />
+          </button>
+        ))}
+      </div>
+    </>
+  );
+}
+
 function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
