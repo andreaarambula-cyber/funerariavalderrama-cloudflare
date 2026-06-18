@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Phone, Mail, MapPin, Facebook } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Instagram } from "lucide-react";
 import logo from "@/assets/logo-valderrama.png";
 
 export function SiteFooter() {
@@ -22,7 +22,7 @@ export function SiteFooter() {
           </p>
           <div className="mt-6 flex gap-3">
             <a
-              href="https://www.facebook.com/people/Funeraria-Valderrama/"
+              href="https://www.facebook.com/funeraria.valderrama.5/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook Funeraria Valderrama"
@@ -30,6 +30,7 @@ export function SiteFooter() {
             >
               <Facebook className="h-4 w-4" />
             </a>
+            <a href="https://www.instagram.com/funerariavalderrama/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Funeraria Valderrama" className="grid h-9 w-9 place-items-center rounded-full border border-primary-foreground/20 transition hover:bg-primary-foreground/10"><Instagram className="h-4 w-4" /></a>
           </div>
         </div>
 
@@ -56,8 +57,8 @@ export function SiteFooter() {
           </li>
           <li className="flex items-start gap-2.5 text-sm text-primary-foreground/75">
             <Mail className="mt-0.5 h-4 w-4 text-accent" />
-            <a href="mailto:contacto@valderrama.cl" className="hover:text-primary-foreground">
-              contacto@valderrama.cl
+            <a href="mailto:funerariavalderramaspa@gmail.com" className="hover:text-primary-foreground">
+              funerariavalderramaspa@gmail.com
             </a>
           </li>
           <li className="flex items-start gap-2.5 text-sm text-primary-foreground/75">
