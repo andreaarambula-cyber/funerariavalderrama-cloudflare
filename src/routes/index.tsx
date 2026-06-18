@@ -4,6 +4,7 @@ import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Bo
 import { LeafDecoration } from "@/components/site/LeafDecoration";
 import heroImg from "@/assets/hero-sunrise.jpg";
 import heroVideo from "@/assets/hero-video.mp4.asset.json";
+import heroMobileVideo from "@/assets/hero-mobile.mp4.asset.json";
 import candleImg from "@/assets/candle.jpg";
 import blogDuelo from "@/assets/blog-duelo.jpg";
 import blogTramites from "@/assets/blog-tramites.jpg";
