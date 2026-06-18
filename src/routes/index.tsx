@@ -125,14 +125,15 @@ function Services() {
           {services.map(({ icon: Icon, title, desc }) => (
             <article
               key={title}
-              className="group rounded-2xl border border-border bg-surface p-7 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
+              className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-7 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
             >
-              <Icon className="h-8 w-8 text-accent" strokeWidth={1.5} />
-              <h3 className="mt-5 font-serif text-2xl text-primary">{title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
+              <LeafDecoration className="absolute -bottom-4 -right-4 h-44 w-44 text-accent opacity-[0.18] transition-opacity duration-300 group-hover:opacity-[0.28]" />
+              <Icon className="relative h-8 w-8 text-accent" strokeWidth={1.5} />
+              <h3 className="relative mt-5 font-serif text-2xl text-primary">{title}</h3>
+              <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
               <Link
                 to="/servicios"
-                className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-primary"
+                className="relative mt-5 inline-flex items-center gap-1 text-sm font-medium text-primary"
               >
                 Conocer más <ArrowRight className="h-3.5 w-3.5" />
               </Link>
