@@ -29,6 +29,7 @@ function HomePage() {
       <Hero />
       <TrustBar />
       <Services />
+      <Convenios />
       <HowWeHelp />
       <FeaturedObituaries />
       <Testimonials />
