@@ -16,6 +16,16 @@ import { PageHero } from "@/components/site/PageHero";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
 import { cn } from "@/lib/utils";
 
+import esencial1 from "@/assets/urnas/esencial-1.jpg.asset.json";
+import esencial2 from "@/assets/urnas/esencial-2.jpg.asset.json";
+import esencial3 from "@/assets/urnas/esencial-3.jpg.asset.json";
+import selecto1 from "@/assets/urnas/selecto-1.jpg.asset.json";
+import selecto2 from "@/assets/urnas/selecto-2.jpg.asset.json";
+import selecto3 from "@/assets/urnas/selecto-3.jpg.asset.json";
+import memorable1 from "@/assets/urnas/memorable-1.jpg.asset.json";
+import memorable2 from "@/assets/urnas/memorable-2.jpg.asset.json";
+import memorable3 from "@/assets/urnas/memorable-3.jpg.asset.json";
+
 export const Route = createFileRoute("/servicios")({
   head: () => ({
     meta: [
@@ -42,6 +52,7 @@ const packages = [
       "Terminación brillante u opaca",
     ],
     note: "Fotos sujetas a stock.",
+    gallery: [esencial1.url, esencial2.url, esencial3.url],
   },
   {
     id: "selecto",
@@ -54,6 +65,7 @@ const packages = [
       "Terminación brillante u opaca",
     ],
     note: "Fotos sujetas a stock.",
+    gallery: [selecto1.url, selecto2.url, selecto3.url],
   },
   {
     id: "memorable",
@@ -66,6 +78,7 @@ const packages = [
       "Con o sin tallado, terminación brillante u opaca",
     ],
     note: "Fotos sujetas a stock.",
+    gallery: [memorable1.url, memorable2.url, memorable3.url],
   },
 ];
 
