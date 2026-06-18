@@ -120,11 +120,61 @@ function Services() {
     { icon: FileText, title: "Trámites y cuota mortuoria", desc: "Inscripción en Registro Civil y gestión legal completa." },
     { icon: Coffee, title: "Servicios incluidos", desc: "Cafetería y arreglo floral para acompañar a la familia." },
   ];
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const scrollBy = (dir: 1 | -1) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * el.clientWidth * 0.85, behavior: "smooth" });
+  };
   return (
     <section className="py-20 md:py-28">
       <div className="container-prose">
         <SectionHeader eyebrow="Nuestros servicios" title="Cuidamos cada detalle con dignidad" />
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+        {/* Mobile: horizontal scroll */}
+        <div className="mt-10 md:hidden">
+          <div
+            ref={scrollerRef}
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {services.map(({ icon: Icon, title, desc }) => (
+              <article
+                key={title}
+                className="group relative w-[85%] shrink-0 snap-center overflow-hidden rounded-2xl border border-border bg-surface p-7 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
+              >
+                <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-60 transition-opacity duration-300 group-hover:opacity-80" />
+                <Icon className="relative h-8 w-8 text-accent" strokeWidth={1.5} />
+                <h3 className="relative mt-5 font-serif text-2xl text-primary">{title}</h3>
+                <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
+                <Link
+                  to="/servicios"
+                  className="relative mt-5 inline-flex items-center gap-1 text-sm font-medium text-primary"
+                >
+                  Conocer más <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </article>
+            ))}
+          </div>
+          <div className="mt-5 flex items-center justify-center gap-3">
+            <button
+              onClick={() => scrollBy(-1)}
+              className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface shadow-soft transition hover:bg-accent hover:text-accent-foreground"
+              aria-label="Anterior"
+            >
+              <ArrowLeft className="h-4 w-4" />
+            </button>
+            <button
+              onClick={() => scrollBy(1)}
+              className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface shadow-soft transition hover:bg-accent hover:text-accent-foreground"
+              aria-label="Siguiente"
+            >
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Desktop: grid */}
+        <div className="mt-12 hidden gap-5 md:grid sm:grid-cols-2 lg:grid-cols-3">
           {services.map(({ icon: Icon, title, desc }) => (
             <article
               key={title}
