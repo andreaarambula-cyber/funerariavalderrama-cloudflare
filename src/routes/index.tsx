@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users, Handshake, Building2, Banknote, Check } from "lucide-react";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
 import heroImg from "@/assets/hero-sunrise.jpg";
+import heroVideo from "@/assets/hero-video.mp4.asset.json";
 import candleImg from "@/assets/candle.jpg";
 import blogDuelo from "@/assets/blog-duelo.jpg";
 import blogTramites from "@/assets/blog-tramites.jpg";
@@ -42,14 +43,16 @@ function HomePage() {
 function Hero() {
   return (
     <section className="relative isolate flex min-h-[calc(100svh-4rem)] items-center overflow-hidden">
-      <img
-        src={heroImg}
-        alt=""
-        width={1920}
-        height={1280}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
         className="absolute inset-0 h-full w-full object-cover"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/55 via-primary/35 to-primary/70" />
+      >
+        <source src={heroVideo.url} type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-black/70" />
       <div className="container-prose relative w-full py-16 text-primary-foreground md:py-20">
         <h1 className="max-w-3xl text-balance font-serif text-4xl leading-[1.05] md:text-6xl lg:text-7xl">
           Acompañamos a tu familia en el momento más difícil
