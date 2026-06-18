@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useRef } from "react";
-import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users } from "lucide-react";
+import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users, Handshake, Building2, Banknote, Check } from "lucide-react";
 import heroImg from "@/assets/hero-sunrise.jpg";
 import candleImg from "@/assets/candle.jpg";
 import blogDuelo from "@/assets/blog-duelo.jpg";
@@ -29,6 +29,7 @@ function HomePage() {
       <Hero />
       <TrustBar />
       <Services />
+      <Convenios />
       <HowWeHelp />
       <FeaturedObituaries />
       <Testimonials />
@@ -134,6 +135,54 @@ function Services() {
               >
                 Conocer más <ArrowRight className="h-3.5 w-3.5" />
               </Link>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Convenios() {
+  const items = [
+    {
+      icon: Building2,
+      title: "Parque Sendero",
+      desc: "Descuentos especiales para nuestras familias.",
+    },
+    {
+      icon: Building2,
+      title: "Crematorio y Cementerio General de Concepción",
+      desc: "Descuentos especiales para nuestras familias.",
+    },
+    {
+      icon: Handshake,
+      title: "Asesoría en cementerios y parques",
+      desc: "Asesoría para la adquisición en todos los cementerios y parques de la región.",
+    },
+    {
+      icon: Banknote,
+      title: "Cobro de cuotas mortuorias",
+      desc: "Tramitación en AFP's, Rentas Vitalicias, CAPREDENA, DIPRECA y Montepío.",
+    },
+  ];
+  return (
+    <section className="bg-secondary/40 py-20 md:py-28">
+      <div className="container-prose">
+        <SectionHeader eyebrow="Convenios" title="Beneficios y descuentos para nuestras familias" />
+        <div className="mt-12 grid gap-5 sm:grid-cols-2">
+          {items.map((c) => (
+            <article
+              key={c.title}
+              className="flex items-start gap-4 rounded-2xl border border-border bg-surface p-6 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
+            >
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15">
+                <c.icon className="h-6 w-6 text-accent" strokeWidth={1.5} />
+              </span>
+              <div>
+                <h3 className="font-serif text-lg text-primary">{c.title}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{c.desc}</p>
+              </div>
             </article>
           ))}
         </div>
