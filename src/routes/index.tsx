@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
-import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users, Handshake, Building2, Banknote, Check } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users, Handshake, Building2, Banknote, Check, X } from "lucide-react";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
 import heroImg from "@/assets/hero-sunrise.jpg";
 import heroVideo from "@/assets/hero-video.mp4.asset.json";
@@ -9,6 +9,12 @@ import candleImg from "@/assets/candle.jpg";
 import blogDuelo from "@/assets/blog-duelo.jpg";
 import blogTramites from "@/assets/blog-tramites.jpg";
 import blogTradiciones from "@/assets/blog-tradiciones.jpg";
+import esencial1 from "@/assets/urnas/esencial-1.jpg.asset.json";
+import selecto1 from "@/assets/urnas/selecto-1.jpg.asset.json";
+import selecto2 from "@/assets/urnas/selecto-2.jpg.asset.json";
+import memorable1 from "@/assets/urnas/memorable-1.jpg.asset.json";
+import memorable2 from "@/assets/urnas/memorable-2.jpg.asset.json";
+import memorable3 from "@/assets/urnas/memorable-3.jpg.asset.json";
 import { obituaries } from "@/data/obituaries";
 import { Obituaries3DCarousel } from "@/components/site/Obituaries3DCarousel";
 
@@ -34,6 +40,7 @@ function HomePage() {
       <Services />
       <Convenios />
       <HowWeHelp />
+      <OurWork />
       <FeaturedObituaries />
       <Testimonials />
       <BlogTeaser />
