@@ -338,6 +338,27 @@ function ServiciosPage() {
           </div>
         </div>
       </section>
+
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+          onClick={() => setLightbox(null)}
+        >
+          <button
+            type="button"
+            aria-label="Cerrar"
+            className="absolute right-5 top-5 grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          <img
+            src={lightbox}
+            alt="Urna ampliada"
+            className="max-h-[90vh] max-w-full rounded-2xl object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </>
   );
 }
