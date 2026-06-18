@@ -54,7 +54,7 @@ function Hero() {
         </h1>
         <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-white/85 md:text-lg">
           Servicios funerarios y de cremación con dignidad, transparencia y cercanía.
-          Más de 30 años cuidando a las familias del Gran Concepción.
+          Más de 28 años cuidando a las familias del Gran Concepción.
         </p>
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
           <a
@@ -77,7 +77,7 @@ function Hero() {
 
 function TrustBar() {
   const items = [
-    { icon: Star, text: "+30 años de experiencia" },
+    { icon: Star, text: "+28 años de experiencia" },
     { icon: ShieldCheck, text: "Registrados en SEREMI" },
     { icon: Clock, text: "Atención 24/7" },
     { icon: MapPin, text: "Cobertura en todo el Gran Concepción" },
