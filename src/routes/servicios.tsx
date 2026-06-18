@@ -7,14 +7,24 @@ import {
   ChevronDown,
   Box,
   Pickaxe,
-  Image as ImageIcon,
   Handshake,
   Building2,
   Banknote,
+  X,
 } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
 import { cn } from "@/lib/utils";
+
+import esencial1 from "@/assets/urnas/esencial-1.jpg.asset.json";
+import esencial2 from "@/assets/urnas/esencial-2.jpg.asset.json";
+import esencial3 from "@/assets/urnas/esencial-3.jpg.asset.json";
+import selecto1 from "@/assets/urnas/selecto-1.jpg.asset.json";
+import selecto2 from "@/assets/urnas/selecto-2.jpg.asset.json";
+import selecto3 from "@/assets/urnas/selecto-3.jpg.asset.json";
+import memorable1 from "@/assets/urnas/memorable-1.jpg.asset.json";
+import memorable2 from "@/assets/urnas/memorable-2.jpg.asset.json";
+import memorable3 from "@/assets/urnas/memorable-3.jpg.asset.json";
 
 export const Route = createFileRoute("/servicios")({
   head: () => ({
@@ -42,6 +52,7 @@ const packages = [
       "Terminación brillante u opaca",
     ],
     note: "Fotos sujetas a stock.",
+    gallery: [esencial1.url, esencial2.url, esencial3.url],
   },
   {
     id: "selecto",
@@ -54,6 +65,7 @@ const packages = [
       "Terminación brillante u opaca",
     ],
     note: "Fotos sujetas a stock.",
+    gallery: [selecto1.url, selecto2.url, selecto3.url],
   },
   {
     id: "memorable",
@@ -66,6 +78,7 @@ const packages = [
       "Con o sin tallado, terminación brillante u opaca",
     ],
     note: "Fotos sujetas a stock.",
+    gallery: [memorable1.url, memorable2.url, memorable3.url],
   },
 ];
 
@@ -114,6 +127,7 @@ const faqs = [
 function ServiciosPage() {
   const [active, setActive] = useState(packages[0].id);
   const current = packages.find((s) => s.id === active)!;
+  const [lightbox, setLightbox] = useState<string | null>(null);
 
   return (
     <>
@@ -162,11 +176,22 @@ function ServiciosPage() {
             <p className="mt-3 text-base leading-relaxed text-muted-foreground">
               {current.desc}
             </p>
-            <div className="mt-6 flex aspect-[4/3] w-full items-center justify-center rounded-2xl border border-dashed border-border bg-background/60 text-center">
-              <span className="flex flex-col items-center gap-2 text-xs text-muted-foreground">
-                <ImageIcon className="h-7 w-7 opacity-60" strokeWidth={1.5} />
-                Fotos próximamente — sujeto a stock
-              </span>
+            <div className="mt-6 grid grid-cols-3 gap-3">
+              {current.gallery.map((src, i) => (
+                <button
+                  key={src}
+                  type="button"
+                  onClick={() => setLightbox(src)}
+                  className="group relative aspect-[3/4] overflow-hidden rounded-2xl border border-border bg-background/60"
+                >
+                  <img
+                    src={src}
+                    alt={`Urna ${current.name} ${i + 1}`}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                  />
+                </button>
+              ))}
             </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
@@ -313,6 +338,27 @@ function ServiciosPage() {
           </div>
         </div>
       </section>
+
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+          onClick={() => setLightbox(null)}
+        >
+          <button
+            type="button"
+            aria-label="Cerrar"
+            className="absolute right-5 top-5 grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          <img
+            src={lightbox}
+            alt="Urna ampliada"
+            className="max-h-[90vh] max-w-full rounded-2xl object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </>
   );
 }
