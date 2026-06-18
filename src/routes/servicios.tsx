@@ -4,7 +4,6 @@ import {
   ArrowRight,
   Check,
   ChevronDown,
-  PhoneCall,
   Box,
   Image as ImageIcon,
   Handshake,
