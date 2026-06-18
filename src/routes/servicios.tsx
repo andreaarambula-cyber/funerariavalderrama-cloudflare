@@ -373,7 +373,7 @@ function PackageGallery({
       const next = (indexRef.current + 1) % gallery.length;
       indexRef.current = next;
       node.scrollTo({ left: next * node.clientWidth, behavior: "smooth" });
-    }, 5000);
+    }, 4000);
     return () => clearInterval(id);
   }, [gallery]);
 
