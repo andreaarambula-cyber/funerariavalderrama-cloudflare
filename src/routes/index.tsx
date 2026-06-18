@@ -225,6 +225,14 @@ function Services() {
 }
 
 function Convenios() {
+  const backgrounds = [convenio1.url, convenio2.url];
+  const [bgIndex, setBgIndex] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => {
+      setBgIndex((i) => (i + 1) % backgrounds.length);
+    }, 5000);
+    return () => clearInterval(id);
+  }, [backgrounds.length]);
   const items = [
     {
       icon: Building2,
@@ -248,7 +256,16 @@ function Convenios() {
     },
   ];
   return (
-    <section className="bg-secondary/40 py-20 md:py-28">
+    <section className="relative isolate overflow-hidden bg-secondary/40 py-20 md:py-28">
+      {backgrounds.map((src, i) => (
+        <div
+          key={src}
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 bg-cover bg-center transition-opacity duration-1000"
+          style={{ backgroundImage: `url(${src})`, opacity: i === bgIndex ? 1 : 0 }}
+        />
+      ))}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-primary/80" />
       <div className="container-prose">
         <SectionHeader eyebrow="Convenios" title="Beneficios y descuentos para nuestras familias" />
         <div className="mt-12 grid gap-5 sm:grid-cols-2">
