@@ -52,18 +52,12 @@ function Hero() {
       >
         <source src={heroVideo.url} type="video/mp4" />
       </video>
-      <div className="absolute inset-0 bg-black/85" />
+      <div className="absolute inset-0 bg-black/70" />
       <div className="container-prose relative w-full py-16 text-primary-foreground md:py-20">
-        <h1
-          className="max-w-3xl text-balance font-serif text-4xl leading-[1.05] md:text-6xl lg:text-7xl"
-          style={{ textShadow: "0 2px 12px rgba(0,0,0,0.6)" }}
-        >
+        <h1 className="max-w-3xl text-balance font-serif text-4xl leading-[1.05] md:text-6xl lg:text-7xl">
           Acompañamos a tu familia en el momento más difícil
         </h1>
-        <p
-          className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-white md:text-lg"
-          style={{ textShadow: "0 1px 8px rgba(0,0,0,0.5)" }}
-        >
+        <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-white/85 md:text-lg">
           Servicios funerarios y de cremación con dignidad, transparencia y cercanía.
           Más de 28 años cuidando a las familias del Gran Concepción.
         </p>
@@ -71,14 +65,12 @@ function Hero() {
           <a
             href="tel:+56953900931"
             className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-medium text-accent-foreground shadow-elevated transition hover:brightness-105"
-            style={{ textShadow: "0 1px 6px rgba(0,0,0,0.4)" }}
           >
             <Phone className="h-4 w-4" /> Necesito ayuda ahora
           </a>
           <Link
             to="/cotizar"
             className="inline-flex items-center justify-center gap-2 rounded-full border border-white/40 bg-white/5 px-7 py-3.5 text-sm font-medium text-white backdrop-blur transition hover:bg-white/10"
-            style={{ textShadow: "0 1px 6px rgba(0,0,0,0.4)" }}
           >
             Cotizar online <ArrowRight className="h-4 w-4" />
           </Link>
