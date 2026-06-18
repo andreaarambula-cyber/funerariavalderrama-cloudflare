@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Heart, ShieldCheck, Users, MapPin, ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
+import { LeafDecoration } from "@/components/site/LeafDecoration";
 import forestImg from "@/assets/forest-path.jpg";
 
 export const Route = createFileRoute("/nosotros")({
@@ -69,10 +70,11 @@ function NosotrosPage() {
               { icon: ShieldCheck, title: "Transparencia", desc: "Precios claros, sin sorpresas, en cada paso." },
               { icon: Users, title: "Profesionalismo", desc: "Equipo capacitado y certificado en cada sucursal." },
             ].map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="rounded-2xl border border-border bg-surface p-7 shadow-soft">
-                <Icon className="h-8 w-8 text-accent" strokeWidth={1.5} />
-                <h3 className="mt-4 font-serif text-2xl text-primary">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
+              <div key={title} className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-7 shadow-soft">
+                <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-60 transition-opacity duration-300 group-hover:opacity-80" />
+                <Icon className="relative h-8 w-8 text-accent" strokeWidth={1.5} />
+                <h3 className="relative mt-4 font-serif text-2xl text-primary">{title}</h3>
+                <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
               </div>
             ))}
           </div>
@@ -84,11 +86,12 @@ function NosotrosPage() {
           {[
             { city: "Concepción", addr: "O'Higgins 1601, esq. Galvarino, Concepción" },
           ].map((s) => (
-            <div key={s.city} className="rounded-2xl border border-border bg-surface p-7 shadow-soft">
-              <MapPin className="h-6 w-6 text-accent" />
-              <h3 className="mt-3 font-serif text-2xl text-primary">{s.city}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{s.addr}</p>
-              <p className="mt-4 text-xs uppercase tracking-wider text-accent-foreground/80">
+            <div key={s.city} className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-7 shadow-soft">
+              <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-60 transition-opacity duration-300 group-hover:opacity-80" />
+              <MapPin className="relative h-6 w-6 text-accent" />
+              <h3 className="relative mt-3 font-serif text-2xl text-primary">{s.city}</h3>
+              <p className="relative mt-1 text-sm text-muted-foreground">{s.addr}</p>
+              <p className="relative mt-4 text-xs uppercase tracking-wider text-accent-foreground/80">
                 Atención 24/7
               </p>
             </div>

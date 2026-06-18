@@ -13,6 +13,7 @@ import {
   Banknote,
 } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
+import { LeafDecoration } from "@/components/site/LeafDecoration";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/servicios")({
@@ -209,22 +210,24 @@ function ServiciosPage() {
           </h2>
         </div>
         <div className="grid gap-5 sm:grid-cols-2">
-          <div className="flex items-start gap-4 rounded-2xl border border-border bg-surface p-6 shadow-soft">
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15">
+          <div className="group relative flex items-start gap-4 overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-soft">
+            <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-60 transition-opacity duration-300 group-hover:opacity-80" />
+            <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15">
               <ArrowLeftRight className="h-6 w-6 text-accent" strokeWidth={1.5} />
             </span>
-            <div>
+            <div className="relative">
               <h3 className="font-serif text-lg text-primary">Traslados interregionales</h3>
               <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                 Coordinamos el traslado de restos a otras regiones del país con todas las gestiones legales y logísticas necesarias.
               </p>
             </div>
           </div>
-          <div className="flex items-start gap-4 rounded-2xl border border-border bg-surface p-6 shadow-soft">
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15">
+          <div className="group relative flex items-start gap-4 overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-soft">
+            <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-60 transition-opacity duration-300 group-hover:opacity-80" />
+            <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15">
               <Pickaxe className="h-6 w-6 text-accent" strokeWidth={1.5} />
             </span>
-            <div>
+            <div className="relative">
               <h3 className="font-serif text-lg text-primary">Exhumaciones</h3>
               <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                 Realizamos exhumaciones con el debido respeto y cumpliendo todos los requisitos legales y sanitarios.
@@ -246,12 +249,13 @@ function ServiciosPage() {
             {convenios.map((c) => (
               <div
                 key={c.title}
-                className="flex items-start gap-4 rounded-2xl border border-border bg-surface p-6 shadow-soft"
+                className="group relative flex items-start gap-4 overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-soft"
               >
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15">
+                <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-60 transition-opacity duration-300 group-hover:opacity-80" />
+                <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15">
                   <c.icon className="h-6 w-6 text-accent" strokeWidth={1.5} />
                 </span>
-                <div>
+                <div className="relative">
                   <h3 className="font-serif text-lg text-primary">{c.title}</h3>
                   <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{c.desc}</p>
                 </div>
