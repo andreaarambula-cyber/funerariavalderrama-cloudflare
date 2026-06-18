@@ -127,6 +127,7 @@ const faqs = [
 function ServiciosPage() {
   const [active, setActive] = useState(packages[0].id);
   const current = packages.find((s) => s.id === active)!;
+  const [lightbox, setLightbox] = useState<string | null>(null);
 
   return (
     <>
