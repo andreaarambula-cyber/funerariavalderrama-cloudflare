@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users, Handshake, Building2, Banknote, Check } from "lucide-react";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
 import heroImg from "@/assets/hero-sunrise.jpg";
@@ -126,6 +126,20 @@ function Services() {
     if (!el) return;
     el.scrollBy({ left: dir * el.clientWidth * 0.85, behavior: "smooth" });
   };
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      const el = scrollerRef.current;
+      if (!el) return;
+      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 10) {
+        el.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        el.scrollBy({ left: el.clientWidth * 0.85, behavior: "smooth" });
+      }
+    }, 4000);
+    return () => clearInterval(id);
+  }, []);
+
   return (
     <section className="py-20 md:py-28">
       <div className="container-prose">
