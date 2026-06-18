@@ -6,10 +6,10 @@ import {
   ChevronDown,
   PhoneCall,
   Box,
-  Flame,
-  Truck,
-  FileText,
-  Coffee,
+  Image as ImageIcon,
+  Handshake,
+  Building2,
+  Banknote,
 } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { cn } from "@/lib/utils";
@@ -28,84 +28,65 @@ export const Route = createFileRoute("/servicios")({
   component: ServiciosPage,
 });
 
-const services = [
+const packages = [
   {
-    id: "atencion",
-    name: "Atención 24/7",
-    icon: PhoneCall,
-    desc: "Disponibilidad permanente para coordinar el retiro y todo el proceso, sin importar la hora del día o la noche.",
-    includes: [
-      "Coordinación inmediata por teléfono o WhatsApp",
-      "Retiro desde clínica, hospital o domicilio",
-      "Equipo de respuesta las 24 horas",
-      "Acompañamiento desde el primer minuto",
-      "Sin recargo por horario nocturno o festivo",
-    ],
-  },
-  {
-    id: "urna",
-    name: "Elección de urna",
+    id: "esencial",
+    name: "Esencial",
     icon: Box,
-    desc: "Variedad de urnas y ataúdes para que elijas la opción que mejor represente a tu ser querido.",
+    desc: "Urnas de fibromadera-terciado, con o sin tallado, en terminación brillante u opaca.",
     includes: [
-      "Catálogo amplio de urnas y ataúdes",
-      "Modelos en distintas maderas y terminaciones",
-      "Asesoría personalizada según presupuesto",
-      "Entrega y preparación incluida",
-      "Opciones para cremación y sepultación",
+      "Urnas de fibromadera-terciado",
+      "Con o sin tallado",
+      "Terminación brillante u opaca",
     ],
+    note: "Fotos sujetas a stock.",
   },
   {
-    id: "velatorio",
-    name: "Equipo de velatorio",
-    icon: Flame,
-    desc: "Luces, cirios y todos los elementos necesarios para crear un ambiente solemne y respetuoso.",
+    id: "selecto",
+    name: "Selecto",
+    icon: Box,
+    desc: "Urnas de pino, con o sin tallado, en terminación brillante u opaca.",
     includes: [
-      "Capilla ardiente con cirios",
-      "Iluminación y ornamentación",
-      "Atril, libro de condolencias y cruz",
-      "Instalación en domicilio o sala de velación",
-      "Atención permanente durante el velatorio",
+      "Urnas de pino",
+      "Con o sin tallado",
+      "Terminación brillante u opaca",
     ],
+    note: "Fotos sujetas a stock.",
   },
   {
-    id: "traslados",
-    name: "Traslados y carroza",
-    icon: Truck,
-    desc: "Retiro desde clínica, hospital o domicilio y traslado al lugar de velatorio y cementerio en carroza panorámica.",
+    id: "memorable",
+    name: "Memorable",
+    icon: Box,
+    desc: "Urnas de madera nativa —castaño, alerce, raulí, roble americano y pino oregón— con diseños exclusivos.",
     includes: [
-      "Carroza fúnebre panorámica",
-      "Retiro desde clínica, hospital o domicilio",
-      "Traslado al velatorio y al cementerio",
-      "Cobertura en Concepción y alrededores",
-      "Traslados a otras regiones coordinados",
+      "Maderas nativas: castaño, alerce, raulí, roble americano, pino oregón",
+      "Diseños exclusivos: americana, lincon, imperial, trébol y más",
+      "Con o sin tallado, terminación brillante u opaca",
     ],
+    note: "Fotos sujetas a stock.",
+  },
+];
+
+const convenios = [
+  {
+    icon: Building2,
+    title: "Parque Sendero",
+    desc: "Descuentos especiales para nuestras familias.",
   },
   {
-    id: "tramites",
-    name: "Trámites y cuota mortuoria",
-    icon: FileText,
-    desc: "Inscripción en el Registro Civil y tramitación legal e integral de la cuota mortuoria.",
-    includes: [
-      "Inscripción en el Registro Civil",
-      "Tramitación de la cuota mortuoria",
-      "Coordinación con cementerio o crematorio",
-      "Gestión de permisos sanitarios",
-      "Asesoría en posesión efectiva",
-    ],
+    icon: Building2,
+    title: "Crematorio y Cementerio General de Concepción",
+    desc: "Descuentos especiales para nuestras familias.",
   },
   {
-    id: "incluidos",
-    name: "Servicios incluidos",
-    icon: Coffee,
-    desc: "Detalles que cuidan a la familia durante el velatorio, sin costo adicional.",
-    includes: [
-      "Servicio de cafetería",
-      "Arreglo floral principal",
-      "Atención cordial al velatorio",
-      "Coordinador familiar dedicado",
-      "Acompañamiento durante todo el proceso",
-    ],
+    icon: Handshake,
+    title: "Asesoría en cementerios y parques",
+    desc: "Asesoría para la adquisición en todos los cementerios y parques de la región.",
+  },
+  {
+    icon: Banknote,
+    title: "Cobro de cuotas mortuorias",
+    desc: "Tramitación en AFP's, Rentas Vitalicias, CAPREDENA, DIPRECA y Montepío.",
   },
 ];
 
@@ -129,8 +110,8 @@ const faqs = [
 ];
 
 function ServiciosPage() {
-  const [active, setActive] = useState(services[0].id);
-  const current = services.find((s) => s.id === active)!;
+  const [active, setActive] = useState(packages[0].id);
+  const current = packages.find((s) => s.id === active)!;
 
   return (
     <>
@@ -141,8 +122,18 @@ function ServiciosPage() {
       />
 
       <section className="container-prose py-16 md:py-20">
+        <div className="mb-10 text-center">
+          <p className="text-xs uppercase tracking-[0.3em] text-accent">Paquetes de servicios</p>
+          <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
+            Elige el paquete que mejor acompañe a tu familia
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Trabajamos con paquetes de servicios que varían principalmente en la durabilidad y el tipo de urna.
+          </p>
+        </div>
+
         <div className="-mx-5 mb-10 flex gap-2 overflow-x-auto px-5 md:flex-wrap md:overflow-visible">
-          {services.map((s) => (
+          {packages.map((s) => (
             <button
               key={s.id}
               onClick={() => setActive(s.id)}
@@ -169,12 +160,18 @@ function ServiciosPage() {
             <p className="mt-3 text-base leading-relaxed text-muted-foreground">
               {current.desc}
             </p>
+            <div className="mt-6 flex aspect-[4/3] w-full items-center justify-center rounded-2xl border border-dashed border-border bg-background/60 text-center">
+              <span className="flex flex-col items-center gap-2 text-xs text-muted-foreground">
+                <ImageIcon className="h-7 w-7 opacity-60" strokeWidth={1.5} />
+                Fotos próximamente — sujeto a stock
+              </span>
+            </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
                 to="/cotizar"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition hover:brightness-110"
               >
-                Solicitar este servicio <ArrowRight className="h-4 w-4" />
+                Solicitar este paquete <ArrowRight className="h-4 w-4" />
               </Link>
               <a
                 href="tel:+56953900931"
@@ -198,6 +195,34 @@ function ServiciosPage() {
                 </li>
               ))}
             </ul>
+            <p className="mt-6 text-xs italic text-muted-foreground">{current.note}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-secondary/40 py-16 md:py-20">
+        <div className="container-prose">
+          <div className="mb-10 text-center">
+            <p className="text-xs uppercase tracking-[0.3em] text-accent">Convenios</p>
+            <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
+              Beneficios y descuentos para nuestras familias
+            </h2>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2">
+            {convenios.map((c) => (
+              <div
+                key={c.title}
+                className="flex items-start gap-4 rounded-2xl border border-border bg-surface p-6 shadow-soft"
+              >
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15">
+                  <c.icon className="h-6 w-6 text-accent" strokeWidth={1.5} />
+                </span>
+                <div>
+                  <h3 className="font-serif text-lg text-primary">{c.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{c.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
