@@ -7,10 +7,10 @@ import {
   ChevronDown,
   Box,
   Pickaxe,
-  Image as ImageIcon,
   Handshake,
   Building2,
   Banknote,
+  X,
 } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
