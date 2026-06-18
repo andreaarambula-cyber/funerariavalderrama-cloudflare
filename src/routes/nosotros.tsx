@@ -10,8 +10,7 @@ export const Route = createFileRoute("/nosotros")({
       {
         name: "description",
         content:
-          "Más de 30 años acompañando a familias del Gran Concepción con servicios funerarios dignos, transparentes y humanos. Conoce nuestra historia y equipo.",
-      },
+          "Más de 28 años acompañando a familias en momentos de despedida, con cercanía, respeto y compromiso. Conoce nuestra historia.",      },
     ],
   }),
   component: NosotrosPage,
@@ -22,8 +21,8 @@ function NosotrosPage() {
     <>
       <PageHero
         eyebrow="Nosotros"
-        title="Una historia de cuidado, durante tres generaciones"
-        subtitle="Desde 1992 hemos acompañado a miles de familias del Gran Concepción en momentos de despedida, manteniendo el mismo compromiso: dignidad, cercanía y transparencia."
+        title="Nuestra historia"
+        subtitle="Más de 28 años acompañando a familias en momentos de despedida, con la cercanía y el compromiso que nos caracterizan desde el primer día."
       />
 
       <section className="container-prose grid gap-12 py-20 lg:grid-cols-2 lg:items-center">
@@ -35,18 +34,29 @@ function NosotrosPage() {
             Nuestra historia
           </p>
           <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
-            Tres generaciones cuidando lo más importante
+          Más de 28 años acompañando a las familias
           </h2>
-          <p className="mt-5 text-muted-foreground">
-            Funeraria Valderrama nació en Concepción en 1992 como una pequeña empresa familiar
-            con una convicción clara: cada despedida merece dignidad, cada familia
-            merece ser escuchada, y cada detalle merece ser cuidado.
-          </p>
-          <p className="mt-3 text-muted-foreground">
-            Hoy atendemos a familias en todo el Gran Concepción —Concepción, Chiguayante,
-            San Pedro de la Paz, Hualpén y Talcahuano—, con un equipo cercano y la misma
-            vocación de servicio que el primer día.
-          </p>
+        <p className="mt-5 text-muted-foreground">
+        Nuestra historia no comenzó en una oficina ni con un gran plan de negocios. Comenzó hace más de 28 años, como una empresa familiar dedicada a la distribución de urnas funerarias en distintas ciudades de Chile.
+        </p>
+        <p className="mt-3 text-muted-foreground">
+        Durante esos años conocimos de cerca la realidad de cientos de familias que enfrentaban la pérdida de un ser querido. Escuchamos sus historias, vimos sus necesidades y comprendimos que, en los momentos más difíciles, las personas no solo necesitan un producto o un trámite: necesitan apoyo, orientación y alguien que les ayude a transitar ese proceso con tranquilidad.
+        </p>
+      <p className="mt-3 text-muted-foreground">
+      Con el tiempo entendimos que nuestra verdadera vocación era acompañar directamente a las familias. Así nació Funeraria Valderrama.
+      </p>
+      <p className="mt-3 text-muted-foreground">
+      Desde entonces hemos trabajado con la misma cercanía y sencillez que nos caracterizó desde el principio. Somos una empresa familiar que cree en el trato humano, en escuchar, en estar disponibles cuando se nos necesita y en hacer las cosas con respeto y responsabilidad.
+      </p>
+      <p className="mt-3 text-muted-foreground">
+      Sabemos que ninguna despedida es igual a otra, porque cada vida tiene su propia historia. Por eso nos esforzamos por entregar una atención cálida, honesta y personalizada, acompañando a las familias como nos gustaría que acompañaran a la nuestra.
+      </p>
+    <p className="mt-3 text-muted-foreground">
+    Hoy, después de décadas de experiencia en el rubro funerario, seguimos manteniendo los mismos valores que nos dieron origen: cercanía, confianza y compromiso con las personas.
+    </p>
+    <p className="mt-3 text-muted-foreground">
+    Porque más que realizar un servicio, creemos en acompañar a las familias cuando más lo necesitan.
+    </p>
         </div>
       </section>
 
