@@ -1,70 +1,73 @@
+// A single laurel branch echoing the olive wreath in the Valderrama logo.
+// One almond-shaped leaf, reused along a curving stem.
+function Leaf({
+  x,
+  y,
+  rotate,
+  scale = 1,
+  opacity = 1,
+}: {
+  x: number;
+  y: number;
+  rotate: number;
+  scale?: number;
+  opacity?: number;
+}) {
+  return (
+    <path
+      d="M0 0 C9 -7 22 -7 34 0 C22 7 9 7 0 0 Z"
+      fill="currentColor"
+      opacity={opacity}
+      transform={`translate(${x} ${y}) rotate(${rotate}) scale(${scale})`}
+    />
+  );
+}
+
 export function LeafDecoration({ className }: { className?: string }) {
+  // Nodes down a gentle curve near the right edge. The branch fans leaves
+  // up-and-left into the card, echoing the olive wreath in the logo.
+  // [x, y, tangentAngle]
+  const stem: Array<[number, number, number]> = [
+    [168, 12, 100],
+    [160, 38, 104],
+    [152, 64, 110],
+    [144, 90, 116],
+    [138, 116, 122],
+    [134, 142, 128],
+    [134, 168, 134],
+    [138, 194, 140],
+    [146, 220, 146],
+    [158, 244, 152],
+  ];
   return (
     <svg
-      viewBox="0 0 200 200"
+      viewBox="0 0 200 260"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="xMaxYMid slice"
       className={className}
       aria-hidden="true"
     >
-      {/* Main branch curving from bottom-left to top-right */}
+      {/* Curving stem */}
       <path
-        d="M-10 210 Q30 160 50 120 Q70 80 90 60 Q110 40 140 30 Q170 20 200 10"
+        d="M168 12 C160 38 150 64 144 90 C138 116 132 142 134 168 C136 194 146 220 158 244"
         stroke="currentColor"
-        strokeWidth="1.2"
+        strokeWidth="2"
         fill="none"
-        opacity="0.35"
+        opacity="0.85"
       />
-      
-      {/* Secondary branch */}
-      <path
-        d="M40 140 Q60 110 80 95 Q100 80 120 75"
-        stroke="currentColor"
-        strokeWidth="0.9"
-        fill="none"
-        opacity="0.25"
-      />
-      
-      {/* Tertiary branch */}
-      <path
-        d="M80 90 Q100 70 115 55 Q130 40 150 35"
-        stroke="currentColor"
-        strokeWidth="0.8"
-        fill="none"
-        opacity="0.2"
-      />
-
-      {/* Leaves along main branch */}
-      <ellipse cx="55" cy="118" rx="8" ry="4" transform="rotate(-35 55 118)" fill="currentColor" opacity="0.22" />
-      <ellipse cx="72" cy="95" rx="9" ry="4.5" transform="rotate(-25 72 95)" fill="currentColor" opacity="0.28" />
-      <ellipse cx="88" cy="72" rx="10" ry="5" transform="rotate(-20 88 72)" fill="currentColor" opacity="0.32" />
-      <ellipse cx="108" cy="55" rx="9" ry="4.5" transform="rotate(-15 108 55)" fill="currentColor" opacity="0.3" />
-      <ellipse cx="128" cy="42" rx="8" ry="4" transform="rotate(-10 128 42)" fill="currentColor" opacity="0.25" />
-      <ellipse cx="148" cy="35" rx="7" ry="3.5" transform="rotate(-5 148 35)" fill="currentColor" opacity="0.2" />
-      <ellipse cx="168" cy="28" rx="6" ry="3" transform="rotate(0 168 28)" fill="currentColor" opacity="0.18" />
-      
-      {/* Leaves on secondary branch */}
-      <ellipse cx="60" cy="115" rx="7" ry="3.5" transform="rotate(30 60 115)" fill="currentColor" opacity="0.2" />
-      <ellipse cx="78" cy="92" rx="8" ry="4" transform="rotate(25 78 92)" fill="currentColor" opacity="0.25" />
-      <ellipse cx="98" cy="78" rx="7" ry="3.5" transform="rotate(20 98 78)" fill="currentColor" opacity="0.22" />
-      <ellipse cx="118" cy="72" rx="6" ry="3" transform="rotate(15 118 72)" fill="currentColor" opacity="0.18" />
-      
-      {/* Leaves on tertiary branch */}
-      <ellipse cx="95" cy="68" rx="7" ry="3.5" transform="rotate(-40 95 68)" fill="currentColor" opacity="0.18" />
-      <ellipse cx="112" cy="52" rx="8" ry="4" transform="rotate(-30 112 52)" fill="currentColor" opacity="0.22" />
-      <ellipse cx="132" cy="40" rx="7" ry="3.5" transform="rotate(-20 132 40)" fill="currentColor" opacity="0.2" />
-      
-      {/* Small accent dots / berries */}
-      <circle cx="85" cy="105" r="1.5" fill="currentColor" opacity="0.3" />
-      <circle cx="105" cy="82" r="1.5" fill="currentColor" opacity="0.35" />
-      <circle cx="125" cy="62" r="1.5" fill="currentColor" opacity="0.25" />
-      <circle cx="145" cy="45" r="1.2" fill="currentColor" opacity="0.2" />
-      
-      {/* Extra delicate leaves for fullness */}
-      <ellipse cx="45" cy="135" rx="6" ry="3" transform="rotate(-45 45 135)" fill="currentColor" opacity="0.15" />
-      <ellipse cx="65" cy="105" rx="7" ry="3.5" transform="rotate(35 65 105)" fill="currentColor" opacity="0.18" />
-      <ellipse cx="115" cy="48" rx="6" ry="3" transform="rotate(-25 115 48)" fill="currentColor" opacity="0.2" />
-      <ellipse cx="138" cy="38" rx="5" ry="2.5" transform="rotate(10 138 38)" fill="currentColor" opacity="0.15" />
+      {stem.map(([x, y, base], i) => (
+        <g key={i}>
+          {/* Outer leaf, fanning up-left into the card */}
+          <Leaf x={x} y={y} rotate={base + 150} scale={1.15} opacity={0.95} />
+          {/* Inner leaf */}
+          <Leaf x={x} y={y} rotate={base + 195} scale={0.95} opacity={0.7} />
+          {/* Berry near the node */}
+          {i % 2 === 0 && (
+            <circle cx={x + 3} cy={y - 2} r="2.4" fill="currentColor" opacity="0.8" />
+          )}
+        </g>
+      ))}
     </svg>
   );
 }

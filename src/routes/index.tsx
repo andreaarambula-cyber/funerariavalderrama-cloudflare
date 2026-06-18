@@ -127,7 +127,7 @@ function Services() {
               key={title}
               className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-7 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
             >
-              <LeafDecoration className="absolute -bottom-4 -right-4 h-44 w-44 text-accent opacity-[0.18] transition-opacity duration-300 group-hover:opacity-[0.28]" />
+              <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-60 transition-opacity duration-300 group-hover:opacity-80" />
               <Icon className="relative h-8 w-8 text-accent" strokeWidth={1.5} />
               <h3 className="relative mt-5 font-serif text-2xl text-primary">{title}</h3>
               <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
