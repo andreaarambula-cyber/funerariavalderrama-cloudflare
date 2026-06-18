@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users, Handshake, Building2, Banknote, Check } from "lucide-react";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
 import heroImg from "@/assets/hero-sunrise.jpg";
@@ -11,6 +11,8 @@ import blogTramites from "@/assets/blog-tramites.jpg";
 import blogTradiciones from "@/assets/blog-tradiciones.jpg";
 import { obituaries } from "@/data/obituaries";
 import { Obituaries3DCarousel } from "@/components/site/Obituaries3DCarousel";
+import convenio1 from "@/assets/convenios/convenio-1.jpg.asset.json";
+import convenio2 from "@/assets/convenios/convenio-2.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -223,6 +225,14 @@ function Services() {
 }
 
 function Convenios() {
+  const backgrounds = [convenio1.url, convenio2.url];
+  const [bgIndex, setBgIndex] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => {
+      setBgIndex((i) => (i + 1) % backgrounds.length);
+    }, 5000);
+    return () => clearInterval(id);
+  }, [backgrounds.length]);
   const items = [
     {
       icon: Building2,
@@ -246,7 +256,16 @@ function Convenios() {
     },
   ];
   return (
-    <section className="bg-secondary/40 py-20 md:py-28">
+    <section className="relative isolate overflow-hidden bg-secondary/40 py-20 md:py-28">
+      {backgrounds.map((src, i) => (
+        <div
+          key={src}
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 bg-cover bg-center transition-opacity duration-1000"
+          style={{ backgroundImage: `url(${src})`, opacity: i === bgIndex ? 1 : 0 }}
+        />
+      ))}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-primary/80" />
       <div className="container-prose">
         <SectionHeader eyebrow="Convenios" title="Beneficios y descuentos para nuestras familias" />
         <div className="mt-12 grid gap-5 sm:grid-cols-2">
