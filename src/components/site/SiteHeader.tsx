@@ -7,7 +7,6 @@ import logo from "@/assets/logo-valderrama.png";
 const nav = [
   { to: "/", label: "Inicio" },
   { to: "/servicios", label: "Servicios" },
-  { to: "/planes", label: "Planes" },
   { to: "/obituarios", label: "Obituarios" },
   { to: "/cotizar", label: "Cotizar" },
   { to: "/nosotros", label: "Nosotros" },
