@@ -201,6 +201,39 @@ function ServiciosPage() {
         </div>
       </section>
 
+      <section className="container-prose py-16 md:py-20">
+        <div className="mb-10 text-center">
+          <p className="text-xs uppercase tracking-[0.3em] text-accent">Complementarios</p>
+          <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
+            Otros servicios que ofrecemos
+          </h2>
+        </div>
+        <div className="grid gap-5 sm:grid-cols-2">
+          <div className="flex items-start gap-4 rounded-2xl border border-border bg-surface p-6 shadow-soft">
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15">
+              <ArrowLeftRight className="h-6 w-6 text-accent" strokeWidth={1.5} />
+            </span>
+            <div>
+              <h3 className="font-serif text-lg text-primary">Traslados interregionales</h3>
+              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                Coordinamos el traslado de restos a otras regiones del país con todas las gestiones legales y logísticas necesarias.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-start gap-4 rounded-2xl border border-border bg-surface p-6 shadow-soft">
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15">
+              <Pickaxe className="h-6 w-6 text-accent" strokeWidth={1.5} />
+            </span>
+            <div>
+              <h3 className="font-serif text-lg text-primary">Exhumaciones</h3>
+              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                Realizamos exhumaciones con el debido respeto y cumpliendo todos los requisitos legales y sanitarios.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-secondary/40 py-16 md:py-20">
         <div className="container-prose">
           <div className="mb-10 text-center">
