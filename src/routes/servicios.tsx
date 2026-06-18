@@ -13,6 +13,7 @@ import {
   Banknote,
 } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
+import { LeafDecoration } from "@/components/site/LeafDecoration";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/servicios")({

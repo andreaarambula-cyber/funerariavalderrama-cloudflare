@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Phone, Mail, MapPin, Clock, MessageCircle, Send, Check } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
+import { LeafDecoration } from "@/components/site/LeafDecoration";
 
 export const Route = createFileRoute("/contacto")({
   head: () => ({

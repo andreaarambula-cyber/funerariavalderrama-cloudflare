@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Heart, ShieldCheck, Users, MapPin, ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
+import { LeafDecoration } from "@/components/site/LeafDecoration";
 import forestImg from "@/assets/forest-path.jpg";
 
 export const Route = createFileRoute("/nosotros")({
