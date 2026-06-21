@@ -1,7 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users, Handshake, Building2, Banknote, Check, X } from "lucide-react";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
+import { useIsMobile } from "@/hooks/use-mobile";
 import heroImg from "@/assets/hero-sunrise.jpg";
 import heroVideo from "@/assets/hero-video.mp4.asset.json";
 import heroMobileVideo from "@/assets/hero-mobile.mp4.asset.json";
@@ -349,6 +352,7 @@ function OurWork() {
     { src: memorable3.url, title: "Honrando su memoria", tag: "Detalle y dignidad" },
   ];
   const [active, setActive] = useState<number | null>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (active === null) return;
@@ -361,47 +365,189 @@ function OurWork() {
     return () => window.removeEventListener("keydown", onKey);
   }, [active, works.length]);
 
+  // ----- Horizontal pinned scroll (desktop, GSAP ScrollTrigger) -----
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const pinRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const barRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    if (isMobile) return;
+    const track = trackRef.current;
+    const pin = pinRef.current;
+    if (!track || !pin) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+    const dist = () => Math.max(0, track.scrollWidth - window.innerWidth + 48);
+
+    const ctx = gsap.context(() => {
+      gsap.to(track, {
+        x: () => -dist(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: pin,
+          start: "top top",
+          end: () => "+=" + dist(),
+          scrub: 0.6,
+          pin: true,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            if (barRef.current) barRef.current.style.width = self.progress * 100 + "%";
+          },
+        },
+      });
+      // subtle image parallax inside each panel
+      gsap.utils.toArray<HTMLImageElement>(".ourwork-img").forEach((img) => {
+        gsap.fromTo(
+          img,
+          { x: -22 },
+          {
+            x: 22,
+            ease: "none",
+            scrollTrigger: {
+              trigger: pin,
+              start: "top top",
+              end: () => "+=" + dist(),
+              scrub: true,
+            },
+          },
+        );
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [isMobile]);
+
+  // ----- Native horizontal scroll (mobile) -----
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const scrollBy = (dir: 1 | -1) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * el.clientWidth * 0.85, behavior: "smooth" });
+  };
+
   return (
-    <section className="py-20 md:py-28">
-      <div className="container-prose">
-        <SectionHeader eyebrow="Nuestro trabajo" title="Servicios que hemos realizado" />
-        <p className="mx-auto mt-4 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
-          Una muestra del cuidado y la dignidad con que acompañamos a cada familia.
+    <section ref={sectionRef} className="relative isolate bg-primary text-primary-foreground">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 opacity-70"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 12% 0%, color-mix(in oklab, var(--accent) 16%, transparent), transparent 55%), radial-gradient(circle at 90% 100%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 50%)",
+        }}
+      />
+
+      {/* Intro */}
+      <div className="container-prose pt-20 md:pt-28">
+        <SectionHeader eyebrow="Nuestro trabajo" title="Servicios que hemos realizado" tone="dark" align="left" />
+        <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/70">
+          Una muestra del cuidado y la dignidad con que acompañamos a cada familia. Desliza para recorrerlos.
         </p>
+      </div>
 
-        <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 md:[grid-auto-rows:11rem]">
-          {works.map((w, i) => (
-            <button
-              key={w.title}
-              type="button"
-              onClick={() => setActive(i)}
-              className={`group relative overflow-hidden rounded-2xl border border-border bg-muted shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-elevated ${
-                i === 0 ? "md:col-span-2 md:row-span-2" : i === 3 ? "md:row-span-2" : ""
-              }`}
-            >
-              <img
-                src={w.src}
-                alt={w.title}
-                loading="lazy"
-                className="h-full min-h-44 w-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
-              />
-              <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/10 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-95" />
-              <span className="pointer-events-none absolute inset-x-0 bottom-0 p-4 text-left">
-                <span className="block text-[10px] uppercase tracking-[0.18em] text-accent">{w.tag}</span>
-                <span className="mt-0.5 block font-serif text-base leading-tight text-white md:text-lg">{w.title}</span>
-              </span>
-            </button>
-          ))}
+      {/* Desktop: horizontal pinned scroll (GSAP ScrollTrigger) */}
+      {!isMobile && (
+        <div ref={pinRef} className="relative mt-10 flex h-screen items-center overflow-hidden">
+          <div ref={trackRef} className="flex gap-6 px-6 lg:gap-8 lg:px-12">
+            {works.map((w, i) => (
+              <article
+                key={w.title}
+                className="group relative w-[42vw] max-w-[580px] shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-elevated"
+              >
+                <span className="pointer-events-none absolute right-5 top-4 z-10 font-serif text-5xl text-accent/30">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setActive(i)}
+                  className="block aspect-[16/11] w-full overflow-hidden"
+                  aria-label={`Ampliar ${w.title}`}
+                >
+                  <img
+                    src={w.src}
+                    alt={w.title}
+                    loading="lazy"
+                    className="ourwork-img h-full w-full scale-110 object-cover transition-transform duration-700 group-hover:scale-[1.16]"
+                  />
+                </button>
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent p-7">
+                  <span className="block text-[11px] uppercase tracking-[0.2em] text-accent">{w.tag}</span>
+                  <h3 className="mt-1 font-serif text-2xl text-white md:text-3xl">{w.title}</h3>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {/* progress bar */}
+          <div className="absolute bottom-10 left-6 h-[3px] w-36 overflow-hidden rounded-full bg-white/15 lg:left-12">
+            <span ref={barRef} className="block h-full w-0 bg-accent" />
+          </div>
+          {/* hint */}
+          <div className="absolute bottom-9 right-6 flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-white/50 lg:right-12">
+            Desliza para recorrer <ArrowRight className="h-3.5 w-3.5" />
+          </div>
         </div>
+      )}
 
-        <div className="mt-10 text-center">
-          <Link
-            to="/servicios"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-7 py-3.5 text-sm font-medium text-primary shadow-soft transition hover:border-accent/40 hover:shadow-elevated"
+      {/* Mobile: native horizontal scroll-snap */}
+      {isMobile && (
+        <div className="mt-10 pb-4">
+          <div
+            ref={scrollerRef}
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
-            Ver todos nuestros servicios <ArrowRight className="h-4 w-4" />
-          </Link>
+            {works.map((w, i) => (
+              <article
+                key={w.title}
+                className="group relative w-[82%] shrink-0 snap-center overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-elevated"
+              >
+                <span className="pointer-events-none absolute right-4 top-3 z-10 font-serif text-4xl text-accent/30">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setActive(i)}
+                  className="block aspect-[16/11] w-full overflow-hidden"
+                  aria-label={`Ampliar ${w.title}`}
+                >
+                  <img src={w.src} alt={w.title} loading="lazy" className="h-full w-full object-cover" />
+                </button>
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent p-5">
+                  <span className="block text-[11px] uppercase tracking-[0.2em] text-accent">{w.tag}</span>
+                  <h3 className="mt-1 font-serif text-xl text-white">{w.title}</h3>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="mt-5 flex items-center justify-center gap-4">
+            <button
+              type="button"
+              aria-label="Anterior"
+              onClick={() => scrollBy(-1)}
+              className="grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-white/5 text-white transition active:scale-95"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              aria-label="Siguiente"
+              onClick={() => scrollBy(1)}
+              className="grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-white/5 text-white transition active:scale-95"
+            >
+              <ArrowRight className="h-5 w-5" />
+            </button>
+          </div>
         </div>
+      )}
+
+      {/* CTA */}
+      <div className="container-prose pb-20 pt-12 text-center md:pb-28">
+        <Link
+          to="/servicios"
+          className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-3.5 text-sm font-medium text-white backdrop-blur transition hover:bg-white/10"
+        >
+          Ver todos nuestros servicios <ArrowRight className="h-4 w-4" />
+        </Link>
       </div>
 
       {active !== null && (
