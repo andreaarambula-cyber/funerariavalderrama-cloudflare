@@ -33,7 +33,7 @@ export const Route = createFileRoute("/servicios")({
       {
         name: "description",
         content:
-          "Servicios funerarios completos en el Gran Concepción: funeral tradicional, cremación, velatorios, traslados y trámites. Precios transparentes y atención 24/7.",
+          "Servicios funerarios completos en el Gran Concepción: funeral tradicional, cremación, velatorios, traslados y trámites. Atención cercana y profesional, 24/7.",
       },
     ],
   }),
@@ -134,7 +134,7 @@ function ServiciosPage() {
       <PageHero
         eyebrow="Nuestros servicios"
         title="Cuidamos cada detalle, con dignidad"
-        subtitle="Diseñamos servicios a la medida de cada familia, con total transparencia en precios y procesos. Atención profesional las 24 horas en el Gran Concepción."
+        subtitle="Diseñamos servicios a la medida de cada familia, con total transparencia y acompañamiento en cada proceso. Atención profesional las 24 horas en el Gran Concepción."
       />
 
       <section className="container-prose py-16 md:py-20">

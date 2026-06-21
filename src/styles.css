@@ -135,11 +135,12 @@
 }
 
 @layer utilities {
+  /* GPU-cheap: solo opacity + scaleY, sin animar filtros (drop-shadow). El halo va en una elipse estática del SVG. */
   @keyframes flicker {
-    0%, 100% { opacity: 0.92; transform: scaleY(1) translateZ(0); filter: drop-shadow(0 0 6px oklch(0.74 0.18 70 / 0.55)); }
-    25% { opacity: 1; transform: scaleY(1.06) translateZ(0); filter: drop-shadow(0 0 10px oklch(0.78 0.2 75 / 0.7)); }
-    50% { opacity: 0.85; transform: scaleY(0.97) translateZ(0); filter: drop-shadow(0 0 5px oklch(0.74 0.18 70 / 0.45)); }
-    75% { opacity: 0.98; transform: scaleY(1.03) translateZ(0); filter: drop-shadow(0 0 8px oklch(0.78 0.2 75 / 0.6)); }
+    0%, 100% { opacity: 0.9; transform: scaleY(1) translateZ(0); }
+    25% { opacity: 1; transform: scaleY(1.06) translateZ(0); }
+    50% { opacity: 0.84; transform: scaleY(0.97) translateZ(0); }
+    75% { opacity: 0.97; transform: scaleY(1.03) translateZ(0); }
   }
   .animate-flicker { animation: flicker 2.4s ease-in-out infinite; transform-origin: bottom center; }
 

@@ -28,9 +28,8 @@ const SERVICIOS = [
 ];
 
 const URGENCIA = [
-  { id: "urgente", title: "Es urgente", desc: "Necesito ayuda ahora" },
-  { id: "dias", title: "En los próximos días", desc: "Estoy organizando" },
-  { id: "futuro", title: "Planifico con tiempo", desc: "Quiero adelantarme" },
+  { id: "urgente", title: "Necesidad inmediata", desc: "Necesito ayuda ahora" },
+  { id: "futuro", title: "Necesidad a futuro", desc: "Quiero planificar con tiempo" },
 ];
 
 const CANALES = ["WhatsApp", "Llamada", "Email"];

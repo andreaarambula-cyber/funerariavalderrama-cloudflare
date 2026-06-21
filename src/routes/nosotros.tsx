@@ -67,7 +67,7 @@ function NosotrosPage() {
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {[
               { icon: Heart, title: "Cercanía humana", desc: "Atendemos cada familia como si fuera la nuestra." },
-              { icon: ShieldCheck, title: "Transparencia", desc: "Precios claros, sin sorpresas, en cada paso." },
+              { icon: ShieldCheck, title: "Transparencia", desc: "Trato claro y honesto, sin sorpresas, en cada paso." },
               { icon: Users, title: "Profesionalismo", desc: "Equipo capacitado y certificado en cada sucursal." },
             ].map(({ icon: Icon, title, desc }) => (
               <div key={title} className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-7 shadow-soft">
