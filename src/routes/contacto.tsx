@@ -43,7 +43,7 @@ function ContactoPage() {
           {[
             { icon: Phone, label: "Teléfono 24/7", val: "+56 9 5390 0931", href: "tel:+56953900931" },
             { icon: MessageCircle, label: "WhatsApp", val: "+56 9 5390 0931", href: "https://wa.me/56953900931" },
-            { icon: Mail, label: "Email", val: "contacto@valderrama.cl", href: "mailto:contacto@valderrama.cl" },
+            { icon: Mail, label: "Email", val: "funerariavalderramaspa@gmail.com", href: "mailto:funerariavalderramaspa@gmail.com" },
             { icon: MapPin, label: "Casa matriz", val: "O'Higgins 1601, esq. Galvarino, Concepción", href: "#" },
           ].map(({ icon: Icon, label, val, href }) => (
             <a
@@ -55,11 +55,11 @@ function ContactoPage() {
               <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15 text-accent-foreground">
                 <Icon className="h-5 w-5" />
               </span>
-              <div className="relative">
+              <div className="relative min-w-0">
                 <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
                   {label}
                 </p>
-                <p className="mt-0.5 font-medium text-primary">{val}</p>
+                <p className="mt-0.5 font-medium text-primary break-words">{val}</p>
               </div>
             </a>
           ))}

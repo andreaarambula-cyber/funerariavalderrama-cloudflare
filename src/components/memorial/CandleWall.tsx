@@ -85,10 +85,9 @@ function Dust() {
             bottom: m.bottom,
             width: m.size,
             height: m.size,
-            opacity: 0.5,
+            opacity: 0.45,
             animationDelay: m.delay,
             animationDuration: m.duration,
-            filter: "blur(1px)",
           }}
         />
       ))}

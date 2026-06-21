@@ -6,8 +6,8 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
   return (
     <footer className="mt-24 border-t border-border bg-primary text-primary-foreground/90">
-      <div className="container-prose grid gap-10 py-16 md:grid-cols-2 lg:grid-cols-5">
-        <div className="lg:col-span-2">
+      <div className="container-prose grid gap-10 py-16 md:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1fr_1.5fr]">
+        <div>
           <div className="flex items-center gap-2.5">
             <img
               src={logo}
@@ -50,19 +50,22 @@ export function SiteFooter() {
 
         <FooterCol title="Contacto 24/7">
           <li className="flex items-start gap-2.5 text-sm text-primary-foreground/75">
-            <Phone className="mt-0.5 h-4 w-4 text-accent" />
+            <Phone className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
             <a href="tel:+56953900931" className="hover:text-primary-foreground">
               +56 9 5390 0931
             </a>
           </li>
           <li className="flex items-start gap-2.5 text-sm text-primary-foreground/75">
-            <Mail className="mt-0.5 h-4 w-4 text-accent" />
-            <a href="mailto:funerariavalderramaspa@gmail.com" className="hover:text-primary-foreground">
+            <Mail className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+            <a
+              href="mailto:funerariavalderramaspa@gmail.com"
+              className="whitespace-nowrap hover:text-primary-foreground"
+            >
               funerariavalderramaspa@gmail.com
             </a>
           </li>
           <li className="flex items-start gap-2.5 text-sm text-primary-foreground/75">
-            <MapPin className="mt-0.5 h-4 w-4 text-accent" />
+            <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
             <span>O'Higgins 1601, esq. Galvarino, Concepción</span>
           </li>
         </FooterCol>

@@ -11,7 +11,6 @@ interface Props {
 
 const SPRING = { type: "spring" as const, stiffness: 500, damping: 90, mass: 1 };
 const DRAG_THRESHOLD = 40;
-const DEG = Math.PI / 180;
 
 export function Obituaries3DCarousel({ obituaries }: Props) {
   const [activeIndex, setActiveIndex] = useState(() => Math.floor(obituaries.length / 2));
@@ -21,11 +20,8 @@ export function Obituaries3DCarousel({ obituaries }: Props) {
 
   const cardW = isMobile ? 220 : 300;
   const cardH = isMobile ? 420 : 520;
-  const xStep = isMobile ? 250 : 360;
-  const radius = isMobile ? 700 : 950;
-  const angleStep = isMobile ? 11 : 13;
-  const perspective = 500;
-  const range = isMobile ? 3 : 4;
+  const xStep = isMobile ? 150 : 220;
+  const range = 2;
 
   const go = useCallback(
     (dir: 1 | -1) => {
@@ -88,15 +84,11 @@ export function Obituaries3DCarousel({ obituaries }: Props) {
 
       <div
         className="flex items-center justify-center overflow-visible py-8 md:py-12"
-        style={{
-          perspective: prefersReduced ? "none" : `${perspective}px`,
-          touchAction: "pan-y",
-        }}
+        style={{ touchAction: "pan-y" }}
       >
         <motion.div
           className="relative"
           style={{
-            transformStyle: "preserve-3d",
             width: isMobile ? "92vw" : "75vw",
             height: cardH + 20,
             touchAction: "none",
@@ -111,54 +103,24 @@ export function Obituaries3DCarousel({ obituaries }: Props) {
             const absOffset = Math.abs(offset);
             if (absOffset > range) return null;
 
-            const angleDeg = offset * angleStep;
-            const angleRad = angleDeg * DEG;
-            const arcX = Math.sin(angleRad) * radius;
-            const arcZ = Math.cos(angleRad) * radius - radius;
-            const rotY = -angleDeg;
-            const scale = Math.max(0.82, 1 - absOffset * 0.06);
-            const opacity = absOffset === 0 ? 1 : Math.max(0.35, 0.55 - absOffset * 0.08);
-            const blur = absOffset === 0 ? 0 : Math.min(2.5, absOffset * 1.2);
+            // Coverflow 2D: solo translateX + scale + opacity (GPU-friendly)
+            const scale = Math.max(0.8, 1 - absOffset * 0.08);
+            const opacity = absOffset === 0 ? 1 : Math.max(0.32, 0.6 - absOffset * 0.14);
             const zIndex = obituaries.length * 2 - absOffset;
-
-            if (prefersReduced) {
-              return (
-                <motion.div
-                  key={o.slug}
-                  className="absolute left-1/2 top-0"
-                  style={{ width: cardW, height: cardH, zIndex }}
-                  animate={{
-                    x: offset * xStep - cardW / 2,
-                    opacity: absOffset === 0 ? 1 : 0.5,
-                    scale: absOffset === 0 ? 1 : 0.92,
-                  }}
-                  transition={SPRING}
-                >
-                  <ObituaryCard obituary={o} isActive={absOffset === 0} blur={0} />
-                </motion.div>
-              );
-            }
 
             return (
               <motion.div
                 key={o.slug}
                 className="absolute left-1/2 top-0 will-change-transform"
-                style={{
-                  width: cardW,
-                  height: cardH,
-                  transformStyle: "preserve-3d",
-                  zIndex,
-                }}
+                style={{ width: cardW, height: cardH, zIndex }}
                 animate={{
-                  x: arcX - cardW / 2,
-                  z: arcZ,
-                  rotateY: rotY,
+                  x: offset * xStep - cardW / 2,
                   scale,
                   opacity,
                 }}
-                transition={SPRING}
+                transition={prefersReduced ? { duration: 0.2 } : SPRING}
               >
-                <ObituaryCard obituary={o} isActive={absOffset === 0} blur={blur} />
+                <ObituaryCard obituary={o} isActive={absOffset === 0} />
               </motion.div>
             );
           })}
@@ -184,11 +146,9 @@ export function Obituaries3DCarousel({ obituaries }: Props) {
 function ObituaryCard({
   obituary,
   isActive,
-  blur,
 }: {
   obituary: Obituary;
   isActive: boolean;
-  blur: number;
 }) {
   return (
     <Link
@@ -196,7 +156,6 @@ function ObituaryCard({
       params={{ slug: obituary.slug }}
       className="group block h-full overflow-hidden rounded-2xl border border-border bg-surface transition-shadow duration-300"
       style={{
-        filter: blur > 0 ? `blur(${blur}px)` : "none",
         boxShadow: isActive
           ? "0 25px 60px -12px rgb(0 0 0 / 0.25)"
           : "0 8px 20px -8px rgb(0 0 0 / 0.08)",

@@ -38,7 +38,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "Servicios funerarios y de cremación con dignidad en el Gran Concepción. Atención 24/7, planes a futuro y obituarios online. +30 años acompañando familias.",
+          "Servicios funerarios y de cremación con dignidad en el Gran Concepción. Atención 24/7, planes a futuro y obituarios online. Más de 28 años acompañando familias.",
       },
       { name: "author", content: "Funeraria Valderrama" },
       { name: "theme-color", content: "#1A1A1A" },

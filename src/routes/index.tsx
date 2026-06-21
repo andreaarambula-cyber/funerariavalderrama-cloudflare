@@ -103,8 +103,8 @@ function TrustBar() {
     { icon: ShieldCheck, text: "Registrados en SEREMI" },
     { icon: Clock, text: "Atención 24/7" },
     { icon: MapPin, text: "Cobertura en todo el Gran Concepción" },
-    { icon: Users, text: "+10.000 familias acompañadas" },
-    { icon: BadgeCheck, text: "Transparencia en precios" },
+    { icon: Users, text: "+2.000 familias acompañadas" },
+    { icon: BadgeCheck, text: "Asesoría sin compromiso" },
     { icon: FileText, text: "Trámites incluidos" },
     { icon: Heart, text: "Atención cercana y humana" },
   ];
@@ -289,7 +289,7 @@ function HowWeHelp() {
       n: "02",
       icon: Heart,
       title: "Asesoría",
-      desc: "Diseñamos contigo el servicio adecuado, transparente en precios y opciones.",
+      desc: "Diseñamos contigo el servicio adecuado, con claridad en cada paso y opción.",
     },
     {
       n: "03",
