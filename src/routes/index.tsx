@@ -428,7 +428,7 @@ function WorkCard({ work, index, size }: { work: Work; index: number; size: "lg"
 
   return (
     <div
-      className={cn("group relative shrink-0", size === "lg" ? "w-[42vw] max-w-[580px]" : "w-[82%] snap-center")}
+      className={cn("group relative shrink-0", size === "lg" ? "w-[42vw] max-w-[580px]" : "w-[78%] max-w-[330px] snap-center")}
       style={{ perspective: "1500px" }}
     >
       {/* Toda la tarjeta voltea al pulsar/tocar (funciona en desktop y móvil) */}
@@ -444,7 +444,8 @@ function WorkCard({ work, index, size }: { work: Work; index: number; size: "lg"
         }}
         aria-label={hasBack ? `${work.title} — ${flipped ? "ver portada" : "ver más fotos y detalle"}` : undefined}
         className={cn(
-          "relative aspect-[16/11] w-full transition-transform duration-[750ms] ease-[cubic-bezier(.22,1,.36,1)] [transform-style:preserve-3d]",
+          "relative w-full transition-transform duration-[750ms] ease-[cubic-bezier(.22,1,.36,1)] [transform-style:preserve-3d]",
+          size === "lg" ? "aspect-[16/11]" : "aspect-[3/4]",
           hasBack && "cursor-pointer",
         )}
         style={{ transform: flipped ? "rotateY(180deg)" : undefined }}
@@ -459,8 +460,8 @@ function WorkCard({ work, index, size }: { work: Work; index: number; size: "lg"
           />
           <span
             className={cn(
-              "pointer-events-none absolute z-10 font-serif text-accent/30",
-              size === "lg" ? "right-5 top-4 text-5xl" : "right-4 top-3 text-4xl",
+              "pointer-events-none absolute z-10 font-serif",
+              size === "lg" ? "right-5 top-4 text-5xl text-accent/30" : "right-4 top-3 text-3xl text-accent/25",
             )}
           >
             {String(index + 1).padStart(2, "0")}
@@ -471,14 +472,24 @@ function WorkCard({ work, index, size }: { work: Work; index: number; size: "lg"
               {work.images.length > 1 ? `${work.images.length} fotos` : "Detalle"}
             </span>
           )}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 md:p-7">
-            <span className="block text-[11px] font-semibold uppercase tracking-[0.2em] text-accent [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]">
+          <div
+            className={cn(
+              "pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent",
+              size === "lg" ? "p-6 md:p-7" : "p-4",
+            )}
+          >
+            <span
+              className={cn(
+                "block font-semibold uppercase text-accent [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]",
+                size === "lg" ? "text-[11px] tracking-[0.2em]" : "text-[10px] tracking-[0.14em]",
+              )}
+            >
               {work.tag}
             </span>
             <h3
               className={cn(
-                "mt-1 font-serif text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]",
-                size === "lg" ? "text-2xl md:text-3xl" : "text-xl",
+                "mt-1.5 font-serif leading-snug text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]",
+                size === "lg" ? "text-2xl md:text-3xl" : "text-base",
               )}
             >
               {work.title}
@@ -494,13 +505,23 @@ function WorkCard({ work, index, size }: { work: Work; index: number; size: "lg"
             <span className="pointer-events-none absolute right-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-black/45 px-3 py-1.5 text-[11px] font-medium text-white/90 ring-1 ring-white/15 backdrop-blur-sm">
               <RotateCcw className="h-3.5 w-3.5" /> Volver
             </span>
-            <div className="pointer-events-none absolute inset-0 flex flex-col justify-end p-6 md:p-7">
-              <span className="block text-[11px] font-semibold uppercase tracking-[0.2em] text-accent [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]">
+            <div
+              className={cn(
+                "pointer-events-none absolute inset-0 flex flex-col justify-end",
+                size === "lg" ? "p-6 md:p-7" : "p-4",
+              )}
+            >
+              <span
+                className={cn(
+                  "block font-semibold uppercase text-accent [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]",
+                  size === "lg" ? "text-[11px] tracking-[0.2em]" : "text-[10px] tracking-[0.14em]",
+                )}
+              >
                 {work.tag}
               </span>
-              <h3 className={cn("mt-1 font-serif text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]", size === "lg" ? "text-2xl" : "text-lg")}>{work.title}</h3>
+              <h3 className={cn("mt-1.5 font-serif leading-snug text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]", size === "lg" ? "text-2xl" : "text-base")}>{work.title}</h3>
               {work.description && (
-                <p className="mt-2 text-[13px] leading-relaxed text-white/90 [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]">{work.description}</p>
+                <p className={cn("mt-2 leading-relaxed text-white/90 [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]", size === "lg" ? "text-[13px]" : "text-[12px]")}>{work.description}</p>
               )}
             </div>
           </div>
@@ -898,6 +919,8 @@ function SectionHeader({
     </div>
   );
 }
+
+
 
 
 
