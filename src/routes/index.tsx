@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users, Handshake, Building2, Banknote, Check, X, Images, RotateCcw } from "lucide-react";
+import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users, Handshake, Building2, Banknote, Check, X, Images, RotateCcw, Cross } from "lucide-react";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
@@ -463,13 +463,9 @@ function WorkCard({ work, index, size }: { work: Work; index: number; size: "lg"
               loading="lazy"
               className="h-full w-full scale-105 object-cover transition-transform duration-700 md:group-hover:scale-110"
             />
-            <span
-              className={cn(
-                "pointer-events-none absolute z-10 font-serif",
-                size === "lg" ? "right-5 top-4 text-5xl text-accent/30" : "right-4 top-3 text-3xl text-accent/25",
-              )}
-            >
-              {String(index + 1).padStart(2, "0")}
+            <span className="pointer-events-none absolute right-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-black/55 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-accent ring-1 ring-accent/30">
+              <Cross className="h-3 w-3" strokeWidth={2.25} />
+              Q.E.P.D.
             </span>
             {hasBack && (
               <span className="pointer-events-none absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1.5 text-[11px] font-medium text-white/90 ring-1 ring-white/15">
@@ -950,6 +946,8 @@ function SectionHeader({
     </div>
   );
 }
+
+
 
 
 
