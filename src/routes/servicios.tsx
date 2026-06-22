@@ -1,30 +1,37 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  ArrowRight,
   ArrowLeftRight,
   Check,
   ChevronDown,
-  Box,
   Pickaxe,
   Handshake,
   Building2,
   Banknote,
-  X,
+  Church,
+  IdCard,
+  Cross,
+  BookHeart,
+  Flower2,
+  FileSignature,
+  Car,
+  BusFront,
+  GlassWater,
+  Coffee,
+  HandHeart,
+  Frame,
+  MicVocal,
+  Speaker,
+  ArrowUpRight,
+  type LucideIcon,
 } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
 import { cn } from "@/lib/utils";
 
 import esencial1 from "@/assets/urnas/esencial-1.jpg.asset.json";
-import esencial2 from "@/assets/urnas/esencial-2.jpg.asset.json";
-import esencial3 from "@/assets/urnas/esencial-3.jpg.asset.json";
 import selecto1 from "@/assets/urnas/selecto-1.jpg.asset.json";
-import selecto2 from "@/assets/urnas/selecto-2.jpg.asset.json";
-import selecto3 from "@/assets/urnas/selecto-3.jpg.asset.json";
 import memorable1 from "@/assets/urnas/memorable-1.jpg.asset.json";
-import memorable2 from "@/assets/urnas/memorable-2.jpg.asset.json";
-import memorable3 from "@/assets/urnas/memorable-3.jpg.asset.json";
 
 export const Route = createFileRoute("/servicios")({
   head: () => ({
@@ -40,47 +47,103 @@ export const Route = createFileRoute("/servicios")({
   component: ServiciosPage,
 });
 
-const packages = [
+/* ------------------------------------------------------------------ */
+/* PLANES — cada servicio incluido es un medallón con ícono.           */
+/* hot = lo que ESTE plan suma respecto al anterior (se resalta dorado)*/
+/* ------------------------------------------------------------------ */
+type Item = { icon: LucideIcon; label: string; hot?: boolean };
+type Plan = {
+  id: string;
+  name: string;
+  tagline: string;
+  wood: string;
+  image: string;
+  items: Item[];
+};
+
+const PLANS: Plan[] = [
   {
     id: "esencial",
     name: "Esencial",
-    icon: Box,
-    desc: "Urnas de fibromadera-terciado, con o sin tallado, en terminación brillante u opaca.",
-    includes: [
-      "Urnas de fibromadera-terciado",
-      "Con o sin tallado",
-      "Terminación brillante u opaca",
+    tagline: "Una despedida sobria y digna.",
+    wood: "Fibromadera · terciado",
+    image: esencial1.url,
+    items: [
+      { icon: Church, label: "Capilla de madera" },
+      { icon: IdCard, label: "Tarjetero" },
+      { icon: Cross, label: "Cruz" },
+      { icon: BookHeart, label: "Libro o arreglo floral" },
+      { icon: FileSignature, label: "Trámites legales" },
+      { icon: Car, label: "Carroza" },
+      { icon: BusFront, label: "Van" },
+      { icon: GlassWater, label: "Dispensador de agua" },
     ],
-    note: "Fotos sujetas a stock.",
-    gallery: [esencial1.url, esencial2.url, esencial3.url],
   },
   {
     id: "selecto",
     name: "Selecto",
-    icon: Box,
-    desc: "Urnas de pino, con o sin tallado, en terminación brillante u opaca.",
-    includes: [
-      "Urnas de pino",
-      "Con o sin tallado",
-      "Terminación brillante u opaca",
+    tagline: "Mayor presencia y calidez en la madera.",
+    wood: "Madera de pino",
+    image: selecto1.url,
+    items: [
+      { icon: Church, label: "Capilla a elección" },
+      { icon: IdCard, label: "Tarjetero" },
+      { icon: Cross, label: "Cruz" },
+      { icon: BookHeart, label: "Libro de Condolencias" },
+      { icon: Flower2, label: "Arreglo floral" },
+      { icon: FileSignature, label: "Trámites legales" },
+      { icon: Car, label: "Carroza" },
+      { icon: BusFront, label: "Van" },
+      { icon: GlassWater, label: "Dispensador de agua" },
+      { icon: Coffee, label: "Cafetería", hot: true },
+      { icon: HandHeart, label: "Tarjetas de agradecimiento", hot: true },
+      { icon: Frame, label: "Fotografía A4", hot: true },
     ],
-    note: "Fotos sujetas a stock.",
-    gallery: [selecto1.url, selecto2.url, selecto3.url],
   },
   {
     id: "memorable",
     name: "Memorable",
-    icon: Box,
-    desc: "Urnas de madera nativa —castaño, alerce, raulí, roble americano y pino oregón— con diseños exclusivos.",
-    includes: [
-      "Maderas nativas: castaño, alerce, raulí, roble americano, pino oregón",
-      "Diseños exclusivos: americana, lincon, imperial, trébol y más",
-      "Con o sin tallado, terminación brillante u opaca",
+    tagline: "Lo más completo, con detalles exclusivos.",
+    wood: "Madera nativa · diseños exclusivos",
+    image: memorable1.url,
+    items: [
+      { icon: Church, label: "Capilla a elección" },
+      { icon: IdCard, label: "Tarjetero" },
+      { icon: Cross, label: "Cruz" },
+      { icon: BookHeart, label: "Libro de Condolencias" },
+      { icon: Flower2, label: "5 arreglos florales", hot: true },
+      { icon: FileSignature, label: "Trámites legales" },
+      { icon: Car, label: "2 carrozas", hot: true },
+      { icon: BusFront, label: "Van" },
+      { icon: GlassWater, label: "Dispensador de agua" },
+      { icon: Coffee, label: "Cafetería" },
+      { icon: HandHeart, label: "Tarjetas de agradecimiento" },
+      { icon: Frame, label: "Fotografía A4" },
+      { icon: MicVocal, label: "Lírico", hot: true },
+      { icon: Speaker, label: "Parlante", hot: true },
     ],
-    note: "Fotos sujetas a stock.",
-    gallery: [memorable1.url, memorable2.url, memorable3.url],
   },
 ];
+
+/* count-up para el contador de servicios */
+function useCountUp(target: number) {
+  const [n, setN] = useState(target);
+  useEffect(() => {
+    let raf = 0;
+    const dur = 650;
+    let startT = 0;
+    const tick = (t: number) => {
+      if (!startT) startT = t;
+      const p = Math.min(1, (t - startT) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setN(Math.round(eased * target));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [target]);
+  return n;
+}
 
 const convenios = [
   {
@@ -125,9 +188,10 @@ const faqs = [
 ];
 
 function ServiciosPage() {
-  const [active, setActive] = useState(packages[0].id);
-  const current = packages.find((s) => s.id === active)!;
-  const [lightbox, setLightbox] = useState<string | null>(null);
+  const [active, setActive] = useState(PLANS[0].id);
+  const current = PLANS.find((p) => p.id === active)!;
+  const count = useCountUp(current.items.length);
+  const hasHot = current.items.some((it) => it.hot);
 
   return (
     <>
@@ -137,81 +201,162 @@ function ServiciosPage() {
         subtitle="Diseñamos servicios a la medida de cada familia, con total transparencia y acompañamiento en cada proceso. Atención profesional las 24 horas en el Gran Concepción."
       />
 
+      {/* ===== PLANES ===== */}
       <section className="container-prose py-16 md:py-20">
-        <div className="mb-10 text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-accent">Paquetes de servicios</p>
+        <style>{`
+          @keyframes med-in { from { opacity:0; transform: translateY(20px) scale(.96); filter: blur(7px) } to { opacity:1; transform:none; filter: blur(0) } }
+          @keyframes name-in { from { opacity:0; transform: translateY(14px) } to { opacity:1; transform:none } }
+          .med-in { animation: med-in .7s cubic-bezier(.22,1,.36,1) both; }
+          .name-in { animation: name-in .6s cubic-bezier(.22,1,.36,1) both; }
+        `}</style>
+
+        <div className="mb-10 text-center md:mb-12">
+          <p className="text-xs uppercase tracking-[0.3em] text-accent">Planes de servicio</p>
           <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
-            Elige el paquete que mejor acompañe a tu familia
+            Elige el plan que mejor acompañe a tu familia
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            Trabajamos con paquetes de servicios que varían principalmente en la durabilidad y el tipo de urna.
+            Cada plan reúne todo lo necesario para una despedida digna. Lo{" "}
+            <span className="font-medium text-accent">dorado ✦</span> es lo que ese plan suma respecto al anterior.
           </p>
         </div>
 
-        <div className="-mx-5 mb-10 flex gap-2 overflow-x-auto px-5 md:flex-wrap md:overflow-visible">
-          {packages.map((s) => (
-            <button
-              key={s.id}
-              onClick={() => setActive(s.id)}
-              className={cn(
-                "shrink-0 rounded-full border px-5 py-2.5 text-sm transition",
-                active === s.id
-                  ? "border-primary bg-primary text-primary-foreground"
-                  : "border-border bg-surface text-foreground/80 hover:border-primary/40",
-              )}
-            >
-              {s.name}
-            </button>
-          ))}
+        {/* outer shell (double-bezel) */}
+        <div className="rounded-[2.6rem] bg-primary p-2 shadow-[0_40px_120px_-40px_rgba(0,0,0,0.55)] ring-1 ring-black/5">
+          {/* inner core */}
+          <div className="relative isolate overflow-hidden rounded-[2.1rem] bg-primary px-5 py-9 text-primary-foreground shadow-[inset_0_1px_1px_rgba(255,255,255,0.10)] sm:px-6 sm:py-10 md:px-10 md:py-12">
+            {/* ambient gold mesh */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 -z-10"
+              style={{
+                backgroundImage:
+                  "radial-gradient(60% 70% at 85% 0%, color-mix(in oklab, var(--accent) 22%, transparent), transparent 60%), radial-gradient(50% 60% at 0% 100%, color-mix(in oklab, var(--accent) 12%, transparent), transparent 55%)",
+              }}
+            />
+
+            {/* tier switcher */}
+            <div className="flex justify-center">
+              <div className="inline-flex gap-1 rounded-full bg-white/5 p-1 ring-1 ring-white/10 backdrop-blur-sm">
+                {PLANS.map((p) => (
+                  <button
+                    key={p.id}
+                    onClick={() => setActive(p.id)}
+                    className={cn(
+                      "rounded-full px-4 py-2 text-[13px] transition-all duration-500 ease-[cubic-bezier(.32,.72,0,1)] sm:px-5 sm:text-sm",
+                      active === p.id
+                        ? "bg-accent text-accent-foreground shadow-[0_8px_24px_-8px_color-mix(in_oklab,var(--accent)_70%,transparent)]"
+                        : "text-white/70 hover:text-white",
+                    )}
+                  >
+                    {p.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* split */}
+            <div className="mt-10 grid gap-8 lg:mt-12 lg:grid-cols-[0.82fr_1.18fr] lg:gap-12">
+              {/* LEFT — urn photo hero */}
+              <div key={current.id} className="name-in min-w-0">
+                <div className="rounded-[1.7rem] bg-white/[0.06] p-1.5 ring-1 ring-white/10">
+                  <div className="relative overflow-hidden rounded-[1.3rem]">
+                    <img
+                      src={current.image}
+                      alt={`Urna del plan ${current.name}`}
+                      loading="lazy"
+                      className="aspect-[4/5] w-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent" />
+                    <span className="absolute left-4 top-4 inline-flex rounded-full bg-black/55 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-accent">
+                      {current.wood}
+                    </span>
+                    <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+                      <h2 className="font-serif text-4xl leading-none text-white sm:text-5xl">{current.name}</h2>
+                      <p className="mt-2 max-w-xs text-sm text-white/75">{current.tagline}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 flex items-center justify-between gap-4">
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-serif text-4xl text-accent">{count}</span>
+                    <span className="text-xs leading-tight text-white/60">
+                      servicios
+                      <br />
+                      incluidos
+                    </span>
+                  </div>
+                  <Link
+                    to="/cotizar"
+                    className="group inline-flex items-center gap-3 rounded-full bg-accent py-2 pl-5 pr-2 text-sm font-medium text-accent-foreground transition-all duration-500 ease-[cubic-bezier(.32,.72,0,1)] active:scale-[0.98]"
+                  >
+                    Solicitar
+                    <span className="grid h-9 w-9 place-items-center rounded-full bg-black/15 transition-transform duration-500 ease-[cubic-bezier(.32,.72,0,1)] group-hover:translate-x-1 group-hover:-translate-y-px">
+                      <ArrowUpRight className="h-4 w-4" strokeWidth={1.75} />
+                    </span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* RIGHT — medallion grid */}
+              <div className="min-w-0">
+                <div className="mb-5 flex items-center justify-between gap-3">
+                  <p className="text-[10px] uppercase tracking-[0.22em] text-white/40">El servicio incluye</p>
+                  {hasHot && (
+                    <span className="inline-flex items-center gap-1.5 text-[10px] text-white/60">
+                      <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_8px_color-mix(in_oklab,var(--accent)_85%,transparent)]" />
+                      Lo que suma este plan
+                    </span>
+                  )}
+                </div>
+                {/* key fuerza re-mount → la animación se reinicia al cambiar de plan */}
+                <ul key={current.id} className="grid grid-cols-3 gap-2.5 sm:grid-cols-4 sm:gap-3">
+                  {current.items.map((it, i) => {
+                    const Icon = it.icon;
+                    return (
+                      <li
+                        key={it.label}
+                        className={cn(
+                          "med-in group/m relative flex flex-col items-center justify-start gap-2.5 rounded-[1.25rem] p-3 text-center ring-1 transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-0.5 sm:p-4",
+                          it.hot
+                            ? "bg-accent/[0.12] ring-accent/40 shadow-[0_18px_40px_-22px_color-mix(in_oklab,var(--accent)_75%,transparent)]"
+                            : "bg-white/[0.04] ring-white/10 hover:bg-white/[0.07]",
+                        )}
+                        style={{ animationDelay: `${i * 42}ms` }}
+                      >
+                        {it.hot && (
+                          <span className="absolute right-2.5 top-2.5 h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_10px_2px_color-mix(in_oklab,var(--accent)_80%,transparent)]" />
+                        )}
+                        <span
+                          className={cn(
+                            "grid h-11 w-11 place-items-center rounded-full transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover/m:scale-105 sm:h-12 sm:w-12",
+                            it.hot ? "bg-accent/20 text-accent" : "bg-white/[0.06] text-white/80",
+                          )}
+                        >
+                          <Icon className="h-5 w-5" strokeWidth={1.1} />
+                        </span>
+                        <span className={cn("text-[11px] leading-tight", it.hot ? "text-white" : "text-white/65")}>
+                          {it.label}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="grid gap-8 rounded-3xl border border-border bg-surface p-8 shadow-soft md:p-12 lg:grid-cols-[1.1fr,1fr]">
-          <div>
-            <div className="flex items-center gap-3">
-              <span className="grid h-12 w-12 place-items-center rounded-full bg-accent/15">
-                <current.icon className="h-6 w-6 text-accent" strokeWidth={1.5} />
-              </span>
-              <h2 className="font-serif text-3xl text-primary md:text-4xl">{current.name}</h2>
-            </div>
-            <p className="mt-3 text-base leading-relaxed text-muted-foreground">
-              {current.desc}
-            </p>
-            <PackageGallery
-              gallery={current.gallery}
-              name={current.name}
-              onOpen={setLightbox}
-            />
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link
-                to="/cotizar"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition hover:brightness-110"
-              >
-                Solicitar este paquete <ArrowRight className="h-4 w-4" />
-              </Link>
-              <a
-                href="tel:+56953900931"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-primary transition hover:bg-secondary"
-              >
-                Llamar ahora
-              </a>
-            </div>
-          </div>
-          <div className="rounded-2xl border border-border bg-background p-6 md:p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-foreground/80">
-              Qué incluye
-            </p>
-            <ul className="mt-5 space-y-3.5">
-              {current.includes.map((it) => (
-                <li key={it} className="flex items-start gap-3 text-sm">
-                  <span className="mt-0.5 grid h-5 w-5 place-items-center rounded-full bg-accent/20 text-accent-foreground">
-                    <Check className="h-3 w-3" />
-                  </span>
-                  {it}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-6 text-xs italic text-muted-foreground">{current.note}</p>
-          </div>
+        {/* CTA secundaria + nota */}
+        <div className="mt-8 flex flex-col items-center gap-3 text-center sm:flex-row sm:justify-center">
+          <a
+            href="tel:+56953900931"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-primary transition hover:bg-secondary"
+          >
+            Llamar ahora · +56 9 5390 0931
+          </a>
+          <p className="text-xs italic text-muted-foreground">Fotos de urnas sujetas a stock.</p>
         </div>
       </section>
 
@@ -326,99 +471,6 @@ function ServiciosPage() {
           </div>
         </div>
       </section>
-
-      {lightbox && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
-          onClick={() => setLightbox(null)}
-        >
-          <button
-            type="button"
-            aria-label="Cerrar"
-            className="absolute right-5 top-5 grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
-          >
-            <X className="h-5 w-5" />
-          </button>
-          <img
-            src={lightbox}
-            alt="Urna ampliada"
-            className="max-h-[90vh] max-w-full rounded-2xl object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
-    </>
-  );
-}
-
-function PackageGallery({
-  gallery,
-  name,
-  onOpen,
-}: {
-  gallery: string[];
-  name: string;
-  onOpen: (src: string) => void;
-}) {
-  const scrollerRef = useRef<HTMLDivElement>(null);
-  const indexRef = useRef(0);
-
-  useEffect(() => {
-    indexRef.current = 0;
-    const el = scrollerRef.current;
-    if (el) el.scrollTo({ left: 0 });
-    const id = setInterval(() => {
-      const node = scrollerRef.current;
-      if (!node) return;
-      const next = (indexRef.current + 1) % gallery.length;
-      indexRef.current = next;
-      node.scrollTo({ left: next * node.clientWidth, behavior: "smooth" });
-    }, 4000);
-    return () => clearInterval(id);
-  }, [gallery]);
-
-  return (
-    <>
-      {/* Mobile: auto-advancing horizontal carousel */}
-      <div
-        ref={scrollerRef}
-        className="mt-6 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth md:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      >
-        {gallery.map((src, i) => (
-          <button
-            key={src}
-            type="button"
-            onClick={() => onOpen(src)}
-            className="relative aspect-[3/4] w-full shrink-0 snap-center overflow-hidden rounded-2xl border border-border bg-background/60"
-          >
-            <img
-              src={src}
-              alt={`Urna ${name} ${i + 1}`}
-              loading="lazy"
-              className="h-full w-full object-cover"
-            />
-          </button>
-        ))}
-      </div>
-
-      {/* Desktop: grid */}
-      <div className="mt-6 hidden grid-cols-3 gap-3 md:grid">
-        {gallery.map((src, i) => (
-          <button
-            key={src}
-            type="button"
-            onClick={() => onOpen(src)}
-            className="group relative aspect-[3/4] overflow-hidden rounded-2xl border border-border bg-background/60"
-          >
-            <img
-              src={src}
-              alt={`Urna ${name} ${i + 1}`}
-              loading="lazy"
-              className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
-            />
-          </button>
-        ))}
-      </div>
     </>
   );
 }
@@ -449,3 +501,5 @@ function FAQItem({ q, a }: { q: string; a: string }) {
     </div>
   );
 }
+
+
