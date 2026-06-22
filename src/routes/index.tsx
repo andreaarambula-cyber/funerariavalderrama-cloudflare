@@ -450,8 +450,12 @@ function WorkCard({ work, index, size }: { work: Work; index: number; size: "lg"
         )}
         style={{ transform: flipped ? "rotateY(180deg)" : undefined }}
       >
-        {/* FRENTE — backface en la cara; overflow/rounded en un div interno (fix iOS) */}
-        <div className="absolute inset-0 [backface-visibility:hidden] [-webkit-backface-visibility:hidden]">
+        {/* FRENTE — se oculta (opacity 0) a mitad del giro; no dependemos de
+            backface-visibility, que falla en iOS Safari. */}
+        <div
+          className="absolute inset-0 [backface-visibility:hidden] [-webkit-backface-visibility:hidden]"
+          style={{ opacity: flipped ? 0 : 1, transition: "opacity 0s linear 375ms" }}
+        >
           <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-elevated">
             <img
               src={work.images[0]}
@@ -501,7 +505,10 @@ function WorkCard({ work, index, size }: { work: Work; index: number; size: "lg"
 
         {/* REVERSO */}
         {hasBack && (
-          <div className="absolute inset-0 [backface-visibility:hidden] [-webkit-backface-visibility:hidden] [transform:rotateY(180deg)]">
+          <div
+            className="absolute inset-0 [backface-visibility:hidden] [-webkit-backface-visibility:hidden] [transform:rotateY(180deg)]"
+            style={{ opacity: flipped ? 1 : 0, transition: "opacity 0s linear 375ms" }}
+          >
             <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/10 shadow-elevated">
               <img src={back} alt={`${work.title} — detalle`} loading="lazy" className="h-full w-full object-cover" />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/35" />
@@ -943,6 +950,9 @@ function SectionHeader({
     </div>
   );
 }
+
+
+
 
 
 
