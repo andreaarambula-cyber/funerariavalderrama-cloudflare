@@ -180,7 +180,7 @@ function Services() {
         <div className="mt-10 md:hidden">
           <div
             ref={scrollerRef}
-            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex touch-pan-x snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {services.map(({ icon: Icon, title, desc }) => (
               <article
@@ -461,7 +461,7 @@ function WorkCard({ work, index, size }: { work: Work; index: number; size: "lg"
               src={work.images[0]}
               alt={work.title}
               loading="lazy"
-              className="h-full w-full scale-105 object-cover transition-transform duration-700 group-hover:scale-110"
+              className="h-full w-full scale-105 object-cover transition-transform duration-700 md:group-hover:scale-110"
             />
             <span
               className={cn(
@@ -657,7 +657,7 @@ function OurWork() {
         <div className="mt-10 pb-4">
           <div
             ref={scrollerRef}
-            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex touch-pan-x snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {works.map((w, i) => (
               <WorkCard key={w.title} work={w} index={i} size="sm" />
@@ -860,7 +860,7 @@ function BlogTeaser() {
         <div className="mt-10 md:hidden">
           <div
             ref={scrollerRef}
-            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex touch-pan-x snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {posts.map((p) => (
               <article
