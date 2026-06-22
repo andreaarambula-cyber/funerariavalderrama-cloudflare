@@ -445,9 +445,12 @@ function OurWork() {
         </p>
       </div>
 
-      {/* Desktop: horizontal pinned scroll (GSAP ScrollTrigger) */}
+      {/* Desktop: horizontal pinned scroll (GSAP ScrollTrigger).
+          El contenedor externo (mt-10) lo controla React; GSAP solo envuelve
+          el pinRef interno en su pin-spacer, evitando el error removeChild. */}
       {!isMobile && (
-        <div ref={pinRef} className="relative mt-10 flex h-screen items-center overflow-hidden">
+        <div className="mt-10">
+          <div ref={pinRef} className="relative flex h-screen items-center overflow-hidden">
           <div ref={trackRef} className="flex gap-6 px-6 lg:gap-8 lg:px-12">
             {works.map((w, i) => (
               <article
@@ -485,6 +488,7 @@ function OurWork() {
           {/* hint */}
           <div className="absolute bottom-9 right-6 flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-white/50 lg:right-12">
             Desliza para recorrer <ArrowRight className="h-3.5 w-3.5" />
+          </div>
           </div>
         </div>
       )}
