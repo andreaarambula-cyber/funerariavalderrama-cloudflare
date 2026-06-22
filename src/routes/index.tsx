@@ -444,7 +444,7 @@ function WorkCard({ work, index, size }: { work: Work; index: number; size: "lg"
         }}
         aria-label={hasBack ? `${work.title} — ${flipped ? "ver portada" : "ver más fotos y detalle"}` : undefined}
         className={cn(
-          "relative w-full transition-transform duration-[750ms] ease-[cubic-bezier(.22,1,.36,1)] [transform-style:preserve-3d] [-webkit-transform-style:preserve-3d]",
+          "relative w-full transition-transform duration-[750ms] ease-[cubic-bezier(.42,0,.58,1)] [transform-style:preserve-3d] [-webkit-transform-style:preserve-3d]",
           size === "lg" ? "aspect-[16/11]" : "aspect-[3/4]",
           hasBack && "cursor-pointer",
         )}
