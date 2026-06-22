@@ -444,14 +444,14 @@ function WorkCard({ work, index, size }: { work: Work; index: number; size: "lg"
         }}
         aria-label={hasBack ? `${work.title} — ${flipped ? "ver portada" : "ver más fotos y detalle"}` : undefined}
         className={cn(
-          "relative w-full transition-transform duration-[750ms] ease-[cubic-bezier(.22,1,.36,1)] [transform-style:preserve-3d]",
+          "relative w-full transition-transform duration-[750ms] ease-[cubic-bezier(.22,1,.36,1)] [transform-style:preserve-3d] [-webkit-transform-style:preserve-3d]",
           size === "lg" ? "aspect-[16/11]" : "aspect-[3/4]",
           hasBack && "cursor-pointer",
         )}
         style={{ transform: flipped ? "rotateY(180deg)" : undefined }}
       >
         {/* FRENTE */}
-        <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-elevated [backface-visibility:hidden]">
+        <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-elevated [backface-visibility:hidden] [-webkit-backface-visibility:hidden]">
           <img
             src={work.images[0]}
             alt={work.title}
@@ -499,7 +499,7 @@ function WorkCard({ work, index, size }: { work: Work; index: number; size: "lg"
 
         {/* REVERSO */}
         {hasBack && (
-          <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/10 shadow-elevated [backface-visibility:hidden] [transform:rotateY(180deg)]">
+          <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/10 shadow-elevated [backface-visibility:hidden] [-webkit-backface-visibility:hidden] [transform:rotateY(180deg)]">
             <img src={back} alt={`${work.title} — detalle`} loading="lazy" className="h-full w-full object-cover" />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/35" />
             <span className="pointer-events-none absolute right-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-black/45 px-3 py-1.5 text-[11px] font-medium text-white/90 ring-1 ring-white/15 backdrop-blur-sm">
