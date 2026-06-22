@@ -468,7 +468,7 @@ function WorkCard({ work, index, size }: { work: Work; index: number; size: "lg"
               {String(index + 1).padStart(2, "0")}
             </span>
             {hasBack && (
-              <span className="pointer-events-none absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-black/45 px-3 py-1.5 text-[11px] font-medium text-white/90 ring-1 ring-white/15 backdrop-blur-sm">
+              <span className="pointer-events-none absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1.5 text-[11px] font-medium text-white/90 ring-1 ring-white/15">
                 <Images className="h-3.5 w-3.5" />
                 {work.images.length > 1 ? `${work.images.length} fotos` : "Detalle"}
               </span>
@@ -505,7 +505,7 @@ function WorkCard({ work, index, size }: { work: Work; index: number; size: "lg"
             <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/10 shadow-elevated">
               <img src={back} alt={`${work.title} — detalle`} loading="lazy" className="h-full w-full object-cover" />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/35" />
-              <span className="pointer-events-none absolute right-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-black/45 px-3 py-1.5 text-[11px] font-medium text-white/90 ring-1 ring-white/15 backdrop-blur-sm">
+              <span className="pointer-events-none absolute right-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1.5 text-[11px] font-medium text-white/90 ring-1 ring-white/15">
                 <RotateCcw className="h-3.5 w-3.5" /> Volver
               </span>
               <div
@@ -943,6 +943,8 @@ function SectionHeader({
     </div>
   );
 }
+
+
 
 
 
