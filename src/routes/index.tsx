@@ -2,9 +2,26 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users, Handshake, Building2, Banknote, Check, X } from "lucide-react";
+import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users, Handshake, Building2, Banknote, Check, X, Images, RotateCcw } from "lucide-react";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
+import donLuis1 from "@/assets/trabajos/don-luis-1.jpg";
+import donLuis2 from "@/assets/trabajos/don-luis-2.jpg";
+import donManuel1 from "@/assets/trabajos/don-manuel-1.jpg";
+import donManuel2 from "@/assets/trabajos/don-manuel-2.jpg";
+import cortejoMar1 from "@/assets/trabajos/cortejo-mar-1.jpg";
+import cortejoMar2 from "@/assets/trabajos/cortejo-mar-2.jpg";
+import donaMiguelina1 from "@/assets/trabajos/dona-miguelina-1.jpg";
+import donaMiguelina2 from "@/assets/trabajos/dona-miguelina-2.jpg";
+import donaCecilia1 from "@/assets/trabajos/dona-cecilia-1.jpg";
+import donaCecilia2 from "@/assets/trabajos/dona-cecilia-2.jpg";
+import donFlorentino1 from "@/assets/trabajos/don-florentino-1.jpg";
+import donFlorentino2 from "@/assets/trabajos/don-florentino-2.jpg";
+import donaTeresa1 from "@/assets/trabajos/dona-teresa-1.jpg";
+import donaTeresa2 from "@/assets/trabajos/dona-teresa-2.jpg";
+import donaRosa1 from "@/assets/trabajos/dona-rosa-1.jpg";
+import donaRosa2 from "@/assets/trabajos/dona-rosa-2.jpg";
 import heroImg from "@/assets/hero-sunrise.jpg";
 import heroVideo from "@/assets/hero-video.mp4.asset.json";
 import heroMobileVideo from "@/assets/hero-mobile.mp4.asset.json";
@@ -12,12 +29,6 @@ import candleImg from "@/assets/candle.jpg";
 import blogDuelo from "@/assets/blog-duelo.jpg";
 import blogTramites from "@/assets/blog-tramites.jpg";
 import blogTradiciones from "@/assets/blog-tradiciones.jpg";
-import esencial1 from "@/assets/urnas/esencial-1.jpg.asset.json";
-import selecto1 from "@/assets/urnas/selecto-1.jpg.asset.json";
-import selecto2 from "@/assets/urnas/selecto-2.jpg.asset.json";
-import memorable1 from "@/assets/urnas/memorable-1.jpg.asset.json";
-import memorable2 from "@/assets/urnas/memorable-2.jpg.asset.json";
-import memorable3 from "@/assets/urnas/memorable-3.jpg.asset.json";
 import { obituaries } from "@/data/obituaries";
 import { Obituaries3DCarousel } from "@/components/site/Obituaries3DCarousel";
 
@@ -342,28 +353,165 @@ function HowWeHelp() {
   );
 }
 
-function OurWork() {
-  const works = [
-    { src: memorable1.url, title: "Velatorio Memorable", tag: "Servicio integral" },
-    { src: selecto1.url, title: "Despedida Selecta", tag: "Capilla y flores" },
-    { src: esencial1.url, title: "Servicio Esencial", tag: "Urna y trámites" },
-    { src: memorable2.url, title: "Ambiente solemne", tag: "Cirios y arreglo floral" },
-    { src: selecto2.url, title: "Acompañamiento", tag: "Atención cercana" },
-    { src: memorable3.url, title: "Honrando su memoria", tag: "Detalle y dignidad" },
-  ];
-  const [active, setActive] = useState<number | null>(null);
-  const isMobile = useIsMobile();
+type Work = {
+  images: string[];
+  title: string;
+  tag: string;
+  description?: string;
+};
 
-  useEffect(() => {
-    if (active === null) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setActive(null);
-      if (e.key === "ArrowRight") setActive((i) => (i === null ? i : (i + 1) % works.length));
-      if (e.key === "ArrowLeft") setActive((i) => (i === null ? i : (i - 1 + works.length) % works.length));
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [active, works.length]);
+const works: Work[] = [
+  {
+    images: [cortejoMar1, cortejoMar2],
+    title: "Despedida frente al mar",
+    tag: "Cortejo marítimo · Caleta de pescadores",
+    description:
+      "Acompañamos a una familia de la caleta en una despedida única: el último viaje por mar. En la lancha de los pescadores, entre flores y los suyos, su ser querido (Q.E.P.D.) cruzó la bahía rumbo a su descanso. Una despedida tan profunda como las aguas que tanto amó.",
+  },
+  {
+    images: [donLuis2, donLuis1],
+    title: "Don Luis Jaime Pezo Astudillo",
+    tag: "Cortejo · Hualpén a Talcahuano",
+    description:
+      "Acompañamos a la familia en la despedida de Don Luis Jaime (Q.E.P.D.), desde la Sede Social de Peñuelas, en Hualpén, hasta el Cementerio Nº2 de Talcahuano. Un cortejo digno y sereno.",
+  },
+  {
+    images: [donManuel1, donManuel2],
+    title: "Don Manuel Heriberto Rodríguez Muñoz",
+    tag: "Misa y cortejo · Santa Cruz",
+    description:
+      "Acompañamos a la familia y la comunidad en la despedida de Don Manuel Heriberto (Q.E.P.D.), desde la Parroquia de Santa Cruz hasta el Cementerio Parroquial. Un hombre muy amado, despedido con cariño y respeto.",
+  },
+  {
+    images: [donaMiguelina1, donaMiguelina2],
+    title: "Doña Miguelina del Carmen Ruiz Rojas",
+    tag: "Cortejo · San Pedro de la Paz a Chiguayante",
+    description:
+      "Acompañamos a la familia en la despedida de Doña Miguelina del Carmen (Q.E.P.D.), desde la Parroquia El Buen Pastor de San Pedro de la Paz hasta el Cementerio Municipal de Chiguayante. Madre amada, esposa dedicada y mujer de espíritu fuerte; su vida será recordada como ejemplo de amor y fortaleza.",
+  },
+  {
+    images: [donaCecilia1, donaCecilia2],
+    title: "Doña Cecilia Ivonne Reyes Palavencino",
+    tag: "Cortejo · Concepción a Parque San Pedro",
+    description:
+      "Acompañamos a la familia en la despedida de Doña Cecilia Ivonne (Q.E.P.D.), desde la Iglesia Cristiana en Juan de Dios Rivera, Concepción, hasta el Parque San Pedro. Madre dedicada, esposa leal y amiga entrañable; una mujer guerrera cuyo ejemplo permanecerá como una luz que inspira.",
+  },
+  {
+    images: [donFlorentino1, donFlorentino2],
+    title: "Don Florentino del Carmen Valenzuela Matamala",
+    tag: "Cortejo · Parroquia San Miguel a Parque del Sendero",
+    description:
+      "Acompañamos a la familia en la despedida de Don Florentino del Carmen (Q.E.P.D.), desde la Parroquia San Miguel hasta el Parque del Sendero. Esposo, padre y abuelo profundamente amado; un hombre amoroso y organizado, cuyo ejemplo de dedicación y esfuerzo seguirá siendo motivo de orgullo para los suyos.",
+  },
+  {
+    images: [donaTeresa1, donaTeresa2],
+    title: "Doña Teresa de Jesús Vergara Turra",
+    tag: "Cortejo · Capilla Jesús Resucitado a Talcahuano",
+    description:
+      "Acompañamos a la familia en la despedida de Doña Teresa de Jesús (Q.E.P.D.), desde la Capilla Jesús Resucitado hasta el Cementerio Nº2 de Talcahuano. Pilar de su familia, entregó cariño y cuidado dejando huella en cada hijo y nieto; un legado que permanecerá por siempre en sus corazones.",
+  },
+  {
+    images: [donaRosa1, donaRosa2],
+    title: "Doña Rosa Isabel Azzarolo Carvallo",
+    tag: "Cortejo · Parroquia San Pablo a Parque Sendero",
+    description:
+      "Acompañamos a la familia en la despedida de Doña Rosa Isabel (Q.E.P.D.), desde la Parroquia San Pablo de Chiguayante hasta el Parque Sendero. Alma y refugio de su familia, un faro de ternura y sabiduría; su legado de amor perdurará en cada abrazo y en cada recuerdo que sigue vivo.",
+  },
+];
+
+/** Tarjeta que se voltea (flip) para mostrar la 2ª foto + descripción, sin ocupar más espacio. */
+function WorkCard({ work, index, size }: { work: Work; index: number; size: "lg" | "sm" }) {
+  const [flipped, setFlipped] = useState(false);
+  const hasBack = work.images.length > 1 || !!work.description;
+  const back = work.images[1] ?? work.images[0];
+  const toggle = () => hasBack && setFlipped((f) => !f);
+
+  return (
+    <div
+      className={cn("group relative shrink-0", size === "lg" ? "w-[42vw] max-w-[580px]" : "w-[82%] snap-center")}
+      style={{ perspective: "1500px" }}
+    >
+      {/* Toda la tarjeta voltea al pulsar/tocar (funciona en desktop y móvil) */}
+      <div
+        onClick={toggle}
+        role={hasBack ? "button" : undefined}
+        tabIndex={hasBack ? 0 : undefined}
+        onKeyDown={(e) => {
+          if (hasBack && (e.key === "Enter" || e.key === " ")) {
+            e.preventDefault();
+            toggle();
+          }
+        }}
+        aria-label={hasBack ? `${work.title} — ${flipped ? "ver portada" : "ver más fotos y detalle"}` : undefined}
+        className={cn(
+          "relative aspect-[16/11] w-full transition-transform duration-[750ms] ease-[cubic-bezier(.22,1,.36,1)] [transform-style:preserve-3d]",
+          hasBack && "cursor-pointer",
+        )}
+        style={{ transform: flipped ? "rotateY(180deg)" : undefined }}
+      >
+        {/* FRENTE */}
+        <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-elevated [backface-visibility:hidden]">
+          <img
+            src={work.images[0]}
+            alt={work.title}
+            loading="lazy"
+            className="h-full w-full scale-105 object-cover transition-transform duration-700 group-hover:scale-110"
+          />
+          <span
+            className={cn(
+              "pointer-events-none absolute z-10 font-serif text-accent/30",
+              size === "lg" ? "right-5 top-4 text-5xl" : "right-4 top-3 text-4xl",
+            )}
+          >
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          {hasBack && (
+            <span className="pointer-events-none absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-black/45 px-3 py-1.5 text-[11px] font-medium text-white/90 ring-1 ring-white/15 backdrop-blur-sm">
+              <Images className="h-3.5 w-3.5" />
+              {work.images.length > 1 ? `${work.images.length} fotos` : "Detalle"}
+            </span>
+          )}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 md:p-7">
+            <span className="block text-[11px] font-semibold uppercase tracking-[0.2em] text-accent [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]">
+              {work.tag}
+            </span>
+            <h3
+              className={cn(
+                "mt-1 font-serif text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]",
+                size === "lg" ? "text-2xl md:text-3xl" : "text-xl",
+              )}
+            >
+              {work.title}
+            </h3>
+          </div>
+        </div>
+
+        {/* REVERSO */}
+        {hasBack && (
+          <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/10 shadow-elevated [backface-visibility:hidden] [transform:rotateY(180deg)]">
+            <img src={back} alt={`${work.title} — detalle`} loading="lazy" className="h-full w-full object-cover" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/35" />
+            <span className="pointer-events-none absolute right-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-black/45 px-3 py-1.5 text-[11px] font-medium text-white/90 ring-1 ring-white/15 backdrop-blur-sm">
+              <RotateCcw className="h-3.5 w-3.5" /> Volver
+            </span>
+            <div className="pointer-events-none absolute inset-0 flex flex-col justify-end p-6 md:p-7">
+              <span className="block text-[11px] font-semibold uppercase tracking-[0.2em] text-accent [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]">
+                {work.tag}
+              </span>
+              <h3 className={cn("mt-1 font-serif text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]", size === "lg" ? "text-2xl" : "text-lg")}>{work.title}</h3>
+              {work.description && (
+                <p className="mt-2 text-[13px] leading-relaxed text-white/90 [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]">{work.description}</p>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function OurWork() {
+  const isMobile = useIsMobile();
 
   // ----- Horizontal pinned scroll (desktop, GSAP ScrollTrigger) -----
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -396,23 +544,6 @@ function OurWork() {
           },
         },
       });
-      // subtle image parallax inside each panel
-      gsap.utils.toArray<HTMLImageElement>(".ourwork-img").forEach((img) => {
-        gsap.fromTo(
-          img,
-          { x: -22 },
-          {
-            x: 22,
-            ease: "none",
-            scrollTrigger: {
-              trigger: pin,
-              start: "top top",
-              end: () => "+=" + dist(),
-              scrub: true,
-            },
-          },
-        );
-      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -427,7 +558,7 @@ function OurWork() {
   };
 
   return (
-    <section ref={sectionRef} className="relative isolate bg-primary text-primary-foreground">
+    <section id="trabajos" ref={sectionRef} className="relative isolate bg-primary text-primary-foreground">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-70"
@@ -453,31 +584,7 @@ function OurWork() {
           <div ref={pinRef} className="relative flex h-screen items-center overflow-hidden">
           <div ref={trackRef} className="flex gap-6 px-6 lg:gap-8 lg:px-12">
             {works.map((w, i) => (
-              <article
-                key={w.title}
-                className="group relative w-[42vw] max-w-[580px] shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-elevated"
-              >
-                <span className="pointer-events-none absolute right-5 top-4 z-10 font-serif text-5xl text-accent/30">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => setActive(i)}
-                  className="block aspect-[16/11] w-full overflow-hidden"
-                  aria-label={`Ampliar ${w.title}`}
-                >
-                  <img
-                    src={w.src}
-                    alt={w.title}
-                    loading="lazy"
-                    className="ourwork-img h-full w-full scale-110 object-cover transition-transform duration-700 group-hover:scale-[1.16]"
-                  />
-                </button>
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent p-7">
-                  <span className="block text-[11px] uppercase tracking-[0.2em] text-accent">{w.tag}</span>
-                  <h3 className="mt-1 font-serif text-2xl text-white md:text-3xl">{w.title}</h3>
-                </div>
-              </article>
+              <WorkCard key={w.title} work={w} index={i} size="lg" />
             ))}
           </div>
 
@@ -501,26 +608,7 @@ function OurWork() {
             className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {works.map((w, i) => (
-              <article
-                key={w.title}
-                className="group relative w-[82%] shrink-0 snap-center overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-elevated"
-              >
-                <span className="pointer-events-none absolute right-4 top-3 z-10 font-serif text-4xl text-accent/30">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => setActive(i)}
-                  className="block aspect-[16/11] w-full overflow-hidden"
-                  aria-label={`Ampliar ${w.title}`}
-                >
-                  <img src={w.src} alt={w.title} loading="lazy" className="h-full w-full object-cover" />
-                </button>
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent p-5">
-                  <span className="block text-[11px] uppercase tracking-[0.2em] text-accent">{w.tag}</span>
-                  <h3 className="mt-1 font-serif text-xl text-white">{w.title}</h3>
-                </div>
-              </article>
+              <WorkCard key={w.title} work={w} index={i} size="sm" />
             ))}
           </div>
           <div className="mt-5 flex items-center justify-center gap-4">
@@ -553,49 +641,6 @@ function OurWork() {
           Ver todos nuestros servicios <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
-
-      {active !== null && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
-          onClick={() => setActive(null)}
-        >
-          <button
-            type="button"
-            aria-label="Cerrar"
-            onClick={() => setActive(null)}
-            className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
-          >
-            <X className="h-5 w-5" />
-          </button>
-          <button
-            type="button"
-            aria-label="Anterior"
-            onClick={(e) => { e.stopPropagation(); setActive((i) => (i === null ? i : (i - 1 + works.length) % works.length)); }}
-            className="absolute left-4 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </button>
-          <figure className="max-h-[85vh] max-w-3xl" onClick={(e) => e.stopPropagation()}>
-            <img
-              src={works[active].src}
-              alt={works[active].title}
-              className="max-h-[78vh] w-full rounded-2xl object-contain"
-            />
-            <figcaption className="mt-4 text-center">
-              <span className="block text-[11px] uppercase tracking-[0.18em] text-accent">{works[active].tag}</span>
-              <span className="mt-1 block font-serif text-xl text-white">{works[active].title}</span>
-            </figcaption>
-          </figure>
-          <button
-            type="button"
-            aria-label="Siguiente"
-            onClick={(e) => { e.stopPropagation(); setActive((i) => (i === null ? i : (i + 1) % works.length)); }}
-            className="absolute right-4 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
-          >
-            <ArrowRight className="h-5 w-5" />
-          </button>
-        </div>
-      )}
     </section>
   );
 }
@@ -853,3 +898,15 @@ function SectionHeader({
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
