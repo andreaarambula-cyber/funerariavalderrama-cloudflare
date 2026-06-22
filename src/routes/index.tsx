@@ -450,64 +450,32 @@ function WorkCard({ work, index, size }: { work: Work; index: number; size: "lg"
         )}
         style={{ transform: flipped ? "rotateY(180deg)" : undefined }}
       >
-        {/* FRENTE */}
-        <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-elevated [backface-visibility:hidden] [-webkit-backface-visibility:hidden]">
-          <img
-            src={work.images[0]}
-            alt={work.title}
-            loading="lazy"
-            className="h-full w-full scale-105 object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-          <span
-            className={cn(
-              "pointer-events-none absolute z-10 font-serif",
-              size === "lg" ? "right-5 top-4 text-5xl text-accent/30" : "right-4 top-3 text-3xl text-accent/25",
-            )}
-          >
-            {String(index + 1).padStart(2, "0")}
-          </span>
-          {hasBack && (
-            <span className="pointer-events-none absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-black/45 px-3 py-1.5 text-[11px] font-medium text-white/90 ring-1 ring-white/15 backdrop-blur-sm">
-              <Images className="h-3.5 w-3.5" />
-              {work.images.length > 1 ? `${work.images.length} fotos` : "Detalle"}
-            </span>
-          )}
-          <div
-            className={cn(
-              "pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent",
-              size === "lg" ? "p-6 md:p-7" : "p-4",
-            )}
-          >
+        {/* FRENTE — backface en la cara; overflow/rounded en un div interno (fix iOS) */}
+        <div className="absolute inset-0 [backface-visibility:hidden] [-webkit-backface-visibility:hidden]">
+          <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-elevated">
+            <img
+              src={work.images[0]}
+              alt={work.title}
+              loading="lazy"
+              className="h-full w-full scale-105 object-cover transition-transform duration-700 group-hover:scale-110"
+            />
             <span
               className={cn(
-                "block font-semibold uppercase text-accent [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]",
-                size === "lg" ? "text-[11px] tracking-[0.2em]" : "text-[10px] tracking-[0.14em]",
+                "pointer-events-none absolute z-10 font-serif",
+                size === "lg" ? "right-5 top-4 text-5xl text-accent/30" : "right-4 top-3 text-3xl text-accent/25",
               )}
             >
-              {work.tag}
+              {String(index + 1).padStart(2, "0")}
             </span>
-            <h3
-              className={cn(
-                "mt-1.5 font-serif leading-snug text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]",
-                size === "lg" ? "text-2xl md:text-3xl" : "text-base",
-              )}
-            >
-              {work.title}
-            </h3>
-          </div>
-        </div>
-
-        {/* REVERSO */}
-        {hasBack && (
-          <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/10 shadow-elevated [backface-visibility:hidden] [-webkit-backface-visibility:hidden] [transform:rotateY(180deg)]">
-            <img src={back} alt={`${work.title} — detalle`} loading="lazy" className="h-full w-full object-cover" />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/35" />
-            <span className="pointer-events-none absolute right-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-black/45 px-3 py-1.5 text-[11px] font-medium text-white/90 ring-1 ring-white/15 backdrop-blur-sm">
-              <RotateCcw className="h-3.5 w-3.5" /> Volver
-            </span>
+            {hasBack && (
+              <span className="pointer-events-none absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-black/45 px-3 py-1.5 text-[11px] font-medium text-white/90 ring-1 ring-white/15 backdrop-blur-sm">
+                <Images className="h-3.5 w-3.5" />
+                {work.images.length > 1 ? `${work.images.length} fotos` : "Detalle"}
+              </span>
+            )}
             <div
               className={cn(
-                "pointer-events-none absolute inset-0 flex flex-col justify-end",
+                "pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent",
                 size === "lg" ? "p-6 md:p-7" : "p-4",
               )}
             >
@@ -519,10 +487,46 @@ function WorkCard({ work, index, size }: { work: Work; index: number; size: "lg"
               >
                 {work.tag}
               </span>
-              <h3 className={cn("mt-1.5 font-serif leading-snug text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]", size === "lg" ? "text-2xl" : "text-base")}>{work.title}</h3>
-              {work.description && (
-                <p className={cn("mt-2 leading-relaxed text-white/90 [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]", size === "lg" ? "text-[13px]" : "text-[12px]")}>{work.description}</p>
-              )}
+              <h3
+                className={cn(
+                  "mt-1.5 font-serif leading-snug text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]",
+                  size === "lg" ? "text-2xl md:text-3xl" : "text-base",
+                )}
+              >
+                {work.title}
+              </h3>
+            </div>
+          </div>
+        </div>
+
+        {/* REVERSO */}
+        {hasBack && (
+          <div className="absolute inset-0 [backface-visibility:hidden] [-webkit-backface-visibility:hidden] [transform:rotateY(180deg)]">
+            <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/10 shadow-elevated">
+              <img src={back} alt={`${work.title} — detalle`} loading="lazy" className="h-full w-full object-cover" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/35" />
+              <span className="pointer-events-none absolute right-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-black/45 px-3 py-1.5 text-[11px] font-medium text-white/90 ring-1 ring-white/15 backdrop-blur-sm">
+                <RotateCcw className="h-3.5 w-3.5" /> Volver
+              </span>
+              <div
+                className={cn(
+                  "pointer-events-none absolute inset-0 flex flex-col justify-end",
+                  size === "lg" ? "p-6 md:p-7" : "p-4",
+                )}
+              >
+                <span
+                  className={cn(
+                    "block font-semibold uppercase text-accent [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]",
+                    size === "lg" ? "text-[11px] tracking-[0.2em]" : "text-[10px] tracking-[0.14em]",
+                  )}
+                >
+                  {work.tag}
+                </span>
+                <h3 className={cn("mt-1.5 font-serif leading-snug text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]", size === "lg" ? "text-2xl" : "text-base")}>{work.title}</h3>
+                {work.description && (
+                  <p className={cn("mt-2 leading-relaxed text-white/90 [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]", size === "lg" ? "text-[13px]" : "text-[12px]")}>{work.description}</p>
+                )}
+              </div>
             </div>
           </div>
         )}
@@ -575,7 +579,27 @@ function OurWork() {
   const scrollBy = (dir: 1 | -1) => {
     const el = scrollerRef.current;
     if (!el) return;
-    el.scrollBy({ left: dir * el.clientWidth * 0.85, behavior: "smooth" });
+    const cards = Array.from(el.children) as HTMLElement[];
+    if (cards.length === 0) return;
+
+    // Tarjeta actualmente centrada (según posición real, robusto al swipe manual)
+    const center = el.getBoundingClientRect().left + el.clientWidth / 2;
+    let current = 0;
+    let best = Infinity;
+    cards.forEach((card, i) => {
+      const r = card.getBoundingClientRect();
+      const d = Math.abs(r.left + r.width / 2 - center);
+      if (d < best) {
+        best = d;
+        current = i;
+      }
+    });
+
+    let next = current + dir;
+    if (next < 0) return; // atrás en la primera → se queda estático
+    if (next >= cards.length) next = 0; // adelante en la última → vuelve al inicio
+
+    cards[next].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
   };
 
   return (
@@ -919,6 +943,8 @@ function SectionHeader({
     </div>
   );
 }
+
+
 
 
 
