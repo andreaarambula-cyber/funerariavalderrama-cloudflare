@@ -564,43 +564,51 @@ function ServiciosPage() {
           </p>
         </div>
 
-        {/* contenedor único que engloba la flota */}
-        <div className="overflow-hidden rounded-3xl border border-border bg-surface shadow-elevated">
-          {/* foto-flota con cross-fade automático */}
-          <div className="group relative aspect-[4/5] sm:aspect-[16/10] lg:aspect-[16/8]">
+        {/* contenedor único que engloba la flota — layout dividido (sin zoom) */}
+        <div className="overflow-hidden rounded-3xl border border-border bg-surface shadow-elevated lg:grid lg:grid-cols-[0.82fr_1.18fr]">
+          {/* FOTO-FLOTA con cross-fade automático (tamaño contenido = nítida) */}
+          <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:min-h-[440px]">
             <CrossfadeMedia
               images={vehiculoImagenes}
               alt="Flota de vehículos — Funeraria Valderrama"
               intervalMs={4500}
-              imgClassName="[object-position:50%_60%]"
+              imgClassName="[object-position:50%_58%]"
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-black/10" />
+            <div className="absolute inset-x-0 bottom-0 p-6 md:p-7 lg:hidden">
               <span className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-accent [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]">
                 Flota propia
               </span>
-              <h3 className="mt-1 font-serif text-3xl text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.7)] md:text-4xl">
+              <h3 className="mt-1 font-serif text-3xl text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]">
                 Carroza y vans para el cortejo
               </h3>
             </div>
           </div>
 
-          {/* franja con los tipos de vehículo */}
-          <div className="grid gap-px bg-border sm:grid-cols-3">
-            {vehiculoTipos.map((t) => {
-              const Icon = t.icon;
-              return (
-                <div key={t.name} className="flex items-start gap-4 bg-surface p-5 md:p-6">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-accent/15 text-accent">
-                    <Icon className="h-5 w-5" strokeWidth={1.5} />
-                  </span>
-                  <div>
-                    <h4 className="font-serif text-lg text-primary">{t.name}</h4>
-                    <p className="mt-0.5 text-sm leading-relaxed text-muted-foreground">{t.desc}</p>
-                  </div>
-                </div>
-              );
-            })}
+          {/* TIPOS de vehículo */}
+          <div className="flex flex-col justify-center p-6 md:p-8 lg:p-10">
+            <div className="mb-6 hidden lg:block">
+              <span className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-accent">
+                Flota propia
+              </span>
+              <h3 className="mt-1 font-serif text-3xl text-primary">Carroza y vans para el cortejo</h3>
+            </div>
+            <ul className="divide-y divide-border">
+              {vehiculoTipos.map((t) => {
+                const Icon = t.icon;
+                return (
+                  <li key={t.name} className="flex items-start gap-4 py-4 first:pt-0 last:pb-0">
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-accent/15 text-accent">
+                      <Icon className="h-5 w-5" strokeWidth={1.5} />
+                    </span>
+                    <div>
+                      <h4 className="font-serif text-lg text-primary">{t.name}</h4>
+                      <p className="mt-0.5 text-sm leading-relaxed text-muted-foreground">{t.desc}</p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </div>
 
