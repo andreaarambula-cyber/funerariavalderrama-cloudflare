@@ -566,15 +566,14 @@ function ServiciosPage() {
 
         {/* contenedor único que engloba la flota — layout dividido (sin zoom) */}
         <div className="overflow-hidden rounded-3xl border border-border bg-surface shadow-elevated lg:grid lg:grid-cols-[0.82fr_1.18fr]">
-          {/* FOTO-FLOTA con cross-fade automático (tamaño contenido = nítida) */}
-          <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:min-h-[440px]">
+          {/* FOTO-FLOTA con cross-fade automático — formato 4:5 = foto completa (logo visible) */}
+          <div className="relative aspect-[4/5]">
             <CrossfadeMedia
               images={vehiculoImagenes}
               alt="Flota de vehículos — Funeraria Valderrama"
               intervalMs={4500}
-              imgClassName="[object-position:50%_58%]"
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-black/10" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/75 to-transparent lg:hidden" />
             <div className="absolute inset-x-0 bottom-0 p-6 md:p-7 lg:hidden">
               <span className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-accent [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]">
                 Flota propia
