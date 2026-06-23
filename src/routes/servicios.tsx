@@ -15,8 +15,8 @@ import {
   Flower2,
   FileSignature,
   Car,
-  Caravan,
-  BusFront,
+  Van,
+  Bus,
   GlassWater,
   Coffee,
   HandHeart,
@@ -124,7 +124,7 @@ const PLANS: Plan[] = [
       { icon: BookHeart, label: "Libro o arreglo floral" },
       { icon: FileSignature, label: "Trámites legales" },
       { icon: Car, label: "Carroza" },
-      { icon: BusFront, label: "Van" },
+      { icon: Van, label: "Van" },
       { icon: GlassWater, label: "Dispensador de agua" },
     ],
   },
@@ -142,7 +142,7 @@ const PLANS: Plan[] = [
       { icon: Flower2, label: "Arreglo floral" },
       { icon: FileSignature, label: "Trámites legales" },
       { icon: Car, label: "Carroza" },
-      { icon: BusFront, label: "Van" },
+      { icon: Van, label: "Van" },
       { icon: GlassWater, label: "Dispensador de agua" },
       { icon: Coffee, label: "Cafetería", hot: true },
       { icon: HandHeart, label: "Tarjetas de agradecimiento", hot: true },
@@ -163,7 +163,7 @@ const PLANS: Plan[] = [
       { icon: Flower2, label: "5 arreglos florales", hot: true },
       { icon: FileSignature, label: "Trámites legales" },
       { icon: Car, label: "2 carrozas", hot: true },
-      { icon: BusFront, label: "Van" },
+      { icon: Van, label: "Van" },
       { icon: GlassWater, label: "Dispensador de agua" },
       { icon: Coffee, label: "Cafetería" },
       { icon: HandHeart, label: "Tarjetas de agradecimiento" },
@@ -222,9 +222,9 @@ const velatorio = [
 const vehiculoImagenes = [vehiculoFlota1, vehiculoCarroza, vehiculoFlota2];
 
 const vehiculoTipos = [
-  { icon: Car, name: "Carroza", desc: "Carroza Volvo para el traslado del ser querido." },
-  { icon: Caravan, name: "Vans", desc: "Vans para el traslado de la familia y acompañantes." },
-  { icon: BusFront, name: "Bus", desc: "Disponible ocasionalmente, según el servicio." },
+  { icon: Car, name: "Carroza", desc: "Carroza para el traslado del ser querido, con respeto y puntualidad." },
+  { icon: Van, name: "Vans", desc: "Vans para el traslado de la familia y acompañantes." },
+  { icon: Bus, name: "Bus", desc: "Disponible ocasionalmente, según el servicio." },
 ];
 
 // Cross-fade automático de fotos (sin flechas ni controles).
