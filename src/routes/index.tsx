@@ -145,8 +145,8 @@ function TrustBar() {
 function Services() {
   const services = [
     { icon: PhoneCall, title: "Atención 24/7", desc: "Coordinamos el retiro y todo el proceso a cualquier hora." },
-    { icon: Box, title: "Elección de urna", desc: "Variedad de urnas y ataúdes para honrar a tu ser querido." },
-    { icon: Flame, title: "Equipo de velatorio", desc: "Cirios, luces y elementos para un ambiente solemne." },
+    { icon: Box, title: "Elección de urna", desc: "Variedad de urnas y ataúdes para honrar a tu ser querido.", hash: "planes" },
+    { icon: Flame, title: "Equipo de velatorio", desc: "Cirios, luces y elementos para un ambiente solemne.", hash: "equipo-velatorio" },
     { icon: Truck, title: "Traslados y carroza", desc: "Retiro desde clínica u hospital y carroza panorámica." },
     { icon: FileText, title: "Trámites y cuota mortuoria", desc: "Inscripción en Registro Civil y gestión legal completa." },
     { icon: Coffee, title: "Servicios incluidos", desc: "Cafetería y arreglo floral para acompañar a la familia." },
@@ -182,7 +182,7 @@ function Services() {
             ref={scrollerRef}
             className="flex touch-pan-x snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
-            {services.map(({ icon: Icon, title, desc }) => (
+            {services.map(({ icon: Icon, title, desc, hash }) => (
               <article
                 key={title}
                 className="group relative w-[85%] shrink-0 snap-center overflow-hidden rounded-2xl border border-border bg-surface p-7 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
@@ -193,6 +193,7 @@ function Services() {
                 <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
                 <Link
                   to="/servicios"
+                  hash={hash}
                   className="relative mt-5 inline-flex items-center gap-1 text-sm font-medium text-primary"
                 >
                   Conocer más <ArrowRight className="h-3.5 w-3.5" />
@@ -220,7 +221,7 @@ function Services() {
 
         {/* Desktop: grid */}
         <div className="mt-12 hidden gap-5 md:grid sm:grid-cols-2 lg:grid-cols-3">
-          {services.map(({ icon: Icon, title, desc }) => (
+          {services.map(({ icon: Icon, title, desc, hash }) => (
             <article
               key={title}
               className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-7 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
@@ -231,6 +232,7 @@ function Services() {
               <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
               <Link
                 to="/servicios"
+                hash={hash}
                 className="relative mt-5 inline-flex items-center gap-1 text-sm font-medium text-primary"
               >
                 Conocer más <ArrowRight className="h-3.5 w-3.5" />

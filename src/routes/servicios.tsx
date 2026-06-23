@@ -32,6 +32,51 @@ import { cn } from "@/lib/utils";
 import esencial1 from "@/assets/urnas/esencial-1.jpg.asset.json";
 import selecto1 from "@/assets/urnas/selecto-1.jpg.asset.json";
 import memorable1 from "@/assets/urnas/memorable-1.jpg.asset.json";
+import velatorioCirios1 from "@/assets/equipo/cirios.jpg";
+import velatorioCirios2 from "@/assets/equipo/cirios-2.jpg";
+import velatorioCirios3 from "@/assets/equipo/cirios-3.jpg";
+import velatorioTulipa from "@/assets/equipo/tulipa.jpg";
+import velatorioLed1 from "@/assets/equipo/led.jpg";
+import velatorioLed2 from "@/assets/equipo/led-2.jpg";
+
+// Íconos a medida del equipo de velatorio (dibujados según las fotos reales).
+type EquipoIconProps = { className?: string; strokeWidth?: number };
+
+// Cirio: vela encendida sobre candelabro torneado.
+function IconCirio({ className, strokeWidth = 1.5 }: EquipoIconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
+      <path d="M12 2.2c1.7 1.6 1.9 3 1 4-.7.8-2 .5-2.2-.6-.1-.6.2-1.2.6-1.6" />
+      <rect x="9.8" y="7.8" width="4.4" height="8.4" rx="1.1" />
+      <path d="M10.4 16.2h3.2l.7 1.6h-4.6z" />
+      <path d="M11 17.8h2v2.2c0 .9.7 1.6 1.6 1.6h-5.2c.9 0 1.6-.7 1.6-1.6z" />
+    </svg>
+  );
+}
+
+// Tulipa: ampolleta tipo llama (frosted) sobre pedestal — estilo antorcha.
+function IconTulipa({ className, strokeWidth = 1.5 }: EquipoIconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
+      <path d="M12 2c2.4 2.3 3 4.3 1.7 6.1C12.7 9.4 11 9.3 10.4 7.9c-.5-1.1 0-2.4 1-3.4" />
+      <path d="M10.4 8.2c.6 1 2.6 1 3.2 0" />
+      <path d="M12 9.4v7.4" />
+      <path d="M10.2 16.8h3.6l.6 1.6h-4.8z" />
+      <path d="M9.4 21.8h5.2" />
+    </svg>
+  );
+}
+
+// Modernas: columna de madera con tira LED vertical.
+function IconLed({ className, strokeWidth = 1.5 }: EquipoIconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
+      <rect x="8.5" y="3" width="7" height="15.5" rx="1.2" />
+      <path d="M12 6.2v9" strokeWidth={strokeWidth + 0.6} />
+      <path d="M8 18.5h8l.8 2.8H7.2z" />
+    </svg>
+  );
+}
 
 export const Route = createFileRoute("/servicios")({
   head: () => ({
@@ -145,6 +190,62 @@ function useCountUp(target: number) {
   return n;
 }
 
+const velatorio = [
+  {
+    name: "Cirios",
+    tag: "Velas",
+    icon: IconCirio,
+    images: [velatorioCirios1, velatorioCirios2, velatorioCirios3],
+    desc: "Cirios tradicionales con vela encendida sobre base de madera torneada. Aportan un ambiente sobrio y solemne a la despedida.",
+  },
+  {
+    name: "Tradiciones",
+    tag: "Tulipas",
+    icon: IconTulipa,
+    images: [velatorioTulipa],
+    desc: "Tulipas de luz cálida tipo llama sobre pedestal de madera. El encanto de lo tradicional, de forma segura y elegante, sin fuego.",
+  },
+  {
+    name: "Modernas",
+    tag: "Luces LED",
+    icon: IconLed,
+    images: [velatorioLed1, velatorioLed2],
+    desc: "Columnas con iluminación LED cálida integrada. Un acompañamiento luminoso, moderno y de líneas limpias.",
+  },
+];
+
+// Cross-fade automático de fotos (sin flechas ni controles).
+function VelatorioMedia({ images, alt, delay = 0 }: { images: string[]; alt: string; delay?: number }) {
+  const [idx, setIdx] = useState(0);
+  useEffect(() => {
+    if (images.length <= 1) return;
+    let interval: ReturnType<typeof setInterval>;
+    const start = setTimeout(() => {
+      setIdx((i) => (i + 1) % images.length);
+      interval = setInterval(() => setIdx((i) => (i + 1) % images.length), 4000);
+    }, delay);
+    return () => {
+      clearTimeout(start);
+      clearInterval(interval);
+    };
+  }, [images.length, delay]);
+
+  return (
+    <>
+      {images.map((src, i) => (
+        <img
+          key={src}
+          src={src}
+          alt={alt}
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms] ease-in-out md:group-hover:scale-105"
+          style={{ opacity: i === idx ? 1 : 0 }}
+        />
+      ))}
+    </>
+  );
+}
+
 const convenios = [
   {
     icon: Building2,
@@ -193,6 +294,17 @@ function ServiciosPage() {
   const count = useCountUp(current.items.length);
   const hasHot = current.items.some((it) => it.hot);
 
+  // Al llegar con un #ancla (desde el home), baja suave al apartado.
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+    const el = document.getElementById(hash);
+    if (el) {
+      const t = setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 120);
+      return () => clearTimeout(t);
+    }
+  }, []);
+
   return (
     <>
       <PageHero
@@ -201,8 +313,8 @@ function ServiciosPage() {
         subtitle="Diseñamos servicios a la medida de cada familia, con total transparencia y acompañamiento en cada proceso. Atención profesional las 24 horas en el Gran Concepción."
       />
 
-      {/* ===== PLANES ===== */}
-      <section className="container-prose py-16 md:py-20">
+      {/* ===== PLANES (urnas) ===== */}
+      <section id="planes" className="container-prose scroll-mt-28 py-16 md:py-20">
         <style>{`
           @keyframes med-in { from { opacity:0; transform: translateY(20px) scale(.96); filter: blur(7px) } to { opacity:1; transform:none; filter: blur(0) } }
           @keyframes name-in { from { opacity:0; transform: translateY(14px) } to { opacity:1; transform:none } }
@@ -357,6 +469,59 @@ function ServiciosPage() {
             Llamar ahora · +56 9 5390 0931
           </a>
           <p className="text-xs italic text-muted-foreground">Fotos de urnas sujetas a stock.</p>
+        </div>
+      </section>
+
+      {/* ===== EQUIPO DE VELATORIO ===== */}
+      <section id="equipo-velatorio" className="scroll-mt-28 bg-secondary/40 py-16 md:py-20">
+        <div className="container-prose">
+          <div className="mb-10 text-center md:mb-12">
+            <p className="text-xs uppercase tracking-[0.3em] text-accent">Equipo de velatorio</p>
+            <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
+              Iluminación para una despedida solemne
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              Disponemos de distintos tipos de iluminación para acompañar el velatorio, según el ambiente
+              que la familia prefiera.
+            </p>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {velatorio.map((v, ci) => {
+              const Icon = v.icon;
+              return (
+                <article
+                  key={v.name}
+                  className="group overflow-hidden rounded-3xl border border-border bg-surface shadow-soft ring-1 ring-transparent transition-all duration-500 hover:-translate-y-1 hover:shadow-elevated hover:ring-accent/30"
+                >
+                  <div className="relative aspect-[4/5] overflow-hidden">
+                    <VelatorioMedia
+                      images={v.images}
+                      alt={`Equipo de velatorio — ${v.name}`}
+                      delay={ci * 1300}
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                    {/* chip de ícono */}
+                    <span className="absolute left-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/45 text-accent ring-1 ring-accent/30 backdrop-blur-[2px]">
+                      <Icon className="h-[18px] w-[18px]" strokeWidth={1.6} />
+                    </span>
+                    <div className="absolute inset-x-0 bottom-0 p-5">
+                      <span className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-accent [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]">
+                        {v.tag}
+                      </span>
+                      <h3 className="mt-1 font-serif text-2xl text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]">
+                        {v.name}
+                      </h3>
+                    </div>
+                  </div>
+                  <div className="relative p-5">
+                    <span className="mb-3 block h-px w-10 bg-accent/40" />
+                    <p className="text-sm leading-relaxed text-muted-foreground">{v.desc}</p>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
         </div>
       </section>
 
