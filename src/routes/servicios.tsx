@@ -263,6 +263,7 @@ function CrossfadeMedia({
           src={src}
           alt={alt}
           loading="lazy"
+          decoding="async"
           className={cn(
             "absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms] ease-in-out md:group-hover:scale-105",
             imgClassName,
@@ -522,7 +523,7 @@ function ServiciosPage() {
                   key={v.name}
                   className="group overflow-hidden rounded-3xl border border-border bg-surface shadow-soft ring-1 ring-transparent transition-all duration-500 hover:-translate-y-1 hover:shadow-elevated hover:ring-accent/30"
                 >
-                  <div className="relative aspect-[4/5] overflow-hidden">
+                  <div className="relative aspect-[4/5] overflow-hidden bg-primary">
                     <CrossfadeMedia
                       images={v.images}
                       alt={`Equipo de velatorio — ${v.name}`}
@@ -567,7 +568,7 @@ function ServiciosPage() {
         {/* contenedor único que engloba la flota — layout dividido (sin zoom) */}
         <div className="overflow-hidden rounded-3xl border border-border bg-surface shadow-elevated lg:grid lg:grid-cols-[0.82fr_1.18fr]">
           {/* FOTO-FLOTA con cross-fade automático — formato 4:5 = foto completa (logo visible) */}
-          <div className="relative aspect-[4/5]">
+          <div className="relative aspect-[4/5] bg-primary">
             <CrossfadeMedia
               images={vehiculoImagenes}
               alt="Flota de vehículos — Funeraria Valderrama"
