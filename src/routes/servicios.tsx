@@ -35,8 +35,8 @@ import selecto1 from "@/assets/urnas/selecto-1.jpg.asset.json";
 import memorable1 from "@/assets/urnas/memorable-1.jpg.asset.json";
 import velatorioCirios1 from "@/assets/equipo/cirios.jpg";
 import velatorioCirios2 from "@/assets/equipo/cirios-2.jpg";
-import velatorioCirios3 from "@/assets/equipo/cirios-3.jpg";
 import velatorioTulipa from "@/assets/equipo/tulipa.jpg";
+import velatorioTulipa2 from "@/assets/equipo/tulipa-2.jpg";
 import velatorioLed1 from "@/assets/equipo/led.jpg";
 import velatorioLed2 from "@/assets/equipo/led-2.jpg";
 import vehiculoCarroza from "@/assets/vehiculos/carroza.jpg";
@@ -199,14 +199,14 @@ const velatorio = [
     name: "Cirios",
     tag: "Velas",
     icon: IconCirio,
-    images: [velatorioCirios1, velatorioCirios2, velatorioCirios3],
+    images: [velatorioCirios1, velatorioCirios2],
     desc: "Cirios tradicionales con vela encendida sobre base de madera torneada. Aportan un ambiente sobrio y solemne a la despedida.",
   },
   {
     name: "Tradiciones",
     tag: "Tulipas",
     icon: IconTulipa,
-    images: [velatorioTulipa],
+    images: [velatorioTulipa, velatorioTulipa2],
     desc: "Tulipas de luz cálida tipo llama sobre pedestal de madera. El encanto de lo tradicional, de forma segura y elegante, sin fuego.",
   },
   {
