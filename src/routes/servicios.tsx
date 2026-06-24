@@ -15,7 +15,8 @@ import {
   Flower2,
   FileSignature,
   Car,
-  BusFront,
+  Van,
+  Bus,
   GlassWater,
   Coffee,
   HandHeart,
@@ -38,6 +39,9 @@ import velatorioCirios3 from "@/assets/equipo/cirios-3.jpg";
 import velatorioTulipa from "@/assets/equipo/tulipa.jpg";
 import velatorioLed1 from "@/assets/equipo/led.jpg";
 import velatorioLed2 from "@/assets/equipo/led-2.jpg";
+import vehiculoCarroza from "@/assets/vehiculos/carroza.jpg";
+import vehiculoFlota1 from "@/assets/vehiculos/flota-1.jpg";
+import vehiculoFlota2 from "@/assets/vehiculos/flota-2.jpg";
 
 // Íconos a medida del equipo de velatorio (dibujados según las fotos reales).
 type EquipoIconProps = { className?: string; strokeWidth?: number };
@@ -120,7 +124,7 @@ const PLANS: Plan[] = [
       { icon: BookHeart, label: "Libro o arreglo floral" },
       { icon: FileSignature, label: "Trámites legales" },
       { icon: Car, label: "Carroza" },
-      { icon: BusFront, label: "Van" },
+      { icon: Van, label: "Van" },
       { icon: GlassWater, label: "Dispensador de agua" },
     ],
   },
@@ -138,7 +142,7 @@ const PLANS: Plan[] = [
       { icon: Flower2, label: "Arreglo floral" },
       { icon: FileSignature, label: "Trámites legales" },
       { icon: Car, label: "Carroza" },
-      { icon: BusFront, label: "Van" },
+      { icon: Van, label: "Van" },
       { icon: GlassWater, label: "Dispensador de agua" },
       { icon: Coffee, label: "Cafetería", hot: true },
       { icon: HandHeart, label: "Tarjetas de agradecimiento", hot: true },
@@ -159,7 +163,7 @@ const PLANS: Plan[] = [
       { icon: Flower2, label: "5 arreglos florales", hot: true },
       { icon: FileSignature, label: "Trámites legales" },
       { icon: Car, label: "2 carrozas", hot: true },
-      { icon: BusFront, label: "Van" },
+      { icon: Van, label: "Van" },
       { icon: GlassWater, label: "Dispensador de agua" },
       { icon: Coffee, label: "Cafetería" },
       { icon: HandHeart, label: "Tarjetas de agradecimiento" },
@@ -214,21 +218,42 @@ const velatorio = [
   },
 ];
 
+// Vehículos: un solo contenedor que engloba la flota; las fotos pasan solas.
+const vehiculoImagenes = [vehiculoFlota1, vehiculoCarroza, vehiculoFlota2];
+
+const vehiculoTipos = [
+  { icon: Car, name: "Carroza", desc: "Carroza para el traslado del ser querido, con respeto y puntualidad." },
+  { icon: Van, name: "Vans", desc: "Vans para el traslado de la familia y acompañantes." },
+  { icon: Bus, name: "Bus", desc: "Disponible ocasionalmente, según el servicio." },
+];
+
 // Cross-fade automático de fotos (sin flechas ni controles).
-function VelatorioMedia({ images, alt, delay = 0 }: { images: string[]; alt: string; delay?: number }) {
+function CrossfadeMedia({
+  images,
+  alt,
+  delay = 0,
+  intervalMs = 4000,
+  imgClassName = "",
+}: {
+  images: string[];
+  alt: string;
+  delay?: number;
+  intervalMs?: number;
+  imgClassName?: string;
+}) {
   const [idx, setIdx] = useState(0);
   useEffect(() => {
     if (images.length <= 1) return;
     let interval: ReturnType<typeof setInterval>;
     const start = setTimeout(() => {
       setIdx((i) => (i + 1) % images.length);
-      interval = setInterval(() => setIdx((i) => (i + 1) % images.length), 4000);
+      interval = setInterval(() => setIdx((i) => (i + 1) % images.length), intervalMs);
     }, delay);
     return () => {
       clearTimeout(start);
       clearInterval(interval);
     };
-  }, [images.length, delay]);
+  }, [images.length, delay, intervalMs]);
 
   return (
     <>
@@ -238,7 +263,10 @@ function VelatorioMedia({ images, alt, delay = 0 }: { images: string[]; alt: str
           src={src}
           alt={alt}
           loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms] ease-in-out md:group-hover:scale-105"
+          className={cn(
+            "absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms] ease-in-out md:group-hover:scale-105",
+            imgClassName,
+          )}
           style={{ opacity: i === idx ? 1 : 0 }}
         />
       ))}
@@ -495,7 +523,7 @@ function ServiciosPage() {
                   className="group overflow-hidden rounded-3xl border border-border bg-surface shadow-soft ring-1 ring-transparent transition-all duration-500 hover:-translate-y-1 hover:shadow-elevated hover:ring-accent/30"
                 >
                   <div className="relative aspect-[4/5] overflow-hidden">
-                    <VelatorioMedia
+                    <CrossfadeMedia
                       images={v.images}
                       alt={`Equipo de velatorio — ${v.name}`}
                       delay={ci * 1300}
@@ -523,6 +551,69 @@ function ServiciosPage() {
             })}
           </div>
         </div>
+      </section>
+
+      {/* ===== VEHÍCULOS / FLOTA ===== */}
+      <section id="vehiculos" className="container-prose scroll-mt-28 py-16 md:py-20">
+        <div className="mb-10 text-center md:mb-12">
+          <p className="text-xs uppercase tracking-[0.3em] text-accent">Traslados</p>
+          <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">Nuestra flota</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Contamos con flota propia para acompañar el último adiós con puntualidad y respeto:
+            carroza para el ser querido y vans para la familia.
+          </p>
+        </div>
+
+        {/* contenedor único que engloba la flota — layout dividido (sin zoom) */}
+        <div className="overflow-hidden rounded-3xl border border-border bg-surface shadow-elevated lg:grid lg:grid-cols-[0.82fr_1.18fr]">
+          {/* FOTO-FLOTA con cross-fade automático — formato 4:5 = foto completa (logo visible) */}
+          <div className="relative aspect-[4/5]">
+            <CrossfadeMedia
+              images={vehiculoImagenes}
+              alt="Flota de vehículos — Funeraria Valderrama"
+              intervalMs={4500}
+            />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/75 to-transparent lg:hidden" />
+            <div className="absolute inset-x-0 bottom-0 p-6 md:p-7 lg:hidden">
+              <span className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-accent [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]">
+                Flota propia
+              </span>
+              <h3 className="mt-1 font-serif text-3xl text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]">
+                Carroza y vans para el cortejo
+              </h3>
+            </div>
+          </div>
+
+          {/* TIPOS de vehículo */}
+          <div className="flex flex-col justify-center p-6 md:p-8 lg:p-10">
+            <div className="mb-6 hidden lg:block">
+              <span className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-accent">
+                Flota propia
+              </span>
+              <h3 className="mt-1 font-serif text-3xl text-primary">Carroza y vans para el cortejo</h3>
+            </div>
+            <ul className="divide-y divide-border">
+              {vehiculoTipos.map((t) => {
+                const Icon = t.icon;
+                return (
+                  <li key={t.name} className="flex items-start gap-4 py-4 first:pt-0 last:pb-0">
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-accent/15 text-accent">
+                      <Icon className="h-5 w-5" strokeWidth={1.5} />
+                    </span>
+                    <div>
+                      <h4 className="font-serif text-lg text-primary">{t.name}</h4>
+                      <p className="mt-0.5 text-sm leading-relaxed text-muted-foreground">{t.desc}</p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+
+        <p className="mt-6 text-center text-xs italic text-muted-foreground">
+          El bus se gestiona según disponibilidad y no incluye servicios adicionales.
+        </p>
       </section>
 
       <section className="container-prose py-16 md:py-20">
