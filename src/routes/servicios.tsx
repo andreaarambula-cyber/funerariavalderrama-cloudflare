@@ -28,6 +28,7 @@ import {
 import { PageHero } from "@/components/site/PageHero";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
 import { CoberturaMapa } from "@/components/site/CoberturaMapa";
+import { MapaChile } from "@/components/site/MapaChile";
 import { cn } from "@/lib/utils";
 
 import esencial1 from "@/assets/urnas/esencial-1.jpg.asset.json";
@@ -629,30 +630,50 @@ function ServiciosPage() {
             Otros servicios que ofrecemos
           </h2>
         </div>
-        <div className="grid gap-5 sm:grid-cols-2">
-          <div className="group relative flex items-start gap-4 overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-soft">
-            <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-60 transition-opacity duration-300 group-hover:opacity-80" />
-            <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15">
-              <ArrowLeftRight className="h-6 w-6 text-accent" strokeWidth={1.5} />
-            </span>
-            <div className="relative">
-              <h3 className="font-serif text-lg text-primary">Traslados interregionales</h3>
-              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                Coordinamos el traslado de restos a otras regiones del país con todas las gestiones legales y logísticas necesarias.
+        <div className="grid gap-5 md:grid-cols-2 md:items-stretch">
+          {/* Traslados interregionales — mapa de Chile */}
+          <div className="group relative flex gap-5 overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-soft sm:gap-6 sm:p-7">
+            <div className="flex shrink-0 items-center">
+              <MapaChile className="h-[260px] sm:h-[300px]" />
+            </div>
+            <div className="flex flex-col justify-center">
+              <span className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent/15 text-accent">
+                <ArrowLeftRight className="h-5 w-5" strokeWidth={1.5} />
+              </span>
+              <h3 className="font-serif text-xl text-primary">Traslados interregionales</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                Coordinamos el traslado de restos a otras regiones del país con todas las gestiones
+                legales y logísticas necesarias.
+              </p>
+              <p className="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-accent">
+                Desde el Biobío a todo Chile
               </p>
             </div>
           </div>
-          <div className="group relative flex items-start gap-4 overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-soft">
-            <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-60 transition-opacity duration-300 group-hover:opacity-80" />
-            <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15">
-              <Pickaxe className="h-6 w-6 text-accent" strokeWidth={1.5} />
+
+          {/* Exhumaciones */}
+          <div className="group relative flex flex-col justify-center overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-soft sm:p-7">
+            <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-44 text-accent opacity-50 transition-opacity duration-300 group-hover:opacity-70" />
+            <span className="relative mb-3 inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent/15 text-accent">
+              <Pickaxe className="h-5 w-5" strokeWidth={1.5} />
             </span>
-            <div className="relative">
-              <h3 className="font-serif text-lg text-primary">Exhumaciones</h3>
-              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                Realizamos exhumaciones con el debido respeto y cumpliendo todos los requisitos legales y sanitarios.
-              </p>
-            </div>
+            <h3 className="relative font-serif text-xl text-primary">Exhumaciones</h3>
+            <p className="relative mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
+              Realizamos exhumaciones con el debido respeto y cumpliendo todos los requisitos
+              legales y sanitarios.
+            </p>
+            <ul className="relative mt-4 space-y-2">
+              {[
+                "Autorización del cementerio y la familia",
+                "Permisos sanitarios y legales al día",
+                "Traslado o reinhumación posterior",
+              ].map((t) => (
+                <li key={t} className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                  {t}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
