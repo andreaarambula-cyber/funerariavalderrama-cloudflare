@@ -26,6 +26,9 @@ import heroMobileVideo from "@/assets/hero-mobile.mp4.asset.json";
 import candleImg from "@/assets/candle.jpg";
 import senderoLogo from "@/assets/convenios/sendero.png";
 import cementerioLogo from "@/assets/convenios/cementerio-general.png";
+import capredenaLogo from "@/assets/convenios/capredena.png";
+import diprecaLogo from "@/assets/convenios/dipreca.png";
+import chileatiendeLogo from "@/assets/convenios/chileatiende.png";
 import { obituaries } from "@/data/obituaries";
 import { Obituaries3DCarousel } from "@/components/site/Obituaries3DCarousel";
 
@@ -260,11 +263,17 @@ function Convenios() {
       icon: Handshake,
       title: "Asesoría en cementerios y parques",
       desc: "Te orientamos en la adquisición de sepulturas en todos los cementerios y parques de la región.",
+      logos: null as { src: string; alt: string }[] | null,
     },
     {
       icon: Banknote,
       title: "Cobro de cuota mortuoria",
       desc: "Tramitamos el beneficio en AFP, Rentas Vitalicias, CAPREDENA, DIPRECA, IPS y Montepío.",
+      logos: [
+        { src: capredenaLogo, alt: "CAPREDENA" },
+        { src: diprecaLogo, alt: "DIPRECA" },
+        { src: chileatiendeLogo, alt: "IPS – ChileAtiende" },
+      ],
     },
   ];
   return (
@@ -300,19 +309,34 @@ function Convenios() {
         </div>
 
         {/* Gestiones que hacemos por ti */}
-        <div className="mt-5 grid gap-5 sm:grid-cols-2">
+        <div className="mt-5 grid items-start gap-5 sm:grid-cols-2">
           {gestiones.map((g) => (
             <article
               key={g.title}
-              className="flex items-start gap-4 rounded-2xl border border-border bg-surface p-6 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
+              className="flex flex-col rounded-2xl border border-border bg-surface p-6 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
             >
-              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15">
-                <g.icon className="h-6 w-6 text-accent" strokeWidth={1.5} />
-              </span>
-              <div>
-                <h3 className="font-serif text-lg text-primary">{g.title}</h3>
-                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{g.desc}</p>
+              <div className="flex items-start gap-4">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15">
+                  <g.icon className="h-6 w-6 text-accent" strokeWidth={1.5} />
+                </span>
+                <div>
+                  <h3 className="font-serif text-lg text-primary">{g.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{g.desc}</p>
+                </div>
               </div>
+              {g.logos && (
+                <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-4">
+                  {g.logos.map((l) => (
+                    <img
+                      key={l.alt}
+                      src={l.src}
+                      alt={l.alt}
+                      loading="lazy"
+                      className="h-5 w-auto object-contain"
+                    />
+                  ))}
+                </div>
+              )}
             </article>
           ))}
         </div>
