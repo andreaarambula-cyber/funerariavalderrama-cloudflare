@@ -776,11 +776,9 @@ function Testimonials() {
         />
         {/* Resumen de calificación en Google */}
         <div className="mt-6 flex justify-center">
-          <div className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/5 px-4 py-2 backdrop-blur">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 backdrop-blur">
             <GoogleG className="h-5 w-5" />
-            <span className="text-sm font-semibold text-white">5,0</span>
-            <Stars className="h-3.5 w-3.5" />
-            <span className="text-xs text-white/55">Reseñas verificadas en Google</span>
+            <span className="text-xs text-white/65">Reseñas verificadas en Google</span>
           </div>
         </div>
 
