@@ -692,8 +692,8 @@ function ServiciosPage() {
               </span>
               <h3 className="font-serif text-xl text-primary">Traslados interregionales</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                Coordinamos el traslado de restos a otras regiones del país con todas las gestiones
-                legales y logísticas necesarias.
+                Coordinamos el traslado de tu ser querido a cualquier región del país, con todas las
+                gestiones legales y logísticas necesarias.
               </p>
               <p className="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-accent">
                 Desde el Biobío a todo Chile
