@@ -623,6 +623,56 @@ function ServiciosPage() {
         </p>
       </section>
 
+      <section className="bg-secondary/40 py-16 md:py-20">
+        <div className="container-prose">
+          <div className="mb-10 text-center">
+            <p className="text-xs uppercase tracking-[0.3em] text-accent">Convenios</p>
+            <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
+              Beneficios y descuentos para nuestras familias
+            </h2>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2">
+            {convenios.map((c) => (
+              <div
+                key={c.title}
+                className="group relative flex items-start gap-4 overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-soft"
+              >
+                <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-60 transition-opacity duration-300 group-hover:opacity-80" />
+                <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15">
+                  <c.icon className="h-6 w-6 text-accent" strokeWidth={1.5} />
+                </span>
+                <div className="relative">
+                  <h3 className="font-serif text-lg text-primary">{c.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{c.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="container-prose py-16 md:py-20">
+        <div className="grid items-center gap-8 rounded-3xl border border-border bg-surface p-8 shadow-soft md:grid-cols-2 md:p-12">
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-accent">Zona de cobertura</p>
+            <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
+              Acompañamos a las familias del Gran Concepción
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              Nuestra funeraria se encuentra en <strong>O'Higgins 1601, esq. Galvarino, Concepción</strong>.
+              Atendemos a familias de la comuna y del Gran Concepción, coordinando traslados y servicios en
+              distintos cementerios y crematorios.
+            </p>
+            <p className="mt-3 text-sm text-muted-foreground">
+              Si necesitas confirmar disponibilidad en tu comuna, contáctanos y te orientaremos de inmediato.
+            </p>
+          </div>
+          <div className="w-full">
+            <CoberturaMapa />
+          </div>
+        </div>
+      </section>
+
       <section className="container-prose py-16 md:py-20">
         <div className="mb-10 text-center">
           <p className="text-xs uppercase tracking-[0.3em] text-accent">Complementarios</p>
@@ -674,56 +724,6 @@ function ServiciosPage() {
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-secondary/40 py-16 md:py-20">
-        <div className="container-prose">
-          <div className="mb-10 text-center">
-            <p className="text-xs uppercase tracking-[0.3em] text-accent">Convenios</p>
-            <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
-              Beneficios y descuentos para nuestras familias
-            </h2>
-          </div>
-          <div className="grid gap-5 sm:grid-cols-2">
-            {convenios.map((c) => (
-              <div
-                key={c.title}
-                className="group relative flex items-start gap-4 overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-soft"
-              >
-                <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-60 transition-opacity duration-300 group-hover:opacity-80" />
-                <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15">
-                  <c.icon className="h-6 w-6 text-accent" strokeWidth={1.5} />
-                </span>
-                <div className="relative">
-                  <h3 className="font-serif text-lg text-primary">{c.title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{c.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="container-prose py-16 md:py-20">
-        <div className="grid items-center gap-8 rounded-3xl border border-border bg-surface p-8 shadow-soft md:grid-cols-2 md:p-12">
-          <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-accent">Zona de cobertura</p>
-            <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
-              Acompañamos a las familias del Gran Concepción
-            </h2>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              Nuestra funeraria se encuentra en <strong>O'Higgins 1601, esq. Galvarino, Concepción</strong>.
-              Atendemos a familias de la comuna y del Gran Concepción, coordinando traslados y servicios en
-              distintos cementerios y crematorios.
-            </p>
-            <p className="mt-3 text-sm text-muted-foreground">
-              Si necesitas confirmar disponibilidad en tu comuna, contáctanos y te orientaremos de inmediato.
-            </p>
-          </div>
-          <div className="w-full">
-            <CoberturaMapa />
           </div>
         </div>
       </section>
