@@ -3,6 +3,12 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
+  "overrides": {
+    "undici": "^8.5.0",
+    "ws": "^8.21.0",
+    "postcss": "^8.5.15",
+    "js-yaml": "^4.1.1"
+  },
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
