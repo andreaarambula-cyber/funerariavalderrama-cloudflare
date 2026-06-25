@@ -121,7 +121,7 @@ const PLANS: Plan[] = [
       { icon: Church, label: "Capilla de madera" },
       { icon: IdCard, label: "Tarjetero" },
       { icon: Cross, label: "Cruz" },
-      { icon: BookHeart, label: "Libro o arreglo floral" },
+      { icon: BookHeart, label: "Libro y arreglo floral" },
       { icon: FileSignature, label: "Trámites legales" },
       { icon: Car, label: "Carroza" },
       { icon: Van, label: "Van" },
@@ -322,6 +322,11 @@ function ServiciosPage() {
   const current = PLANS.find((p) => p.id === active)!;
   const count = useCountUp(current.items.length);
   const hasHot = current.items.some((it) => it.hot);
+  // Los servicios que suma este plan (dorados) van agrupados al final,
+  // como en el plan Selecto. El orden relativo se mantiene (sort estable).
+  const orderedItems = [...current.items].sort(
+    (a, b) => Number(Boolean(a.hot)) - Number(Boolean(b.hot)),
+  );
 
   // Al llegar con un #ancla (desde el home), baja suave al apartado.
   useEffect(() => {
@@ -339,7 +344,7 @@ function ServiciosPage() {
       <PageHero
         eyebrow="Nuestros servicios"
         title="Cuidamos cada detalle, con dignidad"
-        subtitle="Diseñamos servicios a la medida de cada familia, con total transparencia y acompañamiento en cada proceso. Atención profesional las 24 horas en el Gran Concepción."
+        subtitle="Diseñamos servicios a la medida de cada familia, con total transparencia y acompañamiento en cada proceso. Atención profesional las 24 horas del día en el Gran Concepción."
       />
 
       {/* ===== PLANES (urnas) ===== */}
@@ -453,7 +458,7 @@ function ServiciosPage() {
                 </div>
                 {/* key fuerza re-mount → la animación se reinicia al cambiar de plan */}
                 <ul key={current.id} className="grid grid-cols-3 gap-2.5 sm:grid-cols-4 sm:gap-3">
-                  {current.items.map((it, i) => {
+                  {orderedItems.map((it, i) => {
                     const Icon = it.icon;
                     return (
                       <li
