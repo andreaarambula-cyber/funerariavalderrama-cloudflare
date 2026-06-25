@@ -199,8 +199,7 @@ const velatorio = [
     name: "Cirios",
     tag: "Velas",
     icon: IconCirio,
-    // cirios-2 es cuadrada: se muestra completa (contain) para no recortarla.
-    images: [velatorioCirios1, { src: velatorioCirios2, fit: "contain" as const }],
+    images: [velatorioCirios1, velatorioCirios2],
     desc: "Cirios tradicionales con vela encendida sobre base de madera torneada. Aportan un ambiente sobrio y solemne a la despedida.",
   },
   {
@@ -228,10 +227,6 @@ const vehiculoTipos = [
   { icon: Bus, name: "Bus", desc: "Disponible ocasionalmente, según el servicio." },
 ];
 
-// Una foto del cross-fade: puede ser solo la URL, o un objeto para indicar que
-// se muestre completa (fit: "contain") cuando su formato no calza con el marco.
-type CrossfadeImage = string | { src: string; fit?: "cover" | "contain" };
-
 // Cross-fade automático de fotos (sin flechas ni controles).
 function CrossfadeMedia({
   images,
@@ -240,32 +235,29 @@ function CrossfadeMedia({
   intervalMs = 4000,
   imgClassName = "",
 }: {
-  images: CrossfadeImage[];
+  images: string[];
   alt: string;
   delay?: number;
   intervalMs?: number;
   imgClassName?: string;
 }) {
-  const items = images.map((im) =>
-    typeof im === "string" ? { src: im, fit: "cover" as const } : { fit: "cover" as const, ...im },
-  );
   const [idx, setIdx] = useState(0);
   useEffect(() => {
-    if (items.length <= 1) return;
+    if (images.length <= 1) return;
     let interval: ReturnType<typeof setInterval>;
     const start = setTimeout(() => {
-      setIdx((i) => (i + 1) % items.length);
-      interval = setInterval(() => setIdx((i) => (i + 1) % items.length), intervalMs);
+      setIdx((i) => (i + 1) % images.length);
+      interval = setInterval(() => setIdx((i) => (i + 1) % images.length), intervalMs);
     }, delay);
     return () => {
       clearTimeout(start);
       clearInterval(interval);
     };
-  }, [items.length, delay, intervalMs]);
+  }, [images.length, delay, intervalMs]);
 
   return (
     <>
-      {items.map(({ src, fit }, i) => (
+      {images.map((src, i) => (
         <img
           key={src}
           src={src}
@@ -273,8 +265,7 @@ function CrossfadeMedia({
           loading="lazy"
           decoding="async"
           className={cn(
-            "absolute inset-0 h-full w-full transition-opacity duration-[1200ms] ease-in-out md:group-hover:scale-105",
-            fit === "contain" ? "object-contain" : "object-cover",
+            "absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms] ease-in-out md:group-hover:scale-105",
             imgClassName,
           )}
           style={{ opacity: i === idx ? 1 : 0 }}
