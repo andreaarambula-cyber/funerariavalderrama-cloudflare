@@ -545,8 +545,9 @@ function OurWork() {
     const cards = Array.from(el.children) as HTMLElement[];
     if (cards.length === 0) return;
 
+    const elRect = el.getBoundingClientRect();
     // Tarjeta actualmente centrada (según posición real, robusto al swipe manual)
-    const center = el.getBoundingClientRect().left + el.clientWidth / 2;
+    const center = elRect.left + el.clientWidth / 2;
     let current = 0;
     let best = Infinity;
     cards.forEach((card, i) => {
@@ -562,7 +563,11 @@ function OurWork() {
     if (next < 0) return; // atrás en la primera → se queda estático
     if (next >= cards.length) next = 0; // adelante en la última → vuelve al inicio
 
-    cards[next].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    // Desplazamos SOLO el scroll horizontal del carrusel (no la página): así,
+    // si el usuario está mirando otra sección, el auto-avance no lo trae de vuelta.
+    const t = cards[next].getBoundingClientRect();
+    const cardCenterInContent = t.left - elRect.left + el.scrollLeft + t.width / 2;
+    el.scrollTo({ left: cardCenterInContent - el.clientWidth / 2, behavior: "smooth" });
   };
 
   // Auto-avance: pasa una tarjeta cada 5 s; se pausa al interactuar (hover/touch).
