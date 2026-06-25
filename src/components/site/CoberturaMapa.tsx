@@ -3,8 +3,19 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, MapPin } from "lucide-react";
 import { granConcepcion } from "@/data/granConcepcion";
 
-// Recorrido automático por las comunas de cobertura (de norte a sur).
-const TOUR = ["Talcahuano", "Hualpén", "Concepción", "San Pedro de la Paz", "Chiguayante"];
+// Recorrido automático por todas las comunas del Gran Concepción (norte a sur).
+const TOUR = [
+  "Tomé",
+  "Penco",
+  "Talcahuano",
+  "Hualpén",
+  "Concepción",
+  "Chiguayante",
+  "San Pedro de la Paz",
+  "Hualqui",
+  "Coronel",
+  "Lota",
+];
 // Margen de "océano" a la izquierda para la ventanita "Contáctanos".
 const MARGIN_L = 360;
 
@@ -57,14 +68,10 @@ export function CoberturaMapa() {
               d={c.d}
               strokeWidth={on ? 1.8 : 1.2}
               style={{
-                fill: c.served
-                  ? on
-                    ? "var(--accent)"
-                    : "color-mix(in oklab, var(--accent) 60%, var(--surface))"
-                  : "color-mix(in oklab, var(--accent) 26%, var(--surface))",
-                stroke: c.served
-                  ? "color-mix(in oklab, var(--accent) 80%, black)"
-                  : "color-mix(in oklab, var(--accent) 55%, var(--surface))",
+                fill: on
+                  ? "var(--accent)"
+                  : "color-mix(in oklab, var(--accent) 48%, var(--surface))",
+                stroke: "color-mix(in oklab, var(--accent) 78%, black)",
                 filter: on ? "drop-shadow(0 1px 4px color-mix(in oklab, var(--accent) 55%, transparent))" : "none",
                 transition: "fill 600ms ease, stroke 600ms ease, filter 600ms ease",
               }}
@@ -72,10 +79,8 @@ export function CoberturaMapa() {
           );
         })}
 
-        {/* Pines en las comunas de cobertura */}
-        {comunas
-          .filter((c) => c.served)
-          .map((c) => {
+        {/* Pines en todas las comunas del Gran Concepción */}
+        {comunas.map((c) => {
             const on = c.name === active.name;
             return (
               <g key={`pin-${c.name}`}>
