@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users, Handshake, Building2, Banknote, Check, X, Images, RotateCcw, Cross, Navigation, MessageCircle } from "lucide-react";
+import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Star, Heart, BadgeCheck, Users, Handshake, Building2, Banknote, Check, X, Images, RotateCcw, Cross, Navigation, MessageCircle } from "lucide-react";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
@@ -702,25 +702,61 @@ function FeaturedObituaries() {
   );
 }
 
+/** Logo "G" de Google (multicolor) para indicar reseñas verificadas. */
+function GoogleG({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden>
+      <path
+        fill="#4285F4"
+        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+      />
+      <path
+        fill="#34A853"
+        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.07H2.18A10.97 10.97 0 0 0 1 12c0 1.78.43 3.46 1.18 4.93l3.66-2.83z"
+      />
+      <path
+        fill="#EA4335"
+        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"
+      />
+    </svg>
+  );
+}
+
+function Stars({ className = "h-4 w-4" }: { className?: string }) {
+  return (
+    <span className="flex gap-0.5 text-accent">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star key={i} className={cn("fill-accent", className)} strokeWidth={0} />
+      ))}
+    </span>
+  );
+}
+
 function Testimonials() {
-  const items = [
+  const reviews = [
     {
-      quote:
-        "En el peor momento de nuestras vidas, sentimos que no estábamos solos. Cada detalle fue cuidado con cariño.",
-      author: "Familia Pérez",
-      city: "Concepción",
+      name: "Glenny Castro",
+      time: "Hace 3 años",
+      text: "Fue la mejor decisión tener el servicio funerario de mi mamá con Funeraria Valderrama. Atentos, amables y entregados al 1000%. ¡Muchas gracias Patricio y a todo el equipo!",
     },
     {
-      quote:
-        "Profesionalismo y humanidad. Nos guiaron paso a paso, con total transparencia en costos y tiempos.",
-      author: "Camila Rojas",
-      city: "San Pedro de la Paz",
+      name: "Katherine Rodríguez",
+      time: "Hace 1 año",
+      text: "Excelente servicio, súper atentos, amorosos, amables, maravilloso equipo. ¡1000% recomendables!",
     },
     {
-      quote:
-        "El obituario online permitió que familiares en el extranjero se despidieran. Un detalle que nunca olvidaremos.",
-      author: "Andrés Muñoz",
-      city: "Talcahuano",
+      name: "Jose Ortega",
+      time: "Hace 3 años",
+      text: "Muy buena decisión tomar los servicios de Funeraria Valderrama: muy respetuosos, empáticos y profesionales. Los recomiendo totalmente.",
+    },
+    {
+      name: "Denisse Rojas",
+      time: "Hace 2 años",
+      text: "La mejor funeraria.",
     },
   ];
   return (
@@ -735,22 +771,33 @@ function Testimonials() {
       <div className="container-prose">
         <SectionHeader
           eyebrow="Familias que nos confiaron"
-          title="Palabras que nos honran"
+          title="Lo que dicen nuestras familias"
           tone="dark"
         />
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {items.map((t) => (
+        {/* Resumen de calificación en Google */}
+        <div className="mt-6 flex justify-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 backdrop-blur">
+            <GoogleG className="h-5 w-5" />
+            <span className="text-xs text-white/65">Reseñas verificadas en Google</span>
+          </div>
+        </div>
+
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {reviews.map((r) => (
             <figure
-              key={t.author}
-              className="rounded-2xl border border-white/10 bg-white/5 p-7 backdrop-blur"
+              key={r.name}
+              className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur"
             >
-              <Quote className="h-6 w-6 text-accent" />
-              <blockquote className="mt-4 font-serif text-lg leading-snug text-white">
-                "{t.quote}"
+              <Stars className="h-4 w-4" />
+              <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-white/90">
+                “{r.text}”
               </blockquote>
-              <figcaption className="mt-5 text-sm text-white/70">
-                <span className="text-accent">— </span>
-                {t.author}, {t.city}
+              <figcaption className="mt-5 flex items-center gap-2.5 border-t border-white/10 pt-4">
+                <GoogleG className="h-5 w-5 shrink-0" />
+                <span className="min-w-0 text-sm text-white/85">
+                  {r.name}
+                  <span className="block truncate text-xs text-white/40">{r.time} · Google</span>
+                </span>
               </figcaption>
             </figure>
           ))}
