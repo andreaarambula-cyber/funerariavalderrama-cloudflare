@@ -264,6 +264,9 @@ function Convenios() {
       title: "Asesoría en cementerios y parques",
       desc: "Te orientamos en la adquisición de sepulturas en todos los cementerios y parques de la región.",
       logos: null as { src: string; alt: string }[] | null,
+      chips: ["Cementerios municipales", "Parques privados", "Todo el Gran Concepción"] as
+        | string[]
+        | null,
     },
     {
       icon: Banknote,
@@ -274,6 +277,7 @@ function Convenios() {
         { src: diprecaLogo, alt: "DIPRECA" },
         { src: chileatiendeLogo, alt: "IPS – ChileAtiende" },
       ],
+      chips: null as string[] | null,
     },
   ];
   return (
@@ -334,6 +338,18 @@ function Convenios() {
                       loading="lazy"
                       className="h-5 w-auto object-contain"
                     />
+                  ))}
+                </div>
+              )}
+              {g.chips && (
+                <div className="mt-5 flex flex-wrap gap-2 border-t border-border pt-4">
+                  {g.chips.map((c) => (
+                    <span
+                      key={c}
+                      className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground"
+                    >
+                      {c}
+                    </span>
                   ))}
                 </div>
               )}
