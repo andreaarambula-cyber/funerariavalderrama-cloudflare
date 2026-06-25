@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Star, Heart, BadgeCheck, Users, Handshake, Building2, Banknote, Check, X, Images, RotateCcw, Cross, Navigation, MessageCircle } from "lucide-react";
+import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Star, Heart, BadgeCheck, Users, Handshake, Banknote, Check, X, Images, RotateCcw, Cross, Navigation, MessageCircle } from "lucide-react";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
@@ -24,6 +24,11 @@ import heroImg from "@/assets/hero-sunrise.jpg";
 import heroVideo from "@/assets/hero-video.mp4.asset.json";
 import heroMobileVideo from "@/assets/hero-mobile.mp4.asset.json";
 import candleImg from "@/assets/candle.jpg";
+import senderoLogo from "@/assets/convenios/sendero.png";
+import cementerioLogo from "@/assets/convenios/cementerio-general.png";
+import capredenaLogo from "@/assets/convenios/capredena.png";
+import diprecaLogo from "@/assets/convenios/dipreca.png";
+import chileatiendeLogo from "@/assets/convenios/chileatiende.png";
 import { obituaries } from "@/data/obituaries";
 import { Obituaries3DCarousel } from "@/components/site/Obituaries3DCarousel";
 
@@ -241,45 +246,113 @@ function Services() {
 }
 
 function Convenios() {
-  const items = [
+  const partners = [
     {
-      icon: Building2,
-      title: "Parque Sendero",
-      desc: "Descuentos especiales para nuestras familias.",
+      logo: senderoLogo,
+      name: "Parque Sendero",
+      desc: "Descuentos en sus cementerios parque y crematorio para nuestras familias.",
     },
     {
-      icon: Building2,
-      title: "Crematorio y Cementerio General de Concepción",
-      desc: "Descuentos especiales para nuestras familias.",
+      logo: cementerioLogo,
+      name: "Cementerio General de Concepción",
+      desc: "Descuentos en sepultación y cremación en el cementerio y crematorio.",
     },
+  ];
+  const gestiones = [
     {
       icon: Handshake,
       title: "Asesoría en cementerios y parques",
-      desc: "Asesoría para la adquisición en todos los cementerios y parques de la región.",
+      desc: "Te orientamos en la adquisición de sepulturas en todos los cementerios y parques de la región.",
+      logos: null as { src: string; alt: string }[] | null,
+      chips: ["Cementerios municipales", "Parques privados", "Todo el Gran Concepción"] as
+        | string[]
+        | null,
     },
     {
       icon: Banknote,
-      title: "Cobro de cuotas mortuorias",
-      desc: "Tramitación en AFP's, Rentas Vitalicias, CAPREDENA, DIPRECA y Montepío.",
+      title: "Cobro de cuota mortuoria",
+      desc: "Tramitamos el beneficio en AFP, Rentas Vitalicias, CAPREDENA, DIPRECA, IPS y Montepío.",
+      logos: [
+        { src: capredenaLogo, alt: "CAPREDENA" },
+        { src: diprecaLogo, alt: "DIPRECA" },
+        { src: chileatiendeLogo, alt: "IPS – ChileAtiende" },
+      ],
+      chips: null as string[] | null,
     },
   ];
   return (
     <section className="bg-secondary/40 py-20 md:py-28">
       <div className="container-prose">
         <SectionHeader eyebrow="Convenios" title="Beneficios y descuentos para nuestras familias" />
+        <p className="mx-auto mt-4 max-w-2xl text-center text-sm leading-relaxed text-muted-foreground">
+          Gracias a nuestros convenios con instituciones reconocidas, accedes a descuentos
+          exclusivos y a gestiones que hacemos por ti.
+        </p>
+
+        {/* Convenios con descuento (con logo del socio) */}
         <div className="mt-12 grid gap-5 sm:grid-cols-2">
-          {items.map((c) => (
+          {partners.map((p) => (
             <article
-              key={c.title}
-              className="flex items-start gap-4 rounded-2xl border border-border bg-surface p-6 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
+              key={p.name}
+              className="flex flex-col rounded-2xl border border-border bg-surface p-7 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
             >
-              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15">
-                <c.icon className="h-6 w-6 text-accent" strokeWidth={1.5} />
-              </span>
-              <div>
-                <h3 className="font-serif text-lg text-primary">{c.title}</h3>
-                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{c.desc}</p>
+              <div className="flex h-12 items-center">
+                <img
+                  src={p.logo}
+                  alt={p.name}
+                  loading="lazy"
+                  className="h-full w-auto max-w-[78%] object-contain object-left"
+                />
               </div>
+              <p className="mt-5 flex-1 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
+              <span className="mt-5 inline-flex w-fit items-center gap-1.5 rounded-full bg-accent/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-accent-foreground">
+                <BadgeCheck className="h-3.5 w-3.5" /> Convenio con descuento
+              </span>
+            </article>
+          ))}
+        </div>
+
+        {/* Gestiones que hacemos por ti */}
+        <div className="mt-5 grid items-start gap-5 sm:grid-cols-2">
+          {gestiones.map((g) => (
+            <article
+              key={g.title}
+              className="flex flex-col rounded-2xl border border-border bg-surface p-6 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
+            >
+              <div className="flex items-start gap-4">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15">
+                  <g.icon className="h-6 w-6 text-accent" strokeWidth={1.5} />
+                </span>
+                <div>
+                  <h3 className="font-serif text-lg text-primary">{g.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{g.desc}</p>
+                </div>
+              </div>
+              {g.logos && (
+                <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-4">
+                  {g.logos.map((l) => (
+                    <img
+                      key={l.alt}
+                      src={l.src}
+                      alt={l.alt}
+                      loading="lazy"
+                      className="h-5 w-auto object-contain"
+                    />
+                  ))}
+                </div>
+              )}
+              {g.chips && (
+                <div className="mt-5 flex flex-wrap gap-2 border-t border-border pt-4">
+                  {g.chips.map((c) => (
+                    <span
+                      key={c}
+                      className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground"
+                    >
+                      {c}
+                    </span>
+                  ))}
+                </div>
+              )}
             </article>
           ))}
         </div>
