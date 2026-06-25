@@ -339,7 +339,7 @@ function ServiciosPage() {
       <PageHero
         eyebrow="Nuestros servicios"
         title="Cuidamos cada detalle, con dignidad"
-        subtitle="Diseñamos servicios a la medida de cada familia, con total transparencia y acompañamiento en cada proceso. Atención profesional las 24 horas en el Gran Concepción."
+        subtitle="Diseñamos servicios a la medida de cada familia, con total transparencia y acompañamiento en cada proceso. Atención profesional las 24 horas del día en el Gran Concepción."
       />
 
       {/* ===== PLANES (urnas) ===== */}
