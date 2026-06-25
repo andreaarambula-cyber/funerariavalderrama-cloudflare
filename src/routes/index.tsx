@@ -1,7 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Quote, Star, Heart, BadgeCheck, Users, Handshake, Building2, Banknote, Check, X, Images, RotateCcw, Cross } from "lucide-react";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -426,7 +424,7 @@ function WorkCard({ work, index, size }: { work: Work; index: number; size: "lg"
 
   return (
     <div
-      className={cn("group relative shrink-0", size === "lg" ? "w-[42vw] max-w-[580px]" : "w-[78%] max-w-[330px] snap-center")}
+      className={cn("group relative shrink-0 snap-center", size === "lg" ? "w-[42vw] max-w-[580px]" : "w-[78%] max-w-[330px]")}
       style={{ perspective: "1500px" }}
     >
       {/* Toda la tarjeta voltea al pulsar/tocar (funciona en desktop y móvil) */}
@@ -539,43 +537,7 @@ function WorkCard({ work, index, size }: { work: Work; index: number; size: "lg"
 function OurWork() {
   const isMobile = useIsMobile();
 
-  // ----- Horizontal pinned scroll (desktop, GSAP ScrollTrigger) -----
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const pinRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const barRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    if (isMobile) return;
-    const track = trackRef.current;
-    const pin = pinRef.current;
-    if (!track || !pin) return;
-
-    gsap.registerPlugin(ScrollTrigger);
-    const dist = () => Math.max(0, track.scrollWidth - window.innerWidth + 48);
-
-    const ctx = gsap.context(() => {
-      gsap.to(track, {
-        x: () => -dist(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: pin,
-          start: "top top",
-          end: () => "+=" + dist(),
-          scrub: 0.6,
-          pin: true,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            if (barRef.current) barRef.current.style.width = self.progress * 100 + "%";
-          },
-        },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [isMobile]);
-
-  // ----- Native horizontal scroll (mobile) -----
+  // ----- Carrusel horizontal con flechas (escritorio y móvil) -----
   const scrollerRef = useRef<HTMLDivElement>(null);
   const scrollBy = (dir: 1 | -1) => {
     const el = scrollerRef.current;
@@ -603,8 +565,20 @@ function OurWork() {
     cards[next].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
   };
 
+  // Auto-avance: pasa una tarjeta cada 5 s; se pausa al interactuar (hover/touch).
+  const pausedRef = useRef(false);
+  useEffect(() => {
+    const id = setInterval(() => {
+      if (!pausedRef.current) scrollBy(1);
+    }, 5000);
+    return () => clearInterval(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const pause = () => (pausedRef.current = true);
+  const resume = () => (pausedRef.current = false);
+
   return (
-    <section id="trabajos" ref={sectionRef} className="relative isolate bg-primary text-primary-foreground">
+    <section id="trabajos" className="relative isolate bg-primary text-primary-foreground">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-70"
@@ -618,37 +592,43 @@ function OurWork() {
       <div className="container-prose pt-20 md:pt-28">
         <SectionHeader eyebrow="Nuestro trabajo" title="Servicios que hemos realizado" tone="dark" align="left" />
         <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/70">
-          Una muestra del cuidado y la dignidad con que acompañamos a cada familia. Desliza para recorrerlos.
+          Una muestra del cuidado y la dignidad con que acompañamos a cada familia. Usa las flechas para recorrerlos.
         </p>
       </div>
 
-      {/* Desktop: horizontal pinned scroll (GSAP ScrollTrigger).
-          El contenedor externo (mt-10) lo controla React; GSAP solo envuelve
-          el pinRef interno en su pin-spacer, evitando el error removeChild. */}
+      {/* Desktop: carrusel horizontal con flechas a los costados */}
       {!isMobile && (
-        <div className="mt-10">
-          <div ref={pinRef} className="relative flex h-screen items-center overflow-hidden">
-          <div ref={trackRef} className="flex gap-6 px-6 lg:gap-8 lg:px-12">
+        <div className="relative mt-12" onPointerEnter={pause} onPointerLeave={resume}>
+          <div
+            ref={scrollerRef}
+            className="flex snap-x snap-mandatory gap-6 overflow-x-auto overscroll-x-contain scroll-smooth px-6 pb-4 lg:gap-8 lg:px-12 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
             {works.map((w, i) => (
               <WorkCard key={w.title} work={w} index={i} size="lg" />
             ))}
           </div>
-
-          {/* progress bar */}
-          <div className="absolute bottom-10 left-6 h-[3px] w-36 overflow-hidden rounded-full bg-white/15 lg:left-12">
-            <span ref={barRef} className="block h-full w-0 bg-accent" />
-          </div>
-          {/* hint */}
-          <div className="absolute bottom-9 right-6 flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-white/50 lg:right-12">
-            Desliza para recorrer <ArrowRight className="h-3.5 w-3.5" />
-          </div>
-          </div>
+          <button
+            type="button"
+            aria-label="Anterior"
+            onClick={() => scrollBy(-1)}
+            className="absolute left-4 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-white/25 bg-primary/70 text-white shadow-elevated backdrop-blur transition hover:bg-accent hover:text-accent-foreground active:scale-95 lg:left-6"
+          >
+            <ArrowLeft className="h-6 w-6" />
+          </button>
+          <button
+            type="button"
+            aria-label="Siguiente"
+            onClick={() => scrollBy(1)}
+            className="absolute right-4 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-white/25 bg-primary/70 text-white shadow-elevated backdrop-blur transition hover:bg-accent hover:text-accent-foreground active:scale-95 lg:right-6"
+          >
+            <ArrowRight className="h-6 w-6" />
+          </button>
         </div>
       )}
 
       {/* Mobile: native horizontal scroll-snap */}
       {isMobile && (
-        <div className="mt-10 pb-4">
+        <div className="mt-10 pb-4" onPointerEnter={pause} onPointerLeave={resume} onTouchStart={pause}>
           <div
             ref={scrollerRef}
             className="flex touch-pan-x snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
