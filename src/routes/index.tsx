@@ -565,6 +565,18 @@ function OurWork() {
     cards[next].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
   };
 
+  // Auto-avance: pasa una tarjeta cada 5 s; se pausa al interactuar (hover/touch).
+  const pausedRef = useRef(false);
+  useEffect(() => {
+    const id = setInterval(() => {
+      if (!pausedRef.current) scrollBy(1);
+    }, 5000);
+    return () => clearInterval(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const pause = () => (pausedRef.current = true);
+  const resume = () => (pausedRef.current = false);
+
   return (
     <section id="trabajos" className="relative isolate bg-primary text-primary-foreground">
       <div
@@ -586,7 +598,7 @@ function OurWork() {
 
       {/* Desktop: carrusel horizontal con flechas a los costados */}
       {!isMobile && (
-        <div className="relative mt-12">
+        <div className="relative mt-12" onPointerEnter={pause} onPointerLeave={resume}>
           <div
             ref={scrollerRef}
             className="flex snap-x snap-mandatory gap-6 overflow-x-auto overscroll-x-contain scroll-smooth px-6 pb-4 lg:gap-8 lg:px-12 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
@@ -616,7 +628,7 @@ function OurWork() {
 
       {/* Mobile: native horizontal scroll-snap */}
       {isMobile && (
-        <div className="mt-10 pb-4">
+        <div className="mt-10 pb-4" onPointerEnter={pause} onPointerLeave={resume} onTouchStart={pause}>
           <div
             ref={scrollerRef}
             className="flex touch-pan-x snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
