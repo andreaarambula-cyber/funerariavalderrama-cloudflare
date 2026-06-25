@@ -6,8 +6,9 @@ import { granConcepcion } from "@/data/granConcepcion";
 // Recorrido automático por las comunas de cobertura (de norte a sur).
 const TOUR = ["Talcahuano", "Hualpén", "Concepción", "San Pedro de la Paz", "Chiguayante"];
 // Margen de océano a la izquierda: desplaza las comunas a la derecha para dejar
-// libre la esquina superior izquierda (donde va la ventanita "Contáctanos").
-const MARGIN_L = 380;
+// libre la esquina superior izquierda (donde va la ventanita "Contáctanos"),
+// de modo que la tarjeta nunca tape las comunas.
+const MARGIN_L = 540;
 
 export function CoberturaMapa() {
   const { width, height, comunas } = granConcepcion;
@@ -83,20 +84,19 @@ export function CoberturaMapa() {
         </span>
       </div>
 
-      {/* Ventanita "Contáctanos" arriba a la izquierda */}
-      <div className="absolute left-3 top-3 w-[min(50%,13rem)] rounded-xl border border-border bg-surface/95 p-4 shadow-elevated backdrop-blur-sm sm:left-4 sm:top-4">
-        <p className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">
-          <MapPin className="h-3.5 w-3.5" /> Zona de cobertura
+      {/* Ventanita "Contáctanos" arriba a la izquierda (compacta, sobre el océano) */}
+      <div className="absolute left-2.5 top-2.5 w-[34%] max-w-[11rem] rounded-xl border border-border bg-surface/95 p-3 shadow-elevated backdrop-blur-sm sm:left-3 sm:top-3">
+        <p className="flex items-center gap-1 text-[9px] font-semibold uppercase tracking-[0.16em] text-accent">
+          <MapPin className="h-3 w-3 shrink-0" /> Cobertura
         </p>
-        <p className="mt-1 font-serif text-lg leading-tight text-primary">Gran Concepción</p>
-        <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-          ¿Tu comuna está en la zona? Escríbenos.
+        <p className="mt-0.5 font-serif text-sm leading-tight text-primary sm:text-base">
+          Gran Concepción
         </p>
         <Link
           to="/contacto"
-          className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-accent px-4 py-2 text-xs font-medium text-accent-foreground shadow-soft transition hover:brightness-105"
+          className="mt-2.5 inline-flex items-center gap-1 rounded-full bg-accent px-3 py-1.5 text-[11px] font-medium text-accent-foreground shadow-soft transition hover:brightness-105"
         >
-          Contáctanos <ArrowUpRight className="h-3.5 w-3.5" />
+          Contáctanos <ArrowUpRight className="h-3 w-3" />
         </Link>
       </div>
     </div>
