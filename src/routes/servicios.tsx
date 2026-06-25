@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowLeftRight,
-  Check,
   ChevronDown,
   Pickaxe,
   Handshake,
@@ -28,6 +27,7 @@ import {
 } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
+import { CoberturaMapa } from "@/components/site/CoberturaMapa";
 import { cn } from "@/lib/utils";
 
 import esencial1 from "@/assets/urnas/esencial-1.jpg.asset.json";
@@ -686,7 +686,7 @@ function ServiciosPage() {
       </section>
 
       <section className="container-prose py-16 md:py-20">
-        <div className="grid gap-8 rounded-3xl border border-border bg-surface p-8 shadow-soft md:p-12 lg:grid-cols-[1fr,1fr] lg:items-center">
+        <div className="grid items-center gap-8 rounded-3xl border border-border bg-surface p-8 shadow-soft md:grid-cols-2 md:p-12">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-accent">Zona de cobertura</p>
             <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
@@ -701,23 +701,9 @@ function ServiciosPage() {
               Si necesitas confirmar disponibilidad en tu comuna, contáctanos y te orientaremos de inmediato.
             </p>
           </div>
-          <ul className="grid grid-cols-2 gap-3">
-            {[
-              "Concepción",
-              "Chiguayante",
-              "San Pedro de la Paz",
-              "Hualpén",
-              "Talcahuano",
-              "Otras regiones",
-            ].map((c) => (
-              <li
-                key={c}
-                className="flex items-center gap-2 rounded-xl border border-border bg-background px-4 py-3 text-sm"
-              >
-                <Check className="h-4 w-4 text-accent" /> {c}
-              </li>
-            ))}
-          </ul>
+          <div className="w-full">
+            <CoberturaMapa />
+          </div>
         </div>
       </section>
 
