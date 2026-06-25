@@ -203,7 +203,7 @@ const velatorio = [
     desc: "Cirios tradicionales con vela encendida sobre base de madera torneada. Aportan un ambiente sobrio y solemne a la despedida.",
   },
   {
-    name: "Tradiciones",
+    name: "Tradicionales",
     tag: "Tulipas",
     icon: IconTulipa,
     images: [velatorioTulipa, velatorioTulipa2],
@@ -560,7 +560,7 @@ function ServiciosPage() {
           <p className="text-xs uppercase tracking-[0.3em] text-accent">Traslados</p>
           <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">Nuestra flota</h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            Contamos con flota propia para acompañar el último adiós con puntualidad y respeto:
+            Coordinamos los vehículos para acompañar el último adiós con puntualidad y respeto:
             carroza para el ser querido y vans para la familia.
           </p>
         </div>
@@ -577,7 +577,7 @@ function ServiciosPage() {
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/75 to-transparent lg:hidden" />
             <div className="absolute inset-x-0 bottom-0 p-6 md:p-7 lg:hidden">
               <span className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-accent [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]">
-                Flota propia
+                Flota
               </span>
               <h3 className="mt-1 font-serif text-3xl text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]">
                 Carroza y vans para el cortejo
@@ -589,7 +589,7 @@ function ServiciosPage() {
           <div className="flex flex-col justify-center p-6 md:p-8 lg:p-10">
             <div className="mb-6 hidden lg:block">
               <span className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-accent">
-                Flota propia
+                Flota
               </span>
               <h3 className="mt-1 font-serif text-3xl text-primary">Carroza y vans para el cortejo</h3>
             </div>

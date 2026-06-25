@@ -93,7 +93,7 @@ function CotizarPage() {
       <PageHero
         eyebrow="Propuesta personalizada"
         title="Cuéntanos qué necesitas"
-        subtitle="Cada despedida es única. Diseñamos una propuesta a medida según las necesidades de tu familia. Respondemos en menos de 30 minutos, las 24 horas."
+        subtitle="Cada despedida es única. Diseñamos una propuesta a medida según las necesidades de tu familia. Respondemos en menos de 30 minutos, las 24 horas del día."
       />
 
       <section className="container-prose grid gap-10 py-16 lg:grid-cols-[1fr,360px]">
