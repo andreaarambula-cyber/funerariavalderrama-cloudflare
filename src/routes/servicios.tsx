@@ -686,7 +686,7 @@ function ServiciosPage() {
       </section>
 
       <section className="container-prose py-16 md:py-20">
-        <div className="grid gap-8 rounded-3xl border border-border bg-surface p-8 shadow-soft md:p-12 lg:grid-cols-[1fr,1fr] lg:items-center">
+        <div className="grid items-center gap-8 rounded-3xl border border-border bg-surface p-8 shadow-soft md:grid-cols-2 md:p-12">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-accent">Zona de cobertura</p>
             <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
@@ -701,7 +701,7 @@ function ServiciosPage() {
               Si necesitas confirmar disponibilidad en tu comuna, contáctanos y te orientaremos de inmediato.
             </p>
           </div>
-          <div className="mx-auto w-full max-w-[420px]">
+          <div className="w-full">
             <CoberturaMapa />
           </div>
         </div>

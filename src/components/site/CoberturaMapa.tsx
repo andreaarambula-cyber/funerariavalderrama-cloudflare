@@ -7,7 +7,7 @@ import { granConcepcion } from "@/data/granConcepcion";
 const TOUR = ["Talcahuano", "Hualpén", "Concepción", "San Pedro de la Paz", "Chiguayante"];
 // Margen de océano a la izquierda: desplaza las comunas a la derecha para dejar
 // libre la esquina superior izquierda (donde va la ventanita "Contáctanos").
-const MARGIN_L = 230;
+const MARGIN_L = 380;
 
 export function CoberturaMapa() {
   const { width, height, comunas } = granConcepcion;
@@ -24,7 +24,6 @@ export function CoberturaMapa() {
 
   const active = tour[idx] ?? tour[0];
   const vbW = width + MARGIN_L;
-  // Posición (%) de la comuna activa dentro del viewBox mostrado.
   const labelLeft = ((active.cx + MARGIN_L) / vbW) * 100;
   const labelTop = (active.cy / height) * 100;
 
@@ -36,41 +35,23 @@ export function CoberturaMapa() {
         role="img"
         aria-label="Mapa del Gran Concepción y comunas de cobertura"
       >
-        {/* Comunas del Gran Concepción que dan contexto (no destacadas) */}
-        {comunas
-          .filter((c) => !c.served)
-          .map((c) => (
+        {comunas.map((c) => {
+          const on = c.name === active.name;
+          return (
             <path
               key={c.name}
               d={c.d}
-              strokeWidth={1.1}
+              strokeWidth={on ? 1.8 : 1.2}
               style={{
-                fill: "color-mix(in oklab, var(--muted) 55%, var(--surface))",
-                stroke: "var(--border)",
+                fill: on
+                  ? "var(--accent)"
+                  : "color-mix(in oklab, var(--accent) 50%, var(--surface))",
+                stroke: "color-mix(in oklab, var(--accent) 60%, black)",
+                transition: "fill 700ms ease, stroke 700ms ease",
               }}
             />
-          ))}
-
-        {/* Comunas de cobertura — la activa se ilumina */}
-        {comunas
-          .filter((c) => c.served)
-          .map((c) => {
-            const on = c.name === active.name;
-            return (
-              <path
-                key={c.name}
-                d={c.d}
-                strokeWidth={on ? 1.8 : 1.2}
-                style={{
-                  fill: on
-                    ? "var(--accent)"
-                    : "color-mix(in oklab, var(--accent) 52%, var(--surface))",
-                  stroke: "color-mix(in oklab, var(--accent) 60%, black)",
-                  transition: "fill 700ms ease, stroke 700ms ease",
-                }}
-              />
-            );
-          })}
+          );
+        })}
 
         {/* Marcador que se desplaza de comuna en comuna */}
         <g
@@ -83,7 +64,7 @@ export function CoberturaMapa() {
             <animate attributeName="r" values="13;26;13" dur="2.2s" repeatCount="indefinite" />
             <animate attributeName="opacity" values="0.3;0;0.3" dur="2.2s" repeatCount="indefinite" />
           </circle>
-          <circle r={8} style={{ fill: "var(--accent)", stroke: "white" }} strokeWidth={2.5} />
+          <circle r={9} style={{ fill: "var(--accent)", stroke: "white" }} strokeWidth={2.5} />
         </g>
       </svg>
 
@@ -93,7 +74,7 @@ export function CoberturaMapa() {
         style={{
           left: `${labelLeft}%`,
           top: `${labelTop}%`,
-          transform: "translate(14px, -50%)",
+          transform: "translate(16px, -50%)",
           transition: "left 700ms cubic-bezier(.4,0,.2,1), top 700ms cubic-bezier(.4,0,.2,1)",
         }}
       >
@@ -103,7 +84,7 @@ export function CoberturaMapa() {
       </div>
 
       {/* Ventanita "Contáctanos" arriba a la izquierda */}
-      <div className="absolute left-3 top-3 w-[min(46%,12.5rem)] rounded-xl border border-border bg-surface/95 p-4 shadow-elevated backdrop-blur-sm sm:left-4 sm:top-4">
+      <div className="absolute left-3 top-3 w-[min(50%,13rem)] rounded-xl border border-border bg-surface/95 p-4 shadow-elevated backdrop-blur-sm sm:left-4 sm:top-4">
         <p className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">
           <MapPin className="h-3.5 w-3.5" /> Zona de cobertura
         </p>
@@ -113,7 +94,7 @@ export function CoberturaMapa() {
         </p>
         <Link
           to="/contacto"
-          className="pointer-events-auto mt-3 inline-flex items-center gap-1.5 rounded-full bg-accent px-4 py-2 text-xs font-medium text-accent-foreground shadow-soft transition hover:brightness-105"
+          className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-accent px-4 py-2 text-xs font-medium text-accent-foreground shadow-soft transition hover:brightness-105"
         >
           Contáctanos <ArrowUpRight className="h-3.5 w-3.5" />
         </Link>
