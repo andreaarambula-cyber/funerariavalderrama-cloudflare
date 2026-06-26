@@ -4,9 +4,6 @@ import {
   ArrowLeftRight,
   ChevronDown,
   Pickaxe,
-  Handshake,
-  Building2,
-  Banknote,
   Church,
   IdCard,
   Cross,
@@ -275,29 +272,6 @@ function CrossfadeMedia({
     </>
   );
 }
-
-const convenios = [
-  {
-    icon: Building2,
-    title: "Parque Sendero",
-    desc: "Descuentos especiales para nuestras familias.",
-  },
-  {
-    icon: Building2,
-    title: "Crematorio y Cementerio General de Concepción",
-    desc: "Descuentos especiales para nuestras familias.",
-  },
-  {
-    icon: Handshake,
-    title: "Asesoría en cementerios y parques",
-    desc: "Asesoría para la adquisición en todos los cementerios y parques de la región.",
-  },
-  {
-    icon: Banknote,
-    title: "Cobro de cuotas mortuorias",
-    desc: "Tramitación en AFP's, Rentas Vitalicias, CAPREDENA, DIPRECA y Montepío.",
-  },
-];
 
 const faqs = [
   {
@@ -621,34 +595,6 @@ function ServiciosPage() {
         <p className="mt-6 text-center text-xs italic text-muted-foreground">
           El bus se gestiona según disponibilidad y no incluye servicios adicionales.
         </p>
-      </section>
-
-      <section className="bg-secondary/40 py-16 md:py-20">
-        <div className="container-prose">
-          <div className="mb-10 text-center">
-            <p className="text-xs uppercase tracking-[0.3em] text-accent">Convenios</p>
-            <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
-              Beneficios y descuentos para nuestras familias
-            </h2>
-          </div>
-          <div className="grid gap-5 sm:grid-cols-2">
-            {convenios.map((c) => (
-              <div
-                key={c.title}
-                className="group relative flex items-start gap-4 overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-soft"
-              >
-                <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-60 transition-opacity duration-300 group-hover:opacity-80" />
-                <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15">
-                  <c.icon className="h-6 w-6 text-accent" strokeWidth={1.5} />
-                </span>
-                <div className="relative">
-                  <h3 className="font-serif text-lg text-primary">{c.title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{c.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
       </section>
 
       <section className="container-prose py-16 md:py-20">
