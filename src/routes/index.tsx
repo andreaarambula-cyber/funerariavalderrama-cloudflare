@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Star, Heart, BadgeCheck, Users, Handshake, Banknote, Check, X, Images, RotateCcw, Cross } from "lucide-react";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
 import { Visitanos } from "@/components/site/Visitanos";
+import { CoverflowCarousel } from "@/components/site/CoverflowCarousel";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import donLuis1 from "@/assets/trabajos/don-luis-1.jpg";
@@ -152,43 +153,24 @@ function Services() {
     { icon: FileText, title: "Trámites y cuota mortuoria", desc: "Inscripción en Registro Civil y gestión legal completa." },
     { icon: Coffee, title: "Servicios incluidos", desc: "Cafetería y arreglo floral para acompañar a la familia." },
   ];
-  const scrollerRef = useRef<HTMLDivElement>(null);
-  const scrollBy = (dir: 1 | -1) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    el.scrollBy({ left: dir * el.clientWidth * 0.85, behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      const el = scrollerRef.current;
-      if (!el) return;
-      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 10) {
-        el.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        el.scrollBy({ left: el.clientWidth * 0.85, behavior: "smooth" });
-      }
-    }, 4000);
-    return () => clearInterval(id);
-  }, []);
 
   return (
     <section className="py-20 md:py-28">
       <div className="container-prose">
         <SectionHeader eyebrow="Nuestros servicios" title="Cuidamos cada detalle con dignidad" />
 
-        {/* Mobile: horizontal scroll */}
+        {/* Mobile: carrusel coverflow */}
         <div className="mt-10 md:hidden">
-          <div
-            ref={scrollerRef}
-            className="flex touch-pan-x snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          >
-            {services.map(({ icon: Icon, title, desc, hash }) => (
+          <CoverflowCarousel
+            ariaLabel="Nuestros servicios"
+            cardW={262}
+            cardH={244}
+            items={services.map(({ icon: Icon, title, desc, hash }) => (
               <article
                 key={title}
-                className="group relative w-[85%] shrink-0 snap-center overflow-hidden rounded-2xl border border-border bg-surface p-7 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
+                className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-7 shadow-soft"
               >
-                <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-60 transition-opacity duration-300 group-hover:opacity-80" />
+                <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-60" />
                 <Icon className="relative h-8 w-8 text-accent" strokeWidth={1.5} />
                 <h3 className="relative mt-5 font-serif text-2xl text-primary">{title}</h3>
                 <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
@@ -201,23 +183,7 @@ function Services() {
                 </Link>
               </article>
             ))}
-          </div>
-          <div className="mt-5 flex items-center justify-center gap-3">
-            <button
-              onClick={() => scrollBy(-1)}
-              className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface shadow-soft transition hover:bg-accent hover:text-accent-foreground"
-              aria-label="Anterior"
-            >
-              <ArrowLeft className="h-4 w-4" />
-            </button>
-            <button
-              onClick={() => scrollBy(1)}
-              className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface shadow-soft transition hover:bg-accent hover:text-accent-foreground"
-              aria-label="Siguiente"
-            >
-              <ArrowRight className="h-4 w-4" />
-            </button>
-          </div>
+          />
         </div>
 
         {/* Desktop: grid */}
@@ -856,7 +822,36 @@ function Testimonials() {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Mobile: carrusel coverflow */}
+        <div className="mt-12 md:hidden">
+          <CoverflowCarousel
+            ariaLabel="Reseñas de Google"
+            tone="dark"
+            cardW={272}
+            cardH={296}
+            items={reviews.map((r) => (
+              <figure
+                key={r.name}
+                className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur"
+              >
+                <Stars className="h-4 w-4" />
+                <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-white/90">
+                  “{r.text}”
+                </blockquote>
+                <figcaption className="mt-5 flex items-center gap-2.5 border-t border-white/10 pt-4">
+                  <GoogleG className="h-5 w-5 shrink-0" />
+                  <span className="min-w-0 text-sm text-white/85">
+                    {r.name}
+                    <span className="block truncate text-xs text-white/40">{r.time} · Google</span>
+                  </span>
+                </figcaption>
+              </figure>
+            ))}
+          />
+        </div>
+
+        {/* Desktop: grilla (sin cambios) */}
+        <div className="mt-12 hidden gap-6 md:grid md:grid-cols-2 lg:grid-cols-4">
           {reviews.map((r) => (
             <figure
               key={r.name}

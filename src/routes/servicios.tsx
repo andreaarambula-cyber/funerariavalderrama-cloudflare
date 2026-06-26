@@ -26,6 +26,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
 import { CoberturaMapa } from "@/components/site/CoberturaMapa";
 import { MapaChile } from "@/components/site/MapaChile";
+import { CoverflowCarousel } from "@/components/site/CoverflowCarousel";
 import { cn } from "@/lib/utils";
 
 import esencial1 from "@/assets/urnas/esencial-1.jpg.asset.json";
@@ -273,6 +274,39 @@ function CrossfadeMedia({
   );
 }
 
+// Tarjeta de Equipo de velatorio (mismo markup en grilla desktop y carrusel mobile).
+function VelatorioCard({ v, index }: { v: (typeof velatorio)[number]; index: number }) {
+  const Icon = v.icon;
+  return (
+    <article className="group overflow-hidden rounded-3xl border border-border bg-surface shadow-soft ring-1 ring-transparent transition-all duration-500 hover:-translate-y-1 hover:shadow-elevated hover:ring-accent/30">
+      <div className="relative aspect-[4/5] overflow-hidden bg-primary">
+        <CrossfadeMedia
+          images={v.images}
+          alt={`Equipo de velatorio — ${v.name}`}
+          delay={index * 1300}
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+        {/* chip de ícono */}
+        <span className="absolute left-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/45 text-accent ring-1 ring-accent/30 backdrop-blur-[2px]">
+          <Icon className="h-[18px] w-[18px]" strokeWidth={1.6} />
+        </span>
+        <div className="absolute inset-x-0 bottom-0 p-5">
+          <span className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-accent [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]">
+            {v.tag}
+          </span>
+          <h3 className="mt-1 font-serif text-2xl text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]">
+            {v.name}
+          </h3>
+        </div>
+      </div>
+      <div className="relative p-5">
+        <span className="mb-3 block h-px w-10 bg-accent/40" />
+        <p className="text-sm leading-relaxed text-muted-foreground">{v.desc}</p>
+      </div>
+    </article>
+  );
+}
+
 const faqs = [
   {
     q: "¿Cuánto demora organizar un servicio funerario?",
@@ -495,41 +529,23 @@ function ServiciosPage() {
             </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {velatorio.map((v, ci) => {
-              const Icon = v.icon;
-              return (
-                <article
-                  key={v.name}
-                  className="group overflow-hidden rounded-3xl border border-border bg-surface shadow-soft ring-1 ring-transparent transition-all duration-500 hover:-translate-y-1 hover:shadow-elevated hover:ring-accent/30"
-                >
-                  <div className="relative aspect-[4/5] overflow-hidden bg-primary">
-                    <CrossfadeMedia
-                      images={v.images}
-                      alt={`Equipo de velatorio — ${v.name}`}
-                      delay={ci * 1300}
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-                    {/* chip de ícono */}
-                    <span className="absolute left-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/45 text-accent ring-1 ring-accent/30 backdrop-blur-[2px]">
-                      <Icon className="h-[18px] w-[18px]" strokeWidth={1.6} />
-                    </span>
-                    <div className="absolute inset-x-0 bottom-0 p-5">
-                      <span className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-accent [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]">
-                        {v.tag}
-                      </span>
-                      <h3 className="mt-1 font-serif text-2xl text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]">
-                        {v.name}
-                      </h3>
-                    </div>
-                  </div>
-                  <div className="relative p-5">
-                    <span className="mb-3 block h-px w-10 bg-accent/40" />
-                    <p className="text-sm leading-relaxed text-muted-foreground">{v.desc}</p>
-                  </div>
-                </article>
-              );
-            })}
+          {/* Mobile: carrusel coverflow */}
+          <div className="md:hidden">
+            <CoverflowCarousel
+              ariaLabel="Equipo de velatorio"
+              cardW={250}
+              cardH={458}
+              items={velatorio.map((v, ci) => (
+                <VelatorioCard key={v.name} v={v} index={ci} />
+              ))}
+            />
+          </div>
+
+          {/* Desktop: grilla (sin cambios) */}
+          <div className="hidden gap-6 md:grid md:grid-cols-2 lg:grid-cols-3">
+            {velatorio.map((v, ci) => (
+              <VelatorioCard key={v.name} v={v} index={ci} />
+            ))}
           </div>
         </div>
       </section>
