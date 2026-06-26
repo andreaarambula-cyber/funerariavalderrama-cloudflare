@@ -1,7 +1,8 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Heart, ShieldCheck, Users, MapPin, ArrowRight } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
+import { Heart, ShieldCheck, Users } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
+import { Visitanos } from "@/components/site/Visitanos";
 import forestImg from "@/assets/forest-path.jpg";
 
 export const Route = createFileRoute("/nosotros")({
@@ -81,31 +82,7 @@ function NosotrosPage() {
         </div>
       </section>
 
-      <section className="container-prose py-20">
-        <div className="grid gap-10 lg:grid-cols-3">
-          {[
-            { city: "Concepción", addr: "O'Higgins 1601, esq. Galvarino, Concepción" },
-          ].map((s) => (
-            <div key={s.city} className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-7 shadow-soft">
-              <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-60 transition-opacity duration-300 group-hover:opacity-80" />
-              <MapPin className="relative h-6 w-6 text-accent" />
-              <h3 className="relative mt-3 font-serif text-2xl text-primary">{s.city}</h3>
-              <p className="relative mt-1 text-sm text-muted-foreground">{s.addr}</p>
-              <p className="relative mt-4 text-xs uppercase tracking-wider text-accent-foreground/80">
-                Atención 24/7
-              </p>
-            </div>
-          ))}
-        </div>
-        <div className="mt-12 flex justify-center">
-          <Link
-            to="/contacto"
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3 text-sm font-medium text-primary-foreground transition hover:brightness-110"
-          >
-            Visítanos <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </section>
+      <Visitanos />
     </>
   );
 }
