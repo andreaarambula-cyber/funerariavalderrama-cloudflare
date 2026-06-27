@@ -1,15 +1,15 @@
-import obit1 from "@/assets/obit-1.jpg";
-import obit2 from "@/assets/obit-2.jpg";
-import obit3 from "@/assets/obit-3.jpg";
-import obit4 from "@/assets/obit-4.jpg";
-import obit5 from "@/assets/obit-5.jpg";
-import obit6 from "@/assets/obit-6.jpg";
-import mem1 from "@/assets/memory-1.jpg";
-import mem2 from "@/assets/memory-2.jpg";
-import mem3 from "@/assets/memory-3.jpg";
-import mem4 from "@/assets/memory-4.jpg";
-import mem5 from "@/assets/memory-5.jpg";
-import mem6 from "@/assets/memory-6.jpg";
+import obit1 from "@/assets/obit-1.webp";
+import obit2 from "@/assets/obit-2.webp";
+import obit3 from "@/assets/obit-3.webp";
+import obit4 from "@/assets/obit-4.webp";
+import obit5 from "@/assets/obit-5.webp";
+import obit6 from "@/assets/obit-6.webp";
+import mem1 from "@/assets/memory-1.webp";
+import mem2 from "@/assets/memory-2.webp";
+import mem3 from "@/assets/memory-3.webp";
+import mem4 from "@/assets/memory-4.webp";
+import mem5 from "@/assets/memory-5.webp";
+import mem6 from "@/assets/memory-6.webp";
 
 export type TimelineItem = { year: string; title: string; description: string };
 export type GalleryItem = { src: string; caption: string; author: string };
