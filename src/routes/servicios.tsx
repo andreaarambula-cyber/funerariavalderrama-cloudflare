@@ -29,9 +29,9 @@ import { MapaChile } from "@/components/site/MapaChile";
 import { CoverflowCarousel } from "@/components/site/CoverflowCarousel";
 import { cn } from "@/lib/utils";
 
-import esencial1 from "@/assets/urnas/esencial-1.jpg.asset.json";
-import selecto1 from "@/assets/urnas/selecto-1.jpg.asset.json";
-import memorable1 from "@/assets/urnas/memorable-1.jpg.asset.json";
+import esencial1 from "@/assets/urnas/esencial-1.jpg";
+import selecto1 from "@/assets/urnas/selecto-1.jpg";
+import memorable1 from "@/assets/urnas/memorable-1.jpg";
 import velatorioCirios1 from "@/assets/equipo/cirios.jpg";
 import velatorioCirios2 from "@/assets/equipo/cirios-2.jpg";
 import velatorioTulipa from "@/assets/equipo/tulipa.jpg";
@@ -119,7 +119,7 @@ const PLANS: Plan[] = [
     name: "Esencial",
     tagline: "Una despedida sobria y digna.",
     wood: "Fibromadera · terciado",
-    image: esencial1.url,
+    image: esencial1,
     items: [
       { icon: Church, label: "Capilla de madera" },
       { icon: IdCard, label: "Tarjetero" },
@@ -136,7 +136,7 @@ const PLANS: Plan[] = [
     name: "Selecto",
     tagline: "Mayor presencia y calidez en la madera.",
     wood: "Madera de pino",
-    image: selecto1.url,
+    image: selecto1,
     items: [
       { icon: Church, label: "Capilla a elección" },
       { icon: IdCard, label: "Tarjetero" },
@@ -157,7 +157,7 @@ const PLANS: Plan[] = [
     name: "Memorable",
     tagline: "Lo más completo, con detalles exclusivos.",
     wood: "Madera nativa · diseños exclusivos",
-    image: memorable1.url,
+    image: memorable1,
     items: [
       { icon: Church, label: "Capilla a elección" },
       { icon: IdCard, label: "Tarjetero" },
