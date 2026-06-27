@@ -38,27 +38,36 @@ function NosotrosPage() {
           <h2 className="mt-3 font-serif text-[2.2rem] leading-[1.1] text-primary md:text-[2.7rem]">
           Más de 28 años acompañando a las familias
           </h2>
-        <p className="mt-5 text-muted-foreground">
+        {/* Párrafo de entrada: letra capital dorada + texto más grande y oscuro */}
+        <p className="mt-6 text-pretty text-lg leading-relaxed text-foreground/90 first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:font-serif first-letter:text-6xl first-letter:font-semibold first-letter:leading-[0.72] first-letter:text-accent md:text-xl">
         Nuestra historia no comenzó en una oficina ni con un gran plan de negocios. Comenzó hace más de 28 años, como una empresa familiar dedicada a la distribución de urnas funerarias en distintas ciudades de Chile.
         </p>
-        <p className="mt-3 text-muted-foreground">
+        <p className="mt-4 text-muted-foreground">
         Durante esos años conocimos de cerca la realidad de cientos de familias que enfrentaban la pérdida de un ser querido. Escuchamos sus historias, vimos sus necesidades y comprendimos que, en los momentos más difíciles, las personas no solo necesitan un producto o un trámite: necesitan apoyo, orientación y alguien que les ayude a transitar ese proceso con tranquilidad.
         </p>
-      <p className="mt-3 text-muted-foreground">
-      Con el tiempo entendimos que nuestra verdadera vocación era acompañar directamente a las familias. Así nació Funeraria Valderrama.
-      </p>
-      <p className="mt-3 text-muted-foreground">
-      Desde entonces hemos trabajado con la misma cercanía y sencillez que nos caracterizó desde el principio. Somos una empresa familiar que cree en el trato humano, en escuchar, en estar disponibles cuando se nos necesita y en hacer las cosas con respeto y responsabilidad.
-      </p>
-      <p className="mt-3 text-muted-foreground">
-      Sabemos que ninguna despedida es igual a otra, porque cada vida tiene su propia historia. Por eso nos esforzamos por entregar una atención cálida, honesta y personalizada, acompañando a las familias como nos gustaría que acompañaran a la nuestra.
-      </p>
-    <p className="mt-3 text-muted-foreground">
-    Hoy, después de décadas de experiencia en el rubro funerario, seguimos manteniendo los mismos valores que nos dieron origen: cercanía, confianza y compromiso con las personas.
-    </p>
-    <p className="mt-3 text-muted-foreground">
-    Porque más que realizar un servicio, creemos en acompañar a las familias cuando más lo necesitan.
-    </p>
+        <p className="mt-4 text-muted-foreground">
+        Con el tiempo entendimos que nuestra verdadera vocación era acompañar directamente a las familias.
+        </p>
+        {/* Frase destacada (ya estaba en el texto) */}
+        <p className="mt-5 border-l-2 border-accent pl-5 font-serif text-2xl leading-snug text-primary md:text-[1.75rem]">
+        Así nació Funeraria Valderrama.
+        </p>
+        <p className="mt-5 text-muted-foreground">
+        Desde entonces hemos trabajado con la misma cercanía y sencillez que nos caracterizó desde el principio. Somos una empresa familiar que cree en el trato humano, en escuchar, en estar disponibles cuando se nos necesita y en hacer las cosas con respeto y responsabilidad.
+        </p>
+        <p className="mt-4 text-muted-foreground">
+        Sabemos que ninguna despedida es igual a otra, porque cada vida tiene su propia historia. Por eso nos esforzamos por entregar una atención cálida, honesta y personalizada, acompañando a las familias como nos gustaría que acompañaran a la nuestra.
+        </p>
+        <p className="mt-4 text-muted-foreground">
+        Hoy, después de décadas de experiencia en el rubro funerario, seguimos manteniendo los mismos valores que nos dieron origen: cercanía, confianza y compromiso con las personas.
+        </p>
+        {/* Cierre enfatizado: línea dorada + frase en serif itálica */}
+        <div className="mt-8">
+          <div className="h-px w-16 bg-gradient-to-r from-accent to-transparent" />
+          <p className="mt-4 font-serif text-xl italic leading-relaxed text-primary md:text-2xl">
+          Porque más que realizar un servicio, creemos en acompañar a las familias cuando más lo necesitan.
+          </p>
+        </div>
         </div>
       </section>
 
