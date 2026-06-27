@@ -27,8 +27,8 @@ function NosotrosPage() {
         subtitle="Más de 28 años acompañando a familias en momentos de despedida, con la cercanía y el compromiso que nos caracterizan desde el primer día."
       />
 
-      <section className="container-prose grid gap-12 py-20 lg:grid-cols-2 lg:items-center">
-        <div className="overflow-hidden rounded-3xl shadow-soft">
+      <section className="container-prose grid gap-12 py-20 lg:grid-cols-2 lg:items-stretch">
+        <div className="h-full min-h-[20rem] overflow-hidden rounded-3xl shadow-soft">
           <img src={forestImg} alt="Sendero entre árboles" className="h-full w-full object-cover" loading="lazy" />
         </div>
         <div>
