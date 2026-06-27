@@ -829,10 +829,12 @@ function Testimonials() {
             tone="dark"
             cardW={272}
             cardH={296}
+            edgeFade={false}
+            fadeCards={false}
             items={reviews.map((r) => (
               <figure
                 key={r.name}
-                className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur"
+                className="flex flex-col rounded-2xl border border-white/15 bg-[rgb(30,58,82)] p-6 shadow-elevated"
               >
                 <Stars className="h-4 w-4" />
                 <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-white/90">
