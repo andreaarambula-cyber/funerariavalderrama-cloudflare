@@ -35,6 +35,9 @@ import { Obituaries3DCarousel } from "@/components/site/Obituaries3DCarousel";
 
 export const Route = createFileRoute("/")({
   head: () => ({
+    links: [
+      { rel: "preload", as: "image", href: heroPoster.url, fetchpriority: "high" },
+    ],
     meta: [
       { title: "Funeraria Valderrama — Servicios funerarios y cremación 24/7 en el Gran Concepción" },
       {
