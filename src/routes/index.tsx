@@ -71,18 +71,11 @@ function Hero() {
         muted
         loop
         playsInline
-        className="absolute inset-0 hidden h-full w-full object-cover object-bottom md:block"
+        preload="auto"
+        poster={heroPoster.url}
+        className="absolute inset-0 h-full w-full object-cover object-bottom"
       >
-        <source src={heroVideo} type="video/mp4" />
-      </video>
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 h-full w-full object-cover object-bottom md:hidden"
-      >
-        <source src={heroVideo} type="video/mp4" />
+        <source src={heroVideo.url} type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-black/70" />
       <div className="container-prose relative w-full py-16 text-primary-foreground md:py-20">
