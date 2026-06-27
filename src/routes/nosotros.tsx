@@ -42,23 +42,23 @@ function NosotrosPage() {
         <p className="mt-6 text-pretty text-lg leading-relaxed text-foreground/90 first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:font-serif first-letter:text-6xl first-letter:font-semibold first-letter:leading-[0.72] first-letter:text-accent md:text-xl">
         Nuestra historia no comenzó en una oficina ni con un gran plan de negocios. Comenzó hace más de 28 años, como una empresa familiar dedicada a la distribución de urnas funerarias en distintas ciudades de Chile.
         </p>
-        <p className="mt-4 text-muted-foreground">
+        <p className="mt-4 leading-relaxed text-muted-foreground">
         Durante esos años conocimos de cerca la realidad de cientos de familias que enfrentaban la pérdida de un ser querido. Escuchamos sus historias, vimos sus necesidades y comprendimos que, en los momentos más difíciles, las personas no solo necesitan un producto o un trámite: necesitan apoyo, orientación y alguien que les ayude a transitar ese proceso con tranquilidad.
         </p>
-        <p className="mt-4 text-muted-foreground">
+        <p className="mt-4 leading-relaxed text-muted-foreground">
         Con el tiempo entendimos que nuestra verdadera vocación era acompañar directamente a las familias.
         </p>
         {/* Frase destacada (ya estaba en el texto) */}
         <p className="mt-5 border-l-2 border-accent pl-5 font-serif text-2xl leading-snug text-primary md:text-[1.75rem]">
         Así nació Funeraria Valderrama.
         </p>
-        <p className="mt-5 text-muted-foreground">
+        <p className="mt-5 leading-relaxed text-muted-foreground">
         Desde entonces hemos trabajado con la misma cercanía y sencillez que nos caracterizó desde el principio. Somos una empresa familiar que cree en el trato humano, en escuchar, en estar disponibles cuando se nos necesita y en hacer las cosas con respeto y responsabilidad.
         </p>
-        <p className="mt-4 text-muted-foreground">
+        <p className="mt-4 leading-relaxed text-muted-foreground">
         Sabemos que ninguna despedida es igual a otra, porque cada vida tiene su propia historia. Por eso nos esforzamos por entregar una atención cálida, honesta y personalizada, acompañando a las familias como nos gustaría que acompañaran a la nuestra.
         </p>
-        <p className="mt-4 text-muted-foreground">
+        <p className="mt-4 leading-relaxed text-muted-foreground">
         Hoy, después de décadas de experiencia en el rubro funerario, seguimos manteniendo los mismos valores que nos dieron origen: cercanía, confianza y compromiso con las personas.
         </p>
         {/* Cierre enfatizado: línea dorada + frase en serif itálica */}
