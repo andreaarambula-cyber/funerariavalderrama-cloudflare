@@ -38,9 +38,7 @@ import velatorioTulipa from "@/assets/equipo/tulipa.jpg";
 import velatorioTulipa2 from "@/assets/equipo/tulipa-2.jpg";
 import velatorioLed1 from "@/assets/equipo/led.jpg";
 import velatorioLed2 from "@/assets/equipo/led-2.jpg";
-import vehiculoCarroza from "@/assets/vehiculos/carroza.jpg";
-import vehiculoFlota1 from "@/assets/vehiculos/flota-1.jpg";
-import vehiculoFlota2 from "@/assets/vehiculos/flota-2.jpg";
+import vehiculoFlotaValderrama from "@/assets/vehiculos/flota-valderrama.jpeg";
 
 // Íconos a medida del equipo de velatorio (dibujados según las fotos reales).
 type EquipoIconProps = { className?: string; strokeWidth?: number };
@@ -218,7 +216,7 @@ const velatorio = [
 ];
 
 // Vehículos: un solo contenedor que engloba la flota; las fotos pasan solas.
-const vehiculoImagenes = [vehiculoFlota1, vehiculoCarroza, vehiculoFlota2];
+const vehiculoImagenes = [vehiculoFlotaValderrama];
 
 const vehiculoTipos = [
   { icon: Car, name: "Carroza", desc: "Carroza para el traslado del ser querido, con respeto y puntualidad." },
