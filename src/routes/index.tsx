@@ -897,7 +897,7 @@ function SectionHeader({
         className={`gold-divider mt-3 ${align === "center" ? "mx-auto w-24" : "w-24"}`}
       />
       <h2
-        className={`mt-4 font-serif text-3xl md:text-4xl lg:text-[2.75rem] ${
+        className={`mt-4 font-serif text-[2.2rem] leading-[1.1] md:text-[2.7rem] lg:text-[3.25rem] ${
           tone === "dark" ? "text-white" : "text-primary"
         }`}
       >

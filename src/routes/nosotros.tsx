@@ -29,13 +29,13 @@ function NosotrosPage() {
 
       <section className="container-prose grid gap-12 py-20 lg:grid-cols-2 lg:items-stretch">
         <div className="h-full min-h-[20rem] overflow-hidden rounded-3xl shadow-soft">
-          <img src={forestImg} alt="Sendero entre árboles" className="h-full w-full object-cover" loading="lazy" />
+          <img src={forestImg} alt="Sendero entre árboles" className="h-full w-full object-cover animate-kb-slow" loading="lazy" />
         </div>
         <div>
           <p className="text-xs uppercase tracking-[0.22em] text-accent-foreground/80">
             Nuestra historia
           </p>
-          <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
+          <h2 className="mt-3 font-serif text-[2.2rem] leading-[1.1] text-primary md:text-[2.7rem]">
           Más de 28 años acompañando a las familias
           </h2>
         <p className="mt-5 text-muted-foreground">
@@ -64,7 +64,7 @@ function NosotrosPage() {
 
       <section className="bg-secondary/40 py-20">
         <div className="container-prose">
-          <h2 className="font-serif text-3xl text-primary md:text-4xl">Nuestros valores</h2>
+          <h2 className="font-serif text-[2.2rem] leading-[1.1] text-primary md:text-[2.7rem]">Nuestros valores</h2>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {[
               { icon: Heart, title: "Cercanía humana", desc: "Atendemos cada familia como si fuera la nuestra." },

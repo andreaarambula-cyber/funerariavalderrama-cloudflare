@@ -109,7 +109,7 @@
 
   h1, h2, h3, h4, .font-serif {
     font-family: var(--font-serif);
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: -0.01em;
   }
 
@@ -190,5 +190,15 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .animate-marquee { animation: none; }
+  }
+
+  /* Ken Burns muy sutil para imágenes de relato (da vida sin mover el contenedor) */
+  @keyframes kb-slow {
+    0%   { transform: scale(1)    translateZ(0); }
+    100% { transform: scale(1.06) translateZ(0); }
+  }
+  .animate-kb-slow { animation: kb-slow 22s ease-in-out infinite alternate; transform-origin: center 40%; will-change: transform; }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-kb-slow { animation: none; }
   }
 }
