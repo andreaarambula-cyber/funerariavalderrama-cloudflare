@@ -36,6 +36,7 @@ export function CoberturaMapa() {
   const vbW = width + MARGIN_L;
   const px = (active.cx + MARGIN_L) / vbW;
   const py = active.cy / height;
+  const labelNearRight = px > 0.62;
 
   return (
     <div
@@ -111,8 +112,9 @@ export function CoberturaMapa() {
         style={{
           left: `${px * 100}%`,
           top: `${py * 100}%`,
-          transform: "translate(16px, -50%)",
-          transition: "left 700ms cubic-bezier(.4,0,.2,1), top 700ms cubic-bezier(.4,0,.2,1)",
+          transform: labelNearRight ? "translate(calc(-100% - 16px), -50%)" : "translate(16px, -50%)",
+          transition:
+            "left 700ms cubic-bezier(.4,0,.2,1), top 700ms cubic-bezier(.4,0,.2,1), transform 700ms cubic-bezier(.4,0,.2,1)",
         }}
       >
         <span className="whitespace-nowrap rounded-full bg-primary/90 px-3 py-1 text-xs font-medium text-white shadow-elevated backdrop-blur-sm">
@@ -121,7 +123,7 @@ export function CoberturaMapa() {
       </div>
 
       {/* Ventanita "Contáctanos" arriba a la izquierda (compacta) */}
-      <div className="absolute left-2.5 top-2.5 w-[34%] max-w-[11rem] rounded-xl border border-border bg-surface/95 p-3 shadow-elevated backdrop-blur-sm sm:left-3 sm:top-3">
+      <div className="absolute left-2.5 top-2.5 w-[7.5rem] rounded-xl border border-border bg-surface/95 p-2.5 shadow-elevated backdrop-blur-sm sm:left-3 sm:top-3 sm:w-[11rem] sm:p-3">
         <p className="flex items-center gap-1 text-[9px] font-semibold uppercase tracking-[0.16em] text-accent">
           <MapPin className="h-3 w-3 shrink-0" /> Cobertura
         </p>
@@ -130,7 +132,7 @@ export function CoberturaMapa() {
         </p>
         <Link
           to="/contacto"
-          className="mt-2.5 inline-flex items-center gap-1 rounded-full bg-accent px-3 py-1.5 text-[11px] font-medium text-accent-foreground shadow-soft transition hover:brightness-105"
+          className="mt-2.5 inline-flex w-full items-center justify-center gap-1 rounded-full bg-accent px-2 py-1.5 text-[10px] font-medium text-accent-foreground shadow-soft transition hover:brightness-105 sm:px-3 sm:text-[11px]"
         >
           Contáctanos <ArrowUpRight className="h-3 w-3" />
         </Link>
