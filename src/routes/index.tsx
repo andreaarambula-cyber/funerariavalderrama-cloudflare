@@ -23,8 +23,7 @@ import donaTeresa2 from "@/assets/trabajos/dona-teresa-2.jpg";
 import donaRosa1 from "@/assets/trabajos/dona-rosa-1.jpg";
 import donaRosa2 from "@/assets/trabajos/dona-rosa-2.jpg";
 import heroImg from "@/assets/hero-sunrise.jpg";
-import heroVideo from "@/assets/hero-video.mp4.asset.json";
-import heroMobileVideo from "@/assets/hero-mobile.mp4.asset.json";
+import heroVideo from "@/assets/hero-valderrama.mp4";
 import candleImg from "@/assets/candle.jpg";
 import senderoLogo from "@/assets/convenios/sendero.png";
 import cementerioLogo from "@/assets/convenios/cementerio-general.png";
@@ -74,7 +73,7 @@ function Hero() {
         playsInline
         className="absolute inset-0 hidden h-full w-full object-cover object-bottom md:block"
       >
-        <source src={heroVideo.url} type="video/mp4" />
+        <source src={heroVideo} type="video/mp4" />
       </video>
       <video
         autoPlay
@@ -83,7 +82,7 @@ function Hero() {
         playsInline
         className="absolute inset-0 h-full w-full object-cover object-bottom md:hidden"
       >
-        <source src={heroMobileVideo.url} type="video/mp4" />
+        <source src={heroVideo} type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-black/70" />
       <div className="container-prose relative w-full py-16 text-primary-foreground md:py-20">
