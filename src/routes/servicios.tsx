@@ -38,6 +38,12 @@ import velatorioTulipa from "@/assets/equipo/tulipa.jpg";
 import velatorioTulipa2 from "@/assets/equipo/tulipa-2.jpg";
 import velatorioLed1 from "@/assets/equipo/led.jpg";
 import velatorioLed2 from "@/assets/equipo/led-2.jpg";
+import vehiculoFlotaActual01 from "@/assets/vehiculos/flota-actual-01.jpeg";
+import vehiculoFlotaActual02 from "@/assets/vehiculos/flota-actual-02.jpeg";
+import vehiculoFlotaActual03 from "@/assets/vehiculos/flota-actual-03.jpeg";
+import vehiculoFlotaActual04 from "@/assets/vehiculos/flota-actual-04.jpeg";
+import vehiculoFlotaActual05 from "@/assets/vehiculos/flota-actual-05.jpeg";
+import vehiculoFlotaActual06 from "@/assets/vehiculos/flota-actual-06.jpeg";
 import vehiculoFlotaValderrama from "@/assets/vehiculos/flota-valderrama.jpeg";
 
 // Íconos a medida del equipo de velatorio (dibujados según las fotos reales).
@@ -216,7 +222,15 @@ const velatorio = [
 ];
 
 // Vehículos: un solo contenedor que engloba la flota; las fotos pasan solas.
-const vehiculoImagenes = [vehiculoFlotaValderrama];
+const vehiculoImagenes = [
+  vehiculoFlotaValderrama,
+  vehiculoFlotaActual01,
+  vehiculoFlotaActual02,
+  vehiculoFlotaActual03,
+  vehiculoFlotaActual04,
+  vehiculoFlotaActual05,
+  vehiculoFlotaActual06,
+];
 
 const vehiculoTipos = [
   { icon: Car, name: "Carroza", desc: "Carroza para el traslado del ser querido, con respeto y puntualidad." },
