@@ -15,6 +15,9 @@ export function CoverflowCarousel({
   ariaLabel,
   tone = "light",
   autoplay = true,
+  sideOpacity,
+  edgeFade = true,
+  fadeCards = true,
 }: {
   items: ReactNode[];
   cardW?: number;
@@ -22,6 +25,9 @@ export function CoverflowCarousel({
   ariaLabel: string;
   tone?: "light" | "dark";
   autoplay?: boolean;
+  sideOpacity?: number;
+  edgeFade?: boolean;
+  fadeCards?: boolean;
 }) {
   const [activeIndex, setActiveIndex] = useState(() => Math.floor(items.length / 2));
   const prefersReduced = useReducedMotion();
@@ -60,6 +66,7 @@ export function CoverflowCarousel({
     : "border-white/20 bg-white/10 text-white/80 hover:bg-white/25";
   const dotOn = light ? "bg-primary" : "bg-accent";
   const dotOff = light ? "bg-primary/25" : "bg-white/30";
+  const inactiveOpacity = sideOpacity ?? 0.6;
 
   return (
     <div
@@ -93,14 +100,18 @@ export function CoverflowCarousel({
         <ChevronRight className="h-5 w-5" />
       </button>
 
-      <div
-        className="pointer-events-none absolute inset-y-0 left-0 z-20 w-10"
-        style={{ background: `linear-gradient(to right, ${fadeFrom}, transparent)` }}
-      />
-      <div
-        className="pointer-events-none absolute inset-y-0 right-0 z-20 w-10"
-        style={{ background: `linear-gradient(to left, ${fadeFrom}, transparent)` }}
-      />
+      {edgeFade && (
+        <>
+          <div
+            className="pointer-events-none absolute inset-y-0 left-0 z-20 w-10"
+            style={{ background: `linear-gradient(to right, ${fadeFrom}, transparent)` }}
+          />
+          <div
+            className="pointer-events-none absolute inset-y-0 right-0 z-20 w-10"
+            style={{ background: `linear-gradient(to left, ${fadeFrom}, transparent)` }}
+          />
+        </>
+      )}
 
       <div
         className="flex items-center justify-center overflow-visible py-6"
@@ -115,11 +126,18 @@ export function CoverflowCarousel({
           onDragEnd={onDragEnd}
         >
           {items.map((item, i) => {
-            const offset = i - activeIndex;
+            let offset = i - activeIndex;
+            const half = Math.floor(items.length / 2);
+            if (offset > half) offset -= items.length;
+            if (offset < -half) offset += items.length;
             const abs = Math.abs(offset);
             if (abs > range) return null;
             const scale = Math.max(0.8, 1 - abs * 0.08);
-            const opacity = abs === 0 ? 1 : Math.max(0.3, 0.6 - abs * 0.14);
+            const opacity = fadeCards
+              ? abs === 0
+                ? 1
+                : Math.max(0.3, inactiveOpacity - (abs - 1) * 0.14)
+              : 1;
             const zIndex = items.length * 2 - abs;
             return (
               <motion.div
