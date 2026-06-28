@@ -39,7 +39,7 @@ function NosotrosPage() {
           Más de 28 años acompañando a las familias
           </h2>
         {/* Párrafo de entrada: letra capital dorada + texto más grande y oscuro */}
-        <p className="mt-6 text-pretty text-lg leading-relaxed text-foreground/90 first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:font-serif first-letter:text-6xl first-letter:font-semibold first-letter:leading-[0.72] first-letter:text-accent md:text-xl">
+        <p className="mt-6 leading-relaxed text-muted-foreground first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:font-serif first-letter:text-6xl first-letter:font-semibold first-letter:leading-[0.72] first-letter:text-accent">
         Nuestra historia no comenzó en una oficina ni con un gran plan de negocios. Comenzó hace más de 28 años, como una empresa familiar dedicada a la distribución de urnas funerarias en distintas ciudades de Chile.
         </p>
         <p className="mt-4 leading-relaxed text-muted-foreground">
