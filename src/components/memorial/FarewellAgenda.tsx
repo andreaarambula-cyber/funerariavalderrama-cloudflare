@@ -8,7 +8,7 @@ const ICONS: Record<FarewellEvent["type"], LucideIcon> = {
   Misa: Church,
   Cortejo: Car,
   Sepultación: TreePine,
-  Cremación: Flame,
+  
 };
 
 export function FarewellAgenda({

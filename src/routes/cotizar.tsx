@@ -22,7 +22,7 @@ export const Route = createFileRoute("/cotizar")({
 
 const SERVICIOS = [
   "Sepultura tradicional",
-  "Cremación",
+  
   "Velatorio",
   "Traslado",
   "Plan a futuro",
