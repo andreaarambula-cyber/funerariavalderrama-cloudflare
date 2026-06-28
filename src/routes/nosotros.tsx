@@ -3,7 +3,8 @@ import { Heart, ShieldCheck, Users } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
 import { Visitanos } from "@/components/site/Visitanos";
-import forestImg from "@/assets/forest-path.jpg";
+import nosotrosVideo from "@/assets/nosotros-valderrama.mp4.asset.json";
+import nosotrosPoster from "@/assets/nosotros-poster.jpg.asset.json";
 
 export const Route = createFileRoute("/nosotros")({
   head: () => ({
@@ -29,7 +30,16 @@ function NosotrosPage() {
 
       <section className="container-prose grid gap-12 py-20 lg:grid-cols-2 lg:items-stretch">
         <div className="h-full min-h-[20rem] overflow-hidden rounded-3xl shadow-soft">
-          <img src={forestImg} alt="Sendero entre árboles" className="h-full w-full object-cover animate-kb-slow" loading="lazy" />
+          <video
+            src={nosotrosVideo.url}
+            poster={nosotrosPoster.url}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className="h-full w-full object-cover"
+          />
         </div>
         <div>
           <p className="text-xs uppercase tracking-[0.22em] text-accent-foreground/80">
