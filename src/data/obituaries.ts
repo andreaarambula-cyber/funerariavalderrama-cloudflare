@@ -16,7 +16,7 @@ export type GalleryItem = { src: string; caption: string; author: string };
 export type Anecdote = { author: string; text: string };
 export type Candle = { name: string; message?: string; timeAgo: string };
 export type FarewellEvent = {
-  type: "Velatorio" | "Misa" | "Cortejo" | "Sepultación" | "Cremación";
+  type: "Velatorio" | "Misa" | "Cortejo" | "Sepultación";
   date: string;
   address: string;
   mapsQuery: string;
@@ -149,14 +149,6 @@ export const obituaries: Obituary[] = [
         isoStart: "2026-04-30T11:00:00-03:00",
         isoEnd: "2026-04-30T18:00:00-03:00",
       },
-      {
-        type: "Cremación",
-        date: "Pasado mañana, 10:00 hrs",
-        address: "Crematorio Parque Concepción, Hualpén",
-        mapsQuery: "Crematorio Parque Concepción Hualpén",
-        isoStart: "2026-05-01T10:00:00-03:00",
-        isoEnd: "2026-05-01T11:30:00-03:00",
-      },
     ],
   },
   {
@@ -280,14 +272,6 @@ export const obituaries: Obituary[] = [
         mapsQuery: "Parroquia Santa Sofía Hualpén",
         isoStart: "2026-04-29T19:30:00-03:00",
         isoEnd: "2026-04-29T23:00:00-03:00",
-      },
-      {
-        type: "Cremación",
-        date: "Mañana, 14:00 hrs",
-        address: "Crematorio Parque Concepción, Hualpén",
-        mapsQuery: "Crematorio Parque Concepción Hualpén",
-        isoStart: "2026-04-30T14:00:00-03:00",
-        isoEnd: "2026-04-30T15:30:00-03:00",
       },
     ],
   },

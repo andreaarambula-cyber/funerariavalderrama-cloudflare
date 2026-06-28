@@ -36,7 +36,7 @@ export function SiteFooter() {
 
         <FooterCol title="Servicios">
           <FooterLink to="/servicios">Servicio funerario</FooterLink>
-          <FooterLink to="/servicios">Cremación</FooterLink>
+          
           <FooterLink to="/servicios">Velatorios</FooterLink>
           <FooterLink to="/servicios">Traslados</FooterLink>
         </FooterCol>

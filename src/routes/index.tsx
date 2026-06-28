@@ -41,11 +41,11 @@ export const Route = createFileRoute("/")({
       { rel: "canonical", href: `${SITE_URL}/` },
     ],
     meta: [
-      { title: "Funeraria Valderrama — Servicios funerarios y cremación 24/7 en el Gran Concepción" },
+      { title: "Funeraria Valderrama — Servicios funerarios 24/7 en el Gran Concepción" },
       {
         name: "description",
         content:
-          "Acompañamos a tu familia con dignidad. Servicio funerario, cremación, planes a futuro y obituarios online. Atención 24/7 en el Gran Concepción.",
+          "Acompañamos a tu familia con dignidad. Servicio funerario, planes a futuro y obituarios online. Atención 24/7 en el Gran Concepción.",
       },
     ],
   }),
@@ -88,7 +88,7 @@ function Hero() {
           Acompañamos a tu familia en el momento más difícil
         </h1>
         <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-white/85 md:text-lg">
-          Servicios funerarios y de cremación con dignidad, transparencia y cercanía.
+          Servicios funerarios con dignidad, transparencia y cercanía.
           Más de 28 años cuidando a las familias del Gran Concepción.
         </p>
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -219,7 +219,7 @@ function Convenios() {
     {
       logo: cementerioLogo,
       name: "Cementerio General de Concepción",
-      desc: "Descuentos en sepultación y cremación en el cementerio y crematorio.",
+      desc: "Descuentos en sepultación en el cementerio y crematorio.",
     },
   ];
   const gestiones = [

@@ -16,7 +16,7 @@ const FUNERAL_HOME_JSONLD = {
   "@type": "FuneralHome",
   name: "Funeraria Valderrama",
   description:
-    "Servicios funerarios y de cremación con dignidad en el Gran Concepción. Atención 24/7, planes a futuro y obituarios online.",
+    "Servicios funerarios con dignidad en el Gran Concepción. Atención 24/7, planes a futuro y obituarios online.",
   url: SITE_URL,
   telephone: "+56953900931",
   email: "funerariavalderramaspa@gmail.com",
@@ -62,7 +62,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "Servicios funerarios y de cremación con dignidad en el Gran Concepción. Atención 24/7, planes a futuro y obituarios online. Más de 28 años acompañando familias.",
+          "Servicios funerarios con dignidad en el Gran Concepción. Atención 24/7, planes a futuro y obituarios online. Más de 28 años acompañando familias.",
       },
       { name: "author", content: "Funeraria Valderrama" },
       { name: "theme-color", content: "#1A1A1A" },
@@ -70,7 +70,7 @@ export const Route = createRootRoute({
       {
         property: "og:description",
         content:
-          "Acompañamos a tu familia en el momento más difícil. Servicio funerario, cremación y planes a futuro en el Gran Concepción.",
+          "Acompañamos a tu familia en el momento más difícil. Servicio funerario y planes a futuro en el Gran Concepción.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -78,7 +78,7 @@ export const Route = createRootRoute({
       {
         name: "twitter:description",
         content:
-          "Acompañamos a tu familia en el momento más difícil. Servicio funerario, cremación y planes a futuro en el Gran Concepción.",
+          "Acompañamos a tu familia en el momento más difícil. Servicio funerario y planes a futuro en el Gran Concepción.",
       },
       { property: "og:locale", content: "es_CL" },
       { property: "og:site_name", content: "Funeraria Valderrama" },
