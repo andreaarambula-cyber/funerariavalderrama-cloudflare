@@ -15,7 +15,7 @@ export function PageHero({ eyebrow, title, subtitle }: Props) {
             </span>
           </p>
         )}
-        <h1 className="text-balance font-serif text-4xl text-primary md:text-5xl lg:text-6xl">
+        <h1 className="text-balance font-serif text-[2.7rem] leading-[1.05] text-primary md:text-6xl lg:text-7xl">
           {title}
         </h1>
         {subtitle && (
