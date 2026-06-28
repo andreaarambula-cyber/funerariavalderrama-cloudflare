@@ -32,11 +32,13 @@ import diprecaLogo from "@/assets/convenios/dipreca.png";
 import chileatiendeLogo from "@/assets/convenios/chileatiende.png";
 import { obituaries } from "@/data/obituaries";
 import { Obituaries3DCarousel } from "@/components/site/Obituaries3DCarousel";
+import { SITE_URL } from "./__root";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     links: [
       { rel: "preload", as: "image", href: heroPoster.url, fetchpriority: "high" },
+      { rel: "canonical", href: `${SITE_URL}/` },
     ],
     meta: [
       { title: "Funeraria Valderrama — Servicios funerarios y cremación 24/7 en el Gran Concepción" },

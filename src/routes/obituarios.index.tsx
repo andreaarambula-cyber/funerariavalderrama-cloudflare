@@ -3,9 +3,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Search, MapPin, ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { obituaries } from "@/data/obituaries";
+import { SITE_URL } from "./__root";
 
 export const Route = createFileRoute("/obituarios/")({
   head: () => ({
+    links: [{ rel: "canonical", href: `${SITE_URL}/obituarios` }],
     meta: [
       { title: "Obituarios online — Funeraria Valderrama" },
       {
