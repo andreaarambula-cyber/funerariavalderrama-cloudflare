@@ -3,9 +3,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Phone, Mail, MapPin, Clock, MessageCircle, Send, Check } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
+import { SITE_URL } from "./__root";
 
 export const Route = createFileRoute("/contacto")({
   head: () => ({
+    links: [{ rel: "canonical", href: `${SITE_URL}/contacto` }],
     meta: [
       { title: "Contacto — Funeraria Valderrama" },
       {

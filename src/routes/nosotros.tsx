@@ -5,9 +5,11 @@ import { LeafDecoration } from "@/components/site/LeafDecoration";
 import { Visitanos } from "@/components/site/Visitanos";
 import nosotrosVideo from "@/assets/nosotros-valderrama.mp4.asset.json";
 import nosotrosPoster from "@/assets/nosotros-poster.jpg.asset.json";
+import { SITE_URL } from "./__root";
 
 export const Route = createFileRoute("/nosotros")({
   head: () => ({
+    links: [{ rel: "canonical", href: `${SITE_URL}/nosotros` }],
     meta: [
       { title: "Nosotros — Funeraria Valderrama" },
       {

@@ -28,6 +28,7 @@ import { CoberturaMapa } from "@/components/site/CoberturaMapa";
 import { MapaChile } from "@/components/site/MapaChile";
 import { CoverflowCarousel } from "@/components/site/CoverflowCarousel";
 import { cn } from "@/lib/utils";
+import { SITE_URL } from "./__root";
 
 import esencial1 from "@/assets/urnas/esencial-1.jpg.asset.json";
 import selecto1 from "@/assets/urnas/selecto-1.jpg.asset.json";
@@ -87,6 +88,7 @@ function IconLed({ className, strokeWidth = 1.5 }: EquipoIconProps) {
 
 export const Route = createFileRoute("/servicios")({
   head: () => ({
+    links: [{ rel: "canonical", href: `${SITE_URL}/servicios` }],
     meta: [
       { title: "Servicios funerarios y cremación — Funeraria Valderrama" },
       {
