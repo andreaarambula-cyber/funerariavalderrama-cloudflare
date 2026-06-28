@@ -90,11 +90,11 @@ export const Route = createFileRoute("/servicios")({
   head: () => ({
     links: [{ rel: "canonical", href: `${SITE_URL}/servicios` }],
     meta: [
-      { title: "Servicios funerarios y cremación — Funeraria Valderrama" },
+      { title: "Servicios funerarios — Funeraria Valderrama" },
       {
         name: "description",
         content:
-          "Servicios funerarios completos en el Gran Concepción: funeral tradicional, cremación, velatorios, traslados y trámites. Atención cercana y profesional, 24/7.",
+          "Servicios funerarios completos en el Gran Concepción: funeral tradicional, velatorios, traslados y trámites. Atención cercana y profesional, 24/7.",
       },
     ],
   }),
