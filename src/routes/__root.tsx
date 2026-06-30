@@ -1,9 +1,17 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import {
+  Outlet,
+  Link,
+  createRootRoute,
+  HeadContent,
+  Scripts,
+  useRouterState,
+} from "@tanstack/react-router";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { WhatsAppFab } from "@/components/site/WhatsAppFab";
 import { AnnouncementBar } from "@/components/site/AnnouncementBar";
 import { Toaster } from "@/components/ui/sonner";
+import { AuthProvider } from "@/lib/auth";
 
 import appCss from "../styles.css?url";
 
@@ -125,22 +133,37 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <a
-        href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-primary focus:px-3 focus:py-2 focus:text-primary-foreground"
-      >
-        Saltar al contenido
-      </a>
-      <SiteHeader />
-      <AnnouncementBar />
-      <main id="main" className="flex-1">
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isAdmin = pathname.startsWith("/admin");
+
+  // El panel /admin usa su propio layout (sin header/footer público).
+  if (isAdmin) {
+    return (
+      <AuthProvider>
         <Outlet />
-      </main>
-      <SiteFooter />
-      <WhatsAppFab />
-      <Toaster position="top-center" richColors />
-    </div>
+        <Toaster position="top-center" richColors />
+      </AuthProvider>
+    );
+  }
+
+  return (
+    <AuthProvider>
+      <div className="flex min-h-screen flex-col bg-background">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-primary focus:px-3 focus:py-2 focus:text-primary-foreground"
+        >
+          Saltar al contenido
+        </a>
+        <SiteHeader />
+        <AnnouncementBar />
+        <main id="main" className="flex-1">
+          <Outlet />
+        </main>
+        <SiteFooter />
+        <WhatsAppFab />
+        <Toaster position="top-center" richColors />
+      </div>
+    </AuthProvider>
   );
 }
