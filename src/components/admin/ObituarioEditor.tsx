@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowLeft, Save, Plus, Trash2 } from "lucide-react";
+import { ArrowLeft, Save, Plus, Trash2, Upload, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -14,7 +14,7 @@ import {
 interface FieldDef {
   key: string;
   label: string;
-  type?: "text" | "textarea" | "select" | "datetime";
+  type?: "text" | "textarea" | "select" | "datetime" | "image" | "address";
   options?: string[];
   placeholder?: string;
   half?: boolean;
@@ -22,6 +22,10 @@ interface FieldDef {
 
 const inputCls =
   "w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20";
+
+// Subida de imágenes
+const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp", "image/avif"];
+const MAX_IMAGE_MB = 5;
 
 export function ObituarioEditor({
   value,
@@ -126,8 +130,8 @@ export function ObituarioEditor({
               onBlur={() => !form.slug && set("slug", slugify(form.full_name))}
             />
           </Field>
-          <Field label="Foto principal (URL de la imagen)">
-            <input className={inputCls} value={form.photo_url} onChange={(e) => set("photo_url", e.target.value)} />
+          <Field label="Foto principal">
+            <ImageInput value={form.photo_url} onChange={(v) => set("photo_url", v)} />
           </Field>
           <div className="grid grid-cols-2 gap-4">
             <Field label="Nacimiento (ej. 22/11/1965)">
@@ -161,7 +165,7 @@ export function ObituarioEditor({
           items={gallery}
           setItems={setGallery}
           fields={[
-            { key: "src", label: "Imagen (URL)", placeholder: "https://…" },
+            { key: "src", label: "Imagen", type: "image" },
             { key: "caption", label: "Descripción del recuerdo" },
             { key: "author", label: "Aportado por (ej. Familia)" },
           ]}
@@ -204,7 +208,7 @@ export function ObituarioEditor({
           fields={[
             { key: "type", label: "Tipo", type: "select", options: EVENT_TYPES, half: true },
             { key: "date", label: "Fecha y hora (como se muestra)", placeholder: "Hoy, 19:00 a 23:00 hrs", half: true },
-            { key: "address", label: "Dirección (para “Cómo llegar”)" },
+            { key: "address", label: "Lugar / dirección", type: "address" },
             { key: "isoStart", label: "Inicio (para “Mi calendario”)", type: "datetime", half: true },
             { key: "isoEnd", label: "Fin (para “Mi calendario”)", type: "datetime", half: true },
           ]}
@@ -334,6 +338,12 @@ function FieldInput({
       </select>
     );
   }
+  if (field.type === "image") {
+    return <ImageInput value={value} onChange={onChange} />;
+  }
+  if (field.type === "address") {
+    return <AddressInput value={value} onChange={onChange} />;
+  }
   return (
     <input
       type={field.type === "datetime" ? "datetime-local" : "text"}
@@ -342,6 +352,116 @@ function FieldInput({
       value={value}
       onChange={(e) => onChange(e.target.value)}
     />
+  );
+}
+
+/* ---------------- Subir imagen (archivo) o pegar URL ---------------- */
+
+function ImageInput({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  const [uploading, setUploading] = useState(false);
+
+  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = ""; // permite volver a elegir el mismo archivo
+    if (!file) return;
+    if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
+      toast.error("Formato no permitido. Usa JPG, PNG, WEBP o AVIF.");
+      return;
+    }
+    if (file.size > MAX_IMAGE_MB * 1024 * 1024) {
+      toast.error(`La imagen pesa demasiado. Máximo ${MAX_IMAGE_MB} MB.`);
+      return;
+    }
+    if (!supabase) return;
+    setUploading(true);
+    const ext = file.name.split(".").pop() || "jpg";
+    const path = `obituarios/${crypto.randomUUID()}.${ext}`;
+    const { error } = await supabase.storage
+      .from("media")
+      .upload(path, file, { contentType: file.type, upsert: false });
+    if (error) {
+      setUploading(false);
+      toast.error(error.message);
+      return;
+    }
+    const { data } = supabase.storage.from("media").getPublicUrl(path);
+    onChange(data.publicUrl);
+    setUploading(false);
+    toast.success("Imagen subida");
+  };
+
+  return (
+    <div className="space-y-2">
+      {value && (
+        <img
+          src={value}
+          alt="Vista previa"
+          className="h-24 w-24 rounded-lg border border-border object-cover"
+        />
+      )}
+      <div className="flex items-center gap-2">
+        <label className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-border px-3 py-2 text-sm text-primary hover:bg-background">
+          <Upload className="h-4 w-4" />
+          {uploading ? "Subiendo…" : "Subir imagen"}
+          <input
+            type="file"
+            accept={ALLOWED_IMAGE_TYPES.join(",")}
+            className="hidden"
+            disabled={uploading}
+            onChange={handleFile}
+          />
+        </label>
+        {value && (
+          <button
+            type="button"
+            onClick={() => onChange("")}
+            className="text-xs text-muted-foreground hover:text-destructive"
+          >
+            Quitar
+          </button>
+        )}
+      </div>
+      <input
+        className={inputCls}
+        placeholder="…o pega una URL de imagen"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
+      <p className="text-[11px] text-muted-foreground">
+        Formatos: JPG, PNG, WEBP o AVIF · máximo {MAX_IMAGE_MB} MB.
+      </p>
+    </div>
+  );
+}
+
+/* ---------------- Dirección con mapa automático ---------------- */
+
+function AddressInput({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(value)}`;
+  return (
+    <div className="space-y-1.5">
+      <input
+        className={inputCls}
+        placeholder="Ej. Parroquia San Pedro Apóstol, San Pedro de la Paz"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
+      <div className="flex items-center justify-between gap-2">
+        <p className="text-[11px] text-muted-foreground">
+          El mapa y el botón “Cómo llegar” se generan solos con esta dirección.
+        </p>
+        {value.trim() && (
+          <a
+            href={mapsUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex shrink-0 items-center gap-1 text-[11px] font-medium text-primary hover:underline"
+          >
+            <MapPin className="h-3 w-3" /> Ver en Maps
+          </a>
+        )}
+      </div>
+    </div>
   );
 }
 
