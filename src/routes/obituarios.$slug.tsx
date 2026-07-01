@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, MapPin, Calendar, Share2 } from "lucide-react";
 import { fetchObituarioBySlug } from "@/data/obituariosApi";
+import type { ObituaryListItem } from "@/data/obituariosApi";
 import { CandleWall } from "@/components/memorial/CandleWall";
 import { MemoryGallery } from "@/components/memorial/MemoryGallery";
 import { AnecdoteWall } from "@/components/memorial/AnecdoteWall";
@@ -157,7 +158,7 @@ function ObituarioPage() {
           <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {o.others
               .slice(0, 3)
-              .map((x) => (
+              .map((x: ObituaryListItem) => (
                 <Link
                   key={x.slug}
                   to="/obituarios/$slug"
