@@ -528,79 +528,79 @@ function ServiciosPage() {
                 </ul>
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* ===== Opciones de urna (personalizadas y sobredimensionadas) ===== */}
-        <div className="mt-12">
-          <div className="mb-6 text-center">
-            <p className="text-xs uppercase tracking-[0.3em] text-accent">Opciones de urna</p>
-            <h3 className="mt-2 font-serif text-2xl text-primary md:text-3xl">
-              Personalizadas y sobredimensionadas
-            </h3>
-          </div>
-          <div className="grid gap-6 md:grid-cols-2">
-            {/* Urnas personalizadas */}
-            <article className="flex flex-col overflow-hidden rounded-3xl border border-border bg-surface shadow-soft">
-              <div className="aspect-[16/10] overflow-hidden bg-muted">
-                <img
-                  src={urnaPersonalizadaColocolo}
-                  alt="Urna personalizada con el escudo de Colo-Colo"
-                  loading="lazy"
-                  className="h-full w-full object-cover"
-                />
+            {/* ===== Opciones de urna (dentro del módulo de planes) ===== */}
+            <div className="mt-10 border-t border-white/10 pt-10">
+              <div className="mb-6 text-center">
+                <p className="text-xs uppercase tracking-[0.3em] text-accent">Opciones de urna</p>
+                <h3 className="mt-2 font-serif text-2xl text-white md:text-3xl">
+                  Personalizadas y sobredimensionadas
+                </h3>
               </div>
-              <div className="flex flex-1 flex-col p-6">
-                <div className="inline-flex items-center gap-2 text-accent">
-                  <Palette className="h-4 w-4" />
-                  <span className="text-[11px] font-semibold uppercase tracking-wider">Personalizables</span>
-                </div>
-                <h4 className="mt-2 font-serif text-xl text-primary">Urnas personalizadas</h4>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                  Elige el color y la gráfica: el escudo de tu equipo, un diseño especial o un color a pedido.
-                </p>
-                <div className="mt-3 flex gap-2">
-                  <img
-                    src={urnaPersonalizadaUdechile}
-                    alt="Urna azul con escudo de la U de Chile"
-                    loading="lazy"
-                    className="h-14 w-14 rounded-lg border border-border object-cover"
-                  />
-                  <img
-                    src={urnaPersonalizadaRosada}
-                    alt="Urna rosada con paloma"
-                    loading="lazy"
-                    className="h-14 w-14 rounded-lg border border-border object-cover"
-                  />
-                </div>
-              </div>
-            </article>
+              <div className="grid gap-6 md:grid-cols-2">
+                {/* Urnas personalizadas */}
+                <article className="flex flex-col overflow-hidden rounded-3xl border border-border bg-surface shadow-soft">
+                  <div className="aspect-[16/10] overflow-hidden bg-muted">
+                    <img
+                      src={urnaPersonalizadaColocolo}
+                      alt="Urna personalizada con el escudo de Colo-Colo"
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col p-6">
+                    <div className="inline-flex items-center gap-2 text-accent">
+                      <Palette className="h-4 w-4" />
+                      <span className="text-[11px] font-semibold uppercase tracking-wider">Personalizables</span>
+                    </div>
+                    <h4 className="mt-2 font-serif text-xl text-primary">Urnas personalizadas</h4>
+                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                      Elige el color y la gráfica: el escudo de tu equipo, un diseño especial o un color a pedido.
+                    </p>
+                    <div className="mt-3 flex gap-2">
+                      <img
+                        src={urnaPersonalizadaUdechile}
+                        alt="Urna azul con escudo de la U de Chile"
+                        loading="lazy"
+                        className="h-14 w-14 rounded-lg border border-border object-cover"
+                      />
+                      <img
+                        src={urnaPersonalizadaRosada}
+                        alt="Urna rosada con paloma"
+                        loading="lazy"
+                        className="h-14 w-14 rounded-lg border border-border object-cover"
+                      />
+                    </div>
+                  </div>
+                </article>
 
-            {/* Urnas sobredimensionadas — DESTACADA */}
-            <article className="relative flex flex-col overflow-hidden rounded-3xl border-2 border-accent bg-surface shadow-elevated">
-              <span className="absolute right-4 top-4 z-10 inline-flex items-center gap-1 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold text-accent-foreground shadow-soft">
-                <Star className="h-3 w-3" /> De los pocos en Concepción
-              </span>
-              <div className="aspect-[16/10] overflow-hidden bg-muted">
-                <img
-                  src={urnaSobredimensionada}
-                  alt="Urna sobredimensionada de madera"
-                  loading="lazy"
-                  className="h-full w-full object-cover"
-                />
+                {/* Urnas sobredimensionadas — DESTACADA */}
+                <article className="relative flex flex-col overflow-hidden rounded-3xl border-2 border-accent bg-surface shadow-elevated">
+                  <span className="absolute right-4 top-4 z-10 inline-flex items-center gap-1 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold text-accent-foreground shadow-soft">
+                    <Star className="h-3 w-3" /> De los pocos en Concepción
+                  </span>
+                  <div className="aspect-[16/10] overflow-hidden bg-muted">
+                    <img
+                      src={urnaSobredimensionada}
+                      alt="Urna sobredimensionada de madera"
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col p-6">
+                    <div className="inline-flex items-center gap-2 text-accent">
+                      <Maximize2 className="h-4 w-4" />
+                      <span className="text-[11px] font-semibold uppercase tracking-wider">Sobremedida</span>
+                    </div>
+                    <h4 className="mt-2 font-serif text-xl text-primary">Urnas sobredimensionadas</h4>
+                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                      Modelos de mayor amplitud, para brindar comodidad y dignidad. Somos de las pocas
+                      funerarias en Concepción que las ofrece.
+                    </p>
+                  </div>
+                </article>
               </div>
-              <div className="flex flex-1 flex-col p-6">
-                <div className="inline-flex items-center gap-2 text-accent">
-                  <Maximize2 className="h-4 w-4" />
-                  <span className="text-[11px] font-semibold uppercase tracking-wider">Sobremedida</span>
-                </div>
-                <h4 className="mt-2 font-serif text-xl text-primary">Urnas sobredimensionadas</h4>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                  Modelos de mayor amplitud, para brindar comodidad y dignidad. Somos de las pocas
-                  funerarias en Concepción que las ofrece.
-                </p>
-              </div>
-            </article>
+            </div>
           </div>
         </div>
 
