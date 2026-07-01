@@ -30,7 +30,7 @@ import cementerioLogo from "@/assets/convenios/cementerio-general.png";
 import capredenaLogo from "@/assets/convenios/capredena.png";
 import diprecaLogo from "@/assets/convenios/dipreca.png";
 import chileatiendeLogo from "@/assets/convenios/chileatiende.png";
-import { obituaries } from "@/data/obituaries";
+import { fetchPublishedObituarios, type ObituaryListItem } from "@/data/obituariosApi";
 import { Obituaries3DCarousel } from "@/components/site/Obituaries3DCarousel";
 import { SITE_URL } from "./__root";
 
@@ -715,6 +715,21 @@ function OurWork() {
 }
 
 function FeaturedObituaries() {
+  const [items, setItems] = useState<ObituaryListItem[]>([]);
+
+  useEffect(() => {
+    let active = true;
+    fetchPublishedObituarios().then((list) => {
+      if (active) setItems(list);
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  // Si aún no hay obituarios publicados, no mostramos la sección.
+  if (items.length === 0) return null;
+
   return (
     <section className="py-20 md:py-28">
       <div className="container-prose">
@@ -733,7 +748,7 @@ function FeaturedObituaries() {
         </div>
       </div>
       <div className="mt-6">
-        <Obituaries3DCarousel obituaries={obituaries.slice(0, 8)} />
+        <Obituaries3DCarousel obituaries={items.slice(0, 8)} />
       </div>
     </section>
   );

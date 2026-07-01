@@ -72,10 +72,18 @@ export async function fetchPublishedObituarios(): Promise<ObituaryListItem[]> {
   return (data as Row[]).map(toListItem);
 }
 
-/** Un obituario completo por slug + sus condolencias aprobadas (velas). */
+interface AporteRow {
+  tipo: "vela" | "recuerdo" | "anecdota";
+  author_name: string;
+  message: string | null;
+  image_url: string | null;
+  created_at: string;
+}
+
+/** Un obituario completo por slug + sus aportes aprobados (velas/recuerdos/anécdotas). */
 export async function fetchObituarioBySlug(
   slug: string,
-): Promise<(Obituary & { others: ObituaryListItem[] }) | null> {
+): Promise<(Obituary & { id: string; others: ObituaryListItem[] }) | null> {
   if (!supabase) return null;
 
   const { data, error } = await supabase
@@ -89,20 +97,35 @@ export async function fetchObituarioBySlug(
 
   const { data: cond } = await supabase
     .from("condolencias")
-    .select("author_name, message, created_at")
+    .select("tipo, author_name, message, image_url, created_at")
     .eq("obituario_id", r.id)
     .eq("status", "approved")
     .order("created_at", { ascending: false });
+  const aportes = (cond ?? []) as AporteRow[];
 
-  const candles: Candle[] = (cond ?? []).map((c) => ({
-    name: (c as { author_name: string }).author_name,
-    message: (c as { message: string | null }).message ?? undefined,
-    timeAgo: relativeTime((c as { created_at: string }).created_at),
-  }));
+  // Velas aprobadas.
+  const candles: Candle[] = aportes
+    .filter((a) => a.tipo === "vela")
+    .map((a) => ({
+      name: a.author_name,
+      message: a.message ?? undefined,
+      timeAgo: relativeTime(a.created_at),
+    }));
+
+  // Recuerdos aprobados del público, sumados a la galería del obituario.
+  const publicGallery: GalleryItem[] = aportes
+    .filter((a) => a.tipo === "recuerdo" && a.image_url)
+    .map((a) => ({ src: a.image_url as string, caption: a.message ?? "", author: a.author_name }));
+
+  // Anécdotas aprobadas del público, sumadas a las del obituario.
+  const publicAnecdotes: Anecdote[] = aportes
+    .filter((a) => a.tipo === "anecdota")
+    .map((a) => ({ author: a.author_name, text: a.message ?? "" }));
 
   const others = (await fetchPublishedObituarios()).filter((o) => o.slug !== slug);
 
   return {
+    id: r.id,
     slug: r.slug,
     fullName: r.full_name,
     photo: r.photo_url ?? "",
@@ -111,8 +134,8 @@ export async function fetchObituarioBySlug(
     comuna: r.comuna ?? "",
     summary: r.summary ?? "",
     timeline: arr<TimelineItem>(r.timeline),
-    gallery: arr<GalleryItem>(r.gallery),
-    anecdotes: arr<Anecdote>(r.anecdotes),
+    gallery: [...arr<GalleryItem>(r.gallery), ...publicGallery],
+    anecdotes: [...arr<Anecdote>(r.anecdotes), ...publicAnecdotes],
     candles,
     events: arr<FarewellEvent>(r.events),
     others,

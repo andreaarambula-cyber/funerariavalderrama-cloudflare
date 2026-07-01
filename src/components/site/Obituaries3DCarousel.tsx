@@ -3,10 +3,10 @@ import { motion, useReducedMotion, type PanInfo } from "framer-motion";
 import { ChevronLeft, ChevronRight, MapPin, ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useIsMobile } from "@/hooks/use-mobile";
-import type { Obituary } from "@/data/obituaries";
+import type { ObituaryListItem } from "@/data/obituariosApi";
 
 interface Props {
-  obituaries: Obituary[];
+  obituaries: ObituaryListItem[];
 }
 
 const SPRING = { type: "spring" as const, stiffness: 500, damping: 90, mass: 1 };
@@ -147,7 +147,7 @@ function ObituaryCard({
   obituary,
   isActive,
 }: {
-  obituary: Obituary;
+  obituary: ObituaryListItem;
   isActive: boolean;
 }) {
   return (

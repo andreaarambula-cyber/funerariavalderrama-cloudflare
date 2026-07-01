@@ -10,7 +10,7 @@ type Section = "obituarios" | "condolencias" | "contenido";
 
 const NAV: { id: Section; label: string; icon: typeof FileText }[] = [
   { id: "obituarios", label: "Obituarios", icon: FileText },
-  { id: "condolencias", label: "Condolencias", icon: Heart },
+  { id: "condolencias", label: "Moderación", icon: Heart },
   { id: "contenido", label: "Textos del sitio", icon: LayoutGrid },
 ];
 

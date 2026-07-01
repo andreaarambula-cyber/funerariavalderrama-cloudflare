@@ -103,10 +103,10 @@ function ObituarioPage() {
         </div>
       </section>
 
-      <MemoryGallery items={o.gallery} personName={o.fullName} />
-      <AnecdoteWall items={o.anecdotes} personName={o.fullName} />
+      <MemoryGallery items={o.gallery} personName={o.fullName} obituarioId={o.id} />
+      <AnecdoteWall items={o.anecdotes} personName={o.fullName} obituarioId={o.id} />
       <FarewellAgenda events={o.events} personName={o.fullName} />
-      <CandleWall initial={o.candles} personName={o.fullName} />
+      <CandleWall initial={o.candles} personName={o.fullName} obituarioId={o.id} />
 
       <section className="container-prose py-16">
         <aside className="mx-auto grid max-w-2xl gap-6">

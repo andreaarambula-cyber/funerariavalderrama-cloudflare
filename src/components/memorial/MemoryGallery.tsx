@@ -2,11 +2,24 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, ImagePlus, Upload, X } from "lucide-react";
 import { toast } from "sonner";
 import type { GalleryItem } from "@/data/obituaries";
+import { submitAporte, uploadAporteImage } from "@/data/aportes";
 
-export function MemoryGallery({ items, personName }: { items: GalleryItem[]; personName: string }) {
+export function MemoryGallery({
+  items,
+  personName,
+  obituarioId,
+}: {
+  items: GalleryItem[];
+  personName: string;
+  obituarioId: string;
+}) {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [caption, setCaption] = useState("");
+  const [code, setCode] = useState("");
+  const [file, setFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState("");
+  const [sending, setSending] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
   const [paused, setPaused] = useState(false);
 
@@ -28,15 +41,47 @@ export function MemoryGallery({ items, personName }: { items: GalleryItem[]; per
     return () => clearInterval(id);
   }, [paused, items.length]);
 
-  function submit(e: React.FormEvent) {
+  function pickFile(f: File | null) {
+    if (!f) return;
+    setFile(f);
+    setPreview(URL.createObjectURL(f));
+  }
+
+  async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!name.trim() || !caption.trim()) return;
-    toast.success("Recuerdo enviado", {
-      description: "La familia revisará tu aporte antes de publicarlo.",
-    });
-    setName("");
-    setCaption("");
-    setOpen(false);
+    if (!name.trim() || !caption.trim() || sending) return;
+    if (!file) {
+      toast.error("Agrega una foto para tu recuerdo.");
+      return;
+    }
+    setSending(true);
+    try {
+      const imageUrl = await uploadAporteImage(file);
+      const res = await submitAporte({
+        obituarioId,
+        tipo: "recuerdo",
+        authorName: name.trim(),
+        message: caption.trim(),
+        imageUrl: imageUrl ?? undefined,
+        code: code.trim() || undefined,
+      });
+      if (!res.ok) throw new Error(res.error || "Error");
+      toast.success("Recuerdo enviado", {
+        description: res.autoApproved
+          ? "¡Gracias! Ya quedó publicado."
+          : "La familia lo revisará antes de publicarlo.",
+      });
+      setName("");
+      setCaption("");
+      setCode("");
+      setFile(null);
+      setPreview("");
+      setOpen(false);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "No se pudo enviar el recuerdo.");
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -137,13 +182,23 @@ export function MemoryGallery({ items, personName }: { items: GalleryItem[]; per
               </button>
             </div>
 
-            <div className="mt-5 flex min-h-[140px] w-full cursor-pointer items-center justify-center rounded-xl border-2 border-dashed border-border bg-background p-4 text-center text-sm text-muted-foreground hover:border-primary/40 sm:aspect-video sm:min-h-0">
-              <div>
-                <Upload className="mx-auto h-6 w-6" />
-                <p className="mt-2">Haz clic o arrastra una imagen</p>
-                <p className="text-xs">JPG o PNG, máx. 5 MB</p>
-              </div>
-            </div>
+            <label className="mt-5 flex min-h-[140px] w-full cursor-pointer items-center justify-center overflow-hidden rounded-xl border-2 border-dashed border-border bg-background p-4 text-center text-sm text-muted-foreground hover:border-primary/40 sm:aspect-video sm:min-h-0">
+              {preview ? (
+                <img src={preview} alt="Vista previa" className="max-h-40 rounded-lg object-contain" />
+              ) : (
+                <div>
+                  <Upload className="mx-auto h-6 w-6" />
+                  <p className="mt-2">Haz clic para elegir una imagen</p>
+                  <p className="text-xs">JPG, PNG, WEBP o AVIF, máx. 5 MB</p>
+                </div>
+              )}
+              <input
+                type="file"
+                accept="image/jpeg,image/png,image/webp,image/avif"
+                className="hidden"
+                onChange={(e) => pickFile(e.target.files?.[0] ?? null)}
+              />
+            </label>
 
             <label className="mt-4 block text-sm">
               <span className="font-medium">Tu nombre</span>
@@ -166,12 +221,25 @@ export function MemoryGallery({ items, personName }: { items: GalleryItem[]; per
                 className="mt-1.5 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
               />
             </label>
+            <label className="mt-4 block text-sm">
+              <span className="font-medium">
+                Código de la familia <span className="text-muted-foreground">(opcional)</span>
+              </span>
+              <input
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                maxLength={40}
+                placeholder="Si la familia te dio un código, tu recuerdo se publica al instante"
+                className="mt-1.5 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+              />
+            </label>
 
             <button
               type="submit"
-              className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition hover:brightness-110"
+              disabled={sending}
+              className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition hover:brightness-110 disabled:opacity-60"
             >
-              Enviar recuerdo
+              {sending ? "Enviando…" : "Enviar recuerdo"}
             </button>
             <p className="mt-3 text-center text-[11px] text-muted-foreground">
               La familia revisará tu aporte antes de publicarlo.

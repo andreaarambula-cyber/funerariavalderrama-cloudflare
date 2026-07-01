@@ -2,13 +2,24 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { toast } from "sonner";
 import type { Anecdote } from "@/data/obituaries";
+import { submitAporte } from "@/data/aportes";
 
 const tilts = ["polaroid-tilt-1", "polaroid-tilt-2", "polaroid-tilt-3", "polaroid-tilt-4"];
 
-export function AnecdoteWall({ items, personName }: { items: Anecdote[]; personName: string }) {
+export function AnecdoteWall({
+  items,
+  personName,
+  obituarioId,
+}: {
+  items: Anecdote[];
+  personName: string;
+  obituarioId: string;
+}) {
   const [list, setList] = useState<Anecdote[]>(items);
   const [author, setAuthor] = useState("");
   const [text, setText] = useState("");
+  const [code, setCode] = useState("");
+  const [sending, setSending] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
   const [paused, setPaused] = useState(false);
 
@@ -30,13 +41,33 @@ export function AnecdoteWall({ items, personName }: { items: Anecdote[]; personN
     return () => clearInterval(id);
   }, [paused, list.length]);
 
-  function submit(e: React.FormEvent) {
+  async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!author.trim() || !text.trim()) return;
-    setList((l) => [{ author: author.trim(), text: text.trim() }, ...l]);
-    toast.success("Gracias por compartir", { description: "Tu recuerdo se sumó al muro." });
+    if (!author.trim() || !text.trim() || sending) return;
+    setSending(true);
+    const res = await submitAporte({
+      obituarioId,
+      tipo: "anecdota",
+      authorName: author.trim(),
+      message: text.trim(),
+      code: code.trim() || undefined,
+    });
+    setSending(false);
+    if (!res.ok) {
+      toast.error("No se pudo enviar. Intenta de nuevo.");
+      return;
+    }
+    if (res.autoApproved) {
+      setList((l) => [{ author: author.trim(), text: text.trim() }, ...l]);
+      toast.success("Gracias por compartir", { description: "Tu recuerdo se sumó al muro." });
+    } else {
+      toast.success("Gracias por compartir", {
+        description: "La familia lo revisará antes de publicarlo.",
+      });
+    }
     setAuthor("");
     setText("");
+    setCode("");
   }
 
   return (
@@ -141,11 +172,24 @@ export function AnecdoteWall({ items, personName }: { items: Anecdote[]; personN
               className="mt-1.5 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
             />
           </label>
+          <label className="mt-4 block text-sm">
+            <span className="font-medium">
+              Código de la familia <span className="text-muted-foreground">(opcional)</span>
+            </span>
+            <input
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              maxLength={40}
+              placeholder="Si la familia te dio un código, se publica al instante"
+              className="mt-1.5 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+            />
+          </label>
           <button
             type="submit"
-            className="mt-5 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition hover:brightness-110"
+            disabled={sending}
+            className="mt-5 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition hover:brightness-110 disabled:opacity-60"
           >
-            Compartir recuerdo
+            {sending ? "Enviando…" : "Compartir recuerdo"}
           </button>
         </form>
       </div>
