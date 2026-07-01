@@ -21,6 +21,9 @@ import {
   Speaker,
   ArrowUpRight,
   Phone,
+  Newspaper,
+  Palette,
+  Maximize2,
   type LucideIcon,
 } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
@@ -34,6 +37,10 @@ import { SITE_URL } from "./__root";
 import esencial1 from "@/assets/urnas/esencial-1.jpg.asset.json";
 import selecto1 from "@/assets/urnas/selecto-1.jpg.asset.json";
 import memorable1 from "@/assets/urnas/memorable-1.jpg.asset.json";
+import urnaPersonalizadaColocolo from "@/assets/urnas/personalizada-colocolo.jpg";
+import urnaPersonalizadaUdechile from "@/assets/urnas/personalizada-udechile.jpg";
+import urnaPersonalizadaRosada from "@/assets/urnas/personalizada-rosada.jpg";
+import urnaSobredimensionada from "@/assets/urnas/sobredimensionada.jpg";
 import velatorioCirios1 from "@/assets/equipo/cirios.webp";
 import velatorioCirios2 from "@/assets/equipo/cirios-2.webp";
 import velatorioTulipa from "@/assets/equipo/tulipa.webp";
@@ -127,11 +134,14 @@ const PLANS: Plan[] = [
       { icon: Church, label: "Capilla de madera" },
       { icon: IdCard, label: "Tarjetero" },
       { icon: Cross, label: "Cruz" },
-      { icon: BookHeart, label: "Libro y arreglo floral" },
+      { icon: BookHeart, label: "Libro de Condolencias" },
+      { icon: Flower2, label: "Arreglo floral" },
       { icon: FileSignature, label: "Trámites legales" },
       { icon: Car, label: "Carroza" },
-      { icon: Van, label: "Van" },
+      { icon: Van, label: "Van de acompañamiento" },
       { icon: GlassWater, label: "Dispensador de agua" },
+      { icon: HandHeart, label: "Tarjetas de agradecimiento" },
+      { icon: Newspaper, label: "Obituario digital" },
     ],
   },
   {
@@ -148,10 +158,11 @@ const PLANS: Plan[] = [
       { icon: Flower2, label: "Arreglo floral" },
       { icon: FileSignature, label: "Trámites legales" },
       { icon: Car, label: "Carroza" },
-      { icon: Van, label: "Van" },
+      { icon: Van, label: "Van de acompañamiento" },
       { icon: GlassWater, label: "Dispensador de agua" },
+      { icon: HandHeart, label: "Tarjetas de agradecimiento" },
+      { icon: Newspaper, label: "Obituario digital" },
       { icon: Coffee, label: "Cafetería", hot: true },
-      { icon: HandHeart, label: "Tarjetas de agradecimiento", hot: true },
       { icon: Frame, label: "Fotografía A4", hot: true },
     ],
   },
@@ -169,10 +180,11 @@ const PLANS: Plan[] = [
       { icon: Flower2, label: "5 arreglos florales", hot: true },
       { icon: FileSignature, label: "Trámites legales" },
       { icon: Car, label: "2 carrozas", hot: true },
-      { icon: Van, label: "Van" },
+      { icon: Van, label: "Van de acompañamiento" },
       { icon: GlassWater, label: "Dispensador de agua" },
-      { icon: Coffee, label: "Cafetería" },
       { icon: HandHeart, label: "Tarjetas de agradecimiento" },
+      { icon: Newspaper, label: "Obituario digital" },
+      { icon: Coffee, label: "Cafetería" },
       { icon: Frame, label: "Fotografía A4" },
       { icon: MicVocal, label: "Lírico", hot: true },
       { icon: Speaker, label: "Parlante", hot: true },
@@ -518,8 +530,93 @@ function ServiciosPage() {
           </div>
         </div>
 
+        {/* ===== Opciones especiales (dentro de Planes) ===== */}
+        <div className="mt-12">
+          <div className="mb-6 text-center">
+            <p className="text-xs uppercase tracking-[0.3em] text-accent">También disponibles</p>
+            <h3 className="mt-2 font-serif text-2xl text-primary md:text-3xl">Opciones especiales</h3>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {/* Urnas personalizadas */}
+            <article className="flex flex-col overflow-hidden rounded-3xl border border-border bg-surface shadow-soft">
+              <div className="aspect-[4/3] overflow-hidden bg-muted">
+                <img
+                  src={urnaPersonalizadaColocolo}
+                  alt="Urna personalizada con el escudo de Colo-Colo"
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div className="flex flex-1 flex-col p-5">
+                <div className="inline-flex items-center gap-2 text-accent">
+                  <Palette className="h-4 w-4" />
+                  <span className="text-[11px] font-semibold uppercase tracking-wider">Personalizables</span>
+                </div>
+                <h4 className="mt-2 font-serif text-xl text-primary">Urnas personalizadas</h4>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                  Elige el color y la gráfica: el escudo de tu equipo, un diseño especial o un color a pedido.
+                </p>
+                <div className="mt-3 flex gap-2">
+                  <img
+                    src={urnaPersonalizadaUdechile}
+                    alt="Urna azul con escudo de la U de Chile"
+                    loading="lazy"
+                    className="h-14 w-14 rounded-lg border border-border object-cover"
+                  />
+                  <img
+                    src={urnaPersonalizadaRosada}
+                    alt="Urna rosada con paloma"
+                    loading="lazy"
+                    className="h-14 w-14 rounded-lg border border-border object-cover"
+                  />
+                </div>
+              </div>
+            </article>
+
+            {/* Urna sobredimensionada */}
+            <article className="flex flex-col overflow-hidden rounded-3xl border border-border bg-surface shadow-soft">
+              <div className="aspect-[4/3] overflow-hidden bg-muted">
+                <img
+                  src={urnaSobredimensionada}
+                  alt="Urna sobredimensionada de madera"
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div className="flex flex-1 flex-col p-5">
+                <div className="inline-flex items-center gap-2 text-accent">
+                  <Maximize2 className="h-4 w-4" />
+                  <span className="text-[11px] font-semibold uppercase tracking-wider">Sobremedida</span>
+                </div>
+                <h4 className="mt-2 font-serif text-xl text-primary">Urna sobredimensionada</h4>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                  Modelo de mayor amplitud, para brindar comodidad y dignidad. Incluye los mismos servicios que el
+                  plan Selecto.
+                </p>
+              </div>
+            </article>
+
+            {/* Exhumación */}
+            <article className="flex flex-col overflow-hidden rounded-3xl border border-border bg-surface shadow-soft">
+              <div className="flex aspect-[4/3] items-center justify-center bg-secondary/40">
+                <Pickaxe className="h-12 w-12 text-primary/40" strokeWidth={1.2} />
+              </div>
+              <div className="flex flex-1 flex-col p-5">
+                <div className="inline-flex items-center gap-2 text-accent">
+                  <ArrowLeftRight className="h-4 w-4" />
+                  <span className="text-[11px] font-semibold uppercase tracking-wider">Traslados</span>
+                </div>
+                <h4 className="mt-2 font-serif text-xl text-primary">Exhumación</h4>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                  Urnas de reducción y de cuerpo entero. Incluye carroza, trámites legales y traslado.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+
         {/* CTA secundaria + nota */}
-        <div className="mt-8 flex flex-col items-center gap-3 text-center sm:flex-row sm:justify-center">
+        <div className="mt-10 flex flex-col items-center gap-3 text-center sm:flex-row sm:justify-center">
           <a
             href="tel:+56953900931"
             className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-accent-foreground shadow-elevated transition hover:brightness-105"
