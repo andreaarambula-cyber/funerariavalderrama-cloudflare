@@ -156,7 +156,9 @@ $$;
 create or replace function public.enforce_obituario_status()
 returns trigger language plpgsql security definer set search_path = '' as $$
 begin
-  if not public.is_staff(auth.uid()) then
+  -- auth.uid() nulo = operación de servidor/seed (confiable). Los usuarios
+  -- autenticados sin rol de staff no pueden publicar ni archivar.
+  if auth.uid() is not null and not public.is_staff(auth.uid()) then
     if tg_op = 'INSERT' and new.status is distinct from 'draft' then
       raise exception 'Solo admin u owner pueden publicar o archivar';
     elsif tg_op = 'UPDATE' and new.status is distinct from old.status then
@@ -242,34 +244,42 @@ alter table public.content_versions enable row level security;
 alter table public.audit_logs      enable row level security;
 
 -- ---------- profiles ----------
+drop policy if exists "perfil propio o staff" on public.profiles;
 create policy "perfil propio o staff" on public.profiles
   for select to authenticated
   using (auth.uid() = user_id or public.is_staff(auth.uid()));
+drop policy if exists "actualizar perfil propio" on public.profiles;
 create policy "actualizar perfil propio" on public.profiles
   for update to authenticated
   using (auth.uid() = user_id) with check (auth.uid() = user_id);
 
 -- ---------- user_roles ----------
+drop policy if exists "ver roles propios o staff" on public.user_roles;
 create policy "ver roles propios o staff" on public.user_roles
   for select to authenticated
   using (auth.uid() = user_id or public.is_staff(auth.uid()));
 -- Solo el owner gestiona roles.
+drop policy if exists "owner gestiona roles" on public.user_roles;
 create policy "owner gestiona roles" on public.user_roles
   for all to authenticated
   using (public.has_role(auth.uid(), 'owner'))
   with check (public.has_role(auth.uid(), 'owner'));
 
 -- ---------- obituarios ----------
+drop policy if exists "publico ve obituarios publicados" on public.obituarios;
 create policy "publico ve obituarios publicados" on public.obituarios
   for select using (status = 'published');
+drop policy if exists "staff y editores ven todo" on public.obituarios;
 create policy "staff y editores ven todo" on public.obituarios
   for select to authenticated using (true);
+drop policy if exists "editores y staff crean" on public.obituarios;
 create policy "editores y staff crean" on public.obituarios
   for insert to authenticated
   with check (
     created_by = auth.uid()
     and (public.is_staff(auth.uid()) or public.has_role(auth.uid(), 'editor'))
   );
+drop policy if exists "staff edita todo; editor solo lo suyo" on public.obituarios;
 create policy "staff edita todo; editor solo lo suyo" on public.obituarios
   for update to authenticated
   using (public.is_staff(auth.uid())
@@ -277,38 +287,49 @@ create policy "staff edita todo; editor solo lo suyo" on public.obituarios
   with check (updated_by = auth.uid()
          and (public.is_staff(auth.uid())
               or (public.has_role(auth.uid(), 'editor') and created_by = auth.uid())));
+drop policy if exists "solo staff elimina obituarios" on public.obituarios;
 create policy "solo staff elimina obituarios" on public.obituarios
   for delete to authenticated using (public.is_staff(auth.uid()));
 
 -- ---------- condolencias ----------
+drop policy if exists "publico ve condolencias aprobadas" on public.condolencias;
 create policy "publico ve condolencias aprobadas" on public.condolencias
   for select using (status = 'approved');
+drop policy if exists "staff ve todas las condolencias" on public.condolencias;
 create policy "staff ve todas las condolencias" on public.condolencias
   for select to authenticated using (public.is_staff(auth.uid()));
 -- Cualquiera (incluso anónimo) puede enviar; el trigger fuerza 'pending'.
+drop policy if exists "cualquiera envia condolencia" on public.condolencias;
 create policy "cualquiera envia condolencia" on public.condolencias
   for insert to anon, authenticated
   with check (status = 'pending' or public.is_staff(auth.uid()));
+drop policy if exists "staff modera condolencias" on public.condolencias;
 create policy "staff modera condolencias" on public.condolencias
   for update to authenticated
   using (public.is_staff(auth.uid())) with check (public.is_staff(auth.uid()));
+drop policy if exists "staff elimina condolencias" on public.condolencias;
 create policy "staff elimina condolencias" on public.condolencias
   for delete to authenticated using (public.is_staff(auth.uid()));
 
 -- ---------- site_content ----------
+drop policy if exists "publico ve contenido activo" on public.site_content;
 create policy "publico ve contenido activo" on public.site_content
   for select using (is_active = true);
+drop policy if exists "autenticados ven todo el contenido" on public.site_content;
 create policy "autenticados ven todo el contenido" on public.site_content
   for select to authenticated using (true);
+drop policy if exists "solo staff escribe contenido" on public.site_content;
 create policy "solo staff escribe contenido" on public.site_content
   for all to authenticated
   using (public.is_staff(auth.uid())) with check (public.is_staff(auth.uid()));
 
 -- ---------- content_versions (solo lectura staff; escritura por servidor) ----------
+drop policy if exists "staff lee versiones" on public.content_versions;
 create policy "staff lee versiones" on public.content_versions
   for select to authenticated using (public.is_staff(auth.uid()));
 
 -- ---------- audit_logs (solo lectura staff; escritura por triggers/servidor) ----------
+drop policy if exists "staff lee auditoria" on public.audit_logs;
 create policy "staff lee auditoria" on public.audit_logs
   for select to authenticated using (public.is_staff(auth.uid()));
 
