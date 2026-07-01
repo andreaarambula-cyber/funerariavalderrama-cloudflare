@@ -37,7 +37,7 @@ function ContactoPage() {
       <PageHero
         eyebrow="Contacto"
         title="Estamos aquí, en cualquier momento"
-        subtitle="Atendemos las 24 horas del día, los 365 días del año. Elige el canal que prefieras."
+        subtitle="Atendemos las 24 horas del día, los 365 días del año. Elige el canal que prefieras. Desde el primer llamado, nuestro equipo coordina cada detalle con cercanía, transparencia y respeto, entregando a las familias la tranquilidad de sentirse acompañadas en cada paso."
       />
 
       <section className="container-prose grid gap-10 py-16 lg:grid-cols-[1fr,1.2fr]">

@@ -20,6 +20,7 @@ import {
   MicVocal,
   Speaker,
   ArrowUpRight,
+  Phone,
   type LucideIcon,
 } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
@@ -521,9 +522,9 @@ function ServiciosPage() {
         <div className="mt-8 flex flex-col items-center gap-3 text-center sm:flex-row sm:justify-center">
           <a
             href="tel:+56953900931"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-primary transition hover:bg-secondary"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-accent-foreground shadow-elevated transition hover:brightness-105"
           >
-            Llamar ahora · +56 9 5390 0931
+            <Phone className="h-4 w-4" /> Llamar ahora · +56 9 5390 0931
           </a>
           <p className="text-xs italic text-muted-foreground">Fotos de urnas sujetas a stock.</p>
         </div>
