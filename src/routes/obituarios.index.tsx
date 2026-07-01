@@ -2,10 +2,11 @@ import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Search, MapPin, ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
-import { obituaries } from "@/data/obituaries";
+import { fetchPublishedObituarios } from "@/data/obituariosApi";
 import { SITE_URL } from "./__root";
 
 export const Route = createFileRoute("/obituarios/")({
+  loader: async () => ({ obituaries: await fetchPublishedObituarios() }),
   head: () => ({
     links: [{ rel: "canonical", href: `${SITE_URL}/obituarios` }],
     meta: [
@@ -21,12 +22,13 @@ export const Route = createFileRoute("/obituarios/")({
 });
 
 function ObituariosPage() {
+  const { obituaries } = Route.useLoaderData();
   const [q, setQ] = useState("");
   const [comuna, setComuna] = useState("Todas");
 
   const comunas = useMemo(
-    () => ["Todas", ...Array.from(new Set(obituaries.map((o) => o.comuna)))],
-    [],
+    () => ["Todas", ...Array.from(new Set(obituaries.map((o) => o.comuna).filter(Boolean)))],
+    [obituaries],
   );
 
   const results = obituaries.filter((o) => {

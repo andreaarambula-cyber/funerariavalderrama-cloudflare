@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, MapPin, Calendar, Share2 } from "lucide-react";
-import { getObituary, obituaries } from "@/data/obituaries";
+import { fetchObituarioBySlug } from "@/data/obituariosApi";
 import { CandleWall } from "@/components/memorial/CandleWall";
 import { MemoryGallery } from "@/components/memorial/MemoryGallery";
 import { AnecdoteWall } from "@/components/memorial/AnecdoteWall";
@@ -8,8 +8,8 @@ import { FarewellAgenda } from "@/components/memorial/FarewellAgenda";
 import { MemorialQR } from "@/components/memorial/MemorialQR";
 
 export const Route = createFileRoute("/obituarios/$slug")({
-  loader: ({ params }) => {
-    const o = getObituary(params.slug);
+  loader: async ({ params }) => {
+    const o = await fetchObituarioBySlug(params.slug);
     if (!o) throw notFound();
     return o;
   },
@@ -155,8 +155,7 @@ function ObituarioPage() {
         <div className="container-prose">
           <h2 className="font-serif text-2xl text-primary">Otros memoriales</h2>
           <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {obituaries
-              .filter((x) => x.slug !== o.slug)
+            {o.others
               .slice(0, 3)
               .map((x) => (
                 <Link
