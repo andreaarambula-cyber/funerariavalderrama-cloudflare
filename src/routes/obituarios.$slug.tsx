@@ -7,6 +7,7 @@ import { MemoryGallery } from "@/components/memorial/MemoryGallery";
 import { AnecdoteWall } from "@/components/memorial/AnecdoteWall";
 import { FarewellAgenda } from "@/components/memorial/FarewellAgenda";
 import { MemorialQR } from "@/components/memorial/MemorialQR";
+import { MemorialShareImage } from "@/components/memorial/MemorialShareImage";
 
 export const Route = createFileRoute("/obituarios/$slug")({
   loader: async ({ params }) => {
@@ -116,7 +117,20 @@ function ObituarioPage() {
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-foreground/80">
               Compartir
             </p>
-            <div className="mt-3 flex gap-2">
+            <div className="mt-3">
+              <MemorialShareImage
+                photoUrl={o.photo}
+                fullName={o.fullName}
+                birth={o.birth}
+                death={o.death}
+                summary={o.summary}
+                url={memorialUrl}
+              />
+              <p className="mt-2 text-center text-[11px] text-muted-foreground">
+                Genera una tarjeta con su foto y reseña para tu Historia de Instagram.
+              </p>
+            </div>
+            <div className="mt-4 flex gap-2">
               {[
                 {
                   label: "WhatsApp",
