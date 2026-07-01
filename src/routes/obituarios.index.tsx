@@ -31,7 +31,11 @@ function ObituariosPage() {
     () => [
       "Todas",
       ...Array.from(
-        new Set(obituaries.map((o: ObituaryListItem) => o.comuna).filter(Boolean)),
+        new Set(
+          obituaries
+            .map((o: ObituaryListItem) => o.comuna)
+            .filter((c: string): c is string => Boolean(c)),
+        ),
       ),
     ],
     [obituaries],
