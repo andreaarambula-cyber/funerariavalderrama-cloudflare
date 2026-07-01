@@ -3,6 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Search, MapPin, ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { fetchPublishedObituarios } from "@/data/obituariosApi";
+import type { ObituaryListItem } from "@/data/obituariosApi";
 import { SITE_URL } from "./__root";
 
 export const Route = createFileRoute("/obituarios/")({
@@ -26,12 +27,17 @@ function ObituariosPage() {
   const [q, setQ] = useState("");
   const [comuna, setComuna] = useState("Todas");
 
-  const comunas = useMemo(
-    () => ["Todas", ...Array.from(new Set(obituaries.map((o) => o.comuna).filter(Boolean)))],
+  const comunas = useMemo<string[]>(
+    () => [
+      "Todas",
+      ...Array.from(
+        new Set(obituaries.map((o: ObituaryListItem) => o.comuna).filter(Boolean)),
+      ),
+    ],
     [obituaries],
   );
 
-  const results = obituaries.filter((o) => {
+  const results = obituaries.filter((o: ObituaryListItem) => {
     const matchQ = o.fullName.toLowerCase().includes(q.toLowerCase());
     const matchC = comuna === "Todas" || o.comuna === comuna;
     return matchQ && matchC;
@@ -74,7 +80,7 @@ function ObituariosPage() {
         </p>
 
         <div className="mt-6 grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {results.map((o) => (
+          {results.map((o: ObituaryListItem) => (
             <Link
               key={o.slug}
               to="/obituarios/$slug"
