@@ -23,7 +23,7 @@ export const Route = createFileRoute("/obituarios/")({
 });
 
 function ObituariosPage() {
-  const { obituaries } = Route.useLoaderData();
+  const { obituaries } = Route.useLoaderData() as { obituaries: ObituaryListItem[] };
   const [q, setQ] = useState("");
   const [comuna, setComuna] = useState("Todas");
 
