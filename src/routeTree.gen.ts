@@ -15,7 +15,9 @@ import { Route as CotizarRouteImport } from './routes/cotizar'
 import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ObituariosIndexRouteImport } from './routes/obituarios.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ObituariosSlugRouteImport } from './routes/obituarios.$slug'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
 
 const ServiciosRoute = ServiciosRouteImport.update({
   id: '/servicios',
@@ -47,9 +49,19 @@ const ObituariosIndexRoute = ObituariosIndexRouteImport.update({
   path: '/obituarios/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ObituariosSlugRoute = ObituariosSlugRouteImport.update({
   id: '/obituarios/$slug',
   path: '/obituarios/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -59,7 +71,9 @@ export interface FileRoutesByFullPath {
   '/cotizar': typeof CotizarRoute
   '/nosotros': typeof NosotrosRoute
   '/servicios': typeof ServiciosRoute
+  '/admin/login': typeof AdminLoginRoute
   '/obituarios/$slug': typeof ObituariosSlugRoute
+  '/admin/': typeof AdminIndexRoute
   '/obituarios/': typeof ObituariosIndexRoute
 }
 export interface FileRoutesByTo {
@@ -68,7 +82,9 @@ export interface FileRoutesByTo {
   '/cotizar': typeof CotizarRoute
   '/nosotros': typeof NosotrosRoute
   '/servicios': typeof ServiciosRoute
+  '/admin/login': typeof AdminLoginRoute
   '/obituarios/$slug': typeof ObituariosSlugRoute
+  '/admin': typeof AdminIndexRoute
   '/obituarios': typeof ObituariosIndexRoute
 }
 export interface FileRoutesById {
@@ -78,7 +94,9 @@ export interface FileRoutesById {
   '/cotizar': typeof CotizarRoute
   '/nosotros': typeof NosotrosRoute
   '/servicios': typeof ServiciosRoute
+  '/admin/login': typeof AdminLoginRoute
   '/obituarios/$slug': typeof ObituariosSlugRoute
+  '/admin/': typeof AdminIndexRoute
   '/obituarios/': typeof ObituariosIndexRoute
 }
 export interface FileRouteTypes {
@@ -89,7 +107,9 @@ export interface FileRouteTypes {
     | '/cotizar'
     | '/nosotros'
     | '/servicios'
+    | '/admin/login'
     | '/obituarios/$slug'
+    | '/admin/'
     | '/obituarios/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -98,7 +118,9 @@ export interface FileRouteTypes {
     | '/cotizar'
     | '/nosotros'
     | '/servicios'
+    | '/admin/login'
     | '/obituarios/$slug'
+    | '/admin'
     | '/obituarios'
   id:
     | '__root__'
@@ -107,7 +129,9 @@ export interface FileRouteTypes {
     | '/cotizar'
     | '/nosotros'
     | '/servicios'
+    | '/admin/login'
     | '/obituarios/$slug'
+    | '/admin/'
     | '/obituarios/'
   fileRoutesById: FileRoutesById
 }
@@ -117,7 +141,9 @@ export interface RootRouteChildren {
   CotizarRoute: typeof CotizarRoute
   NosotrosRoute: typeof NosotrosRoute
   ServiciosRoute: typeof ServiciosRoute
+  AdminLoginRoute: typeof AdminLoginRoute
   ObituariosSlugRoute: typeof ObituariosSlugRoute
+  AdminIndexRoute: typeof AdminIndexRoute
   ObituariosIndexRoute: typeof ObituariosIndexRoute
 }
 
@@ -165,11 +191,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ObituariosIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/obituarios/$slug': {
       id: '/obituarios/$slug'
       path: '/obituarios/$slug'
       fullPath: '/obituarios/$slug'
       preLoaderRoute: typeof ObituariosSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -181,9 +221,20 @@ const rootRouteChildren: RootRouteChildren = {
   CotizarRoute: CotizarRoute,
   NosotrosRoute: NosotrosRoute,
   ServiciosRoute: ServiciosRoute,
+  AdminLoginRoute: AdminLoginRoute,
   ObituariosSlugRoute: ObituariosSlugRoute,
+  AdminIndexRoute: AdminIndexRoute,
   ObituariosIndexRoute: ObituariosIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
