@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Flame, X } from "lucide-react";
 import { toast } from "sonner";
 import type { Candle } from "@/data/obituaries";
+import { submitAporte } from "@/data/aportes";
 
 type Size = "sm" | "md" | "lg";
 
@@ -160,11 +161,21 @@ function CandleNode({
   );
 }
 
-export function CandleWall({ initial, personName }: { initial: Candle[]; personName: string }) {
+export function CandleWall({
+  initial,
+  personName,
+  obituarioId,
+}: {
+  initial: Candle[];
+  personName: string;
+  obituarioId: string;
+}) {
   const [candles, setCandles] = useState<Candle[]>(initial);
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+  const [code, setCode] = useState("");
+  const [sending, setSending] = useState(false);
   const [hover, setHover] = useState<number | null>(null);
   const [newestKey, setNewestKey] = useState<number | null>(null);
   const [showAll, setShowAll] = useState(false);
@@ -188,21 +199,40 @@ export function CandleWall({ initial, personName }: { initial: Candle[]; personN
     return { back, mid, front };
   }, [visible]);
 
-  function light(e: React.FormEvent) {
+  async function light(e: React.FormEvent) {
     e.preventDefault();
-    if (!name.trim()) return;
-    const newCandle: Candle = {
-      name: name.trim(),
+    if (!name.trim() || sending) return;
+    setSending(true);
+    const res = await submitAporte({
+      obituarioId,
+      tipo: "vela",
+      authorName: name.trim(),
       message: message.trim() || undefined,
-      timeAgo: "Hace un instante",
-    };
-    setCandles((c) => [newCandle, ...c]);
-    setNewestKey(Date.now());
+      code: code.trim() || undefined,
+    });
+    setSending(false);
+    if (!res.ok) {
+      toast.error("No se pudo encender la vela. Intenta de nuevo.");
+      return;
+    }
+    if (res.autoApproved) {
+      // Con código: se muestra al instante.
+      setCandles((c) => [
+        { name: name.trim(), message: message.trim() || undefined, timeAgo: "Hace un instante" },
+        ...c,
+      ]);
+      setNewestKey(Date.now());
+      toast.success(`Tu vela arde por ${firstName}`);
+      setTimeout(() => setNewestKey(null), 800);
+    } else {
+      toast.success("Tu vela fue enviada", {
+        description: "Aparecerá cuando la familia la apruebe.",
+      });
+    }
     setName("");
     setMessage("");
+    setCode("");
     setOpen(false);
-    toast.success(`Tu vela arde por ${firstName}`);
-    setTimeout(() => setNewestKey(null), 800);
   }
 
   return (
@@ -336,11 +366,24 @@ export function CandleWall({ initial, personName }: { initial: Candle[]; personN
                 {message.length}/80
               </span>
             </label>
+            <label className="relative mt-4 block text-sm">
+              <span className="font-medium text-[oklch(0.92_0.02_85)]">
+                Código de la familia <span className="text-[oklch(0.65_0.02_85)]">(opcional)</span>
+              </span>
+              <input
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                maxLength={40}
+                placeholder="Si la familia te dio un código"
+                className="mt-1.5 w-full rounded-lg border border-[oklch(0.3_0.03_70_/_0.7)] bg-[oklch(0.1_0.01_260_/_0.6)] px-4 py-2.5 text-sm text-[oklch(0.95_0.02_85)] placeholder:text-[oklch(0.55_0.02_85)] focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
+              />
+            </label>
             <button
               type="submit"
-              className="relative mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-[oklch(0.18_0.02_60)] transition hover:brightness-110"
+              disabled={sending}
+              className="relative mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-[oklch(0.18_0.02_60)] transition hover:brightness-110 disabled:opacity-60"
             >
-              <Flame className="h-4 w-4" /> Encender
+              <Flame className="h-4 w-4" /> {sending ? "Encendiendo…" : "Encender"}
             </button>
           </form>
         </div>

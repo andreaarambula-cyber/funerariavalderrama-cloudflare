@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { ArrowLeft, Save, Plus, Trash2, Upload, MapPin } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ArrowLeft, Save, Plus, Trash2, Upload, MapPin, KeyRound } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -54,6 +54,28 @@ export function ObituarioEditor({
   });
   const set = (k: keyof typeof form, v: string) => setForm((f) => ({ ...f, [k]: v }));
 
+  const [code, setCode] = useState("");
+  useEffect(() => {
+    if (!supabase || !value) return;
+    supabase
+      .from("obituario_codes")
+      .select("code")
+      .eq("obituario_id", value.id)
+      .maybeSingle()
+      .then(({ data }) => setCode((data as { code: string } | null)?.code ?? ""));
+  }, [value]);
+
+  const generateCode = () => {
+    const base =
+      (form.full_name.split(" ")[0] || "FAMILIA")
+        .toUpperCase()
+        .normalize("NFD")
+        .replace(/[̀-ͯ]/g, "")
+        .replace(/[^A-Z]/g, "")
+        .slice(0, 8) || "FAMILIA";
+    setCode(`${base}-${Math.floor(1000 + Math.random() * 9000)}`);
+  };
+
   const [gallery, setGallery] = useState<Item[]>(asItems(value?.gallery, ["src", "caption", "author"]));
   const [anecdotes, setAnecdotes] = useState<Item[]>(asItems(value?.anecdotes, ["text", "author"]));
   const [timeline, setTimeline] = useState<Item[]>(asItems(value?.timeline, ["year", "title", "description"]));
@@ -86,19 +108,35 @@ export function ObituarioEditor({
       updated_by: userId,
     };
 
+    let obituarioId = value?.id;
     let error;
     if (value) {
       ({ error } = await supabase.from("obituarios").update(payload).eq("id", value.id));
     } else {
-      ({ error } = await supabase
+      const res = await supabase
         .from("obituarios")
-        .insert({ ...payload, created_by: userId, display_order: 0 }));
+        .insert({ ...payload, created_by: userId, display_order: 0 })
+        .select("id")
+        .single();
+      error = res.error;
+      obituarioId = (res.data as { id: string } | null)?.id;
     }
-    setSaving(false);
-    if (error) {
-      toast.error(error.message);
+    if (error || !obituarioId) {
+      setSaving(false);
+      toast.error(error?.message ?? "No se pudo guardar");
       return;
     }
+
+    // Código de auto-aprobación (tabla secreta). Si se vacía, se elimina.
+    if (code.trim()) {
+      await supabase
+        .from("obituario_codes")
+        .upsert({ obituario_id: obituarioId, code: code.trim() }, { onConflict: "obituario_id" });
+    } else {
+      await supabase.from("obituario_codes").delete().eq("obituario_id", obituarioId);
+    }
+
+    setSaving(false);
     toast.success(value ? "Obituario actualizado" : "Obituario creado");
     onSaved();
   };
@@ -213,6 +251,28 @@ export function ObituarioEditor({
             { key: "isoEnd", label: "Fin (para “Mi calendario”)", type: "datetime", half: true },
           ]}
         />
+
+        {/* CÓDIGO DE AUTO-APROBACIÓN */}
+        <Card
+          title="Código de la familia (auto-aprobación)"
+          hint="Compártelo con los cercanos: quien lo use al dejar una vela, recuerdo o anécdota, se publica al instante sin revisión. Los demás quedan pendientes."
+        >
+          <div className="flex flex-wrap items-center gap-2">
+            <input
+              className={`${inputCls} max-w-xs font-mono`}
+              placeholder="Ej. PEREIRA-8421 (vacío = todo se revisa)"
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+            />
+            <button
+              type="button"
+              onClick={generateCode}
+              className="inline-flex items-center gap-2 rounded-xl border border-border px-3 py-2.5 text-sm text-primary hover:bg-background"
+            >
+              <KeyRound className="h-4 w-4" /> Generar
+            </button>
+          </div>
+        </Card>
 
         {/* ESTADO */}
         <Card title="Publicación" hint="Solo un administrador puede publicar o archivar.">
