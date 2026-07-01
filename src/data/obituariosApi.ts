@@ -1,0 +1,120 @@
+// Acceso a los obituarios PUBLICADOS desde Supabase para el sitio público.
+// El público solo puede leer status = 'published' (lo garantiza RLS).
+import { supabase } from "@/integrations/supabase/client";
+import type {
+  Obituary,
+  GalleryItem,
+  Anecdote,
+  FarewellEvent,
+  TimelineItem,
+  Candle,
+} from "@/data/obituaries";
+
+export interface ObituaryListItem {
+  slug: string;
+  fullName: string;
+  photo: string;
+  birth: string;
+  death: string;
+  comuna: string;
+}
+
+const arr = <T,>(v: unknown): T[] => (Array.isArray(v) ? (v as T[]) : []);
+
+function relativeTime(iso: string): string {
+  const diff = Date.now() - new Date(iso).getTime();
+  const min = Math.round(diff / 60000);
+  if (min < 1) return "Hace instantes";
+  if (min < 60) return `Hace ${min} min`;
+  const h = Math.round(min / 60);
+  if (h < 24) return `Hace ${h} h`;
+  const d = Math.round(h / 24);
+  if (d < 7) return `Hace ${d} d`;
+  return new Date(iso).toLocaleDateString("es-CL");
+}
+
+interface Row {
+  id: string;
+  slug: string;
+  full_name: string;
+  photo_url: string | null;
+  birth: string | null;
+  death: string | null;
+  comuna: string | null;
+  summary: string | null;
+  timeline: unknown;
+  gallery: unknown;
+  anecdotes: unknown;
+  events: unknown;
+}
+
+const toListItem = (r: Row): ObituaryListItem => ({
+  slug: r.slug,
+  fullName: r.full_name,
+  photo: r.photo_url ?? "",
+  birth: r.birth ?? "",
+  death: r.death ?? "",
+  comuna: r.comuna ?? "",
+});
+
+/** Lista de obituarios publicados (para /obituarios). */
+export async function fetchPublishedObituarios(): Promise<ObituaryListItem[]> {
+  if (!supabase) return [];
+  const { data, error } = await supabase
+    .from("obituarios")
+    .select("id, slug, full_name, photo_url, birth, death, comuna, summary, timeline, gallery, anecdotes, events")
+    .eq("status", "published")
+    .order("updated_at", { ascending: false });
+  if (error) {
+    console.error("Error cargando obituarios:", error.message);
+    return [];
+  }
+  return (data as Row[]).map(toListItem);
+}
+
+/** Un obituario completo por slug + sus condolencias aprobadas (velas). */
+export async function fetchObituarioBySlug(
+  slug: string,
+): Promise<(Obituary & { others: ObituaryListItem[] }) | null> {
+  if (!supabase) return null;
+
+  const { data, error } = await supabase
+    .from("obituarios")
+    .select("id, slug, full_name, photo_url, birth, death, comuna, summary, timeline, gallery, anecdotes, events")
+    .eq("slug", slug)
+    .eq("status", "published")
+    .maybeSingle();
+  if (error || !data) return null;
+  const r = data as Row;
+
+  const { data: cond } = await supabase
+    .from("condolencias")
+    .select("author_name, message, created_at")
+    .eq("obituario_id", r.id)
+    .eq("status", "approved")
+    .order("created_at", { ascending: false });
+
+  const candles: Candle[] = (cond ?? []).map((c) => ({
+    name: (c as { author_name: string }).author_name,
+    message: (c as { message: string | null }).message ?? undefined,
+    timeAgo: relativeTime((c as { created_at: string }).created_at),
+  }));
+
+  const others = (await fetchPublishedObituarios()).filter((o) => o.slug !== slug);
+
+  return {
+    slug: r.slug,
+    fullName: r.full_name,
+    photo: r.photo_url ?? "",
+    birth: r.birth ?? "",
+    death: r.death ?? "",
+    comuna: r.comuna ?? "",
+    summary: r.summary ?? "",
+    timeline: arr<TimelineItem>(r.timeline),
+    gallery: arr<GalleryItem>(r.gallery),
+    anecdotes: arr<Anecdote>(r.anecdotes),
+    candles,
+    events: arr<FarewellEvent>(r.events),
+    others,
+  };
+}
