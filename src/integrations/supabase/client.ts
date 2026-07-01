@@ -1,11 +1,15 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
-// Las llaves son públicas (URL + anon key). La seguridad real vive en la base
-// de datos (RLS) y en las Edge Functions, nunca en el frontend.
-const url = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+// Las llaves son PÚBLICAS (URL + anon/publishable key): viajan en el sitio de
+// todos modos. La seguridad real vive en la base de datos (RLS) y en las Edge
+// Functions, nunca en el frontend. Por eso se pueden dejar como respaldo aquí,
+// para que producción funcione sin configurar variables de entorno.
+const FALLBACK_URL = "https://scbqoblotvxwrzzpgiic.supabase.co";
+const FALLBACK_ANON_KEY = "sb_publishable_VzWyo5ugR-mE9R5Hh72ROw_paNNIICp";
 
-/** true cuando ya pegaste las llaves de Supabase en .env.local */
+const url = (import.meta.env.VITE_SUPABASE_URL as string | undefined) || FALLBACK_URL;
+const anonKey = (import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined) || FALLBACK_ANON_KEY;
+
 export const isSupabaseConfigured = Boolean(url && anonKey);
 
 /**
