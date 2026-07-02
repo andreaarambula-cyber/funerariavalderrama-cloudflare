@@ -492,7 +492,14 @@ function ServiciosPage() {
                       {current.wood}
                     </span>
                     <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-                      <h2 className="font-serif text-4xl leading-none text-white sm:text-5xl">{current.name}</h2>
+                      <h2
+                        className={cn(
+                          "font-serif leading-none text-white [word-break:break-word]",
+                          current.name.length > 12 ? "text-2xl sm:text-3xl" : "text-4xl sm:text-5xl",
+                        )}
+                      >
+                        {current.name}
+                      </h2>
                       <p className="mt-2 max-w-xs text-sm text-white/75">{current.tagline}</p>
                     </div>
                   </div>
