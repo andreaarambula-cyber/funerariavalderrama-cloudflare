@@ -3,7 +3,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowLeftRight,
   ChevronDown,
-  Pickaxe,
   Church,
   IdCard,
   Cross,
@@ -23,11 +22,9 @@ import {
   Phone,
   Newspaper,
   Palette,
-  Star,
   type LucideIcon,
 } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
-import { LeafDecoration } from "@/components/site/LeafDecoration";
 import { CoberturaMapa } from "@/components/site/CoberturaMapa";
 import { MapaChile } from "@/components/site/MapaChile";
 import { CoverflowCarousel } from "@/components/site/CoverflowCarousel";
@@ -573,12 +570,12 @@ function ServiciosPage() {
               </div>
             </div>
 
-            {/* ===== Opciones de urna (dentro del módulo de planes) ===== */}
+            {/* ===== Opciones adicionales (dentro del módulo de planes) ===== */}
             <div className="mt-10 border-t border-white/10 pt-10">
               <div className="mb-6 text-center">
-                <p className="text-xs uppercase tracking-[0.3em] text-accent">Opciones de urna</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-accent">También ofrecemos</p>
                 <h3 className="mt-2 font-serif text-2xl text-white md:text-3xl">
-                  Personalizadas y sobredimensionadas
+                  Urnas personalizadas y traslados interregionales
                 </h3>
               </div>
               <div className="grid gap-5 md:grid-cols-2">
@@ -609,25 +606,22 @@ function ServiciosPage() {
                   </div>
                 </article>
 
-                {/* Urnas sobredimensionadas — DESTACADA, galería que rota */}
-                <article className="group relative flex min-h-[210px] overflow-hidden rounded-2xl border-2 border-accent bg-surface shadow-elevated">
-                  <div className="relative w-[42%] shrink-0 overflow-hidden bg-black/5">
-                    <CrossfadeMedia
-                      images={[urnaSobredimensionada, urnaSobredimensionada2]}
-                      alt="Urnas sobredimensionadas"
-                      delay={1500}
-                    />
+                {/* Traslados interregionales — mapa de Chile */}
+                <article className="group flex min-h-[210px] overflow-hidden rounded-2xl border border-border bg-surface shadow-soft">
+                  <div className="relative flex w-[42%] shrink-0 items-center justify-center overflow-hidden bg-secondary/40 p-3">
+                    <MapaChile className="h-[180px]" />
                   </div>
                   <div className="flex flex-1 flex-col justify-center p-4 sm:p-5">
                     <div className="inline-flex items-center gap-1.5 text-accent">
-                      <Star className="h-3.5 w-3.5" />
+                      <ArrowLeftRight className="h-3.5 w-3.5" />
                       <span className="text-[10px] font-semibold uppercase tracking-wider">
-                        De los pocos en Concepción
+                        Desde el Biobío a todo Chile
                       </span>
                     </div>
-                    <h4 className="mt-1 font-serif text-lg text-primary">Urnas sobredimensionadas</h4>
+                    <h4 className="mt-1 font-serif text-lg text-primary">Traslados interregionales</h4>
                     <p className="mt-1 text-[13px] leading-snug text-muted-foreground">
-                      Modelos de mayor amplitud. Somos de las pocas funerarias en Concepción que las ofrece.
+                      Coordinamos el traslado de tu ser querido a cualquier región del país, con las
+                      gestiones legales y logísticas necesarias.
                     </p>
                   </div>
                 </article>
@@ -764,61 +758,6 @@ function ServiciosPage() {
           </div>
           <div className="w-full">
             <CoberturaMapa />
-          </div>
-        </div>
-      </section>
-
-      <section className="container-prose py-16 md:py-20">
-        <div className="mb-10 text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-accent">Complementarios</p>
-          <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
-            Otros servicios que ofrecemos
-          </h2>
-        </div>
-        <div className="grid gap-5 md:grid-cols-2 md:items-stretch">
-          {/* Traslados interregionales — mapa de Chile */}
-          <div className="group relative flex gap-5 overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-soft sm:gap-6 sm:p-7">
-            <div className="flex shrink-0 items-center">
-              <MapaChile className="h-[260px] sm:h-[300px]" />
-            </div>
-            <div className="flex flex-col justify-center">
-              <span className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent/15 text-accent">
-                <ArrowLeftRight className="h-5 w-5" strokeWidth={1.5} />
-              </span>
-              <h3 className="font-serif text-xl text-primary">Traslados interregionales</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                Coordinamos el traslado de tu ser querido a cualquier región del país, con todas las
-                gestiones legales y logísticas necesarias.
-              </p>
-              <p className="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-accent">
-                Desde el Biobío a todo Chile
-              </p>
-            </div>
-          </div>
-
-          {/* Exhumaciones */}
-          <div className="group relative flex flex-col justify-center overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-soft sm:p-7">
-            <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-44 text-accent opacity-50 transition-opacity duration-300 group-hover:opacity-70" />
-            <span className="relative mb-3 inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent/15 text-accent">
-              <Pickaxe className="h-5 w-5" strokeWidth={1.5} />
-            </span>
-            <h3 className="relative font-serif text-xl text-primary">Exhumaciones</h3>
-            <p className="relative mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
-              Realizamos exhumaciones con el debido respeto y cumpliendo todos los requisitos
-              legales y sanitarios.
-            </p>
-            <ul className="relative mt-4 space-y-2">
-              {[
-                "Autorización del cementerio y la familia",
-                "Permisos sanitarios y legales al día",
-                "Traslado o reinhumación posterior",
-              ].map((t) => (
-                <li key={t} className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                  {t}
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>
