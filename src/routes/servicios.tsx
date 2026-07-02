@@ -23,7 +23,6 @@ import {
   Phone,
   Newspaper,
   Palette,
-  Maximize2,
   Star,
   type LucideIcon,
 } from "lucide-react";
@@ -41,7 +40,10 @@ import memorable1 from "@/assets/urnas/memorable-1.jpg.asset.json";
 import urnaPersonalizadaColocolo from "@/assets/urnas/personalizada-colocolo.jpg";
 import urnaPersonalizadaUdechile from "@/assets/urnas/personalizada-udechile.jpg";
 import urnaPersonalizadaRosada from "@/assets/urnas/personalizada-rosada.jpg";
+import urnaPersonalizadaRosada2 from "@/assets/urnas/personalizada-rosada-2.jpg";
+import urnaPersonalizadaAzul2 from "@/assets/urnas/personalizada-azul-2.jpg";
 import urnaSobredimensionada from "@/assets/urnas/sobredimensionada.jpg";
+import urnaSobredimensionada2 from "@/assets/urnas/sobredimensionada-2.jpg";
 import velatorioCirios1 from "@/assets/equipo/cirios.webp";
 import velatorioCirios2 from "@/assets/equipo/cirios-2.webp";
 import velatorioTulipa from "@/assets/equipo/tulipa.webp";
@@ -537,65 +539,53 @@ function ServiciosPage() {
                   Personalizadas y sobredimensionadas
                 </h3>
               </div>
-              <div className="grid gap-6 md:grid-cols-2">
-                {/* Urnas personalizadas */}
-                <article className="flex flex-col overflow-hidden rounded-3xl border border-border bg-surface shadow-soft">
-                  <div className="aspect-[16/10] overflow-hidden bg-muted">
-                    <img
-                      src={urnaPersonalizadaColocolo}
-                      alt="Urna personalizada con el escudo de Colo-Colo"
-                      loading="lazy"
-                      className="h-full w-full object-cover"
+              <div className="grid gap-5 md:grid-cols-2">
+                {/* Urnas personalizadas — galería que rota (urna completa) */}
+                <article className="group flex min-h-[210px] overflow-hidden rounded-2xl border border-border bg-surface shadow-soft">
+                  <div className="relative w-[42%] shrink-0 overflow-hidden bg-white">
+                    <CrossfadeMedia
+                      images={[
+                        urnaPersonalizadaColocolo,
+                        urnaPersonalizadaRosada,
+                        urnaPersonalizadaRosada2,
+                        urnaPersonalizadaUdechile,
+                        urnaPersonalizadaAzul2,
+                      ]}
+                      alt="Urnas personalizadas"
+                      imgClassName="object-contain"
                     />
                   </div>
-                  <div className="flex flex-1 flex-col p-6">
-                    <div className="inline-flex items-center gap-2 text-accent">
-                      <Palette className="h-4 w-4" />
-                      <span className="text-[11px] font-semibold uppercase tracking-wider">Personalizables</span>
+                  <div className="flex flex-1 flex-col justify-center p-4 sm:p-5">
+                    <div className="inline-flex items-center gap-1.5 text-accent">
+                      <Palette className="h-3.5 w-3.5" />
+                      <span className="text-[10px] font-semibold uppercase tracking-wider">Personalizables</span>
                     </div>
-                    <h4 className="mt-2 font-serif text-xl text-primary">Urnas personalizadas</h4>
-                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                    <h4 className="mt-1 font-serif text-lg text-primary">Urnas personalizadas</h4>
+                    <p className="mt-1 text-[13px] leading-snug text-muted-foreground">
                       Elige el color y la gráfica: el escudo de tu equipo, un diseño especial o un color a pedido.
                     </p>
-                    <div className="mt-3 flex gap-2">
-                      <img
-                        src={urnaPersonalizadaUdechile}
-                        alt="Urna azul con escudo de la U de Chile"
-                        loading="lazy"
-                        className="h-14 w-14 rounded-lg border border-border object-cover"
-                      />
-                      <img
-                        src={urnaPersonalizadaRosada}
-                        alt="Urna rosada con paloma"
-                        loading="lazy"
-                        className="h-14 w-14 rounded-lg border border-border object-cover"
-                      />
-                    </div>
                   </div>
                 </article>
 
-                {/* Urnas sobredimensionadas — DESTACADA */}
-                <article className="relative flex flex-col overflow-hidden rounded-3xl border-2 border-accent bg-surface shadow-elevated">
-                  <span className="absolute right-4 top-4 z-10 inline-flex items-center gap-1 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold text-accent-foreground shadow-soft">
-                    <Star className="h-3 w-3" /> De los pocos en Concepción
-                  </span>
-                  <div className="aspect-[16/10] overflow-hidden bg-muted">
-                    <img
-                      src={urnaSobredimensionada}
-                      alt="Urna sobredimensionada de madera"
-                      loading="lazy"
-                      className="h-full w-full object-cover"
+                {/* Urnas sobredimensionadas — DESTACADA, galería que rota */}
+                <article className="group relative flex min-h-[210px] overflow-hidden rounded-2xl border-2 border-accent bg-surface shadow-elevated">
+                  <div className="relative w-[42%] shrink-0 overflow-hidden bg-black/5">
+                    <CrossfadeMedia
+                      images={[urnaSobredimensionada, urnaSobredimensionada2]}
+                      alt="Urnas sobredimensionadas"
+                      delay={1500}
                     />
                   </div>
-                  <div className="flex flex-1 flex-col p-6">
-                    <div className="inline-flex items-center gap-2 text-accent">
-                      <Maximize2 className="h-4 w-4" />
-                      <span className="text-[11px] font-semibold uppercase tracking-wider">Sobremedida</span>
+                  <div className="flex flex-1 flex-col justify-center p-4 sm:p-5">
+                    <div className="inline-flex items-center gap-1.5 text-accent">
+                      <Star className="h-3.5 w-3.5" />
+                      <span className="text-[10px] font-semibold uppercase tracking-wider">
+                        De los pocos en Concepción
+                      </span>
                     </div>
-                    <h4 className="mt-2 font-serif text-xl text-primary">Urnas sobredimensionadas</h4>
-                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                      Modelos de mayor amplitud, para brindar comodidad y dignidad. Somos de las pocas
-                      funerarias en Concepción que las ofrece.
+                    <h4 className="mt-1 font-serif text-lg text-primary">Urnas sobredimensionadas</h4>
+                    <p className="mt-1 text-[13px] leading-snug text-muted-foreground">
+                      Modelos de mayor amplitud. Somos de las pocas funerarias en Concepción que las ofrece.
                     </p>
                   </div>
                 </article>
