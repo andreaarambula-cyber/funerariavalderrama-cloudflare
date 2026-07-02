@@ -3,7 +3,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowLeftRight,
   ChevronDown,
-  Pickaxe,
   Church,
   IdCard,
   Cross,
@@ -23,11 +22,9 @@ import {
   Phone,
   Newspaper,
   Palette,
-  Star,
   type LucideIcon,
 } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
-import { LeafDecoration } from "@/components/site/LeafDecoration";
 import { CoberturaMapa } from "@/components/site/CoberturaMapa";
 import { MapaChile } from "@/components/site/MapaChile";
 import { CoverflowCarousel } from "@/components/site/CoverflowCarousel";
@@ -191,6 +188,41 @@ const PLANS: Plan[] = [
       { icon: Frame, label: "Fotografía A4" },
       { icon: MicVocal, label: "Lírico", hot: true },
       { icon: Speaker, label: "Parlante", hot: true },
+    ],
+  },
+  {
+    id: "sobredimensionado",
+    name: "Sobredimensionado",
+    tagline: "Urna de mayor amplitud, con el servicio del plan Selecto.",
+    wood: "Urna sobredimensionada",
+    image: urnaSobredimensionada,
+    items: [
+      { icon: Cross, label: "Urna sobredimensionada" },
+      { icon: Church, label: "Capilla a elección" },
+      { icon: IdCard, label: "Tarjetero" },
+      { icon: BookHeart, label: "Libro de Condolencias" },
+      { icon: Flower2, label: "Arreglo floral" },
+      { icon: FileSignature, label: "Trámites legales" },
+      { icon: Car, label: "Carroza" },
+      { icon: Van, label: "Van de acompañamiento" },
+      { icon: GlassWater, label: "Dispensador de agua" },
+      { icon: HandHeart, label: "Tarjetas de agradecimiento" },
+      { icon: Newspaper, label: "Obituario digital" },
+      { icon: Coffee, label: "Cafetería" },
+      { icon: Frame, label: "Fotografía A4" },
+    ],
+  },
+  {
+    id: "exhumacion",
+    name: "Exhumación",
+    tagline: "Urnas de reducción y cuerpo entero.",
+    wood: "Reducción y cuerpo entero",
+    image: urnaSobredimensionada2,
+    items: [
+      { icon: Cross, label: "Urnas de reducción y cuerpo entero" },
+      { icon: Car, label: "Carroza" },
+      { icon: FileSignature, label: "Trámites legales" },
+      { icon: ArrowLeftRight, label: "Traslado" },
     ],
   },
 ];
@@ -382,8 +414,8 @@ function ServiciosPage() {
     <>
       <PageHero
         eyebrow="Nuestros servicios"
-        title="Cuidamos cada detalle, con dignidad"
-        subtitle="Diseñamos servicios a la medida de cada familia, con total transparencia y acompañamiento en cada proceso. Atención profesional las 24 horas del día en el Gran Concepción."
+        title="Cada despedida merece una atención a la altura de su historia."
+        subtitle="Diseñamos servicios funerarios personalizados, cuidando cada detalle con respeto, profesionalismo y una profunda vocación de servicio."
       />
 
       {/* ===== PLANES (urnas) ===== */}
@@ -398,7 +430,7 @@ function ServiciosPage() {
         <div className="mb-10 text-center md:mb-12">
           <p className="text-xs uppercase tracking-[0.3em] text-accent">Planes de servicio</p>
           <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
-            Elige el plan que mejor acompañe a tu familia
+            Encuentra el servicio adecuado para una despedida solemne
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
             Cada plan reúne todo lo necesario para una despedida digna. Lo{" "}
@@ -422,7 +454,7 @@ function ServiciosPage() {
 
             {/* tier switcher */}
             <div className="flex justify-center">
-              <div className="inline-flex gap-1 rounded-full bg-white/5 p-1 ring-1 ring-white/10 backdrop-blur-sm">
+              <div className="inline-flex max-w-full flex-wrap justify-center gap-1 rounded-3xl bg-white/5 p-1 ring-1 ring-white/10 backdrop-blur-sm">
                 {PLANS.map((p) => (
                   <button
                     key={p.id}
@@ -457,7 +489,14 @@ function ServiciosPage() {
                       {current.wood}
                     </span>
                     <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-                      <h2 className="font-serif text-4xl leading-none text-white sm:text-5xl">{current.name}</h2>
+                      <h2
+                        className={cn(
+                          "font-serif leading-none text-white [word-break:break-word]",
+                          current.name.length > 12 ? "text-2xl sm:text-3xl" : "text-4xl sm:text-5xl",
+                        )}
+                      >
+                        {current.name}
+                      </h2>
                       <p className="mt-2 max-w-xs text-sm text-white/75">{current.tagline}</p>
                     </div>
                   </div>
@@ -531,12 +570,12 @@ function ServiciosPage() {
               </div>
             </div>
 
-            {/* ===== Opciones de urna (dentro del módulo de planes) ===== */}
+            {/* ===== Opciones adicionales (dentro del módulo de planes) ===== */}
             <div className="mt-10 border-t border-white/10 pt-10">
               <div className="mb-6 text-center">
-                <p className="text-xs uppercase tracking-[0.3em] text-accent">Opciones de urna</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-accent">También ofrecemos</p>
                 <h3 className="mt-2 font-serif text-2xl text-white md:text-3xl">
-                  Personalizadas y sobredimensionadas
+                  Urnas personalizadas y traslados interregionales
                 </h3>
               </div>
               <div className="grid gap-5 md:grid-cols-2">
@@ -567,25 +606,22 @@ function ServiciosPage() {
                   </div>
                 </article>
 
-                {/* Urnas sobredimensionadas — DESTACADA, galería que rota */}
-                <article className="group relative flex min-h-[210px] overflow-hidden rounded-2xl border-2 border-accent bg-surface shadow-elevated">
-                  <div className="relative w-[42%] shrink-0 overflow-hidden bg-black/5">
-                    <CrossfadeMedia
-                      images={[urnaSobredimensionada, urnaSobredimensionada2]}
-                      alt="Urnas sobredimensionadas"
-                      delay={1500}
-                    />
+                {/* Traslados interregionales — mapa de Chile */}
+                <article className="group flex min-h-[210px] overflow-hidden rounded-2xl border border-border bg-surface shadow-soft">
+                  <div className="relative flex w-[42%] shrink-0 items-center justify-center overflow-hidden bg-secondary/40 p-3">
+                    <MapaChile className="h-[180px]" />
                   </div>
                   <div className="flex flex-1 flex-col justify-center p-4 sm:p-5">
                     <div className="inline-flex items-center gap-1.5 text-accent">
-                      <Star className="h-3.5 w-3.5" />
+                      <ArrowLeftRight className="h-3.5 w-3.5" />
                       <span className="text-[10px] font-semibold uppercase tracking-wider">
-                        De los pocos en Concepción
+                        Desde el Biobío a todo Chile
                       </span>
                     </div>
-                    <h4 className="mt-1 font-serif text-lg text-primary">Urnas sobredimensionadas</h4>
+                    <h4 className="mt-1 font-serif text-lg text-primary">Traslados interregionales</h4>
                     <p className="mt-1 text-[13px] leading-snug text-muted-foreground">
-                      Modelos de mayor amplitud. Somos de las pocas funerarias en Concepción que las ofrece.
+                      Coordinamos el traslado de tu ser querido a cualquier región del país, con las
+                      gestiones legales y logísticas necesarias.
                     </p>
                   </div>
                 </article>
@@ -722,61 +758,6 @@ function ServiciosPage() {
           </div>
           <div className="w-full">
             <CoberturaMapa />
-          </div>
-        </div>
-      </section>
-
-      <section className="container-prose py-16 md:py-20">
-        <div className="mb-10 text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-accent">Complementarios</p>
-          <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
-            Otros servicios que ofrecemos
-          </h2>
-        </div>
-        <div className="grid gap-5 md:grid-cols-2 md:items-stretch">
-          {/* Traslados interregionales — mapa de Chile */}
-          <div className="group relative flex gap-5 overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-soft sm:gap-6 sm:p-7">
-            <div className="flex shrink-0 items-center">
-              <MapaChile className="h-[260px] sm:h-[300px]" />
-            </div>
-            <div className="flex flex-col justify-center">
-              <span className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent/15 text-accent">
-                <ArrowLeftRight className="h-5 w-5" strokeWidth={1.5} />
-              </span>
-              <h3 className="font-serif text-xl text-primary">Traslados interregionales</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                Coordinamos el traslado de tu ser querido a cualquier región del país, con todas las
-                gestiones legales y logísticas necesarias.
-              </p>
-              <p className="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-accent">
-                Desde el Biobío a todo Chile
-              </p>
-            </div>
-          </div>
-
-          {/* Exhumaciones */}
-          <div className="group relative flex flex-col justify-center overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-soft sm:p-7">
-            <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-44 text-accent opacity-50 transition-opacity duration-300 group-hover:opacity-70" />
-            <span className="relative mb-3 inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent/15 text-accent">
-              <Pickaxe className="h-5 w-5" strokeWidth={1.5} />
-            </span>
-            <h3 className="relative font-serif text-xl text-primary">Exhumaciones</h3>
-            <p className="relative mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
-              Realizamos exhumaciones con el debido respeto y cumpliendo todos los requisitos
-              legales y sanitarios.
-            </p>
-            <ul className="relative mt-4 space-y-2">
-              {[
-                "Autorización del cementerio y la familia",
-                "Permisos sanitarios y legales al día",
-                "Traslado o reinhumación posterior",
-              ].map((t) => (
-                <li key={t} className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                  {t}
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>
