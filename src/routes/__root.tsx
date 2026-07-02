@@ -74,7 +74,7 @@ export const Route = createRootRoute({
       },
       { name: "author", content: "Funeraria Valderrama" },
       { name: "theme-color", content: "#1A1A1A" },
-      { name: "msapplication-TileColor", content: "#0c216e" },
+      { name: "msapplication-TileColor", content: "#f5f1e9" },
       { name: "msapplication-TileImage", content: "/favicon-150x150.png" },
       { property: "og:title", content: "Funeraria Valderrama — Acompañamos a tu familia 24/7 en el Gran Concepción" },
       {
