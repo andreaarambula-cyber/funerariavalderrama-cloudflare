@@ -398,7 +398,7 @@ function ServiciosPage() {
         <div className="mb-10 text-center md:mb-12">
           <p className="text-xs uppercase tracking-[0.3em] text-accent">Planes de servicio</p>
           <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl">
-            Elige el plan que mejor acompañe a tu familia
+            Encuentra el servicio adecuado para una despedida solemne
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
             Cada plan reúne todo lo necesario para una despedida digna. Lo{" "}

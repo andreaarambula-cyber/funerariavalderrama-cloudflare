@@ -85,11 +85,11 @@ function Hero() {
       <div className="absolute inset-0 bg-black/30" />
       <div className="container-prose relative w-full py-16 text-primary-foreground md:py-20">
         <h1 className="max-w-3xl text-balance font-serif text-4xl leading-[1.05] md:text-6xl lg:text-7xl">
-          Acompañamos a tu familia en el momento más difícil
+          Cada despedida merece una atención a la altura de su historia.
         </h1>
         <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-white/85 md:text-lg">
-          Servicios funerarios con dignidad, transparencia y cercanía.
-          Más de 28 años cuidando a las familias del Gran Concepción.
+          Diseñamos servicios funerarios personalizados, cuidando cada detalle
+          con respeto, profesionalismo y una profunda vocación de servicio.
         </p>
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
           <a
