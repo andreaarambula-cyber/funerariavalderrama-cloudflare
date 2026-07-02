@@ -126,7 +126,7 @@ type Plan = {
 const PLANS: Plan[] = [
   {
     id: "esencial",
-    name: "Esencial",
+    name: "Raíces",
     tagline: "Una despedida sobria y digna.",
     wood: "Fibromadera · terciado",
     image: esencial1.url,
@@ -146,7 +146,7 @@ const PLANS: Plan[] = [
   },
   {
     id: "selecto",
-    name: "Selecto",
+    name: "Legado",
     tagline: "Mayor presencia y calidez en la madera.",
     wood: "Madera de pino",
     image: selecto1.url,
@@ -168,7 +168,7 @@ const PLANS: Plan[] = [
   },
   {
     id: "memorable",
-    name: "Memorable",
+    name: "Gratitud",
     tagline: "Lo más completo, con detalles exclusivos.",
     wood: "Madera nativa · diseños exclusivos",
     image: memorable1.url,
@@ -193,7 +193,7 @@ const PLANS: Plan[] = [
   {
     id: "sobredimensionado",
     name: "Sobredimensionado",
-    tagline: "Urna de mayor amplitud, con el servicio del plan Selecto.",
+    tagline: "Urna de mayor amplitud, con el servicio del plan Legado.",
     wood: "Urna sobredimensionada",
     image: urnaSobredimensionada,
     items: [
@@ -394,7 +394,7 @@ function ServiciosPage() {
   const count = useCountUp(current.items.length);
   const hasHot = current.items.some((it) => it.hot);
   // Los servicios que suma este plan (dorados) van agrupados al final,
-  // como en el plan Selecto. El orden relativo se mantiene (sort estable).
+  // como en el plan Legado. El orden relativo se mantiene (sort estable).
   const orderedItems = [...current.items].sort(
     (a, b) => Number(Boolean(a.hot)) - Number(Boolean(b.hot)),
   );
