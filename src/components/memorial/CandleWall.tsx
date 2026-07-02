@@ -76,7 +76,7 @@ function Dust() {
     [],
   );
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+    <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl" aria-hidden>
       {motes.map((m, i) => (
         <span
           key={i}
@@ -279,7 +279,7 @@ export function CandleWall({
           {/* wood plank reflection at bottom */}
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-16"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-16 rounded-b-3xl"
             style={{
               background:
                 "linear-gradient(to bottom, transparent, oklch(0.18 0.03 60 / 0.6))",
