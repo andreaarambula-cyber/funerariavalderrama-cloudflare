@@ -74,6 +74,8 @@ export const Route = createRootRoute({
       },
       { name: "author", content: "Funeraria Valderrama" },
       { name: "theme-color", content: "#1A1A1A" },
+      { name: "msapplication-TileColor", content: "#0c216e" },
+      { name: "msapplication-TileImage", content: "/favicon-150x150.png" },
       { property: "og:title", content: "Funeraria Valderrama — Acompañamos a tu familia 24/7 en el Gran Concepción" },
       {
         property: "og:description",
@@ -95,6 +97,11 @@ export const Route = createRootRoute({
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/781951dc-0398-4823-b0ec-aada83db29b2/id-preview-e01e4ee3--aa0c1194-590a-4958-b566-0ad45fb6e5a6.lovable.app-1777932698494.png" },
     ],
     links: [
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      { rel: "icon", type: "image/png", sizes: "48x48", href: "/favicon-48x48.png" },
+      { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
+      { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
