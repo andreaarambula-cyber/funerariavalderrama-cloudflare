@@ -193,6 +193,41 @@ const PLANS: Plan[] = [
       { icon: Speaker, label: "Parlante", hot: true },
     ],
   },
+  {
+    id: "sobredimensionado",
+    name: "Sobredimensionado",
+    tagline: "Urna de mayor amplitud, con el servicio del plan Selecto.",
+    wood: "Urna sobredimensionada",
+    image: urnaSobredimensionada,
+    items: [
+      { icon: Cross, label: "Urna sobredimensionada" },
+      { icon: Church, label: "Capilla a elección" },
+      { icon: IdCard, label: "Tarjetero" },
+      { icon: BookHeart, label: "Libro de Condolencias" },
+      { icon: Flower2, label: "Arreglo floral" },
+      { icon: FileSignature, label: "Trámites legales" },
+      { icon: Car, label: "Carroza" },
+      { icon: Van, label: "Van de acompañamiento" },
+      { icon: GlassWater, label: "Dispensador de agua" },
+      { icon: HandHeart, label: "Tarjetas de agradecimiento" },
+      { icon: Newspaper, label: "Obituario digital" },
+      { icon: Coffee, label: "Cafetería" },
+      { icon: Frame, label: "Fotografía A4" },
+    ],
+  },
+  {
+    id: "exhumacion",
+    name: "Exhumación",
+    tagline: "Urnas de reducción y cuerpo entero.",
+    wood: "Reducción y cuerpo entero",
+    image: urnaSobredimensionada2,
+    items: [
+      { icon: Cross, label: "Urnas de reducción y cuerpo entero" },
+      { icon: Car, label: "Carroza" },
+      { icon: FileSignature, label: "Trámites legales" },
+      { icon: ArrowLeftRight, label: "Traslado" },
+    ],
+  },
 ];
 
 /* count-up para el contador de servicios */
@@ -382,8 +417,8 @@ function ServiciosPage() {
     <>
       <PageHero
         eyebrow="Nuestros servicios"
-        title="Cuidamos cada detalle, con dignidad"
-        subtitle="Diseñamos servicios a la medida de cada familia, con total transparencia y acompañamiento en cada proceso. Atención profesional las 24 horas del día en el Gran Concepción."
+        title="Cada despedida merece una atención a la altura de su historia."
+        subtitle="Diseñamos servicios funerarios personalizados, cuidando cada detalle con respeto, profesionalismo y una profunda vocación de servicio."
       />
 
       {/* ===== PLANES (urnas) ===== */}
@@ -422,7 +457,7 @@ function ServiciosPage() {
 
             {/* tier switcher */}
             <div className="flex justify-center">
-              <div className="inline-flex gap-1 rounded-full bg-white/5 p-1 ring-1 ring-white/10 backdrop-blur-sm">
+              <div className="inline-flex max-w-full flex-wrap justify-center gap-1 rounded-3xl bg-white/5 p-1 ring-1 ring-white/10 backdrop-blur-sm">
                 {PLANS.map((p) => (
                   <button
                     key={p.id}

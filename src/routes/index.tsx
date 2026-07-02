@@ -85,11 +85,12 @@ function Hero() {
       <div className="absolute inset-0 bg-black/30" />
       <div className="container-prose relative w-full py-16 text-primary-foreground md:py-20">
         <h1 className="max-w-3xl text-balance font-serif text-4xl leading-[1.05] md:text-6xl lg:text-7xl">
-          Cada despedida merece una atención a la altura de su historia.
+          Honramos historias y acompañamos familias.
         </h1>
         <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-white/85 md:text-lg">
-          Diseñamos servicios funerarios personalizados, cuidando cada detalle
-          con respeto, profesionalismo y una profunda vocación de servicio.
+          Por eso entregamos un acompañamiento cercano, transparente y humano,
+          adaptándonos a las necesidades de quienes depositan su confianza en
+          nosotros.
         </p>
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
           <a
@@ -112,16 +113,12 @@ function Hero() {
 
 function TrustBar() {
   const items = [
-    { icon: Star, text: "+28 años de experiencia" },
-    { icon: ShieldCheck, text: "Registrados en SEREMI" },
-    { icon: Clock, text: "Atención 24/7" },
-    { icon: MapPin, text: "Cobertura en todo el Gran Concepción" },
-    { icon: Users, text: "+2.000 familias acompañadas" },
-    { icon: BadgeCheck, text: "Asesoría sin compromiso" },
-    { icon: FileText, text: "Trámites incluidos" },
+    { icon: Clock, text: "Atención 24 horas" },
+    { icon: Star, text: "Más de 28 años de experiencia" },
     { icon: Box, text: "Urnas de madera nativa exclusivas" },
     { icon: Box, text: "Urnas sobredimensionadas disponibles" },
-    { icon: Heart, text: "Atención cercana y humana" },
+    { icon: MapPin, text: "Cobertura regional y nacional" },
+    { icon: BadgeCheck, text: "Asesoría personalizada" },
   ];
   return (
     <section className="group border-b border-border bg-surface py-6">
