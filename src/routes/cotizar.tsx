@@ -21,11 +21,11 @@ export const Route = createFileRoute("/cotizar")({
 });
 
 const SERVICIOS = [
-  "Sepultura tradicional",
-  
-  "Velatorio",
-  "Traslado",
-  "Plan a futuro",
+  "Servicio funerario",
+  "Adquirir una sepultura",
+  "Exhumación y traslado",
+  "Traslado interregional",
+  "Planificar a futuro",
   "Aún no estoy seguro",
 ];
 
@@ -155,7 +155,7 @@ function CotizarPage() {
           </Block>
 
           {/* Comuna */}
-          <Block num="03" title="Comuna" hint="Atendemos todo el Gran Concepción.">
+          <Block num="03" title="Comuna" hint="Atendemos a nivel regional y nacional, dentro y fuera del Gran Concepción.">
             <input
               value={comuna}
               onChange={(e) => setComuna(e.target.value)}

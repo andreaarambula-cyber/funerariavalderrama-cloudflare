@@ -20,6 +20,10 @@ import {
   MicVocal,
   Speaker,
   ArrowUpRight,
+  Phone,
+  Newspaper,
+  Palette,
+  Star,
   type LucideIcon,
 } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
@@ -33,6 +37,13 @@ import { SITE_URL } from "./__root";
 import esencial1 from "@/assets/urnas/esencial-1.jpg.asset.json";
 import selecto1 from "@/assets/urnas/selecto-1.jpg.asset.json";
 import memorable1 from "@/assets/urnas/memorable-1.jpg.asset.json";
+import urnaPersonalizadaColocolo from "@/assets/urnas/personalizada-colocolo.jpg";
+import urnaPersonalizadaUdechile from "@/assets/urnas/personalizada-udechile.jpg";
+import urnaPersonalizadaRosada from "@/assets/urnas/personalizada-rosada.jpg";
+import urnaPersonalizadaRosada2 from "@/assets/urnas/personalizada-rosada-2.jpg";
+import urnaPersonalizadaAzul2 from "@/assets/urnas/personalizada-azul-2.jpg";
+import urnaSobredimensionada from "@/assets/urnas/sobredimensionada.jpg";
+import urnaSobredimensionada2 from "@/assets/urnas/sobredimensionada-2.jpg";
 import velatorioCirios1 from "@/assets/equipo/cirios.webp";
 import velatorioCirios2 from "@/assets/equipo/cirios-2.webp";
 import velatorioTulipa from "@/assets/equipo/tulipa.webp";
@@ -126,11 +137,14 @@ const PLANS: Plan[] = [
       { icon: Church, label: "Capilla de madera" },
       { icon: IdCard, label: "Tarjetero" },
       { icon: Cross, label: "Cruz" },
-      { icon: BookHeart, label: "Libro y arreglo floral" },
+      { icon: BookHeart, label: "Libro de Condolencias" },
+      { icon: Flower2, label: "Arreglo floral" },
       { icon: FileSignature, label: "Trámites legales" },
       { icon: Car, label: "Carroza" },
-      { icon: Van, label: "Van" },
+      { icon: Van, label: "Van de acompañamiento" },
       { icon: GlassWater, label: "Dispensador de agua" },
+      { icon: HandHeart, label: "Tarjetas de agradecimiento" },
+      { icon: Newspaper, label: "Obituario digital" },
     ],
   },
   {
@@ -147,10 +161,11 @@ const PLANS: Plan[] = [
       { icon: Flower2, label: "Arreglo floral" },
       { icon: FileSignature, label: "Trámites legales" },
       { icon: Car, label: "Carroza" },
-      { icon: Van, label: "Van" },
+      { icon: Van, label: "Van de acompañamiento" },
       { icon: GlassWater, label: "Dispensador de agua" },
+      { icon: HandHeart, label: "Tarjetas de agradecimiento" },
+      { icon: Newspaper, label: "Obituario digital" },
       { icon: Coffee, label: "Cafetería", hot: true },
-      { icon: HandHeart, label: "Tarjetas de agradecimiento", hot: true },
       { icon: Frame, label: "Fotografía A4", hot: true },
     ],
   },
@@ -168,10 +183,11 @@ const PLANS: Plan[] = [
       { icon: Flower2, label: "5 arreglos florales", hot: true },
       { icon: FileSignature, label: "Trámites legales" },
       { icon: Car, label: "2 carrozas", hot: true },
-      { icon: Van, label: "Van" },
+      { icon: Van, label: "Van de acompañamiento" },
       { icon: GlassWater, label: "Dispensador de agua" },
-      { icon: Coffee, label: "Cafetería" },
       { icon: HandHeart, label: "Tarjetas de agradecimiento" },
+      { icon: Newspaper, label: "Obituario digital" },
+      { icon: Coffee, label: "Cafetería" },
       { icon: Frame, label: "Fotografía A4" },
       { icon: MicVocal, label: "Lírico", hot: true },
       { icon: Speaker, label: "Parlante", hot: true },
@@ -514,16 +530,77 @@ function ServiciosPage() {
                 </ul>
               </div>
             </div>
+
+            {/* ===== Opciones de urna (dentro del módulo de planes) ===== */}
+            <div className="mt-10 border-t border-white/10 pt-10">
+              <div className="mb-6 text-center">
+                <p className="text-xs uppercase tracking-[0.3em] text-accent">Opciones de urna</p>
+                <h3 className="mt-2 font-serif text-2xl text-white md:text-3xl">
+                  Personalizadas y sobredimensionadas
+                </h3>
+              </div>
+              <div className="grid gap-5 md:grid-cols-2">
+                {/* Urnas personalizadas — galería que rota (urna completa) */}
+                <article className="group flex min-h-[210px] overflow-hidden rounded-2xl border border-border bg-surface shadow-soft">
+                  <div className="relative w-[42%] shrink-0 overflow-hidden bg-white">
+                    <CrossfadeMedia
+                      images={[
+                        urnaPersonalizadaColocolo,
+                        urnaPersonalizadaRosada,
+                        urnaPersonalizadaRosada2,
+                        urnaPersonalizadaUdechile,
+                        urnaPersonalizadaAzul2,
+                      ]}
+                      alt="Urnas personalizadas"
+                      imgClassName="object-contain"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col justify-center p-4 sm:p-5">
+                    <div className="inline-flex items-center gap-1.5 text-accent">
+                      <Palette className="h-3.5 w-3.5" />
+                      <span className="text-[10px] font-semibold uppercase tracking-wider">Personalizables</span>
+                    </div>
+                    <h4 className="mt-1 font-serif text-lg text-primary">Urnas personalizadas</h4>
+                    <p className="mt-1 text-[13px] leading-snug text-muted-foreground">
+                      Elige el color y la gráfica: el escudo de tu equipo, un diseño especial o un color a pedido.
+                    </p>
+                  </div>
+                </article>
+
+                {/* Urnas sobredimensionadas — DESTACADA, galería que rota */}
+                <article className="group relative flex min-h-[210px] overflow-hidden rounded-2xl border-2 border-accent bg-surface shadow-elevated">
+                  <div className="relative w-[42%] shrink-0 overflow-hidden bg-black/5">
+                    <CrossfadeMedia
+                      images={[urnaSobredimensionada, urnaSobredimensionada2]}
+                      alt="Urnas sobredimensionadas"
+                      delay={1500}
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col justify-center p-4 sm:p-5">
+                    <div className="inline-flex items-center gap-1.5 text-accent">
+                      <Star className="h-3.5 w-3.5" />
+                      <span className="text-[10px] font-semibold uppercase tracking-wider">
+                        De los pocos en Concepción
+                      </span>
+                    </div>
+                    <h4 className="mt-1 font-serif text-lg text-primary">Urnas sobredimensionadas</h4>
+                    <p className="mt-1 text-[13px] leading-snug text-muted-foreground">
+                      Modelos de mayor amplitud. Somos de las pocas funerarias en Concepción que las ofrece.
+                    </p>
+                  </div>
+                </article>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* CTA secundaria + nota */}
-        <div className="mt-8 flex flex-col items-center gap-3 text-center sm:flex-row sm:justify-center">
+        <div className="mt-10 flex flex-col items-center gap-3 text-center sm:flex-row sm:justify-center">
           <a
             href="tel:+56953900931"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-primary transition hover:bg-secondary"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-accent-foreground shadow-elevated transition hover:brightness-105"
           >
-            Llamar ahora · +56 9 5390 0931
+            <Phone className="h-4 w-4" /> Llamar ahora · +56 9 5390 0931
           </a>
           <p className="text-xs italic text-muted-foreground">Fotos de urnas sujetas a stock.</p>
         </div>

@@ -102,7 +102,7 @@ function Hero() {
             to="/cotizar"
             className="inline-flex items-center justify-center gap-2 rounded-full border border-white/40 bg-white/5 px-7 py-3.5 text-sm font-medium text-white backdrop-blur transition hover:bg-white/10"
           >
-            Cotizar online <ArrowRight className="h-4 w-4" />
+            Solicitar orientación online <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </div>
@@ -119,6 +119,8 @@ function TrustBar() {
     { icon: Users, text: "+2.000 familias acompañadas" },
     { icon: BadgeCheck, text: "Asesoría sin compromiso" },
     { icon: FileText, text: "Trámites incluidos" },
+    { icon: Box, text: "Urnas de madera nativa exclusivas" },
+    { icon: Box, text: "Urnas sobredimensionadas disponibles" },
     { icon: Heart, text: "Atención cercana y humana" },
   ];
   return (
