@@ -201,4 +201,14 @@
   @media (prefers-reduced-motion: reduce) {
     .animate-kb-slow { animation: none; }
   }
+
+  /* Latido sutil para el ícono del sello «Toca para ver más información» en las tarjetas de trabajos */
+  @keyframes tap-hint {
+    0%, 100% { transform: scale(1);    opacity: 1; }
+    50%      { transform: scale(1.08); opacity: .82; }
+  }
+  .animate-tap-hint { animation: tap-hint 1.6s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-tap-hint { animation: none; }
+  }
 }

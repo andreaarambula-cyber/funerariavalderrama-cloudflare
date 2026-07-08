@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Star, Heart, BadgeCheck, Users, Handshake, Banknote, Check, X, Images, RotateCcw, Cross } from "lucide-react";
+import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Star, Heart, BadgeCheck, Users, Handshake, Banknote, Check, X, Hand, RotateCcw, Cross } from "lucide-react";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
 import { Visitanos } from "@/components/site/Visitanos";
 import { CoverflowCarousel } from "@/components/site/CoverflowCarousel";
@@ -501,9 +501,16 @@ function WorkCard({ work, index, size }: { work: Work; index: number; size: "lg"
               Q.E.P.D.
             </span>
             {hasBack && (
-              <span className="pointer-events-none absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1.5 text-[11px] font-medium text-white/90 ring-1 ring-white/15">
-                <Images className="h-3.5 w-3.5" />
-                {work.images.length > 1 ? `${work.images.length} fotos` : "Detalle"}
+              <span
+                className={cn(
+                  "pointer-events-none absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5 rounded-xl bg-black/45 text-center text-white ring-1 ring-white/25 backdrop-blur-[2px] transition-opacity duration-300 md:group-hover:opacity-0",
+                  size === "lg" ? "max-w-[9.5rem] px-3.5 py-2.5" : "max-w-[7.5rem] px-3 py-2",
+                )}
+              >
+                <Hand className={cn("animate-tap-hint text-accent", size === "lg" ? "h-5 w-5" : "h-4 w-4")} />
+                <span className={cn("font-semibold uppercase leading-tight tracking-[0.1em]", size === "lg" ? "text-[10px]" : "text-[9px]")}>
+                  Click para más información
+                </span>
               </span>
             )}
             <div
