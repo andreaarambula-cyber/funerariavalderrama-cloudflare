@@ -31,6 +31,7 @@ import capredenaLogo from "@/assets/convenios/capredena.png";
 import diprecaLogo from "@/assets/convenios/dipreca.png";
 import chileatiendeLogo from "@/assets/convenios/chileatiende.png";
 import { fetchPublishedObituarios, type ObituaryListItem } from "@/data/obituariosApi";
+import { fetchTrabajos } from "@/data/siteFotos";
 import { Obituaries3DCarousel } from "@/components/site/Obituaries3DCarousel";
 import { SITE_URL } from "./__root";
 
@@ -581,6 +582,19 @@ function WorkCard({ work, index, size }: { work: Work; index: number; size: "lg"
 function OurWork() {
   const isMobile = useIsMobile();
 
+  // Trabajos administrables desde el panel (si hay); si no, usa los actuales.
+  const [override, setOverride] = useState<Work[] | null>(null);
+  useEffect(() => {
+    fetchTrabajos()
+      .then((items) => {
+        if (items && items.length) {
+          setOverride(items.map((t) => ({ images: [t.cover], title: t.title, tag: t.tag, description: t.description })));
+        }
+      })
+      .catch(() => {});
+  }, []);
+  const list = override ?? works;
+
   // ----- Carrusel horizontal con flechas (escritorio y móvil) -----
   const scrollerRef = useRef<HTMLDivElement>(null);
   const scrollBy = (dir: 1 | -1) => {
@@ -652,7 +666,7 @@ function OurWork() {
             ref={scrollerRef}
             className="flex snap-x snap-mandatory gap-6 overflow-x-auto overscroll-x-contain scroll-smooth px-6 pb-4 lg:gap-8 lg:px-12 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
-            {works.map((w, i) => (
+            {list.map((w, i) => (
               <WorkCard key={w.title} work={w} index={i} size="lg" />
             ))}
           </div>
@@ -682,7 +696,7 @@ function OurWork() {
             ref={scrollerRef}
             className="flex touch-pan-x snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
-            {works.map((w, i) => (
+            {list.map((w, i) => (
               <WorkCard key={w.title} work={w} index={i} size="sm" />
             ))}
           </div>

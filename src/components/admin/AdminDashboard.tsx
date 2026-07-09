@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { FileText, Heart, LayoutGrid, LogOut, ShieldAlert } from "lucide-react";
+import { FileText, Heart, Images, LogOut, ShieldAlert } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { ObituariosPanel } from "./ObituariosPanel";
 import { CondolenciasPanel } from "./CondolenciasPanel";
-import { ContenidoPanel } from "./ContenidoPanel";
+import { FotosPanel } from "./FotosPanel";
 
-type Section = "obituarios" | "condolencias" | "contenido";
+type Section = "obituarios" | "condolencias" | "fotos";
 
 const NAV: { id: Section; label: string; icon: typeof FileText }[] = [
   { id: "obituarios", label: "Obituarios", icon: FileText },
   { id: "condolencias", label: "Moderación", icon: Heart },
-  { id: "contenido", label: "Textos del sitio", icon: LayoutGrid },
+  { id: "fotos", label: "Fotos del sitio", icon: Images },
 ];
 
 export function AdminDashboard() {
@@ -115,7 +115,7 @@ export function AdminDashboard() {
       <main className="flex-1 overflow-y-auto">
         {section === "obituarios" && <ObituariosPanel />}
         {section === "condolencias" && <CondolenciasPanel />}
-        {section === "contenido" && <ContenidoPanel />}
+        {section === "fotos" && <FotosPanel />}
       </main>
     </div>
   );

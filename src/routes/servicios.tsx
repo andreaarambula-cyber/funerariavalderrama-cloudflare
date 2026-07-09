@@ -29,6 +29,7 @@ import { CoberturaMapa } from "@/components/site/CoberturaMapa";
 import { MapaChile } from "@/components/site/MapaChile";
 import { CoverflowCarousel } from "@/components/site/CoverflowCarousel";
 import { cn } from "@/lib/utils";
+import { fetchUrnas, fetchVelatorio, GRUPOS_VELATORIO, type FotoGrupos } from "@/data/siteFotos";
 import { SITE_URL } from "./__root";
 
 import esencial1 from "@/assets/urnas/esencial-1.jpg.asset.json";
@@ -391,6 +392,22 @@ const faqs = [
 function ServiciosPage() {
   const [active, setActive] = useState(PLANS[0].id);
   const current = PLANS.find((p) => p.id === active)!;
+
+  // Fotos administrables desde el panel (si hay); si no, usa las actuales (respaldo).
+  const [urnasOv, setUrnasOv] = useState<FotoGrupos | null>(null);
+  const [velatorioOv, setVelatorioOv] = useState<FotoGrupos | null>(null);
+  useEffect(() => {
+    fetchUrnas().then(setUrnasOv).catch(() => {});
+    fetchVelatorio().then(setVelatorioOv).catch(() => {});
+  }, []);
+  const planFotos = (urnasOv?.[current.name] ?? []).filter(Boolean);
+  const heroImgs = planFotos.length ? planFotos : [current.image];
+  const velatorioList = velatorio.map((v, i) => {
+    const ov = (velatorioOv?.[GRUPOS_VELATORIO[i]] ?? []).filter(Boolean);
+    return ov.length ? { ...v, images: ov } : v;
+  });
+  const personalizadasOv = (urnasOv?.["Personalizados"] ?? []).filter(Boolean);
+
   const count = useCountUp(current.items.length);
   const hasHot = current.items.some((it) => it.hot);
   // Los servicios que suma este plan (dorados) van agrupados al final,
@@ -477,13 +494,8 @@ function ServiciosPage() {
               {/* LEFT — urn photo hero */}
               <div key={current.id} className="name-in min-w-0">
                 <div className="rounded-[1.7rem] bg-white/[0.06] p-1.5 ring-1 ring-white/10">
-                  <div className="relative overflow-hidden rounded-[1.3rem]">
-                    <img
-                      src={current.image}
-                      alt={`Urna del plan ${current.name}`}
-                      loading="lazy"
-                      className="aspect-[4/5] w-full object-cover"
-                    />
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-[1.3rem]">
+                    <CrossfadeMedia images={heroImgs} alt={`Urna del plan ${current.name}`} intervalMs={5000} />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent" />
                     <span className="absolute left-4 top-4 inline-flex rounded-full bg-black/55 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-accent">
                       {current.wood}
@@ -583,13 +595,17 @@ function ServiciosPage() {
                 <article className="group flex min-h-[210px] overflow-hidden rounded-2xl border border-border bg-surface shadow-soft">
                   <div className="relative w-[42%] shrink-0 overflow-hidden bg-white">
                     <CrossfadeMedia
-                      images={[
-                        urnaPersonalizadaColocolo,
-                        urnaPersonalizadaRosada,
-                        urnaPersonalizadaRosada2,
-                        urnaPersonalizadaUdechile,
-                        urnaPersonalizadaAzul2,
-                      ]}
+                      images={
+                        personalizadasOv.length
+                          ? personalizadasOv
+                          : [
+                              urnaPersonalizadaColocolo,
+                              urnaPersonalizadaRosada,
+                              urnaPersonalizadaRosada2,
+                              urnaPersonalizadaUdechile,
+                              urnaPersonalizadaAzul2,
+                            ]
+                      }
                       alt="Urnas personalizadas"
                       imgClassName="object-contain"
                     />
@@ -662,7 +678,7 @@ function ServiciosPage() {
               ariaLabel="Equipo de velatorio"
               cardW={250}
               cardH={458}
-              items={velatorio.map((v, ci) => (
+              items={velatorioList.map((v, ci) => (
                 <VelatorioCard key={v.name} v={v} index={ci} />
               ))}
             />
@@ -670,7 +686,7 @@ function ServiciosPage() {
 
           {/* Desktop: grilla (sin cambios) */}
           <div className="hidden gap-6 md:grid md:grid-cols-2 lg:grid-cols-3">
-            {velatorio.map((v, ci) => (
+            {velatorioList.map((v, ci) => (
               <VelatorioCard key={v.name} v={v} index={ci} />
             ))}
           </div>
