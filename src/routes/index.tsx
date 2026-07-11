@@ -167,7 +167,7 @@ function Services() {
                 key={title}
                 className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-7 shadow-soft"
               >
-                <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-60" />
+                <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-25" />
                 <Icon className="relative h-8 w-8 text-accent" strokeWidth={1.5} />
                 <h3 className="relative mt-5 font-serif text-2xl text-primary">{title}</h3>
                 <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
@@ -190,7 +190,7 @@ function Services() {
               key={title}
               className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-7 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
             >
-              <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-60 transition-opacity duration-300 group-hover:opacity-80" />
+              <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-25 transition-opacity duration-300 group-hover:opacity-45" />
               <Icon className="relative h-8 w-8 text-accent" strokeWidth={1.5} />
               <h3 className="relative mt-5 font-serif text-2xl text-primary">{title}</h3>
               <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
@@ -835,7 +835,7 @@ function Testimonials() {
     <section
       className="relative isolate overflow-hidden bg-primary py-20 text-primary-foreground md:py-28"
       style={{
-        backgroundImage: `linear-gradient(rgba(30,58,82,0.92), rgba(30,58,82,0.92)), url(${candleImg})`,
+        backgroundImage: `linear-gradient(rgba(30,23,18,0.93), rgba(38,30,24,0.90)), url(${candleImg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -866,7 +866,7 @@ function Testimonials() {
             items={reviews.map((r) => (
               <figure
                 key={r.name}
-                className="flex flex-col rounded-2xl border border-white/15 bg-[rgb(30,58,82)] p-6 shadow-elevated"
+                className="flex flex-col rounded-2xl border border-white/15 bg-[rgb(46,37,30)] p-6 shadow-elevated"
               >
                 <Stars className="h-4 w-4" />
                 <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-white/90">
@@ -923,18 +923,18 @@ function SectionHeader({
 }) {
   return (
     <div className={align === "center" ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
+      <div
+        className={`gold-divider ${align === "center" ? "mx-auto w-10" : "w-10"}`}
+      />
       <p
-        className={`text-xs uppercase tracking-[0.22em] ${
-          tone === "dark" ? "text-accent" : "text-accent-foreground/80"
+        className={`mt-4 text-sm font-medium tracking-[0.02em] ${
+          tone === "dark" ? "text-accent" : "text-muted-foreground"
         }`}
       >
         {eyebrow}
       </p>
-      <div
-        className={`gold-divider mt-3 ${align === "center" ? "mx-auto w-24" : "w-24"}`}
-      />
       <h2
-        className={`mt-4 font-serif text-[2.2rem] leading-[1.1] md:text-[2.7rem] lg:text-[3.25rem] ${
+        className={`mt-3 font-serif text-[2.2rem] leading-[1.1] md:text-[2.7rem] lg:text-[3.25rem] ${
           tone === "dark" ? "text-white" : "text-primary"
         }`}
       >
