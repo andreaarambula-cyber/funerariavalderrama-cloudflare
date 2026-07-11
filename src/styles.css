@@ -94,13 +94,16 @@
 @layer base {
   * { border-color: var(--color-border); }
 
-  html { scroll-behavior: smooth; }
+  /* Base tipográfica más grande (público mayor). Escala todo el sitio ~8%
+     de forma proporcional; los tamaños en rem crecen sin romper la maqueta. */
+  html { scroll-behavior: smooth; font-size: 108%; }
 
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv11";
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }

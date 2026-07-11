@@ -98,7 +98,7 @@ function CotizarPage() {
         subtitle="Cada despedida es única. Diseñamos una propuesta a medida según las necesidades de tu familia. Respondemos en menos de 30 minutos, las 24 horas del día."
       />
 
-      <section className="container-prose grid gap-10 py-16 lg:grid-cols-[1fr,360px]">
+      <section className="container-prose grid gap-10 py-16 lg:grid-cols-[1fr_360px]">
         <form onSubmit={handleSubmit} className="rounded-3xl border border-border bg-surface p-6 shadow-soft md:p-10">
           {/* Servicios */}
           <Block
@@ -115,7 +115,7 @@ function CotizarPage() {
                     key={s}
                     onClick={() => toggleServicio(s)}
                     className={cn(
-                      "rounded-full border px-4 py-2 text-sm transition",
+                      "rounded-full border px-5 py-2.5 text-base transition",
                       active
                         ? "border-primary bg-primary text-primary-foreground"
                         : "border-border bg-background text-foreground/80 hover:border-primary/40",
@@ -146,8 +146,8 @@ function CotizarPage() {
                         : "border-border hover:border-primary/40",
                     )}
                   >
-                    <p className="font-serif text-base text-primary">{u.title}</p>
-                    <p className="mt-1 text-xs text-muted-foreground">{u.desc}</p>
+                    <p className="font-serif text-lg text-primary">{u.title}</p>
+                    <p className="mt-1 text-sm text-muted-foreground">{u.desc}</p>
                   </button>
                 );
               })}
@@ -160,7 +160,7 @@ function CotizarPage() {
               value={comuna}
               onChange={(e) => setComuna(e.target.value)}
               placeholder="Ej. Concepción, Talcahuano, San Pedro de la Paz…"
-              className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+              className="w-full rounded-lg border border-border bg-background px-4 py-3 text-base focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
             />
           </Block>
 
@@ -171,7 +171,7 @@ function CotizarPage() {
               onChange={(e) => setDetalle(e.target.value)}
               rows={4}
               placeholder="Ej. Velatorio en casa, ceremonia íntima, preferencias religiosas, presupuesto aproximado, etc."
-              className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+              className="w-full rounded-lg border border-border bg-background px-4 py-3 text-base focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
             />
           </Block>
 
@@ -195,7 +195,7 @@ function CotizarPage() {
                     key={c}
                     onClick={() => setCanal(c)}
                     className={cn(
-                      "rounded-full border px-4 py-2 text-sm transition",
+                      "rounded-full border px-5 py-2.5 text-base transition",
                       active
                         ? "border-primary bg-primary text-primary-foreground"
                         : "border-border bg-background hover:border-primary/40",
@@ -214,7 +214,7 @@ function CotizarPage() {
                 onChange={(e) => setConsent(e.target.checked)}
                 className="mt-0.5 h-4 w-4 accent-primary"
               />
-              <span className="text-sm text-foreground/80">
+              <span className="text-base text-foreground/80">
                 Acepto ser contactado por Funeraria Valderrama para recibir mi propuesta personalizada.
               </span>
             </label>
@@ -233,13 +233,13 @@ function CotizarPage() {
               href={`https://wa.me/${WHATSAPP_NUMBER}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 text-sm font-medium text-primary hover:underline"
+              className="inline-flex items-center justify-center gap-2 text-base font-medium text-primary hover:underline"
             >
               <MessageCircle className="h-4 w-4" /> Prefiero hablar ahora
             </a>
             <button
               type="submit"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground shadow-elevated transition hover:brightness-110 active:scale-[0.98]"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-medium text-primary-foreground shadow-elevated transition hover:brightness-110 active:scale-[0.98]"
             >
               Solicitar propuesta <ArrowRight className="h-4 w-4" />
             </button>
@@ -248,7 +248,8 @@ function CotizarPage() {
 
         <aside className="lg:sticky lg:top-24 lg:self-start">
           <div className="rounded-2xl border border-primary/20 bg-primary p-7 text-primary-foreground shadow-soft">
-            <p className="text-xs uppercase tracking-[0.2em] text-accent">
+            <p className="flex items-center gap-2.5 text-sm font-medium text-accent">
+              <span className="h-px w-6 bg-accent/70" />
               Cómo trabajamos tu propuesta
             </p>
             <ol className="mt-5 space-y-5">
@@ -308,7 +309,7 @@ function Block({
         <span className="font-serif text-sm text-accent-foreground/70">{num}</span>
         <h3 className="font-serif text-xl text-primary md:text-2xl">{title}</h3>
       </div>
-      {hint && <p className="mt-1 pl-7 text-xs text-muted-foreground">{hint}</p>}
+      {hint && <p className="mt-1.5 pl-7 text-sm text-muted-foreground">{hint}</p>}
       <div className="mt-4 pl-0 sm:pl-7">{children}</div>
     </div>
   );
@@ -332,7 +333,7 @@ function Field({
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-1.5 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+        className="mt-1.5 w-full rounded-lg border border-border bg-background px-4 py-3 text-base focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
       />
     </label>
   );

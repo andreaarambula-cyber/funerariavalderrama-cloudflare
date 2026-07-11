@@ -40,7 +40,7 @@ function ContactoPage() {
         subtitle="Atendemos las 24 horas del día, los 365 días del año. Elige el canal que prefieras. Desde el primer llamado, nuestro equipo coordina cada detalle con cercanía, transparencia y respeto, entregando a las familias la tranquilidad de sentirse acompañadas en cada paso."
       />
 
-      <section className="container-prose grid gap-10 py-16 lg:grid-cols-[1fr,1.2fr]">
+      <section className="container-prose grid gap-10 py-16 lg:grid-cols-[1fr_1.2fr]">
         <div className="space-y-4">
           {[
             { icon: Phone, label: "Teléfono 24/7", val: "+56 9 5390 0931", href: "tel:+56953900931" },
@@ -53,7 +53,7 @@ function ContactoPage() {
               href={href}
               className="group relative flex items-start gap-4 overflow-hidden rounded-2xl border border-border bg-surface p-5 shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
             >
-              <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-60 transition-opacity duration-300 group-hover:opacity-80" />
+              <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-25 transition-opacity duration-300 group-hover:opacity-45" />
               <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent/15 text-accent-foreground">
                 <Icon className="h-5 w-5" />
               </span>

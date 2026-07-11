@@ -12,9 +12,9 @@ export function Visitanos() {
     <section className="py-20 md:py-28">
       <div className="container-prose">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs uppercase tracking-[0.22em] text-accent-foreground/80">Visítanos</p>
-          <div className="gold-divider mx-auto mt-3 w-24" />
-          <h2 className="mt-4 font-serif text-3xl text-primary md:text-4xl lg:text-[2.75rem]">
+          <div className="gold-divider mx-auto w-10" />
+          <p className="mt-4 text-sm font-medium tracking-[0.02em] text-muted-foreground">Visítanos</p>
+          <h2 className="mt-3 font-serif text-3xl text-primary md:text-4xl lg:text-[2.75rem]">
             Dónde encontrarnos
           </h2>
         </div>

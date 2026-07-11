@@ -44,10 +44,11 @@ function NosotrosPage() {
           />
         </div>
         <div>
-          <p className="text-xs uppercase tracking-[0.22em] text-accent-foreground/80">
+          <p className="flex items-center gap-3 text-sm font-medium text-muted-foreground">
+            <span className="h-px w-8 bg-accent" />
             Nuestra historia
           </p>
-          <h2 className="mt-3 font-serif text-[2.2rem] leading-[1.1] text-primary md:text-[2.7rem]">
+          <h2 className="mt-4 font-serif text-[2.2rem] leading-[1.1] text-primary md:text-[2.7rem]">
           Más de 28 años acompañando a las familias
           </h2>
         {/* Párrafo de entrada: letra capital dorada + texto más grande y oscuro */}
@@ -93,7 +94,7 @@ function NosotrosPage() {
               { icon: Users, title: "Profesionalismo", desc: "Equipo capacitado y certificado en cada sucursal." },
             ].map(({ icon: Icon, title, desc }) => (
               <div key={title} className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-7 shadow-soft">
-                <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-60 transition-opacity duration-300 group-hover:opacity-80" />
+                <LeafDecoration className="pointer-events-none absolute right-0 top-0 h-full w-40 text-accent opacity-25 transition-opacity duration-300 group-hover:opacity-45" />
                 <Icon className="relative h-8 w-8 text-accent" strokeWidth={1.5} />
                 <h3 className="relative mt-4 font-serif text-2xl text-primary">{title}</h3>
                 <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>

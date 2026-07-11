@@ -47,7 +47,7 @@ export function FarewellAgenda({
           </p>
         </div>
 
-        <div className="mt-10 grid gap-8 lg:grid-cols-[1fr,1fr]">
+        <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_1fr]">
           <ul className="space-y-4">
             {events.map((ev, i) => (
               <li
