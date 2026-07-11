@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowLeft, Phone, ShieldCheck, Clock, MapPin, PhoneCall, Box, Flame, Truck, FileText, Coffee, Star, Heart, BadgeCheck, Users, Handshake, Banknote, Check, X, Hand, RotateCcw, Cross } from "lucide-react";
 import { LeafDecoration } from "@/components/site/LeafDecoration";
 import { Visitanos } from "@/components/site/Visitanos";
@@ -69,7 +70,27 @@ function HomePage() {
   );
 }
 
+// Curva ease-out-expo: entra rápido y se asienta suave. Emil: los elementos que
+// ENTRAN usan ease-out (nunca ease-in); las curvas nativas de CSS son muy débiles.
+const EASE_OUT: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
 function Hero() {
+  const reduce = useReducedMotion();
+  // Entrada escalonada: título → subtítulo → botones. El hero se ve una vez por
+  // visita (frecuencia baja), así que un poco de coreografía es apropiada.
+  const container = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } },
+  };
+  const item = {
+    // Empieza desde una posición ya visible (y: 20 + opacity), no desde la nada.
+    hidden: { opacity: 0, y: reduce ? 0 : 20 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: reduce ? 0.2 : 0.65, ease: EASE_OUT },
+    },
+  };
   return (
     <section className="relative isolate flex min-h-[calc(100svh-4rem)] items-center overflow-hidden">
       <video
@@ -84,16 +105,27 @@ function Hero() {
         <source src={heroVideo.url} type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-black/30" />
-      <div className="container-prose relative w-full py-16 text-primary-foreground md:py-20">
-        <h1 className="max-w-3xl text-balance font-serif text-4xl leading-[1.05] md:text-6xl lg:text-7xl">
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="container-prose relative w-full py-16 text-primary-foreground md:py-20"
+      >
+        <motion.h1
+          variants={item}
+          className="max-w-3xl text-balance font-serif text-4xl leading-[1.05] md:text-6xl lg:text-7xl"
+        >
           Honramos historias y acompañamos familias.
-        </h1>
-        <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-white/85 md:text-lg">
+        </motion.h1>
+        <motion.p
+          variants={item}
+          className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-white/85 md:text-lg"
+        >
           Por eso entregamos un acompañamiento cercano, transparente y humano,
           adaptándonos a las necesidades de quienes depositan su confianza en
           nosotros.
-        </p>
-        <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+        </motion.p>
+        <motion.div variants={item} className="mt-9 flex flex-col gap-3 sm:flex-row">
           <a
             href="tel:+56953900931"
             className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-medium text-accent-foreground shadow-elevated transition hover:brightness-105"
@@ -106,8 +138,8 @@ function Hero() {
           >
             Solicitar orientación online <ArrowRight className="h-4 w-4" />
           </Link>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
