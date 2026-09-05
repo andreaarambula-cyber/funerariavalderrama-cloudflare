@@ -862,6 +862,21 @@ function Testimonials() {
       time: "Hace 2 años",
       text: "La mejor funeraria.",
     },
+    {
+      name: "Marcela Medina Arias",
+      time: "Hace 2 semanas",
+      text: "Queremos expresar nuestro más sincero agradecimiento a Funeraria Valderrama y, especialmente, a Nathaly por el acompañamiento y apoyo que nos brindaron en un momento tan doloroso y difícil como fue la partida de mi padre. Valoramos profundamente la empatía, el respeto y la calidad humana con que nos acompañaron durante todo el proceso.",
+    },
+    {
+      name: "Mariela Figueroa Diaz",
+      time: "Hace 1 día",
+      text: "Quiero dejar mi opinión con respecto a mi experiencia con la funeraria. Fue muy grato que en este difícil momento encontrara a personas tan cercanas y empáticas con el dolor de una persona. Más que una empresa, son gente que trabaja con dedicación y se nota que les encanta su trabajo y el buen trato.",
+    },
+    {
+      name: "Rodrigo A. Araya D.",
+      time: "Hace 1 semana",
+      text: "Excelente servicio, una atención muy amable de parte de todos y muy empáticos.",
+    },
   ];
   return (
     <section
@@ -882,7 +897,7 @@ function Testimonials() {
         <div className="mt-6 flex justify-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 backdrop-blur">
             <GoogleG className="h-5 w-5" />
-            <span className="text-xs text-white/65">Reseñas verificadas en Google</span>
+            <span className="text-xs text-white/65">13 reseñas verificadas en Google</span>
           </div>
         </div>
 
@@ -892,13 +907,13 @@ function Testimonials() {
             ariaLabel="Reseñas de Google"
             tone="dark"
             cardW={272}
-            cardH={296}
+            cardH={430}
             edgeFade={false}
             fadeCards={false}
             items={reviews.map((r) => (
               <figure
                 key={r.name}
-                className="flex flex-col rounded-2xl border border-white/15 bg-[rgb(46,37,30)] p-6 shadow-elevated"
+                className="flex min-h-0 flex-col rounded-2xl border border-white/15 bg-[rgb(46,37,30)] p-5 shadow-elevated"
               >
                 <Stars className="h-4 w-4" />
                 <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-white/90">
